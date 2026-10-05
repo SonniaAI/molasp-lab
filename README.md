@@ -57,6 +57,20 @@ python3 -m unittest discover -s tests -v
 - Winfree, Bekbolatov — proofreading tile systems (k×k transform)
 - [Minimum tile set problem is NP-complete](https://core.ac.uk/works/2249929); [binary pattern tile set synthesis is NP-hard](https://csd.uwo.ca/~lkari/pdfs/2PATS_Algorithmica.pdf)
 
+## Standing rules
+
+1. The tube is a sampler, not an enumerator. One-sided claims only.
+2. Name all three resources every time: species count, copy number,
+   search multiplicity. Never let one stand in for another.
+3. Compute before synthesis: C1/C2 die in simulation (KinDA, Xgrow)
+   before anyone orders an oligo.
+4. No wet work happens from this repo. A wet-lab submission is drafted
+   here and escalated to a human gate, never executed.
+5. Direct pushes to `main` are the norm — this is a lab notebook, not
+   product code. History rewrites are reserved for purges (e.g. removing
+   an internal document published by mistake) and every rewrite lands
+   with a receipt naming what was purged and why.
+
 ## License
 
 Code: MIT (see `LICENSE`). Lab notes: CC BY 4.0.
