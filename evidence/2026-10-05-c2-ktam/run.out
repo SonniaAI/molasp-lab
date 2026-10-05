@@ -1,0 +1,8 @@
+{"sweep": "Gse@dG=ln2", "Gse": 7.0, "Gmc": 6.307, "n": 500, "T_read_s": 438653.3, "decode": {"a": 428, "ap": 0, "p": 0, "empty": 72, "unreadable": 0, "unlocked": 0}}
+{"sweep": "Gse@dG=ln2", "Gse": 9.0, "Gmc": 8.307, "n": 500, "T_read_s": 3241233.6, "decode": {"a": 404, "ap": 0, "p": 0, "empty": 96, "unreadable": 0, "unlocked": 0}}
+{"sweep": "Gse@dG=ln2", "Gse": 11.0, "Gmc": 10.307, "n": 500, "T_read_s": 23949656.7, "decode": {"a": 415, "ap": 0, "p": 0, "empty": 85, "unreadable": 0, "unlocked": 0}}
+{"sweep": "Gse@dG=ln2", "Gse": 13.0, "Gmc": 12.307, "n": 500, "T_read_s": 176965356.8, "decode": {"a": 403, "ap": 0, "p": 0, "empty": 97, "unreadable": 0, "unlocked": 0}}
+{"sweep": "dG@Gse=9", "Gse": 9.0, "Gmc": 8.307, "n": 500, "T_read_s": 3241233.6, "decode": {"a": 423, "ap": 0, "p": 0, "empty": 77, "unreadable": 0, "unlocked": 0}}
+{"sweep": "dG@Gse=9", "Gse": 9.0, "Gmc": 7.0, "n": 500, "T_read_s": 3241233.6, "decode": {"a": 407, "ap": 0, "p": 0, "empty": 93, "unreadable": 0, "unlocked": 0}}
+{"sweep": "dG@Gse=9", "Gse": 9.0, "Gmc": 5.0, "n": 500, "T_read_s": 3241233.6, "decode": {"a": 413, "ap": 0, "p": 0, "empty": 87, "unreadable": 0, "unlocked": 0}}
+{"sweep": "dG@Gse=9", "Gse": 9.0, "Gmc": 3.0, "n": 500, "T_read_s": 3241233.6, "decode": {"a": 398, "ap": 0, "p": 0, "empty": 102, "unreadable": 0, "unlocked": 0}}

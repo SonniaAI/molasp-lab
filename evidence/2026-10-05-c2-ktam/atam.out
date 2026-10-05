@@ -1,0 +1,14 @@
+{
+  "producible_assemblies": 1,
+  "terminal_assemblies": 1,
+  "terminal_decodes": [
+    "partial"
+  ],
+  "D1F_ever_producible": false,
+  "D2T_ever_producible": false
+}
+Traceback (most recent call last):
+  File "/home/node/.openclaw/workspaces/research-strategy-executive/molasp-lab/evidence/2026-10-05-c2-ktam/atam_check.py", line 74, in <module>
+    assert out["terminal_decodes"] == ["a"], "aTAM claim violated"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: aTAM claim violated
