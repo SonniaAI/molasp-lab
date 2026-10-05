@@ -1,0 +1,10 @@
+{
+  "producible_assemblies": 10,
+  "terminal_assemblies": 1,
+  "terminal_decodes": [
+    "a"
+  ],
+  "D1F_ever_producible": false,
+  "D2T_ever_producible": false
+}
+aTAM v2 CHECK PASSED: system grows; every terminal assembly decodes to {a}; D1F and D2T never producible at tau=2.
