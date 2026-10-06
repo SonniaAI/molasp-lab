@@ -387,3 +387,58 @@ read-WINDOW problem (slow growth), not a rate problem — consistent
 with the tick-10 readwindow invariant. Honest limit: one geometry,
 one species, one read rule; the collapse point is this build's
 glue arithmetic, not yet a law.
+
+## F6 arm (tick 23, SON-4775): species-death survey — resolved
+
+All 12 single-species removals of BUILD1, both arms: aTAM
+(exhaustive τ=2 BFS) and kTAM (protocol of record, job
+hxq-20828594, 26,000 trajectories). Receipts:
+evidence/2026-10-06-species-death-survey/; narrative:
+research-log/2026-10-06-species-death-survey.md; pins:
+tests/test_species_death_survey.py, tests/test_species_death_survey_ktam.py.
+
+aTAM: unique terminal for every removal — 4 COLLAPSED (S1, D1T,
+V0p, L1; zero locked rows; V0p's death kills the lock column via
+L1.W=p-t), 8 FAITHFUL_SUB reading a residual program's stable
+model exactly ({p,q} = drop_r_rule for S3/DAr/DBr/L3; {p} =
+drop_q_fact for S2/D2T/Vp/L2). Width-graded: row-1 deaths collapse,
+row-2 read {p}, row-3 read {p,q}.
+
+kTAM verdicts (pre-registered P1–P4/S4, machine-computed):
+
+- S4 PASS — build1 reproduces tick-19 within 0.5%.
+- P1 half-refuted — DAr repairs (0.88/0.83/0.71 at dG ≤ 4), DBr
+  does not (max 0.45): the F5 trap is asymmetric.
+- P2 falsified at L3 only — 18/500 and 5/500 strict "pqr" at
+  dG ≤ 2 through cross-row lock substitution (a foreign L-tile
+  holds the dead lock site on a b=1 west bond; value-typed "-t"
+  glues are not row-unique at the lock site); 0 at dG ≥ 4.
+  L1/L2/S1/S2/S3 DEAD at every point.
+- P3 refuted — all four decision/via removals repair at ≈ parity
+  (0.66–1.53, three exceed build1 at dG 0.5): substitution repair
+  is the norm at dG ≤ 4.
+- P4 PASS — every removal starves at dG 7 (max ratio 0.02); loose
+  decodes read the aTAM terminal (DBr-missing {p,q} 499/500).
+
+Consequences for the design text:
+
+1. Missing-species detection is a read-WINDOW problem universally
+   (P4): at dG 7 every death reads its residual stable model; at
+   dG ≤ 4 six of twelve are invisible and one is a MISREAD.
+2. Lock-glue values must be ROW-UNIQUE (encode the row in the lock
+   value, not just t/f) or the lock column admits cross-row
+   misreads — the L3 leak is ≤ 3.6% here but is a misread, not a
+   repair, and scales with lock-column width. designs/004 item.
+3. aTAM producibility does not predict kinetic robustness class;
+   the predictor is whether the strict-decode path (spine + lock
+   chain + their column-V west partners) retains bonding channels.
+   d2/d3 are silent on species absence by construction — a
+   synthesis-QC gap the compiler pass cannot close; only the read
+   window can.
+
+Honest limits: one geometry, single-species removals, n=500/point,
+no-mismatch kTAM; the west-partner gradient is correlational, Vp is
+a counterexample to its simple form (substituted D2T re-exposes
+q-t), and the exceeds-parity repairs (Vp 1.53, V0p 1.25, D1T 1.08
+at dG 0.5) are unexplained. Trajectory-level mechanism study
+queued as the natural next tick.

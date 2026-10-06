@@ -1,0 +1,30 @@
+{
+ "admitted_epoch": 1791328074.8541362,
+ "collected_by_run": "9f69e88c-75c4-4b32-873a-0b7537fc14ae",
+ "collection_errors": [],
+ "command": [
+  "python3",
+  "ktam_mc_survey.py"
+ ],
+ "cpu": 1,
+ "created_epoch": 1791328070.418272,
+ "execution_status": 0,
+ "exit_code": 0,
+ "finished_epoch": 1791329203.6617937,
+ "image_alias": "paperclip-test",
+ "image_id": "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd",
+ "image_verified": true,
+ "job": "hxq-20828594fc9d3d0e",
+ "job_completion": "2026-10-06T23:26:39Z",
+ "job_start": "2026-10-06T23:07:54Z",
+ "memory": 1073741824,
+ "node": "spark-4a06",
+ "nonce": "species-death-survey-v1",
+ "pod": "hxq-20828594fc9d3d0e-hn8nm",
+ "pod_phase": "Succeeded",
+ "pod_uid": "003e214f-3a61-4fd7-bd58-7cdf4b1dd137",
+ "request_id": "20828594fc9d3d0e4956f91ceacb4f4cc58b53ebd3d32309c09ba7994892ec61",
+ "result_blob": "46d9ba79c9db19dd31f9892fa68d5e7024bca9fa79a4b6285670ad796ddf39e2",
+ "state": "complete",
+ "wall_limit_s": 3600
+}
