@@ -109,8 +109,8 @@ removed), a different experiment.
 What stands, pinned in CI: (1) build3/build1 completion ratio
 0.970–1.037 at every point — the wrong compile executes at the
 correct compile's own rate (tick 16's prediction, now in the AND
-geometry); (2) build2 tracks build1 within 0.97–1.03 — false rows
-cost nothing kinetically; (3) all three builds sit on the tick-15
+geometry); (2) build2 tracks build1 at 0.947–0.988 — false rows
+cost at most ~5% completion (floor at dG=2); (3) all three builds sit on the tick-15
 dG=7 partial wall (0.844–0.870 vs 0.866) — the depth ceiling is
 unchanged by the 4th column.
 

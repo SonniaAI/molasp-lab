@@ -273,8 +273,9 @@ What stands (pinned in CI, tests/test_ktam_and_grid.py):
   0.970–1.037) — the substrate executes the wrong compile at the
   correct compile's own rate. Tick 16's prediction carries into the
   AND geometry.
-- **Slot-A death costs nothing kinetically**: build2 tracks build1
-  within noise (0.97–1.03) — false rows do not slow the assembly.
+- **Slot-A death is nearly free kinetically**: build2 tracks build1
+  at 0.947–0.988 across the grid (floor at dG=2) — false rows cost
+  at most ~5% completion, and nothing at the operating points.
 - **The depth ceiling is unchanged**: all three builds sit on the
   tick-15 dG=7 partial wall (0.844–0.870 vs 0.866).
 
