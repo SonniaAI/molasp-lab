@@ -95,5 +95,89 @@ class TestSmallMC(unittest.TestCase):
                 # it.
 
 
+class TestMeasuredGrid(unittest.TestCase):
+    """Pins the F4 measured curve (tick 19 cluster job 10c9aa52…,
+    evidence/2026-10-06-and-ktam-grid/run.out — deterministic seeds,
+    BASE_SEED 20261019, n=500/point).
+
+    Pins the three standing claims, not the failed thresholds:
+      1. consistent-wrong rate: build3/build1 expected_frac ratio
+         >= 0.95 at every point;
+      2. slot-A death is kinetically free: build2/build1 ratio
+         >= 0.95 at every point;
+      3. convergence to the tick-15 anchored curve from dG=4 up
+         (all builds >= 0.95x tick-15 CORRECT at dG in {4, 7}).
+    Also pins the K2/K3 threshold failures AS MEASURED (fractions
+    below 0.9 at dG <= 2) so any drift in a re-run is visible.
+    """
+
+    MEASURED = {
+        ("P_AND_corrected", 0.5): 0.540,
+        ("P_AND_corrected", 2.0): 0.790,
+        ("P_AND_corrected", 4.0): 0.984,
+        ("P_AND_corrected", 7.0): 0.870,
+        ("P_AND_minus_q", 0.5): 0.524,
+        ("P_AND_minus_q", 2.0): 0.748,
+        ("P_AND_minus_q", 4.0): 0.972,
+        ("P_AND_minus_q", 7.0): 0.854,
+        ("W1_dropped_literal_corrected", 0.5): 0.560,
+        ("W1_dropped_literal_corrected", 2.0): 0.810,
+        ("W1_dropped_literal_corrected", 4.0): 0.976,
+        ("W1_dropped_literal_corrected", 7.0): 0.844,
+    }
+
+    @classmethod
+    def setUpClass(cls):
+        import json
+        cls.rows = {}
+        with open(os.path.join(EV, "run.out")) as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                d = json.loads(line)
+                if "decode" in d:
+                    cls.rows[(d["system"], d["dGmc"])] = d
+
+    def test_runout_matches_pinned_table(self):
+        for key, frac in self.MEASURED.items():
+            self.assertIn(key, self.rows, "missing point %r" % (key,))
+            self.assertAlmostEqual(self.rows[key]["expected_frac"], frac,
+                                   places=3, msg=str(key))
+
+    def test_consistent_wrong_rate(self):
+        for dG in (0.5, 2.0, 4.0, 7.0):
+            b1 = self.MEASURED[("P_AND_corrected", dG)]
+            b3 = self.MEASURED[("W1_dropped_literal_corrected", dG)]
+            self.assertGreaterEqual(
+                b3 / b1, 0.95,
+                "wrong compile no longer tracks correct at dG=%s" % dG)
+
+    def test_slot_a_death_is_free(self):
+        for dG in (0.5, 2.0, 4.0, 7.0):
+            b1 = self.MEASURED[("P_AND_corrected", dG)]
+            b2 = self.MEASURED[("P_AND_minus_q", dG)]
+            self.assertGreaterEqual(
+                b2 / b1, 0.95,
+                "false rows cost kinetics at dG=%s" % dG)
+
+    def test_convergence_to_tick15_from_dG4(self):
+        tick15 = {4.0: 0.990, 7.0: 0.866}
+        for dG, ref in tick15.items():
+            for name in ("P_AND_corrected", "P_AND_minus_q",
+                         "W1_dropped_literal_corrected"):
+                self.assertGreaterEqual(
+                    self.MEASURED[(name, dG)] / ref, 0.95,
+                    "%s fell off the tick-15 curve at dG=%s" % (name, dG))
+
+    def test_failed_thresholds_pinned_as_measured(self):
+        # K2/K3 as pre-registered (>= 0.9 at dG <= 4) failed at
+        # dG <= 2 — pinned so a drifted re-run is investigated, not
+        # silently absorbed
+        for name in ("W1_dropped_literal_corrected", "P_AND_minus_q"):
+            self.assertLess(self.MEASURED[(name, 0.5)], 0.9)
+            self.assertLess(self.MEASURED[(name, 2.0)], 0.9)
+
+
 if __name__ == "__main__":
     unittest.main()

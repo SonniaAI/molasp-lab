@@ -206,7 +206,7 @@ above it (p-cut terminal is the empty decode, not {q}).
 
 ## Falsification criteria (pre-registered)
 
-**F1–F3 measured — see Measured outcomes above. F4 still open.**
+**F1–F4 measured — see Measured outcomes above and the F4 note below.**
 
 - **F1 (foundedness of the AND).** Build 1: exhaustive τ = 2 BFS must
   yield exactly one terminal, decoding {p,q,r}; re-run with p's fact
@@ -225,10 +225,67 @@ above it (p-cut terminal is the empty decode, not {q}).
   Any reassertion channel above the e^{−2dG} floor refutes the
   sequential-gating claim kinetically.
 
+### F4 measured (tick 19, evidence/2026-10-06-and-ktam-grid/)
+
+Cluster queue job `10c9aa52…` (paperclip-test, 1 CPU, ~45 s wall):
+6000 trajectories, protocol of record, BASE_SEED 20261019, receipt
+and raw blob in the evidence directory. Strict completion (expected
+decode fraction, per 500):
+
+| dG | build1 pqr | build2 p | build3 qr | tick-15 CORRECT | build3/build1 |
+| --- | --- | --- | --- | --- | --- |
+| 0.5 | 0.540 | 0.524 | 0.560 | 1.000 | 1.037 |
+| 2 | 0.790 | 0.748 | 0.810 | 0.998 | 1.025 |
+| 4 | 0.984 | 0.972 | 0.976 | 0.990 | 0.992 |
+| 7 | 0.870 | 0.854 | 0.844 | 0.866 | 0.970 |
+
+Verdicts against the pre-registration (the pre-registered text
+above is unchanged — this is the record of what it predicted vs
+what happened):
+
+- **K1 PASS**: build1 stays within the ~2× band of tick-15 CORRECT
+  at every point (min ratio 0.540 at dG=0.5 — the band is nearly
+  exhausted there) and matches it from dG=4 up.
+- **K2 FAIL as pre-registered**: strict qr < 0.9 at dG=0.5 (0.560)
+  and dG=2 (0.810). The failure mode is completion rate, not
+  consistency: the 4-column geometry completes at roughly half the
+  3-column rate at fast churn (the via column costs ~0.46
+  completion at dG=0.5 — a new measurable) and does not cross 0.9
+  before dG=4. The 0.9 threshold was calibrated on the wrong
+  geometry.
+- **K3 FAIL as pre-registered**: same story (0.524/0.748 at
+  dG=0.5/2).
+- **K4 FIRES as operationalized**: partial-strict loose counts
+  239/2000 (build1) and 136/2000 (build3). The detector is refuted
+  as a measurement, not the claim: in a positive program whose rows
+  can always complete, an unfinished assembly reads as a subset of
+  the true model by construction — growth-incompletion is
+  indistinguishable from reassertion at a fixed read time. No
+  completion-independent reassertion channel exists in this
+  geometry; a kinetic reassertion claim needs a structural-death
+  build (a tile type removed), which is a different experiment.
+
+What stands (pinned in CI, tests/test_ktam_and_grid.py):
+
+- **The consistent-wrong claim, restated correctly**: build3's
+  strict-qr completion is statistically indistinguishable from
+  build1's strict-pqr completion at every point (ratios
+  0.970–1.037) — the substrate executes the wrong compile at the
+  correct compile's own rate. Tick 16's prediction carries into the
+  AND geometry.
+- **Slot-A death costs nothing kinetically**: build2 tracks build1
+  within noise (0.97–1.03) — false rows do not slow the assembly.
+- **The depth ceiling is unchanged**: all three builds sit on the
+  tick-15 dG=7 partial wall (0.844–0.870 vs 0.866).
+
 ## What this does not establish
 
-1. F1–F3 are machine-checked (tick 18); **F4 remains the queue head**
-   and is the next thing to run, on the cluster queue.
+1. F1–F3 are machine-checked (tick 18); F4 is measured (tick 19,
+   kTAM grid on the cluster queue): thresholds K2/K3 failed as
+   pre-registered (miscalibrated on 3-column completions), the
+   consistent-wrong-rate claim is confirmed, and the reassertion
+   detector is refuted as a measurement (growth-incompletion
+   conflation).
 2. **Negative literals.** `not c` bodies remain unexpressed on the
    tile path (dual rail is the DSD answer; the tile answer is open).
 3. **OR ∧ AND.** An atom with k rules where some body is conjunctive

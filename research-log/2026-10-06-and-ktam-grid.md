@@ -76,3 +76,44 @@ Collect via the issue monitor (owner wake), land `run.out`, evaluate
 K1–K4 against the pre-registration, update designs/003's F4 arm and
 the taxonomy row, promote a CI pin of the measured curve. Then the
 OR∧AND composition, which remains unbuilt.
+
+## Results (same tick — the job ran in ~45 s and was collected
+immediately)
+
+Job `hxq-10c9aa5297779717` succeeded (execution_status 0, completed
+2026-10-06T19:10:19Z); `run.out` (18 JSON lines) and the raw result
+blob (`queue-result-10c9aa52.txt`) land in this directory. Strict
+completion per 500:
+
+| dG | build1 pqr | build2 p | build3 qr | tick-15 CORRECT |
+| --- | --- | --- | --- | --- |
+| 0.5 | 0.540 | 0.524 | 0.560 | 1.000 |
+| 2 | 0.790 | 0.748 | 0.810 | 0.998 |
+| 4 | 0.984 | 0.972 | 0.976 | 0.990 |
+| 7 | 0.870 | 0.854 | 0.844 | 0.866 |
+
+**K1 PASS** (min ratio 0.540 at dG=0.5 — the ~2× band nearly
+exhausted; matches tick-15 from dG=4). **K2/K3 FAIL as
+pre-registered**: the 0.9 threshold was calibrated on 3-column
+completions; the 4-column AND geometry halves completion at dG=0.5
+(new measurable: the via column costs ~0.46 there) and crosses 0.9
+only at dG=4. **K4 FIRES as operationalized** (239/2000 build1,
+136/2000 build3) — and the detector is hereby refuted as a
+measurement: in a positive program whose rows can always complete,
+an unfinished assembly reads as a subset of the true model by
+construction. Growth-incompletion and reassertion are
+indistinguishable at fixed read time in this geometry; a kinetic
+reassertion claim needs a structural-death build (tile type
+removed), a different experiment.
+
+What stands, pinned in CI: (1) build3/build1 completion ratio
+0.970–1.037 at every point — the wrong compile executes at the
+correct compile's own rate (tick 16's prediction, now in the AND
+geometry); (2) build2 tracks build1 within 0.97–1.03 — false rows
+cost nothing kinetically; (3) all three builds sit on the tick-15
+dG=7 partial wall (0.844–0.870 vs 0.866) — the depth ceiling is
+unchanged by the 4th column.
+
+Lesson for the pre-registration ledger: calibrate completion
+thresholds on the geometry being tested, and separate completion
+statistics from semantic-channel detectors before gating on them.
