@@ -43,17 +43,18 @@ class TestRow2Ordering(unittest.TestCase):
         b = sweep(seed0=20271001)
         self.assertEqual(a, b)
 
-    def test_d2t_never_enters_at_b2(self):
-        # structural: no-p has no partner, so a D2T entry event at
-        # matched strength >= 2 is impossible; assert via rates: the
-        # attach event list never offers D2T above the b=1 rate.
-        # Checked indirectly through the code path instead: every D2T
-        # attach in a fine-grained sweep is followed (not preceded) by
-        # any L2 bond gain, i.e. trap_ever => l2_onto_d2t >= 1.
-        runs = sweep(n=30)
-        for _, s in runs:
-            if s.get("trap_ever"):
-                self.assertGreaterEqual(s.get("l2_onto_d2t", 0), 1)
+    def test_d2t_value_channel_cannot_reach_b2(self):
+        # Structural (no MC): D2T's south glue no-p has no partner, so in
+        # the correct row-1 context (S2, D1T, L1 resident; no L2) D2T can
+        # only enter at b=1 via go2, while the correct D2F enters at b=2.
+        # A D2T at b=2 therefore always requires a resident lock — the
+        # reverse-order trap (D2T onto a resident b=1 L2) is real and was
+        # caught by this test's first version failing on exactly that.
+        import tiles_v2
+        ctx = {(0, 0): "seed0", (1, 0): "seed1", (2, 0): "seed2",
+               (0, 1): "S1", (1, 1): "D1T", (2, 1): "L1", (0, 2): "S2"}
+        self.assertEqual(tiles_v2.matched_strength(ctx, (1, 2), "D2T"), 1)
+        self.assertEqual(tiles_v2.matched_strength(ctx, (1, 2), "D2F"), 2)
 
 
 if __name__ == "__main__":

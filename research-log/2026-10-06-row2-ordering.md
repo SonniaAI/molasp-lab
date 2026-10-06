@@ -72,3 +72,21 @@ Next unblocked: value-agnostic e^{−2dG} variant measurement (needs a
 designed tile variant — queued with design notes); designs/002
 atom-order derivation; promoting design rule (c) to the compiler
 invariant list.
+
+## Addendum (same tick): a second trap-formation ordering, caught by the test
+
+The first version of `tests/test_row2_ordering.py` asserted every
+trap forms as "L2 attaches onto a resident D2T" — and failed on a
+counterexample in a 30-run sweep. The reverse ordering is real: an L2
+resident at b = 1 (attached via base2 under a resident L1) can
+persist briefly, and a D2T attaching into it enters at b = 2 directly
+(W = go2 to S2, E = r2 to the resident L2). So the pipeline stage
+"L2 onto resident D2T" undercounts formations; the read-state trap
+counter (`trap_at_read`) is order-agnostic and is the number the
+reconciliation above uses, so the headline table stands. Corrected
+structural statement, now pinned in CI: D2T's value channel (S = no-p,
+no partner) can never carry it to b = 2 — in the correct row-1 context
+D2T enters at b = 1 while D2F enters at b = 2 — so a wrong value only
+ever becomes locked through a resident lock, in either attachment
+order. The narrative's shorthand "D2T can NEVER enter at b = 2" above
+should read "…without a resident L2".
