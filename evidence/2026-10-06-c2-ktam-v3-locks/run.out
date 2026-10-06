@@ -1,0 +1,6 @@
+{"Gse": 9.0, "T_read_rule": "400*exp(Gmc)", "n_per_point": 500, "seed_base": 20261007, "model": "kTAM v3 no-mismatch, value-typed locks", "prediction": "both channels ~ exp(-2*dG)", "v21_measured": {"0.5": {"empty": 0.212, "unfounded": 0.222}, "2.0": {"empty": 0.174, "unfounded": 0.058}, "4.0": {"empty": 0.044, "unfounded": 0.0}, "7.0": {"empty": 0.0, "unfounded": 0.0}}}
+{"Gse": 9.0, "Gmc": 9.5, "dGmc": 0.5, "n": 500, "decode": {"a": 500, "ap": 0, "p": 0, "empty": 0, "partial": 0}, "empty_frac": 0.0, "unfounded_frac": 0.0, "curve_e_neg_dG": 0.6065, "curve_e_neg_2dG": 0.36788}
+{"Gse": 9.0, "Gmc": 11.0, "dGmc": 2.0, "n": 500, "decode": {"a": 498, "ap": 0, "p": 0, "empty": 0, "partial": 2}, "empty_frac": 0.0, "unfounded_frac": 0.0, "curve_e_neg_dG": 0.1353, "curve_e_neg_2dG": 0.01832}
+{"Gse": 9.0, "Gmc": 13.0, "dGmc": 4.0, "n": 500, "decode": {"a": 498, "ap": 0, "p": 0, "empty": 0, "partial": 2}, "empty_frac": 0.0, "unfounded_frac": 0.0, "curve_e_neg_dG": 0.0183, "curve_e_neg_2dG": 0.00034}
+{"Gse": 9.0, "Gmc": 16.0, "dGmc": 7.0, "n": 500, "decode": {"a": 436, "ap": 0, "p": 0, "empty": 0, "partial": 64}, "empty_frac": 0.0, "unfounded_frac": 0.0, "curve_e_neg_dG": 0.0009, "curve_e_neg_2dG": 0.0}
+{"wrong_total": 0, "n_total": 2000, "wrong_ci95_upper": 0.0015}

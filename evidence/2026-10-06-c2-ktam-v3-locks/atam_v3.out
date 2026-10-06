@@ -1,0 +1,37 @@
+{
+  "producible_assemblies": 10,
+  "terminal_assemblies": 1,
+  "terminal_decodes": [
+    "a"
+  ],
+  "D1F_ever_producible": false,
+  "D2T_ever_producible": false,
+  "value_blind_bond_strengths": {
+    "pair_strengths": {
+      "L1.W_rd1t_vs_D1F.E_rd1f": 0,
+      "D2F.S_rd1t-done_vs_D1F.N_rd1f-done": 0,
+      "L2.W_rd2f_vs_D2T.E_rd2t": 0
+    },
+    "context_totals": [
+      [
+        "L1_total_D1F",
+        1,
+        "L1_total_D1T",
+        2
+      ],
+      [
+        "D2F_total_above_D1F",
+        1,
+        "D2F_total_above_D1T",
+        2
+      ],
+      [
+        "L2_total_D2T",
+        1,
+        "L2_total_D2F",
+        2
+      ]
+    ]
+  }
+}
+aTAM v3 CHECK PASSED: system grows; every terminal assembly decodes to {a}; D1F and D2T never producible at tau=2; no lock's value-side glue bonds a wrong value (wrong contexts keep only structural bonds, strictly fewer than correct contexts).

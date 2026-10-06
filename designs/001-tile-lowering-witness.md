@@ -2,9 +2,12 @@
 
 Status: v2.1 machine-checked at τ=2 (aTAM); kTAM v2.1 slow-growth window
 swept 2026-10-06 (results below) — C2 at kTAM level is a rate statement,
-not an absolute; v3 (evidence-checking locks) specified, not yet built.
+not an absolute; v3 (evidence-checking locks) built, machine-checked and
+gridded 2026-10-06 — wrong values structurally un-lockable, 0/2000 window
+errors (results below).
 Date opened: 2026-10-05. Evidence: `../evidence/2026-10-05-c2-ktam/`,
-`../evidence/2026-10-06-c2-ktam-v2-window/`.
+`../evidence/2026-10-06-c2-ktam-v2-window/`,
+`../evidence/2026-10-06-c2-ktam-v3-locks/`.
 
 ## Goal
 
@@ -134,7 +137,7 @@ Readings:
    (.174 vs ~.11 at dG=2) — site-reopening retries, exact first-passage
    analysis queued.
 
-### v3, specified (not yet built): evidence-checking locks
+### v3, built and measured (2026-10-06): evidence-checking locks
 
 Rule: a lock must check the value it locks, not merely stitch the row
 shut. Value-type the decision tiles' exposed glues (D1T→rd1t, D1F→rd1f,
@@ -143,3 +146,41 @@ value's glue. Locking a wrong value then needs two coincident near-misses
 → error ~e^{−2·dG}; at dG=2 that is ≈10⁻³ instead of 6%. Decision-column
 proofreading; first entry in the compiler's design-rule catalogue.
 Falsifier: the v3 grid showing either channel above its e^{−2·dG} curve.
+
+**Built and measured 2026-10-06** (evidence and grid:
+`../evidence/2026-10-06-c2-ktam-v3-locks/`; narrative:
+`../research-log/2026-10-06-ktam-v3-locks.md`; CI-enforced by
+`tests/test_tiles_v3.py`). One spec subtlety found while building: the
+four E-glue typings are **not sufficient** — D2F's south input
+`row1done` bonds D1F's north glue exactly as happily as D1T's, a
+vertical value-blind lock; left untyped, the founded channel keeps
+~e^{−dG}. v3 types the row-1→row-2 channel too (D1T N=rd1t-done,
+D1F N=rd1f-done, D2F S=rd1t-done). Tile count unchanged (8+3); the
+cost moves entirely into glue-alphabet size. aTAM τ=2 re-checked on
+the v3 glue table: same 10 producible assemblies, 1 terminal decoding
+{a}, D1F/D2T producible in 0 of 10, all lock-vs-wrong-value glue
+pairs strength 0 (asserted in CI).
+
+Grid, identical protocol to the v2.1 window (seeds from 20261007):
+
+| Gmc | dG | {a} | {a,p}+{p} | empty | partial | e^{−2·dG} |
+| --- | --- | --- | --- | --- | --- | --- |
+| 9.5 | 0.5 | 500 | 0 | 0 | 0 | .368 |
+| 11 | 2.0 | 498 | 0 | 0 | 2 | .018 |
+| 13 | 4.0 | 498 | 0 | 0 | 2 | .00034 |
+| 16 | 7.0 | 436 | 0 | 0 | 64 | 8e-7 |
+
+**Verdict: falsifier not triggered — both channels below the curve at
+every point** (v2.1 same protocol: 355/2000 pooled wrong; v3: 0/2000,
+CI95 upper 1.5×10⁻³, including dG=0.5 where v2.1 trapped 21–22%). The
+result *supersedes* the prediction: with complete value-typing a wrong
+decision tile's value glues bond nothing at any strength (max b = 1 in
+every assembly), so no coincidence of attachments can lock a wrong
+value — errors reduce to pre-settlement transients the read protocol
+does not catch. The e^{−2·dG} two-coincidence picture belongs to a
+weaker variant (v3-proofreading: value-agnostic locks requiring two
+independent bonds — specified, unmeasured). Design-rule catalogue,
+two entries: (a) locks bind value-bearing glues → wrong values
+un-lockable, free at τ=2, glue alphabet pays; (b) where value-agnostic
+locks are unavoidable, two independent bonds → ~e^{−2·dG}. No growth
+penalty measured (partial fractions 0/2/2/64 vs v2.1's 0/1/2/66).
