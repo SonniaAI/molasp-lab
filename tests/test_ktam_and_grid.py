@@ -133,8 +133,8 @@ class TestMeasuredGrid(unittest.TestCase):
         with open(os.path.join(EV, "run.out")) as fh:
             for line in fh:
                 line = line.strip()
-                if not line:
-                    continue
+                if not line.startswith("{"):
+                    continue  # blank lines / runner trailers
                 d = json.loads(line)
                 if "decode" in d:
                     cls.rows[(d["system"], d["dGmc"])] = d

@@ -15,4 +15,3 @@
 {"system": "W1_dropped_literal_corrected", "Gmc": 16.0, "dGmc": 7.0, "n": 500, "decode": {"partial": 78, "qr": 422}, "decode_loose": {"qr": 500}, "expected": "qr", "expected_frac": 0.844, "partial_frac": 0.156, "tick15_correct": 0.866, "curve_e_neg_dG": 0.0009, "curve_e_neg_2dG": 0.0}
 {"system": "W1_dropped_literal_corrected", "reassertion_loose_total": 136, "decision_vacancy_total": 160, "n_total": 2000, "reassertion_ci95_upper": 0.0015}
 
-HX-QUEUE-EXIT:0
