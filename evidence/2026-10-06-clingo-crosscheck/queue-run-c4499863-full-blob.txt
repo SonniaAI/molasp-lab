@@ -1,0 +1,240 @@
+HX-OUT-BEGIN:c4499863d06116ce27fbc4a223fbb017aed6131d7b4e6b38837ff1b3daea2d46
+HX-FILE:arch
+aarch64
+
+HX-FILE:clingo.sha256
+fa59f0b56f8a676fdac0b07663e1ec8cc55a6aeed280f4d0ba0ff9d3ed5f3ec8  /usr/bin/clingo
+
+HX-FILE:clingo.version
+clingo version 5.6.2
+Address model: 64-bit
+
+libclingo version 5.6.2
+Configuration: without Python, with Lua 5.4.6
+
+libclasp version 3.3.9 (libpotassco version 1.1.0)
+Configuration: WITH_THREADS=1
+Copyright (C) Benjamin Kaufmann
+
+License: The MIT License <https://opensource.org/licenses/MIT>
+
+HX-FILE:cpu.stat.after
+usage_usec 75397
+user_usec 32781
+system_usec 42615
+nice_usec 0
+core_sched.force_idle_usec 0
+nr_periods 1
+nr_throttled 0
+throttled_usec 0
+nr_bursts 0
+burst_usec 0
+
+HX-FILE:cpu.stat.before
+usage_usec 26587
+user_usec 2580
+system_usec 24007
+nice_usec 0
+core_sched.force_idle_usec 0
+nr_periods 1
+nr_throttled 0
+throttled_usec 0
+nr_bursts 0
+burst_usec 0
+
+HX-FILE:cpu_implementer
+0x41
+
+HX-FILE:cpu_model
+
+HX-FILE:cpu_part
+0xd87
+
+HX-FILE:crosscheck.out
+{
+  "oracle": "python-module",
+  "environment": "module clingo 5.8.2",
+  "rows": [
+    {
+      "program": "p :- p.",
+      "lp": "p1-selfloop.lp",
+      "enumeration": "full",
+      "clingo": [
+        "{}"
+      ],
+      "stable": [
+        "{}"
+      ],
+      "supported": [
+        "{p}",
+        "{}"
+      ],
+      "supported_but_unstable": [
+        "{p}"
+      ],
+      "checks": {
+        "clingo_eq_stable": true,
+        "stable_subset_supported": true,
+        "no_unstable_in_clingo": true
+      }
+    },
+    {
+      "program": "a. p :- p.",
+      "lp": "p2-min-clean.lp",
+      "enumeration": "full",
+      "clingo": [
+        "{a}"
+      ],
+      "stable": [
+        "{a}"
+      ],
+      "supported": [
+        "{a,p}",
+        "{a}"
+      ],
+      "supported_but_unstable": [
+        "{a,p}"
+      ],
+      "checks": {
+        "clingo_eq_stable": true,
+        "stable_subset_supported": true,
+        "no_unstable_in_clingo": true
+      }
+    },
+    {
+      "program": "p :- q. q :- p.",
+      "lp": "p3-2cycle.lp",
+      "enumeration": "full",
+      "clingo": [
+        "{}"
+      ],
+      "stable": [
+        "{}"
+      ],
+      "supported": [
+        "{p,q}",
+        "{}"
+      ],
+      "supported_but_unstable": [
+        "{p,q}"
+      ],
+      "checks": {
+        "clingo_eq_stable": true,
+        "stable_subset_supported": true,
+        "no_unstable_in_clingo": true
+      }
+    },
+    {
+      "program": "a. p :- q. q :- p.",
+      "lp": "p4-2cycle-entry.lp",
+      "enumeration": "full",
+      "clingo": [
+        "{a}"
+      ],
+      "stable": [
+        "{a}"
+      ],
+      "supported": [
+        "{a,p,q}",
+        "{a}"
+      ],
+      "supported_but_unstable": [
+        "{a,p,q}"
+      ],
+      "checks": {
+        "clingo_eq_stable": true,
+        "stable_subset_supported": true,
+        "no_unstable_in_clingo": true
+      }
+    },
+    {
+      "program": "a. q :- a.",
+      "lp": "p5-tight-control.lp",
+      "enumeration": "full",
+      "clingo": [
+        "{a,q}"
+      ],
+      "stable": [
+        "{a,q}"
+      ],
+      "supported": [
+        "{a,q}"
+      ],
+      "supported_but_unstable": [],
+      "checks": {
+        "clingo_eq_stable": true,
+        "stable_subset_supported": true,
+        "no_unstable_in_clingo": true
+      }
+    }
+  ],
+  "diagnostic": {
+    "program": "a :- not b. b :- not a.  (completeness probe)",
+    "lp": "p6-choice-diagnostic.lp",
+    "enumeration": "full",
+    "clingo": [
+      "{a}",
+      "{b}"
+    ],
+    "stable": [
+      "{a}",
+      "{b}"
+    ],
+    "supported": [
+      "{a}",
+      "{b}"
+    ],
+    "supported_but_unstable": [],
+    "expected_two_models": [
+      "{a}",
+      "{b}"
+    ],
+    "completeness_observed": true
+  },
+  "failures": [],
+  "verdict": "PASSED"
+}
+
+HX-FILE:memory.events
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+
+HX-FILE:memory.events.before
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+
+HX-FILE:memory.max
+1073741824
+
+HX-FILE:memory.peak
+15024128
+
+HX-FILE:status
+0
+
+HX-FILE:stderr
+
+HX-FILE:stdout
+ORACLE: module clingo 5.8.2
+{"program": "p :- p.", "lp": "p1-selfloop.lp", "enumeration": "full", "clingo": ["{}"], "stable": ["{}"], "supported": ["{p}", "{}"], "supported_but_unstable": ["{p}"], "checks": {"clingo_eq_stable": true, "stable_subset_supported": true, "no_unstable_in_clingo": true}}
+{"program": "a. p :- p.", "lp": "p2-min-clean.lp", "enumeration": "full", "clingo": ["{a}"], "stable": ["{a}"], "supported": ["{a,p}", "{a}"], "supported_but_unstable": ["{a,p}"], "checks": {"clingo_eq_stable": true, "stable_subset_supported": true, "no_unstable_in_clingo": true}}
+{"program": "p :- q. q :- p.", "lp": "p3-2cycle.lp", "enumeration": "full", "clingo": ["{}"], "stable": ["{}"], "supported": ["{p,q}", "{}"], "supported_but_unstable": ["{p,q}"], "checks": {"clingo_eq_stable": true, "stable_subset_supported": true, "no_unstable_in_clingo": true}}
+{"program": "a. p :- q. q :- p.", "lp": "p4-2cycle-entry.lp", "enumeration": "full", "clingo": ["{a}"], "stable": ["{a}"], "supported": ["{a,p,q}", "{a}"], "supported_but_unstable": ["{a,p,q}"], "checks": {"clingo_eq_stable": true, "stable_subset_supported": true, "no_unstable_in_clingo": true}}
+{"program": "a. q :- a.", "lp": "p5-tight-control.lp", "enumeration": "full", "clingo": ["{a,q}"], "stable": ["{a,q}"], "supported": ["{a,q}"], "supported_but_unstable": [], "checks": {"clingo_eq_stable": true, "stable_subset_supported": true, "no_unstable_in_clingo": true}}
+{"program": "a :- not b. b :- not a.  (completeness probe)", "lp": "p6-choice-diagnostic.lp", "enumeration": "full", "clingo": ["{a}", "{b}"], "stable": ["{a}", "{b}"], "supported": ["{a}", "{b}"], "supported_but_unstable": [], "expected_two_models": ["{a}", "{b}"], "completeness_observed": true}
+CLINGO CROSS-CHECK PASSED: independent oracle agrees with the GL-reduct derivation on all five witness programs; no supported-but-unstable set is a clingo answer set.
+
+HX-FILE:wall_ms
+59
+
+HX-QUEUE-EXIT:0
+HX-OUT-END:c4499863d06116ce27fbc4a223fbb017aed6131d7b4e6b38837ff1b3daea2d46
+
