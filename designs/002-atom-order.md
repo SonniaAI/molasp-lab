@@ -1,9 +1,11 @@
 # Design 002 — Atom order: lowering multi-atom recursion
 
-Status: derived + machine-checked at τ=2 (aTAM) 2026-10-06; kTAM grid
-queued (v3 value-typing carried per row); the anchored-cycle order
-falsifier queued (below). Evidence:
-`../evidence/2026-10-06-atom-order-2cycle/`.
+Status: derived + machine-checked at τ=2 (aTAM) 2026-10-06; the
+anchored-cycle order falsifier RESOLVED the same day (tick 14,
+OR construction, three builds — see "Order falsifier" below); kTAM
+grid queued (v3 value-typing carried per row). Evidence:
+`../evidence/2026-10-06-atom-order-2cycle/` and
+`../evidence/2026-10-06-anchored-cycle-order/`.
 Date opened: 2026-10-06. Prerequisite: designs/001 (v2.1 spine
 discipline, v3 value-typed locks).
 
@@ -104,14 +106,8 @@ each dies by a different mechanism (cut edge / transitive death).
    glue cannot read two witnesses. `r :- p, q.` needs a widened
    decision column or an in-row AND — designs/003 territory, and the
    known honest limit of the 3-column geometry.
-2. **The order falsifier (anchored cycle).** Program
-   `a. p :- a. p :- q. q :- p.` (stable {a,p,q}): with the correct
-   stage order a < p < q, D_pT has a fact-wired variant; with the
-   WRONG order a < q < p, q's true-tile reads p from above (dead) and
-   the system terminates at {a,p} — a wrong-but-terminal decode that
-   proves the compiler MUST emit stage order, not any order. Requires
-   the OR construction (multiple true-variants per atom sharing value
-   outputs); queued as the next machine check.
+2. **Body conjunction** remains open — see item 1. The order
+   falsifier that was queued here is now RESOLVED below.
 3. **kTAM carryover.** Rule (a) value-typing is verified per row at
    τ=2 and structurally (b = 1 wrong contexts); the per-row kTAM grid
    is queued, same protocol as designs/001 v3 (falsifier: any
@@ -128,5 +124,9 @@ each dies by a different mechanism (cut edge / transitive death).
 3. A positive normal program whose stage order exists but the
    3-column geometry cannot realize (criterion 1 above is the known
    instance class; finding another is a result).
-4. The order falsifier built the wrong way round and STILL decoding
-   {a,p,q} — would refute the claim that stage order is load-bearing.
+4. ~~The order falsifier built the wrong way round and STILL decoding
+   {a,p,q} — would refute the claim that stage order is load-bearing.~~
+   ANSWERED (tick 14): built both wrong ways — wrong cut edge AND wrong
+   row order — and neither decodes {a,p,q} (terminals {a,p} and {a}
+   respectively, both non-models). Stage order is load-bearing.
+   Evidence: `../evidence/2026-10-06-anchored-cycle-order/`.

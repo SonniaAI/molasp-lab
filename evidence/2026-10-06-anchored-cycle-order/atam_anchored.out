@@ -1,0 +1,74 @@
+{
+  "program": "a. p :- a. p :- q. q :- p.",
+  "builds": {
+    "correct_stage_order": {
+      "producible_assemblies": 20,
+      "terminals": 1,
+      "terminal_decodes": [
+        "apq"
+      ],
+      "decision_tiles_ever_producible": {
+        "D1T": true,
+        "D1F": false,
+        "D2TA": true,
+        "D2TQ": false,
+        "D2F": false,
+        "D3T": true,
+        "D3F": false
+      },
+      "locked_rows_terminal": [
+        3
+      ]
+    },
+    "wrong_cut_edge": {
+      "producible_assemblies": 16,
+      "terminals": 1,
+      "terminal_decodes": [
+        "ap"
+      ],
+      "decision_tiles_ever_producible": {
+        "D1T": true,
+        "D1F": false,
+        "D2TA": true,
+        "D2TQ": false,
+        "D2F": false,
+        "D3T": false,
+        "D3F": false
+      },
+      "locked_rows_terminal": [
+        2
+      ]
+    },
+    "wrong_row_order": {
+      "producible_assemblies": 10,
+      "terminals": 1,
+      "terminal_decodes": [
+        "a"
+      ],
+      "decision_tiles_ever_producible": {
+        "D1T": true,
+        "D1F": false,
+        "D2T": false,
+        "D2F": false,
+        "D3TA": false,
+        "D3TQ": false,
+        "D3F": false
+      },
+      "locked_rows_terminal": [
+        1
+      ]
+    }
+  },
+  "D2TQ_bond_in_full_correct_context": 3,
+  "clingo": {
+    "available": true,
+    "stable_models": [
+      [
+        "a.",
+        "p.",
+        "q."
+      ]
+    ],
+    "ap_satisfiable_under_assumptions": false
+  }
+}
