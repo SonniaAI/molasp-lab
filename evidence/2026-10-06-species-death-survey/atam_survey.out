@@ -1,0 +1,339 @@
+{
+ "anchors": {
+  "P_AND": "pqr",
+  "drop_p_fact": "q",
+  "drop_q_fact": "p",
+  "drop_r_rule": "pq",
+  "p_only": "p",
+  "q_only": "q",
+  "r_rule_loses_p": "pqr",
+  "r_rule_loses_q": "pqr"
+ },
+ "programs": {
+  "P_AND": "p. q. r :- p, q.",
+  "P_AND_minus_p": "q. r :- p, q.",
+  "P_AND_minus_q": "p. r :- p, q."
+ },
+ "residuals": {
+  "P_AND": "p. q. r :- p, q.",
+  "drop_p_fact": "q. r :- p, q.",
+  "drop_q_fact": "p. r :- p, q.",
+  "drop_r_rule": "p. q.",
+  "p_only": "p.",
+  "q_only": "q.",
+  "r_rule_loses_p": "p. q. r :- q.",
+  "r_rule_loses_q": "p. q. r :- p."
+ },
+ "rows": [
+  {
+   "anchors": [],
+   "assemblies": 4,
+   "canonical_site": [
+    1,
+    1
+   ],
+   "label": "COLLAPSED",
+   "removed": "D1T",
+   "terminal_decodes": [
+    [
+     "",
+     0
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "D2T",
+    "DAr",
+    "DBr",
+    "L1",
+    "L2",
+    "L3",
+    "V0p",
+    "Vp"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_q_fact",
+    "p_only"
+   ],
+   "assemblies": 13,
+   "canonical_site": [
+    1,
+    2
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "D2T",
+   "terminal_decodes": [
+    [
+     "p",
+     1
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "DAr",
+    "DBr",
+    "L2",
+    "L3",
+    "Vp"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_r_rule"
+   ],
+   "assemblies": 25,
+   "canonical_site": [
+    1,
+    3
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "DAr",
+   "terminal_decodes": [
+    [
+     "pq",
+     2
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "DBr",
+    "L3"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_r_rule"
+   ],
+   "assemblies": 31,
+   "canonical_site": [
+    2,
+    3
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "DBr",
+   "terminal_decodes": [
+    [
+     "pq",
+     2
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "L3"
+   ]
+  },
+  {
+   "anchors": [],
+   "assemblies": 20,
+   "canonical_site": [
+    3,
+    1
+   ],
+   "label": "COLLAPSED",
+   "removed": "L1",
+   "terminal_decodes": [
+    [
+     "",
+     0
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "L2",
+    "L3"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_q_fact",
+    "p_only"
+   ],
+   "assemblies": 30,
+   "canonical_site": [
+    3,
+    2
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "L2",
+   "terminal_decodes": [
+    [
+     "p",
+     1
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "L3"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_r_rule"
+   ],
+   "assemblies": 34,
+   "canonical_site": [
+    3,
+    3
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "L3",
+   "terminal_decodes": [
+    [
+     "pq",
+     2
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": []
+  },
+  {
+   "anchors": [],
+   "assemblies": 1,
+   "canonical_site": [
+    0,
+    1
+   ],
+   "label": "COLLAPSED",
+   "removed": "S1",
+   "terminal_decodes": [
+    [
+     "",
+     0
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "D1T",
+    "D2T",
+    "DAr",
+    "DBr",
+    "L1",
+    "L2",
+    "L3",
+    "S2",
+    "S3",
+    "V0p",
+    "Vp"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_q_fact",
+    "p_only"
+   ],
+   "assemblies": 5,
+   "canonical_site": [
+    0,
+    2
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "S2",
+   "terminal_decodes": [
+    [
+     "p",
+     1
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "D2T",
+    "DAr",
+    "DBr",
+    "L2",
+    "L3",
+    "S3",
+    "Vp"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_r_rule"
+   ],
+   "assemblies": 15,
+   "canonical_site": [
+    0,
+    3
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "S3",
+   "terminal_decodes": [
+    [
+     "pq",
+     2
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "DAr",
+    "DBr",
+    "L3"
+   ]
+  },
+  {
+   "anchors": [],
+   "assemblies": 10,
+   "canonical_site": [
+    2,
+    1
+   ],
+   "label": "COLLAPSED",
+   "removed": "V0p",
+   "terminal_decodes": [
+    [
+     "",
+     0
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "DBr",
+    "L1",
+    "L2",
+    "L3",
+    "Vp"
+   ]
+  },
+  {
+   "anchors": [
+    "drop_q_fact",
+    "p_only"
+   ],
+   "assemblies": 22,
+   "canonical_site": [
+    2,
+    2
+   ],
+   "label": "FAITHFUL_SUB",
+   "removed": "Vp",
+   "terminal_decodes": [
+    [
+     "p",
+     1
+    ]
+   ],
+   "terminals": 1,
+   "unproducible_tiles": [
+    "DBr",
+    "L2",
+    "L3"
+   ]
+  }
+ ],
+ "species": [
+  "D1T",
+  "D2T",
+  "DAr",
+  "DBr",
+  "L1",
+  "L2",
+  "L3",
+  "S1",
+  "S2",
+  "S3",
+  "V0p",
+  "Vp"
+ ],
+ "tau": 2
+}
