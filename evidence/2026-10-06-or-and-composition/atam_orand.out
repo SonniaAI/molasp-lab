@@ -1,0 +1,155 @@
+{
+ "checks": {
+  "G1_build1": {
+   "assemblies": 45,
+   "decodes": [
+    "pqr",
+    "pqr"
+   ],
+   "hybrid_assemblies": 0,
+   "locked_rows": [
+    3,
+    3
+   ],
+   "shared_output_inventory_count": 2,
+   "terminals": 2,
+   "terminals_with_conj_variant": 1,
+   "terminals_with_unit_variant": 1
+  },
+  "G1_cutp": {
+   "assemblies": 4,
+   "decodes": [
+    ""
+   ],
+   "r_true_glue_producible": false,
+   "terminals": 1
+  },
+  "G2_build2": {
+   "DBr_in_any_assembly": false,
+   "and1_r_producible": false,
+   "assemblies": 35,
+   "decodes": [
+    "pr"
+   ],
+   "locked_rows": [
+    3
+   ],
+   "q_t_done_producible": false,
+   "q_t_producible": false,
+   "terminals": 1
+  },
+  "G3_build3": {
+   "assemblies": 35,
+   "decodes": [
+    "q"
+   ],
+   "locked_rows": [
+    3
+   ],
+   "p_t_producible": false,
+   "r_t_producible": false,
+   "terminals": 1
+  },
+  "G4_build4": {
+   "assemblies": 35,
+   "certificate_fires": true,
+   "clingo_stable_P_OA_minus_q": "pr",
+   "decodes": [
+    "p"
+   ],
+   "terminals": 1
+  },
+  "clingo": {
+   "P_OA": [
+    [
+     "p.",
+     "q.",
+     "r."
+    ]
+   ],
+   "P_OA_minus_p": [
+    [
+     "q."
+    ]
+   ],
+   "P_OA_minus_q": [
+    [
+     "p.",
+     "r."
+    ]
+   ]
+  },
+  "d1_via_discipline": {
+   "build1": [],
+   "build1_cutp": [],
+   "build2": [],
+   "build3": [],
+   "build4": []
+  },
+  "d2_conj_body": {
+   "build1": [],
+   "build1_cutp": [],
+   "build2": [],
+   "build3": "n/a_r_predicted_false",
+   "build4": "n/a_r_predicted_false"
+  },
+  "d3_closure_support": {
+   "build1": [],
+   "build1_cutp": [],
+   "build2": [],
+   "build3": [],
+   "build4": [
+    [
+     "closure",
+     "r",
+     [
+      "p"
+     ]
+    ]
+   ]
+  },
+  "inertness": {
+   "build1": {
+    "SP4": 1,
+    "and1_r-done": 1,
+    "cap3": 1,
+    "rf-relay": 0,
+    "u-cutp": 0,
+    "unit1_r-done": 1
+   },
+   "build1_cutp": {
+    "SP4": 1,
+    "and1_r-done": 1,
+    "cap3": 1,
+    "rf-relay": 0,
+    "u-cutp": 1,
+    "unit1_r-done": 1
+   },
+   "build2": {
+    "SP4": 1,
+    "and1_r-done": 1,
+    "cap3": 1,
+    "rf-relay": 0,
+    "u-cutp": 0,
+    "unit1_r-done": 1
+   },
+   "build3": {
+    "SP4": 1,
+    "and1_r-done": 0,
+    "cap3": 1,
+    "rf-relay": 1,
+    "u-cutp": 0,
+    "unit1_r-done": 0
+   },
+   "build4": {
+    "SP4": 1,
+    "and1_r-done": 0,
+    "cap3": 1,
+    "rf-relay": 1,
+    "u-cutp": 0,
+    "unit1_r-done": 0
+   }
+  }
+ },
+ "tau": 2
+}

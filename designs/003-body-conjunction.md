@@ -4,7 +4,10 @@ Status: **F1–F3 machine-checked 2026-10-06 (tick 18, SON-4758)** —
 exhaustive τ = 2 BFS, evidence/2026-10-06-body-conjunction-builds/,
 tests pinned in tests/test_tiles_and.py. Two build-table errata (E1,
 E2) found by that check and corrected; see Errata below. F4 (kTAM
-grid) remains queued — it needs the cluster queue.
+grid) measured tick 19 (evidence/2026-10-06-and-ktam-grid/).
+**OR ∧ AND composition machine-checked 2026-10-06 (tick 20,
+SON-4763)** — evidence/2026-10-06-or-and-composition/, tests pinned
+in tests/test_tiles_orand.py; see the composition section below.
 Date opened: 2026-10-06. Prerequisites: designs/001 (v3 value typing,
 rule (a)), designs/002 (3-column geometry, stage order lemma, OR pair
 convention, tick 16 emit-time certificate).
@@ -279,6 +282,64 @@ What stands (pinned in CI, tests/test_ktam_and_grid.py):
 - **The depth ceiling is unchanged**: all three builds sit on the
   tick-15 dG=7 partial wall (0.844–0.870 vs 0.866).
 
+### OR ∧ AND composition (measured, tick 20, SON-4763)
+
+Witness family: **P_OA** `p. q. r :- p, q. r :- p.` (stable
+{p,q,r}); **P_OA−q** `p. r :- p, q. r :- p.` (stable {p,r});
+**P_OA−p** `q. r :- p, q. r :- p.` (stable {q}); plus W2, a
+dropped-unit-rule wrong compile of P_OA−q whose solver model is
+{p}. r is the composition atom — one conjunctive rule, one unit
+rule; logically r ⇔ p, so deleting q's fact must NOT kill r while
+deleting p's fact must (the discriminator pair, builds 2/3).
+
+Construction (4-column geometry unchanged): r's row carries TWO
+variant reader paths sharing the value outputs r-t/r-t-done and
+the lock L3 — the designs/002 OR pair convention, conjunctive
+variant widened per this design's sequential gating (DAr+DBr =
+build 1 verbatim). The unit variant adds one new tile class: a
+**conduit** Cr at slot A (south face typed by the row-below
+predicted-VALUE done glue — a spine relay, not a semantic read)
+followed by the reader Ur at the V column (S = p-t-done; p's
+witness only surfaces at the via's north face two rows down).
+Hybrid exclusion is by glue identity: and1_r ≠ unit1_r mispairs
+bond at strength 1. The shared output r-t-done occurs in exactly 2
+tile types (the OR-pair fingerprint) and at most once per assembly
+(the two readers compete for the same V-column site).
+
+| Arm | Prediction | Measured | Verdict |
+| --- | --- | --- | --- |
+| G1 P_OA | every terminal decodes {p,q,r}; both variants realize; no mixing | 2 terminals, both {p,q,r}, 3/3 locked, one per variant path, 0 hybrid assemblies | PASS |
+| G1-cut p-seed | r-t producible 0 (over-collapse) | terminal {}, r-t 0 | PASS |
+| G2 P_OA−q | unique terminal {p,r} — OR rescue of the dead AND slot | unique {p,r}, 3/3 locked; q-t/q-t-done/and1_r producible 0; DAr/DBr in no assembly | PASS |
+| G3 P_OA−p | unique terminal {q}; both rules die with p | unique {q}; p-t/r-t producible 0 | PASS |
+| G4 W2 | terminal {p} ≠ clingo {p,r}; certificate + static closure fire | exactly that; d3 fires on `r :- p` | PASS |
+
+The contrast that IS the composition claim: the same fact deletion
+that kills r under pure AND (this design's build 2, terminal {p})
+leaves r alive under OR∧AND (G2, terminal {p,r}) — value typing
+kills the dead variant's reads (q-t-done never exposed) while the
+live variant completes through the shared lock. Emission policy
+this pins: reader paths are rule-local — a dead variant is still
+emitted when a sibling rule predicts the atom true, and is killed
+by value typing, not by omission.
+
+New compiler invariant (promoted to required by G4): **(d3)
+compile-model closure/support.** The predicted-true set compiled
+into the locks must be a supported model of the program: no rule
+with body inside the set may have its head predicted false
+(closure), and every predicted-true atom is a fact or has a
+fully-in-set rule body (support). d3 is static — it catches the
+dropped-rule compile without running the BFS, complementing d2
+(which catches dropped literals).
+
+Tile budget (build 1): **14 tile types + 4-wide seed** — vs this
+design's build 1 (12 types + 4-wide seed): **+2 types** (conduit +
+reader) for the second rule, sharing the lock and the value chain.
+Each additional rule variant of a b-literal body adds ~(b) slot
+types (a unit rule adds 2 here: its literal rides the via column,
+so the spine must be relayed across slot A). Still linear in
+program size at fixed max body width.
+
 ## What this does not establish
 
 1. F1–F3 are machine-checked (tick 18); F4 is measured (tick 19,
@@ -289,10 +350,10 @@ What stands (pinned in CI, tests/test_ktam_and_grid.py):
    conflation).
 2. **Negative literals.** `not c` bodies remain unexpressed on the
    tile path (dual rail is the DSD answer; the tile answer is open).
-3. **OR ∧ AND.** An atom with k rules where some body is conjunctive
-   should compose with designs/002's OR pair (k TRUE variants sharing
-   value outputs, conjunctive variants widened per this design), but
-   that composition is unbuilt and unproven.
+3. **OR ∧ AND — resolved tick 20 (machine-checked).** Composes as
+   specified; see the composition section above. Open remainder:
+   rule sets with > 2 variants and b ≥ 3 bodies are the same
+   slot-widening, untested.
 4. **b ≥ 3** extends by more slots but grows lock-column width and
    read time; untested.
 5. The stage table and body order are still computed by hand
