@@ -1,0 +1,48 @@
+{
+ "build": "P_AND_corrected_missing_DAr",
+ "checks": {
+  "S1": {
+   "and1_r_exposed": false,
+   "assemblies": 25,
+   "dbr_producible": false,
+   "inventory": [
+    "D1T",
+    "D2T",
+    "DBr",
+    "L1",
+    "L2",
+    "L3",
+    "S1",
+    "S2",
+    "S3",
+    "V0p",
+    "Vp"
+   ],
+   "l3_producible": false,
+   "r_t_exposed": false,
+   "site_1_3_occupied_assemblies": 0,
+   "terminal_decodes": [
+    [
+     "pq",
+     2
+    ]
+   ],
+   "terminals": 1
+  },
+  "clingo": {
+   "P_AND": [
+    [
+     "p.",
+     "q.",
+     "r."
+    ]
+   ],
+   "P_AND_dead_semantics": [
+    [
+     "p.",
+     "q."
+    ]
+   ]
+  }
+ }
+}

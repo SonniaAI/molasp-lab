@@ -359,3 +359,31 @@ program size at fixed max body width.
 5. The stage table and body order are still computed by hand
    (designs/002 item 4); this design is another specification for the
    compiler pass, not the pass itself.
+
+## F5 arm (tick 22, SON-4773): structural-death reassertion — resolved
+
+K4's honest successor, built and measured
+(evidence/2026-10-06-structural-death/): BUILD1 minus the single
+species DAr (synthesis-time absence; no recompile, so d2/d3 are
+silent by construction). aTAM: unique terminal, lock decode ("pq",
+2), DBr/L3 never producible, site (1,3) never occupied. kTAM
+(protocol of record, queue job hxq-eb04748e): dead strict "pqr"
+0.442/0.658/0.726/0.006 at dG 0.5/2/4/7 vs build1
+0.542/0.790/0.984/0.872.
+
+Verdicts (pre-registered in ktam_mc_death.py before the run):
+S2 PASSES — a completion-independent reassertion channel exists
+(916/2000 full true-model reads through a structurally dead row;
+no incompletion confound is possible by the strict-decode
+definition). S3 — trapping class (213x above 10*e^{-2dG} at dG=4;
+the DBr+L3 mutual b=2 stabilization dominates the joint split),
+kinetically invisible at dG<=4 (dead/build1 0.74-0.83), and
+window-controlled: at dG=7 the repair collapses (0.006) and the
+substrate reads the dropped-rule stable model {p,q} at 99.2%.
+S4 PASSES — build1 calibration reproduces tick-19.
+
+Consequence for the design text: missing-species detection is a
+read-WINDOW problem (slow growth), not a rate problem — consistent
+with the tick-10 readwindow invariant. Honest limit: one geometry,
+one species, one read rule; the collapse point is this build's
+glue arithmetic, not yet a law.
