@@ -1,0 +1,66 @@
+{
+  "producible_assemblies": 20,
+  "terminal_assemblies": 1,
+  "terminal_decodes": [
+    "a"
+  ],
+  "D1F_ever_producible": false,
+  "D2T_ever_producible": false,
+  "D3T_ever_producible": false,
+  "unique_name_glues": {
+    "q-true": 1,
+    "SP4": 1
+  },
+  "rd2t-done_exposed_by": {
+    "north": [
+      "D2T"
+    ],
+    "south": [
+      "D3T"
+    ],
+    "seed": []
+  },
+  "value_blind_bond_strengths": {
+    "pair_strengths": {
+      "L1.W_rd1t_vs_D1F.E_rd1f": 0,
+      "D2F.S_rd1t-done_vs_D1F.N_rd1f-done": 0,
+      "L2.W_rd2f_vs_D2T.E_rd2t": 0,
+      "D3T.S_rd2t-done_vs_D2F.N_rd2f-done": 0,
+      "D3F.S_rd2f-done_vs_D2T.N_rd2t-done": 0,
+      "L3.W_rd3f_vs_D3T.E_rd3t": 0
+    },
+    "context_totals": [
+      [
+        "L1_total_D1F",
+        1,
+        "L1_total_D1T",
+        2
+      ],
+      [
+        "D2F_total_above_D1F",
+        1,
+        "D2F_total_above_D1T",
+        2
+      ],
+      [
+        "L2_total_D2T",
+        0,
+        "L2_total_D2F",
+        1
+      ],
+      [
+        "D3F_total_above_D2T",
+        1,
+        "D3F_total_above_D2F",
+        2
+      ],
+      [
+        "L3_total_D3T",
+        1,
+        "L3_total_D3F",
+        2
+      ]
+    ]
+  }
+}
+aTAM 2cycle CHECK PASSED: system grows; unique terminal decodes {a}; D1F/D2T/D3T never producible at tau=2; q-true and SP4 unique-name inert; rd2t-done exposed only by the never-producible D2T (transitive death); no value-side glue bonds a wrong value.

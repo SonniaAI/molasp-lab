@@ -101,7 +101,7 @@ above it.
    transient-occupancy floor.
 3. An instance where the row order cannot realise a strict level mapping
    the program needs (positive recursion through many atoms) — that is
-   designs/002 territory: the row-typing here hard-codes order a < p.
+   designs/002 territory: the row-typing here hard-codes order a < p. Opened as designs/002 (2026-10-06): the 2-cycle `a. p :- q. q :- p.` is derived and machine-checked at tau=2; body conjunction is its known open limit.
 
 Verdict on criterion 2 after the 2026-10-06 grid: **not refuted, but the
 floor is far higher than v1 suggested.** Unfounded decodes sit *at* the
