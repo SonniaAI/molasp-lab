@@ -201,3 +201,21 @@ use the CTMC. One honest residual: the window CTMC over-predicts the
 unfounded channel 2.4x at dG=2 (.138 vs .058 measured) — full-assembly
 ordering suppresses row-2 traps in a way not yet mechanistically
 accounted; instrumenting the full MC is queued next.
+
+### Row-2 residual closed (2026-10-06, tick 9)
+
+Instrumented full-assembly run (evidence
+`../evidence/2026-10-06-row2-ordering/`, narrative
+`../research-log/2026-10-06-row2-ordering.md`, invariants in
+`tests/test_row2_ordering.py`): the 2.4x was two stacked terms —
+window-vs-full trap formation (.1381 → .108, L1-overlap ordering; D2T
+excursions overlapping an L1 residency fall 79→69→45% across the grid)
+and passage-vs-read survival (.108 → .058). A trapped pair still
+detaches at b=2 rate e^{−2Gse} per tile; over T_read = 400·e^{Gmc}
+survival is e^{−800·e^{−(Gse+dG)}} = .92/.48/.005, and window t2 ×
+survival = .24/.067/.0001 against measured .222/.058/.000 — closed at
+all three points. Corollary promoted to candidate design rule (c):
+read time is an instrument parameter with a stated churn cost, not a
+constant; same churn dissolves correct b=2 fabric (2.8 b≥2
+detach/traj at dG=4), so the order file's read window must be emitted
+as a function of (Gse, Gmc, assembly depth).
