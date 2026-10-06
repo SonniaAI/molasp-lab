@@ -1,7 +1,10 @@
 # Design 001 — Tile lowering of the C2 witness `a. p :- p.`
 
-Status: v2.1 machine-checked at τ=2 (aTAM); kTAM run pending on v2.1.
-Date opened/closed: 2026-10-05. Evidence: `../evidence/2026-10-05-c2-ktam/`.
+Status: v2.1 machine-checked at τ=2 (aTAM); kTAM v2.1 slow-growth window
+swept 2026-10-06 (results below) — C2 at kTAM level is a rate statement,
+not an absolute; v3 (evidence-checking locks) specified, not yet built.
+Date opened: 2026-10-05. Evidence: `../evidence/2026-10-05-c2-ktam/`,
+`../evidence/2026-10-06-c2-ktam-v2-window/`.
 
 ## Goal
 
@@ -96,3 +99,47 @@ above it.
 3. An instance where the row order cannot realise a strict level mapping
    the program needs (positive recursion through many atoms) — that is
    designs/002 territory: the row-typing here hard-codes order a < p.
+
+Verdict on criterion 2 after the 2026-10-06 grid: **not refuted, but the
+floor is far higher than v1 suggested.** Unfounded decodes sit *at* the
+near-miss-trap level (same class, same e^{−dG} suppression as the founded
+channel) — not above it — yet at dG=0.5 they equal the founded channel
+(.222 vs .212), because L2 locks D2T as happily as D2F. The v1 0/4000
+separation was construction luck, now demolished.
+
+## kTAM v2.1 results — the slow-growth window (2026-10-06)
+
+Grid of record: `../evidence/2026-10-06-c2-ktam-v2-window/` (`ktam_mc_v2.py`,
+`run.out`; the first grid, read at fixed T = 400·e^{Gse}, is preserved as
+`run-grid1-fixedT.out` — its dG=7 point was read before any growth,
+500/500 partial: read time must scale with the on-rate, T = 400·e^{Gmc}).
+Gse = 9, no-mismatch kTAM on this construction, n = 500/point.
+
+| Gmc | dG | {a} | {a,p}+{p} | empty | partial | empty | unfounded |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 9.5 | 0.5 | 283 | 111 | 106 | 0 | .212 | .222 |
+| 11 | 2.0 | 383 | 29 | 87 | 1 | .174 | .058 |
+| 13 | 4.0 | 476 | 0 | 22 | 2 | .044 | .000 |
+| 16 | 7.0 | 434 | 0 | 0 | 66 | .000 | .000 |
+
+Readings:
+
+1. The window prediction's structure holds — `empty` falls with dG and
+   `{a,p}` never rises above it — so the design survives its own
+   falsification criteria at this n.
+2. But C2 at kTAM level is a **rate statement**: every wrong value costs
+   ≥1 sub-τ attachment (the aTAM guarantee), then a value-blind lock makes
+   it terminal with probability ~1/(1+e^{dG}). The unfounded track shadows
+   the trap formula with a ~½ factor; `empty` over-stays it at small dG
+   (.174 vs ~.11 at dG=2) — site-reopening retries, exact first-passage
+   analysis queued.
+
+### v3, specified (not yet built): evidence-checking locks
+
+Rule: a lock must check the value it locks, not merely stitch the row
+shut. Value-type the decision tiles' exposed glues (D1T→rd1t, D1F→rd1f,
+D2F→rd2f, D2T→rd2t); each lock's value-side glue matches only the correct
+value's glue. Locking a wrong value then needs two coincident near-misses
+→ error ~e^{−2·dG}; at dG=2 that is ≈10⁻³ instead of 6%. Decision-column
+proofreading; first entry in the compiler's design-rule catalogue.
+Falsifier: the v3 grid showing either channel above its e^{−2·dG} curve.

@@ -1,0 +1,6 @@
+{"Gse": 9.0, "T_read_rule": "400*exp(Gmc)", "n_per_point": 500, "seed_base": 20261006, "model": "kTAM v2.1 no-mismatch"}
+{"Gse": 9.0, "Gmc": 9.5, "dGmc": 0.5, "n": 500, "decode": {"a": 283, "ap": 73, "p": 38, "empty": 106, "partial": 0}, "empty_frac": 0.212, "unfounded_frac": 0.222}
+{"Gse": 9.0, "Gmc": 11.0, "dGmc": 2.0, "n": 500, "decode": {"a": 383, "ap": 23, "p": 6, "empty": 87, "partial": 1}, "empty_frac": 0.174, "unfounded_frac": 0.058}
+{"Gse": 9.0, "Gmc": 13.0, "dGmc": 4.0, "n": 500, "decode": {"a": 476, "ap": 0, "p": 0, "empty": 22, "partial": 2}, "empty_frac": 0.044, "unfounded_frac": 0.0}
+{"Gse": 9.0, "Gmc": 16.0, "dGmc": 7.0, "n": 500, "decode": {"a": 434, "ap": 0, "p": 0, "empty": 0, "partial": 66}, "empty_frac": 0.0, "unfounded_frac": 0.0}
+{"unfounded_total": 140, "n_total": 2000, "unfounded_ci95_upper": 0.0015}

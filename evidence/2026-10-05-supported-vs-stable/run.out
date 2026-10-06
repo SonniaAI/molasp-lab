@@ -1,0 +1,6 @@
+{"program": "p :- p.", "stable": ["{}"], "supported": ["{p}", "{}"], "supported_but_unstable": ["{p}"]}
+{"program": "a. p :- p.", "stable": ["{a}"], "supported": ["{a,p}", "{a}"], "supported_but_unstable": ["{a,p}"]}
+{"program": "p :- q. q :- p.", "stable": ["{}"], "supported": ["{p,q}", "{}"], "supported_but_unstable": ["{p,q}"]}
+{"program": "a. p :- q. q :- p.", "stable": ["{a}"], "supported": ["{a,p,q}", "{a}"], "supported_but_unstable": ["{a,p,q}"]}
+{"program": "a. q :- a.  (tight control)", "stable": ["{a,q}"], "supported": ["{a,q}"], "supported_but_unstable": []}
+SUPPORTED-VS-STABLE CHECK PASSED: table re-derived from the GL-reduct and completion definitions; matches the published witness selection, including the tight control.

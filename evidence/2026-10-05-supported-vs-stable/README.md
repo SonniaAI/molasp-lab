@@ -5,9 +5,10 @@ the five `.lp` files of this directory were lost when the repo history
 was purged on 2026-10-05 (the purge removed an internal draft that had
 been published by mistake; see `log/2026-10-05.md`). What survived is
 the result table below, recorded verbatim from the lost evidence and
-cross-checked against hand derivations for all five programs. The
-checker is queued for regeneration on the clingo cross-check tick; the
-programs are listed inline so this directory stays usable.
+cross-checked against hand derivations for all five programs.
+**Regenerated 2026-10-06**: `checker.py` + `run.out` re-derive the table
+from the GL-reduct and completion definitions directly and match the
+published selection, including the tight control. The programs are
 
 Programs:
 
@@ -33,5 +34,5 @@ largest enumeration is over 8 subsets):
 | `a. p :- q. q :- p.` | `{a}` | `{a}`, `{a,p,q}` | `{a,p,q}` |
 | `a. q :- a.` (tight control) | `{a,q}` | `{a,q}` | — (Fages holds) |
 
-Still owed: regeneration of the checker plus a clingo cross-check on the
-first cluster tick.
+Still owed: the clingo cross-check (independent oracle over the same
+five programs) on the first cluster tick.
