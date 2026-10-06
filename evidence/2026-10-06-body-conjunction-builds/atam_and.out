@@ -1,0 +1,170 @@
+{
+ "checks": {
+  "E1_build1_raw": {
+   "assemblies": 13,
+   "decodes": [
+    "p"
+   ],
+   "terminals": 1
+  },
+  "E2_build3_raw": {
+   "assemblies": 22,
+   "decodes": [
+    "q"
+   ],
+   "terminals": 1
+  },
+  "F1_build1": {
+   "assemblies": 35,
+   "decodes": [
+    "pqr"
+   ],
+   "locked_rows": [
+    3
+   ],
+   "r_true_glue_producible": true,
+   "terminals": 1
+  },
+  "F1_build1_cutp": {
+   "and1_r_producible": false,
+   "assemblies": 4,
+   "decodes": [
+    ""
+   ],
+   "r_true_glue_producible": false,
+   "terminals": 1
+  },
+  "F1_build1_cutq": {
+   "and1_r_producible": false,
+   "assemblies": 13,
+   "decodes": [
+    "p"
+   ],
+   "r_true_glue_producible": false,
+   "terminals": 1
+  },
+  "F2_build2": {
+   "and1_r_producible": false,
+   "assemblies": 35,
+   "decodes": [
+    "p"
+   ],
+   "locked_rows": [
+    3
+   ],
+   "q_t_producible": false,
+   "r_t_producible": false,
+   "terminals": 1
+  },
+  "F3_build3": {
+   "assemblies": 35,
+   "certificate_fires": true,
+   "clingo_stable": [
+    [
+     "q."
+    ]
+   ],
+   "decodes": [
+    "qr"
+   ],
+   "terminals": 1
+  },
+  "F3_d2_static": {
+   "violations": [
+    [
+     "r",
+     "p",
+     [
+      "SP2",
+      "q-t-done",
+      "q-t-done",
+      "base2"
+     ]
+    ]
+   ]
+  },
+  "clingo": {
+   "P_AND": [
+    [
+     "p.",
+     "q.",
+     "r."
+    ]
+   ],
+   "P_AND_minus_p": [
+    [
+     "q."
+    ]
+   ],
+   "P_AND_minus_q": [
+    [
+     "p."
+    ]
+   ]
+  },
+  "d1_via_discipline": {
+   "build1": [],
+   "build1_cutp": [],
+   "build1_cutq": [],
+   "build1_raw": [],
+   "build2": [],
+   "build3": [],
+   "build3_raw": []
+  },
+  "d2_build1": {
+   "violations": []
+  },
+  "inertness": {
+   "build1": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 0,
+    "rf-relay": 0,
+    "u-cutp": 0
+   },
+   "build1_cutp": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 0,
+    "rf-relay": 0,
+    "u-cutp": 1
+   },
+   "build1_cutq": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 0,
+    "rf-relay": 0,
+    "u-cutp": 0
+   },
+   "build1_raw": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 0,
+    "rf-relay": 0,
+    "u-cutp": 0
+   },
+   "build2": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 0,
+    "rf-relay": 1,
+    "u-cutp": 0
+   },
+   "build3": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 1,
+    "rf-relay": 0,
+    "u-cutp": 0
+   },
+   "build3_raw": {
+    "SP4": 1,
+    "cap3": 1,
+    "pf-cap": 1,
+    "rf-relay": 0,
+    "u-cutp": 0
+   }
+  }
+ },
+ "tau": 2
+}

@@ -1,8 +1,10 @@
 # Design 003 — Body conjunction: reading two witnesses with one south face
 
-Status: derived 2026-10-06 (tick 17, SON-4755); NOT yet machine-checked —
-the aTAM builds below are the next tick's queue head. This document is
-the construction of record plus its falsifier plan.
+Status: **F1–F3 machine-checked 2026-10-06 (tick 18, SON-4758)** —
+exhaustive τ = 2 BFS, evidence/2026-10-06-body-conjunction-builds/,
+tests pinned in tests/test_tiles_and.py. Two build-table errata (E1,
+E2) found by that check and corrected; see Errata below. F4 (kTAM
+grid) remains queued — it needs the cluster queue.
 Date opened: 2026-10-06. Prerequisites: designs/001 (v3 value typing,
 rule (a)), designs/002 (3-column geometry, stage order lemma, OR pair
 convention, tick 16 emit-time certificate).
@@ -151,12 +153,60 @@ composing with tick 10's readwindow arithmetic.
   exposed by a tile whose south face READS the same-named witness in
   the row below; vias are gated in-row by the row's own predicted
   value glue. No broadcast: a detached or forged via has b ≤ 1.
+  *Tick 18: 0 violations across all 7 builds — holds.*
 - **(d2) AND discipline.** Every positive body literal of a
   predicted-true atom appears as a south read in some decision slot
   of its row (direct or via). Dropping one is not a kinetic error, it
   is a wrong program — caught only by the emit-time certificate.
+  *Tick 18: holds on the correct build; catches both W1 variants
+  including the one that stalls past the semantic certificate —
+  promoted from candidate to required emit-time check.*
+
+## Measured outcomes (tick 18, exhaustive τ = 2 BFS)
+
+| Arm | Measured | Verdict |
+| --- | --- | --- |
+| F1 build 1 | 35 assemblies, unique terminal {p,q,r}, 3/3 locked | PASS |
+| F1 p-cut | terminal {}; r-t, and1_r producible in 0 | PASS (stronger: over-collapse, finding 3) |
+| F1 q-cut | unique terminal {p}; r-t, and1_r producible in 0 | PASS |
+| F2 | unique terminal {p}, 3/3 locked; q-t/r-t/and1_r never producible | PASS |
+| F3 | unique terminal {q,r} vs clingo {q}: certificate fires; d2 flags missing p-read | PASS, both arms |
+| d1 via discipline | 0 violations, all 7 builds | holds |
+| d2 AND discipline | holds on build 1; fires on both W1 variants | promoted to required emit-time check |
+| E1 raw build 1 | stalls at {p} | erratum, demolished |
+| E2 raw build 3 | stalls at {q} — masquerades as correct | erratum, demolished |
+
+## Errata (found by the tick-18 machine check, corrected in
+evidence/2026-10-06-body-conjunction-builds/tiles_and.py)
+
+- **E0 (clarification, not corrected):** the construction text says
+  "all glues strength 1", but the spine exemption is inherited from
+  designs/002 — SP1/SP2/SP3 pairs bond at strength 2. With a
+  strength-1 spine nothing attaches in row 1 at τ = 2 at all.
+- **E1:** `D2T.S = f-q` matches nothing below site (1,2) — a fact
+  above row 1 must chain on the row-below done glue
+  (`p-t-done`), exactly as this design's own Build-2 false tiles
+  already do. As written, build 1 stalls at {p}. Corrected to
+  `p-t-done`; the as-written variant is pinned as a demolition.
+- **E2:** `F⁺.S = vb3` is a dead face. As written, the W1 wrong
+  compile stalls at {q} — the stable model — i.e. it escapes the
+  semantic certificate by stalling and masquerading as correct.
+  Corrected to `q-t-done` (the conduit bonds the channel below it;
+  the dropped-literal wrongness is unchanged). Only the static d2
+  check catches the as-written variant.
+- **Lock faces completed:** the build-2/build-3 tables truncated
+  lock south/north faces; they follow the base-chain discipline
+  (L2.S = base2, L3.S = base3, N = base3/cap3) as in builds above.
+
+Two design consequences recorded from the corrected builds: the tile
+path cannot distinguish `q.` from `q :- p` when q's row sits directly
+above p's row (fact-vs-rule is a compile-time distinction only), and
+fact deletion is not modular — a seed fact cut re-compiles every row
+above it (p-cut terminal is the empty decode, not {q}).
 
 ## Falsification criteria (pre-registered)
+
+**F1–F3 measured — see Measured outcomes above. F4 still open.**
 
 - **F1 (foundedness of the AND).** Build 1: exhaustive τ = 2 BFS must
   yield exactly one terminal, decoding {p,q,r}; re-run with p's fact
@@ -177,8 +227,8 @@ composing with tick 10's readwindow arithmetic.
 
 ## What this does not establish
 
-1. Nothing here is machine-checked yet — derivation only. F1–F4 are
-   the next tick's queue head, before any kTAM spend.
+1. F1–F3 are machine-checked (tick 18); **F4 remains the queue head**
+   and is the next thing to run, on the cluster queue.
 2. **Negative literals.** `not c` bodies remain unexpressed on the
    tile path (dual rail is the DSD answer; the tile answer is open).
 3. **OR ∧ AND.** An atom with k rules where some body is conjunctive
