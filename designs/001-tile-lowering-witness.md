@@ -219,3 +219,38 @@ read time is an instrument parameter with a stated churn cost, not a
 constant; same churn dissolves correct b=2 fabric (2.8 b≥2
 detach/traj at dG=4), so the order file's read window must be emitted
 as a function of (Gse, Gmc, assembly depth).
+
+### Value-agnostic locking: cage attempt and catalogue correction (2026-10-06, tick 11)
+
+Catalogue entry (b) as stated ("where value-agnostic locks are
+unavoidable, two independent bonds → ~e^{−2·dG}") does not survive its
+own realization. Lemma (3×2 witness, per-tile kTAM): a lock whose
+glues are value-blind bonds the wrong value with the same strength as
+the correct one, so its bond count cannot depend on the value. Either
+(i) the lock keeps any value-independent support bond (seed/spine
+side) — then some wrong-value closure is a single coincidence riding
+the wrong tile's sub-tau residency (~e^{−dG}; v2.1 measured 355/2000,
+channels .058/.174); or (ii) every support bond is stripped so each
+closure rides sub-tau overlap — the maximally-blind cage
+(`../evidence/2026-10-06-v3p-blind-cage/`): aTAM τ=2 reaches exactly
+ONE terminal {seed, S1, S2, D1T}, decode `partial`. The CORRECT
+terminal {a} is unreachable; D1F/D2T attach 0 times; correct growth
+itself becomes kinetic-only (cooperative b=1 overlap).
+
+Ratio arithmetic (prediction, MC queued): correct completion ~e^{−2·dG}
+(D2F∧L1 overlap + L2 arrival over D1T's τ-residency); wrong completion
+~e^{−3·dG} (adds D1F's b=1 window). Wrong/correct ~e^{−dG} — the SAME
+error/throughput ratio as v2.1. Value-agnostic locking preserves the
+ratio; value-typing (v3) is the move that shifts it (0/2000 wrong, no
+growth penalty, aTAM intact). This is the kinetic mirror of the
+foundedness argument: geometry moves error ratios, kinetics cannot.
+
+**Amended entry (b):** value-agnostic locks force a trade, not a free
+suppression — keep any value-independent support and some wrong
+closure is single-coincidence; strip them all and correct growth goes
+cooperative (aTAM-unreachable at τ, rate penalized in the same exponent
+family). e^{−2·dG} is a rate statement paid equally by correct growth.
+
+Falsifier (queued MC on `tiles_v3p.py`): wrong completions at or above
+e^{−2·dG} with correct completion within e^{−dG} of v3's rate refutes
+the lemma. CI pins the structural facts (`tests/test_tiles_v3p.py`).

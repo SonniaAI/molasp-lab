@@ -1,0 +1,15 @@
+{
+  "tile_count": 11,
+  "producible_states_note": "BFS over tau=2 attachments from seed",
+  "terminals": 1,
+  "terminal_decodes": {
+    "partial": 1
+  },
+  "wrong_terminals": 0,
+  "max_b_of_wrong_tiles_in_producible": {
+    "D1F": 0,
+    "D2T": 0
+  },
+  "v3_contrast": "v3: D1F/D2T producible in 0/10 assemblies, wrong terminal 0"
+}
+{"decode": "partial", "assembly": {"(0, 0)": "seed0", "(0, 1)": "S1", "(0, 2)": "S2", "(1, 0)": "seed1", "(1, 1)": "D1T", "(2, 0)": "seed2"}}
