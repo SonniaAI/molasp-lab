@@ -254,3 +254,36 @@ family). e^{−2·dG} is a rate statement paid equally by correct growth.
 Falsifier (queued MC on `tiles_v3p.py`): wrong completions at or above
 e^{−2·dG} with correct completion within e^{−dG} of v3's rate refutes
 the lemma. CI pins the structural facts (`tests/test_tiles_v3p.py`).
+
+### Cage MC measured (2026-10-06, tick 12) — ratio arithmetic superseded
+
+The queued falsifier ran (evidence `../evidence/2026-10-06-v3p-cage-ktam-ratio/`,
+narrative `../research-log/2026-10-06-v3p-cage-ktam-ratio.md`, verdict pinned in
+`tests/test_cage_ktam_ratio.py`). Protocol identical to the v2.1/v3 grids (Gse=9,
+Gmc ∈ {9.5, 11, 13, 16}, T_read = 400·e^{Gmc}, n=500/point, seeds printed).
+
+Verdict: wrong ~e^{−2·dG}→e^{−3·dG} scaling and wrong/correct ~e^{−dG} are
+REFUTED. Measured wrong/correct = 1.18 / 0.90 / 0.93 at dG = 0.5 / 2 / 4 — the
+ratio is ≈1, not e^{−dG}. The falsifier clauses fire at dG=2 and dG=4 (wrong ≥
+e^{−2·dG} by 25x/149x while correct stays within e^{−dG} of v3's rate). At dG=0.5
+wrong is above e^{−2·dG} but correct is already >e^{−dG} below v3; at dG=7 nothing
+completes (0/500), ratio unmeasurable.
+
+Cause is structural, spotted before the run: with every support bond stripped,
+D2F and D2T are bond-arithmetic IDENTICAL — both ride only the blind W=go2 into
+S2.E (cap3/no-p/topF/topT are unique-name inert), so the unfounded completion ap
+rides the correct channel's own overlap kinetics: a fair coin on which row-2 tile
+is resident when L2's b=2 catch locks (totals 511 a / 487 ap over 2000). The D1F
+channels the e^{−3·dG} arithmetic modeled are near-dead at scaled read (empty
+18/2000, p 20/2000, all at dG=0.5): D1T's τ-residency lands the founded row-1
+value ~surely within T_read, so wrong row-1 loses by arrival race, not by locking.
+Correct completion pays the trade everywhere: 0.458 / 0.510 / 0.054 / 0 at
+dG = 0.5/2/4/7 (co-residency budget guide 1.0 / 1.0 / 0.22 / 7e-4; the
+independence approximation overestimates ~2x at dG=4).
+
+Strengthened entry (b), final: value-agnostic locking cannot push wrong/correct
+below O(1). Partial blindness gives v2.1's e^{−dG}; FULL blindness collapses the
+ratio to unity by making wrong and correct the same process with different
+labels. Value-typing (v3: 0/2000 wrong, no growth penalty, aTAM intact) remains
+the only mechanism that separates them — the kinetic mirror of foundedness, now
+measured at both limits.
