@@ -108,10 +108,20 @@ each dies by a different mechanism (cut edge / transitive death).
    known honest limit of the 3-column geometry.
 2. **Body conjunction** remains open — see item 1. The order
    falsifier that was queued here is now RESOLVED below.
-3. **kTAM carryover.** Rule (a) value-typing is verified per row at
-   τ=2 and structurally (b = 1 wrong contexts); the per-row kTAM grid
-   is queued, same protocol as designs/001 v3 (falsifier: any
-   wrong-value channel above the catalogue curves).
+3. **kTAM carryover — MEASURED (tick 15).** The per-row kTAM grid
+   ran (evidence/`2026-10-06-multirow-ktam-grid/`, v3 protocol,
+   n=500/point). Wrong-VALUE channels stay dead (2-cycle strict wrong
+   14/2000, all ≤ e^{-2dG}; anchored CORRECT 0/2000) — rule (a)
+   carries to depth 3. But criterion 4's aTAM reading does NOT
+   survive kinetics for the CUT arm: WRONG_CUT strict-decodes the true
+   stable model {a,p,q} at 100/99.2/72.6% for dG ≤ 4 — the cut kills
+   only the dead tile's south glue, its value outputs stay intact and
+   the lock chain is value-complete, so a b=1 transient is captured
+   into a b=2 locked terminal (wrong compile self-corrects). The ROW
+   arm stays dead kinetically (0/2000 strict; severed lock south
+   faces). Order is load-bearing in both models; cut discipline is
+   load-bearing only at aTAM. Boundary left open: the wrong-cut
+   lock-on-false variant (L3 bonding rq-f) is unbuilt.
 4. **The stage order was computed by hand here.** Emitting tile sets
    from the stage table mechanically (the actual compiler pass) is not
    yet code; this design is its specification.
@@ -130,3 +140,8 @@ each dies by a different mechanism (cut edge / transitive death).
    row order — and neither decodes {a,p,q} (terminals {a,p} and {a}
    respectively, both non-models). Stage order is load-bearing.
    Evidence: `../evidence/2026-10-06-anchored-cycle-order/`.
+   KINETIC SUPERSESSION (tick 15): at kTAM the wrong-cut build DOES
+   decode {a,p,q} (99%+ at dG ≤ 2) via lock capture — see "What this
+   does not establish" item 3. The aTAM claim stands as stated
+   (τ=2 terminal assemblies); the kinetic claim narrows to the row
+   order. Cut discipline is enforced by value typing, not geometry.
