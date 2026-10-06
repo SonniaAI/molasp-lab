@@ -184,3 +184,20 @@ two entries: (a) locks bind value-bearing glues → wrong values
 un-lockable, free at τ=2, glue alphabet pays; (b) where value-agnostic
 locks are unavoidable, two independent bonds → ~e^{−2·dG}. No growth
 penalty measured (partial fractions 0/2/2/64 vs v2.1's 0/1/2/66).
+
+### First-passage update (2026-10-06, tick 8)
+
+The queued exact first-passage analysis is done (evidence
+`../evidence/2026-10-06-empty-first-passage/`, narrative
+`../research-log/2026-10-06-empty-first-passage.md`, CI invariants in
+`tests/test_first_passage.py`). Verdict: the retry hypothesis was wrong —
+the site almost never re-rolls (E[D1F excursions] .61–.95 across the
+window) and the W-only race sits at .05 at dG=2, *below* the single-shot
+formula. The .174 excess is carried by channels the formula never
+modeled: L1-first ordering (+.053) and the S2->D2F chain that bonds a
+resident D1F from the north (+.122 residual decomposition in the log).
+The single-shot formula is demoted to a rough bound; future rate claims
+use the CTMC. One honest residual: the window CTMC over-predicts the
+unfounded channel 2.4x at dG=2 (.138 vs .058 measured) — full-assembly
+ordering suppresses row-2 traps in a way not yet mechanistically
+accounted; instrumenting the full MC is queued next.

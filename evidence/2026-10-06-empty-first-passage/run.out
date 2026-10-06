@@ -1,0 +1,8 @@
+{"model": "exact first-passage CTMC, v2.1 window", "Gse": 9.0, "context": "seed + S1 settled", "absorption": "joint first lock of rows 1-2 (decision tile at b>=2)"}
+{"dG": 0.5, "states": 72, "absorbing": 15, "P": {"a": 0.4403, "empty": 0.2951, "ap": 0.1683, "p": 0.0962}, "t1_row1_traps_D1F": 0.3913, "t2_row2_traps_D2T": 0.2646, "E_d1f_excursions": 0.6087, "singleshot_formula": 0.3775, "cells": {"empty_pred": 0.2878, "unfounded_pred": 0.2646}}
+{"dG": 2.0, "states": 72, "absorbing": 15, "P": {"a": 0.6642, "empty": 0.1978, "ap": 0.109, "p": 0.0291}, "t1_row1_traps_D1F": 0.2268, "t2_row2_traps_D2T": 0.1381, "E_d1f_excursions": 0.7735, "singleshot_formula": 0.1192, "cells": {"empty_pred": 0.1955, "unfounded_pred": 0.1381}}
+{"dG": 4.0, "states": 72, "absorbing": 15, "P": {"a": 0.9243, "empty": 0.0481, "ap": 0.0263, "p": 0.0013}, "t1_row1_traps_D1F": 0.0494, "t2_row2_traps_D2T": 0.0276, "E_d1f_excursions": 0.9544, "singleshot_formula": 0.018, "cells": {"empty_pred": 0.0481, "unfounded_pred": 0.0276}}
+{"attribution_at_dG2": {}}
+{"variant": "full", "t1": 0.2268, "E_d1f_excursions": 0.7735}
+{"variant": "no-L1-first", "t1": 0.1736, "E_d1f_excursions": 0.8268}
+{"variant": "D1F-W-only", "t1": 0.0512, "E_d1f_excursions": 0.9493}
