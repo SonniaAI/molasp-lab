@@ -117,8 +117,23 @@ is the only net that catches it.
 **12 tile types + 4-wide seed**: 3 spine + 2 fact decisions + 1 source
 stub + 1 witness via + 2 reader decisions + 3 locks; glue alphabet
 ~24 names (SP1–4, go1–3, f-p/f-q, value chains p/q/r-t(-done),
-and1_r(-done), vb1, base1–3, cap3). designs/002 needed 12+3 for three
-atoms with unit bodies: a width-2 body costs **+4 types, +1 column**.
+and1_r(-done), vb1, base1–3, cap3).
+
+Cost deltas, comparator stated explicitly (*post-review correction
+2026-10-06, QA run e1477162: the original sentence here claimed
+"+4 types, +1 column" with no baseline that reconstructs from the
+record — designs/002 budgets 12 types + 3 seed and this build's own
+inventory sums to 12*):
+
+- **vs the all-true unit-body compile of the same 3-atom program
+  (9 types: 3 spine + 2 fact decisions + 1 reader decision +
+  3 locks): +3 tile types, +1 column, +1 seed tile.** These are the
+  three tile classes conjunction genuinely adds — source stub,
+  witness via, second reader slot — and this is the baseline the
+  ~(b+1) symmetry below reads against (b = 2 → b+1 = 3).
+- **vs designs/002's full budget (12 types + 3 seed tiles): +0 tile
+  types, +1 column, +1 seed tile** — the new classes are absorbed
+  within the same 12-type count.
 
 General width-b body at depth d: reader row +(b−1) decision slots,
 +(b−1) source stubs, +O((b−1)·d) vias — linear in program size at
