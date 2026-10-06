@@ -122,6 +122,17 @@ each dies by a different mechanism (cut edge / transitive death).
    faces). Order is load-bearing in both models; cut discipline is
    load-bearing only at aTAM. Boundary left open: the wrong-cut
    lock-on-false variant (L3 bonding rq-f) is unbuilt.
+   **RESOLVED (tick 16):** built and measured
+   (`../evidence/2026-10-06-cut-lockvalue/`). The consistent wrong
+   compile (post-cut re-prediction q=false, lock on rq-f, falsity
+   chain D3F.S=rp-t-done) terminates at {a,p} at aTAM AND kTAM:
+   1933/2000 strict, 0/2000 reassertion of {a,p,q}, completion
+   tracking the CORRECT build within ~1.02x. Self-correction is
+   lock-typed, not cut-typed; kinetics neither repairs nor detects
+   a consistent-but-wrong compile. Soundness must be certified at
+   emit time — the aTAM producibility check against the solver's
+   stable-model enumeration is the certificate, and no kinetic
+   safety net exists downstream.
 4. **The stage order was computed by hand here.** Emitting tile sets
    from the stage table mechanically (the actual compiler pass) is not
    yet code; this design is its specification.
@@ -145,3 +156,12 @@ each dies by a different mechanism (cut edge / transitive death).
    does not establish" item 3. The aTAM claim stands as stated
    (τ=2 terminal assemblies); the kinetic claim narrows to the row
    order. Cut discipline is enforced by value typing, not geometry.
+   SHARPENED (tick 16): tick 15's self-correction was the artifact
+   of an INCONSISTENT compile (dead true tile, live true-typed
+   lock). The consistent wrong compile locks {a,p} at full completion
+   rates with zero reassertion (0/2000) — criterion 4's answer is
+   now two-sided: geometry (row order) enforces order in both
+   models; value typing (locks) enforces cuts in both models, but
+   only against INCONSISTENT emissions. A compile consistent with
+   its own wrong prediction is executed faithfully. Emit-time
+   certification is mandatory; see tick 16 log entry.
