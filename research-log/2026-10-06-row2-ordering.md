@@ -30,10 +30,11 @@ unfounded decode IS a read-time D2T+L2 trap — no decode-map artifact.
    probabilities; the protocol decodes state at T_read. A trapped pair
    (D2T at b = 2, L2 at b = 2) still detaches at rate e^{−2Gse} each;
    over T_read = 400·e^{Gmc} the expected breaks per trapped pair are
-   800·e^{−(2Gse−Gmc)} = 800·e^{−(Gse+dG)}: 0.08 / 0.73 / 5.3 across
-   the grid. Survival e^{−breaks} = .92 / .48 / .005.
+   800·e^{−(2Gse−Gmc)} = 800·e^{−(Gse−dG)} (this grid's convention is
+   dG = Gmc − Gse, so 2Gse − Gmc = Gse − dG): 0.16 / 0.73 / 5.3 across
+   the grid. Survival e^{−breaks} = .85 / .48 / .005.
 2. **Reconciliation at all three points:** window t2 × survival =
-   .24 / .067 / .0001 vs measured .222 / .058 / .000. The 2.4× at dG=2
+   .225 / .067 / .0001 vs measured .222 / .058 / .000. The 2.4× at dG=2
    was two things stacked: window-vs-full-assembly trap formation
    (.138 → .108, the L1-overlap ordering term) and passage-vs-read
    survival (.108 → .058). Neither alone explains it; the product does.
@@ -52,7 +53,7 @@ also dissolves correct assemblies (tick 4: partial 66/500 at dG = 7 —
 read churn of the correct b = 2 fabric; here b≥2 detach rises to
 2.8/traj at dG = 4). The read protocol must sit between "enough for
 growth" and "not so long that churn dominates": T_read ≈ 400·e^{Gmc}
-multiplies trap survival by e^{−800·e^{−(Gse+dG)}}. A compiler emitting
+multiplies trap survival by e^{−800·e^{−(Gse−dG)}}. A compiler emitting
 an order file should state the read window as a function of (Gse, Gmc,
 assembly depth), not as a constant. To be promoted from candidate when
 stated for the general construction and pinned in CI.
@@ -90,3 +91,19 @@ D2T enters at b = 1 while D2F enters at b = 2 — so a wrong value only
 ever becomes locked through a resident lock, in either attachment
 order. The narrative's shorthand "D2T can NEVER enter at b = 2" above
 should read "…without a resident L2".
+
+## Correction (2026-10-06, post-review): closed-form survival arithmetic
+
+QA review of this tick (SON-4731, verdict d1997431) caught that the
+closed form as first landed simplified e^{−(2Gse−Gmc)} to e^{−(Gse+dG)}
+— the standard-kTAM dG = Gse − Gmc convention — while this grid's
+code uses dG = Gmc − Gse (instrument_mc.py: `dG = round(Gmc − Gse,
+1)`, Gse = 9). Corrected inline above: 800·e^{−(2Gse−Gmc)} =
+800·e^{−(Gse−dG)}; the dG = 0.5 row is 0.16 expected breaks /
+survival .85 (the first-landed 0.08 / .92 was the one-tile/400
+value); and the reconciliation triple is .225 / .067 / .0001 against
+measured .222 / .058 / .000 — marginally tighter at dG = 0.5 than
+first reported. The slip was prose-only: the MC, committed outputs,
+and tests are unchanged; no MC number moves. This corrected exponent
+is the one to pin in CI when rule (c) is promoted to a compiler
+invariant.

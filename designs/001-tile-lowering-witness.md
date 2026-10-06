@@ -212,8 +212,8 @@ window-vs-full trap formation (.1381 → .108, L1-overlap ordering; D2T
 excursions overlapping an L1 residency fall 79→69→45% across the grid)
 and passage-vs-read survival (.108 → .058). A trapped pair still
 detaches at b=2 rate e^{−2Gse} per tile; over T_read = 400·e^{Gmc}
-survival is e^{−800·e^{−(Gse+dG)}} = .92/.48/.005, and window t2 ×
-survival = .24/.067/.0001 against measured .222/.058/.000 — closed at
+survival is e^{−800·e^{−(Gse−dG)}} = .85/.48/.005, and window t2 ×
+survival = .225/.067/.0001 against measured .222/.058/.000 — closed at
 all three points. Corollary promoted to candidate design rule (c):
 read time is an instrument parameter with a stated churn cost, not a
 constant; same churn dissolves correct b=2 fabric (2.8 b≥2
