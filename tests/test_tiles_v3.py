@@ -50,9 +50,13 @@ class TestEvidenceCheckingLocks(unittest.TestCase):
 
     def test_wrong_tiles_un_lockable_in_full_correct_context(self):
         asm = correct_assembly()
-        self.assertEqual(matched_strength(asm, (1, 1), "D1T"), 2)
+        # Correct decision tiles bond every face they have in the
+        # finished assembly: D1T (W,S,E,N) = 4, D2F (W,S,E) = 3.
+        self.assertEqual(matched_strength(asm, (1, 1), "D1T"), 4)
+        self.assertEqual(matched_strength(asm, (1, 2), "D2F"), 3)
+        # Wrong values keep ONLY the structural spine bond: no context,
+        # however complete, raises them to b >= 2 — un-lockable.
         self.assertEqual(matched_strength(asm, (1, 1), "D1F"), 1)
-        self.assertEqual(matched_strength(asm, (1, 2), "D2F"), 2)
         self.assertEqual(matched_strength(asm, (1, 2), "D2T"), 1)
 
     def test_no_glue_table_entry_matches_wrong_values(self):
