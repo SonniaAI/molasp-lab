@@ -199,3 +199,40 @@ DW1–DW7 pre-registered at `236f91b`, n=500/arm):
   reinforcement is regime-dependent; price it against the
   operating point's nucleation barrier, not as a universal
   hazard or cure.
+
+## Closed — compiler-facing severity ranking with the dG axis (tick 44)
+
+The design consequence of both extensions is now the compiler
+surface: `molasp.offchannel.contention_severity` — the census
+joined to the measured regimes.  For every knob-sensitive
+vacancy it emits a severity TIER at the requested dG, priced
+against `REGIME_ANCHORS` (contention_dg.out verbatim, quoted —
+never asserted), and `check_d4` auto-attaches it at the protocol
+equilibrium `DEFAULT_DG = 0.5`, with `d4_report_lines` naming the
+regime, the knob verdict, and each tier ≥ moderate.
+
+| dG regime | knob verdict | tier logic | measured anchor |
+|---|---|---|---|
+| frozen (≤1.0) | hazard | critical: mints over a family fill; high: mints, no family fill | fill 0.904→0.412, persist 0.872 |
+| marginal (1.0–3.0) | hazard | critical (the lottery survives as a stationary split) | 232:229 coin, persist 0.52 |
+| churn (3.0–6.0) | mitigation | mitigating: knob is the growth carrier; starved: family-only b=1 nucleation | 0.074 vs 0.564, dwell 0.113 |
+| starvation (≥6.0) | moot | moot: refuse the operating point, do not price it | fill 0, partial 0.0008 |
+
+Boundary discipline carried into the artifact: `interpolated`
+flags any dG off the measured points 0.5/2/4/7 (nearest-regime
+pricing); `boundary_notes` records the untested dG-2 window arm,
+the persist_n=1 starvation caveat, and L3@(2,2)'s exclusion from
+the five-name census.  Static arithmetic only — no cluster job
+(tick-37 rule; every kinetic number is already receipted).
+
+Pins: `tests/test_contention_severity.py` (14) — anchors
+verbatim, regime boundaries, BUILD1 Vp@2,2 critical/high/mitigating/moot
+across the four regimes, lock-vacancy high, BUILD2 minting
+generalisation, BUILD3 tier validity + minting constructional,
+check_d4 integration, determinism.
+
+designs/007 is CLOSED: the via-site lock story ran property →
+knob → mechanism → thermodynamic closure → regime pricing →
+compiler surface.  Remaining honest boundaries (dG-2 window arm,
+L3-at-vacancy class) are recorded in the artifact, not owed by
+this design.

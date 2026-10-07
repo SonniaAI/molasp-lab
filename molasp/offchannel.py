@@ -671,9 +671,176 @@ def vacancy_contention(build, canon=None, strength=None, bond_fns=None):
     return out
 
 
-def check_d4(build, canon=None, *, lock_sites=None, strength=None):
+# Tick-43 dG/read-window sweep anchors (contention_dg.out, n=500/arm,
+# BUILD1 Vp-missing arm at site 2,2; quoted at .out precision).  The
+# severity layer prices the static contention census against these
+# MEASURED regimes — no number below is asserted, all are pinned in
+# tests/test_contention_severity.py.
+REGIME_ANCHORS = {
+    "frozen": {"dg": 0.5, "family_fill": 0.904, "knob_fill": 0.412,
+               "family_persist": 0.542, "knob_persist": 0.872,
+               "site_dwell": 0.994,
+               "source": "contention_dg.out fam_dg0.5/s2_dg0.5"},
+    "marginal": {"dg": 2.0, "family_fill": 0.97, "knob_fill": 0.464,
+                 "family_persist": 0.088, "knob_persist": 0.52,
+                 "reroll_split": "D2T 232 : L2 229",
+                 "source": "contention_dg.out fam_dg2/s2_dg2"},
+    "churn": {"dg": 4.0, "family_fill": 0.074, "knob_fill": 0.564,
+              "family_dwell": 0.113, "knob_dwell": 0.967,
+              "family_partial": 0.633,
+              "win4_family_fill": 0.054, "win4_knob_fill": 0.798,
+              "source": "contention_dg.out fam_dg4/s2_dg4(/_win4)"},
+    "starvation": {"dg": 7.0, "family_fill": 0.0, "knob_fill": 0.0,
+                   "partial": 0.0008, "persist_n": 1,
+                   "source": "contention_dg.out s2_dg7"},
+}
+# Regime boundaries are midpoints of the measured points 0.5/2/4/7;
+# every dg off a measured point is priced by nearest regime and
+# flagged interpolated (honest-boundary discipline, tick 43).
+REGIME_BOUNDS = [(1.0, "frozen"), (3.0, "marginal"), (6.0, "churn"),
+                 (None, "starvation")]
+KNOB_VERDICTS = {
+    "frozen": "hazard", "marginal": "hazard",
+    "churn": "mitigation", "starvation": "moot",
+}
+DEFAULT_DG = 0.5   # the protocol point; check_d4 prices at it
+
+
+def regime_at(dg):
+    """Map a dG operating point to its measured regime.
+
+    Returns ``(regime, interpolated)`` — ``interpolated`` is True
+    off the four measured points (0.5 / 2 / 4 / 7), where the
+    pricing rests on the nearest regime, not a measurement.
+    """
+    dg = float(dg)
+    interpolated = not any(
+        abs(dg - a["dg"]) < 1e-9 for a in REGIME_ANCHORS.values())
+    for bound, regime in REGIME_BOUNDS:
+        if bound is None or dg < bound:
+            return regime, interpolated
+    return "starvation", interpolated
+
+
+def contention_severity(build, dg=None, canon=None, strength=None,
+                        bond_fns=None):
+    """Compiler-facing severity ranking of knob-sensitive vacancies
+    WITH the dG axis (tick 44 — the designs/007 closure).
+
+    The tick-42 census priced vacancies at one operating point;
+    tick-43 resolved the trade table on dG.  This layer joins them:
+    for every knob-sensitive vacancy (a site whose contender set
+    changes stability between knobs) it emits a severity TIER at
+    the requested dG, priced against the measured regime anchors
+    (REGIME_ANCHORS — never asserted, always quoted).
+
+    Tiers, by regime (see designs/007 closure section for the full
+    derivation):
+
+    - frozen/marginal: ``critical`` — the knob mints frozen
+      contenders AND a family-stable fill exists (measured BUILD1
+      Vp@2,2: fill 0.904 -> 0.412); ``high`` — knob mints but no
+      family fill (first-come among squatters; lock/spine
+      vacancies, 0 -> 3-6 frozen contenders); ``moderate`` — no
+      minting, only w_read doubling of an already-family-stable
+      squatter; ``low`` otherwise.
+    - churn: ``mitigating`` — the knob is the growth carrier
+      (family floor collapses, 0.074 vs 0.564; principle #7: the
+      knob's sign flips with dG); ``starved`` — family-stable
+      contenders exist but none survive the knob (b=1 nucleation
+      cannot reach its partner at dwell 0.113).
+    - starvation: ``moot`` for everything — nothing grows (fill
+      0, partial 0.0008, persist rests on 1 event); the compile
+      should refuse the operating point, not price it.
+
+    Static arithmetic over the census + measured anchors; no
+    kinetics are asserted here (tick-37 rule — the numbers come
+    from contention_dg.out, pinned in tests).
+    """
+    dg = DEFAULT_DG if dg is None else dg
+    regime, interpolated = regime_at(dg)
+    vc = vacancy_contention(build, canon, strength, bond_fns)
+    vacancies = {}
+    for sp in sorted(vc):
+        for site, contenders in sorted(vc[sp].items()):
+            fam_stable = sorted(
+                t for t, c in contenders.items()
+                if "family" in c["stable_under"])
+            s2_stable = sorted(
+                t for t, c in contenders.items()
+                if "s2" in c["stable_under"])
+            minted = sorted(set(s2_stable) - set(fam_stable))
+            fill_fam = [t for t in fam_stable
+                        if "fill" in contenders[t]["classes"]]
+            if not minted and not fam_stable:
+                tier = "low"
+            elif regime in ("frozen", "marginal"):
+                if minted and fill_fam:
+                    tier = "critical"
+                elif minted:
+                    tier = "high"
+                elif any(contenders[t]["w_read"]
+                         for t, c in contenders.items()
+                         if t in fam_stable):
+                    tier = "moderate"
+                else:
+                    tier = "low"
+            elif regime == "churn":
+                if s2_stable:
+                    tier = "mitigating"
+                elif fam_stable:
+                    tier = "starved"
+                else:
+                    tier = "low"
+            else:   # starvation
+                tier = "moot"
+            note = {
+                "critical": "knob mints frozen contenders over a "
+                            "family-stable fill (measured 0.904->0.412)",
+                "high": "knob mints frozen contenders; no family fill "
+                        "(first-come among squatters)",
+                "moderate": "w_read doubling of an already-stable "
+                            "squatter only",
+                "mitigating": "knob is the growth carrier at this dG "
+                              "(family floor 0.074 vs knob 0.564)",
+                "starved": "family-only contenders: b=1 nucleation "
+                           "starves at dwell 0.113",
+                "moot": "nothing grows at this dG (fill 0, partial "
+                        "0.0008) — refuse the operating point",
+                "low": "no knob-sensitive stable contender",
+            }[tier]
+            vacancies.setdefault(sp, {})[site] = {
+                "tier": tier,
+                "family_stable": fam_stable,
+                "s2_stable": s2_stable,
+                "minted": minted,
+                "note": note,
+            }
+    return {
+        "dg": dg,
+        "regime": regime,
+        "interpolated": interpolated,
+        "knob_verdict": KNOB_VERDICTS[regime],
+        "anchors": REGIME_ANCHORS[regime],
+        "vacancies": vacancies,
+        "boundary_notes": [
+            "read-window axis priced only at dG 4 (win4 arms); the "
+            "dG-2 window arm is untested",
+            "starvation persist rests on persist_n=1 (single event)",
+            "L3@(2,2) (54/500) sits outside the tick-42 five-name "
+            "census; priced as measured, not enumerated",
+            "dg off the measured points 0.5/2/4/7 is nearest-regime "
+            "pricing (interpolated=true)",
+        ],
+    }
+
+
+def check_d4(build, canon=None, *, lock_sites=None, strength=None,
+             dg=None):
     """Emit-time off-channel census (d4).  WARNING severity: returns
-    the report; never gates emission (designs/004 A3)."""
+    the report; never gates emission (designs/004 A3).  ``dg``
+    selects the operating point the severity ranking is priced at
+    (default DEFAULT_DG = 0.5, the protocol point)."""
     if canon is None:
         canon = canonical_assembly(build)
     if lock_sites is None:
@@ -710,6 +877,8 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
         "lock_misreads": lock_misreads_from(probe),
         "lock_misplacements": mispl,
         "vacancy_contention": vacancy_contention(build, canon, strength),
+        "contention_severity": contention_severity(
+            build, dg=dg, canon=canon, strength=strength),
         "measured_context": MEASURED_CONTEXT,
     }
     return report
@@ -813,6 +982,24 @@ def d4_report_lines(report):
                   "set (measured s2 Vp-arm: fill 0.908 -> 0.406, "
                   "first-come among three stable contenders; "
                   "vacancy_bg.out VB1/VB3)")
+    sev = report.get("contention_severity")
+    if sev:
+        lines.append(
+            f"  contention severity at dG {sev['dg']} — regime "
+            f"{sev['regime']}"
+            + (" (interpolated: nearest measured regime)"
+               if sev["interpolated"] else "")
+            + f", lock-reinforcement knob verdict: "
+              f"{sev['knob_verdict']}")
+        for sp, sites in sorted(sev["vacancies"].items()):
+            for site, s in sorted(sites.items()):
+                if s["tier"] in ("low",):
+                    continue
+                lines.append(
+                    f"    {sp}-missing @{site}: tier {s['tier']} — "
+                    f"minted {','.join(s['minted']) or '-'} over "
+                    f"family-stable {','.join(s['family_stable']) or '-'}; "
+                    f"{s['note']}")
     ctx = report["measured_context"]
     lines.append(
         "  measured context: lock-squat block rate "
