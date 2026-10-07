@@ -270,3 +270,53 @@ failure at dG 0.5; it does not survive thermodynamics. The
 glue-scope study is fully closed through its kinetic arm; the
 open items are the glue-CLASS boundary kinetic test and the
 founder-gated collaborator/venue shortlist.
+
+### Closed (tick 35, same day): the glue-CLASS boundary is inert
+### by enumeration
+
+The last open item is closed statically, with an exact inventory
+proof in place of a Monte Carlo arm. `apply_lock_glue_scope` now
+accepts `scope="class"`: the row rule PLUS every non-value,
+non-SP canonical-bond rename (the strength-2 spine self-relays
+stay exempt, designs/002; seed bonds are outside canon by
+construction; value bonds keep EXACTLY the row treatment).
+
+Receipt `evidence/2026-10-07-glue-class/glue_class.out`
+(predictions C1-C4 + R1 registered in-script before running; pins
+in `tests/test_glue_class.py`, suite 276 OK / 1 skip):
+
+- C1 CONFIRMED — every non-value glue in BUILD1/2/3 is
+  `canonical_pair`, `seed_bond` or `inert_single`
+  (`glue_class_census`): no shared structural glue exists, so no
+  off-channel use exists for the class glues at all.
+- C2 CONFIRMED — `scope_bond_identity`, the COMPLETE matching
+  predicate (every opposing tile-face pair + every seed bond),
+  has an empty row-vs-class diff on all three builds: the class
+  scope renames only canonical-pair-exclusive glues, splits
+  nothing, and is kinetically identical to row BY CONSTRUCTION.
+  No cluster job spent, and the justification is explicit: the
+  standing "census over-approximates; kinetics decides" rule
+  covers sampled channel censuses — this enumeration is the
+  complete inventory predicate that kTAM dynamics are a function
+  of, so there is no sampled channel left for trajectories to
+  over-rule.
+- C3 CONFIRMED — canonical assemblies >= tau=2 at every site
+  under class scope.
+- C4 CONFIRMED — the full check_d4 report is identical row vs
+  class on all three builds.
+- R1 (rename principle, now explicit) — a scope rename can only
+  kill a bond whose two faces land on DIFFERENT final names (the
+  one-face lock-read split: D1T.E `p-t` vs L1.W `p-t-lk1`); it is
+  structurally blind to displaced-pair / same-tag recombination.
+  All four row-scope surviving channel bonds (Vp.N<->DBr.S,
+  D2T.N<->DAr.S, D2T.S<->V0p.N, D2T.W<->S2.E — the last an
+  unrenamed go2 class glue) carry EQUAL final names on both
+  faces. One rule states the static reason RS1/RS2 falsified the
+  elimination reading.
+
+The knob terminates at `row` for these inventories: the honest
+boundary of `lock_glue_scope` is now (a) the strength-2 spine
+exemption and (b) the seed row — both nucleation anchors, not
+hazard carriers. A future build family with a SHARED structural
+glue would reopen the boundary; `glue_class_census` is the
+emit-time check that flags it (status `shared`).

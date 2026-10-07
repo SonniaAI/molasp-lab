@@ -1,0 +1,604 @@
+{
+ "builds": {
+  "BUILD1": {
+   "census": {
+    "SP1": {
+     "class": "spine",
+     "status": "seed_bond",
+     "users": [
+      "S1.S",
+      "seed0"
+     ]
+    },
+    "SP2": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S1.N",
+      "S2.S"
+     ]
+    },
+    "SP3": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S2.N",
+      "S3.S"
+     ]
+    },
+    "SP4": {
+     "class": "spine",
+     "status": "inert_single",
+     "users": [
+      "S3.N"
+     ]
+    },
+    "and1_r": {
+     "class": "and",
+     "status": "canonical_pair",
+     "users": [
+      "DAr.E",
+      "DBr.W"
+     ]
+    },
+    "and1_r-done": {
+     "class": "and",
+     "status": "inert_single",
+     "users": [
+      "DAr.N"
+     ]
+    },
+    "base1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "L1.S",
+      "seed3"
+     ]
+    },
+    "base2": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L1.N",
+      "L2.S"
+     ]
+    },
+    "base3": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L2.N",
+      "L3.S"
+     ]
+    },
+    "cap3": {
+     "class": "cap",
+     "status": "inert_single",
+     "users": [
+      "L3.N"
+     ]
+    },
+    "f-p": {
+     "class": "fact",
+     "status": "seed_bond",
+     "users": [
+      "D1T.S",
+      "seed1"
+     ]
+    },
+    "go1": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D1T.W",
+      "S1.E"
+     ]
+    },
+    "go2": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D2T.W",
+      "S2.E"
+     ]
+    },
+    "go3": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "DAr.W",
+      "S3.E"
+     ]
+    },
+    "p-t": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1T.E",
+      "L1.W",
+      "V0p.E",
+      "V0p.W"
+     ]
+    },
+    "p-t-done": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1T.N",
+      "D2T.S",
+      "DBr.S",
+      "V0p.N",
+      "Vp.N",
+      "Vp.S"
+     ]
+    },
+    "q-t": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D2T.E",
+      "L2.W",
+      "Vp.E",
+      "Vp.W"
+     ]
+    },
+    "q-t-done": {
+     "class": "value",
+     "status": "canonical_pair",
+     "users": [
+      "D2T.N",
+      "DAr.S"
+     ]
+    },
+    "r-t": {
+     "class": "value",
+     "status": "canonical_pair",
+     "users": [
+      "DBr.E",
+      "L3.W"
+     ]
+    },
+    "r-t-done": {
+     "class": "value",
+     "status": "inert_single",
+     "users": [
+      "DBr.N"
+     ]
+    },
+    "vb1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "V0p.S",
+      "seed2"
+     ]
+    }
+   },
+   "class_canonical_bonds": {
+    "0,1": 5,
+    "0,2": 5,
+    "0,3": 3,
+    "1,1": 4,
+    "1,2": 4,
+    "1,3": 3,
+    "2,1": 4,
+    "2,2": 4,
+    "2,3": 3,
+    "3,1": 3,
+    "3,2": 3,
+    "3,3": 2
+   },
+   "d4_report_identical_row_vs_class": true,
+   "row_vs_class_bond_diff": {},
+   "shared_nonvalue_glues": []
+  },
+  "BUILD2": {
+   "census": {
+    "SP1": {
+     "class": "spine",
+     "status": "seed_bond",
+     "users": [
+      "S1.S",
+      "seed0"
+     ]
+    },
+    "SP2": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S1.N",
+      "S2.S"
+     ]
+    },
+    "SP3": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S2.N",
+      "S3.S"
+     ]
+    },
+    "SP4": {
+     "class": "spine",
+     "status": "inert_single",
+     "users": [
+      "S3.N"
+     ]
+    },
+    "base1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "L1.S",
+      "seed3"
+     ]
+    },
+    "base2": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L1.N",
+      "L2.S"
+     ]
+    },
+    "base3": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L2.N",
+      "L3.S"
+     ]
+    },
+    "cap3": {
+     "class": "cap",
+     "status": "inert_single",
+     "users": [
+      "L3.N"
+     ]
+    },
+    "f-p": {
+     "class": "fact",
+     "status": "seed_bond",
+     "users": [
+      "D1T.S",
+      "seed1"
+     ]
+    },
+    "go1": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D1T.W",
+      "S1.E"
+     ]
+    },
+    "go2": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D2F.W",
+      "S2.E"
+     ]
+    },
+    "go3": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D3F.W",
+      "S3.E"
+     ]
+    },
+    "p-t": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1T.E",
+      "L1.W",
+      "V0p.E",
+      "V0p.W"
+     ]
+    },
+    "p-t-done": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1T.N",
+      "D2F.S",
+      "Fr.S",
+      "V0p.N",
+      "Vp.N",
+      "Vp.S"
+     ]
+    },
+    "q-f": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D2F.E",
+      "L2.W",
+      "Vp.E",
+      "Vp.W"
+     ]
+    },
+    "q-f-done": {
+     "class": "value",
+     "status": "canonical_pair",
+     "users": [
+      "D2F.N",
+      "D3F.S"
+     ]
+    },
+    "r-f": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D3F.E",
+      "Fr.E",
+      "Fr.W",
+      "L3.W"
+     ]
+    },
+    "r-f-done": {
+     "class": "value",
+     "status": "inert_single",
+     "users": [
+      "D3F.N"
+     ]
+    },
+    "rf-relay": {
+     "class": "relay",
+     "status": "inert_single",
+     "users": [
+      "Fr.N"
+     ]
+    },
+    "vb1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "V0p.S",
+      "seed2"
+     ]
+    }
+   },
+   "class_canonical_bonds": {
+    "0,1": 5,
+    "0,2": 5,
+    "0,3": 3,
+    "1,1": 4,
+    "1,2": 4,
+    "1,3": 3,
+    "2,1": 4,
+    "2,2": 4,
+    "2,3": 3,
+    "3,1": 3,
+    "3,2": 3,
+    "3,3": 2
+   },
+   "d4_report_identical_row_vs_class": true,
+   "row_vs_class_bond_diff": {},
+   "shared_nonvalue_glues": []
+  },
+  "BUILD3": {
+   "census": {
+    "SP1": {
+     "class": "spine",
+     "status": "seed_bond",
+     "users": [
+      "S1.S",
+      "seed0"
+     ]
+    },
+    "SP2": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S1.N",
+      "S2.S"
+     ]
+    },
+    "SP3": {
+     "class": "spine",
+     "status": "canonical_pair",
+     "users": [
+      "S2.N",
+      "S3.S"
+     ]
+    },
+    "SP4": {
+     "class": "spine",
+     "status": "inert_single",
+     "users": [
+      "S3.N"
+     ]
+    },
+    "base1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "L1q.S",
+      "seed3"
+     ]
+    },
+    "base2": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L1q.N",
+      "L2.S"
+     ]
+    },
+    "base3": {
+     "class": "base",
+     "status": "canonical_pair",
+     "users": [
+      "L2.N",
+      "L3.S"
+     ]
+    },
+    "cap3": {
+     "class": "cap",
+     "status": "inert_single",
+     "users": [
+      "L3.N"
+     ]
+    },
+    "f-q": {
+     "class": "fact",
+     "status": "seed_bond",
+     "users": [
+      "D1Tq.S",
+      "seed1"
+     ]
+    },
+    "go1": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D1Tq.W",
+      "S1.E"
+     ]
+    },
+    "go2": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "DAr.W",
+      "S2.E"
+     ]
+    },
+    "go3": {
+     "class": "go",
+     "status": "canonical_pair",
+     "users": [
+      "D3Fp.W",
+      "S3.E"
+     ]
+    },
+    "p-f": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D3Fp.E",
+      "Fp.E",
+      "Fp.W",
+      "L3.W"
+     ]
+    },
+    "p-f-done": {
+     "class": "value",
+     "status": "inert_single",
+     "users": [
+      "D3Fp.N"
+     ]
+    },
+    "pf-cap": {
+     "class": "cap",
+     "status": "inert_single",
+     "users": [
+      "Fp.N"
+     ]
+    },
+    "q-t": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1Tq.E",
+      "L1q.W",
+      "V0q.E",
+      "V0q.W"
+     ]
+    },
+    "q-t-done": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "D1Tq.N",
+      "DAr.S",
+      "Fplus.S",
+      "V0q.N"
+     ]
+    },
+    "r-t": {
+     "class": "value",
+     "status": "shared",
+     "users": [
+      "DAr.E",
+      "Fplus.E",
+      "Fplus.W",
+      "L2.W"
+     ]
+    },
+    "r-t-done": {
+     "class": "value",
+     "status": "canonical_pair",
+     "users": [
+      "D3Fp.S",
+      "DAr.N"
+     ]
+    },
+    "vb1": {
+     "class": "base",
+     "status": "seed_bond",
+     "users": [
+      "V0q.S",
+      "seed2"
+     ]
+    },
+    "w1-relay": {
+     "class": "relay",
+     "status": "canonical_pair",
+     "users": [
+      "Fp.S",
+      "Fplus.N"
+     ]
+    }
+   },
+   "class_canonical_bonds": {
+    "0,1": 5,
+    "0,2": 5,
+    "0,3": 3,
+    "1,1": 4,
+    "1,2": 4,
+    "1,3": 3,
+    "2,1": 4,
+    "2,2": 4,
+    "2,3": 3,
+    "3,1": 3,
+    "3,2": 3,
+    "3,3": 2
+   },
+   "d4_report_identical_row_vs_class": true,
+   "row_vs_class_bond_diff": {},
+   "shared_nonvalue_glues": []
+  }
+ },
+ "r1_rename_principle": {
+  "all_survivors_equal": true,
+  "kill_case_split_final_names": {
+   "D1T.E": "p-t",
+   "L1.W": "p-t-lk1"
+  },
+  "split_is_real": true,
+  "surviving_pairs_equal_final_names": {
+   "D2T.N<->DAr.S": [
+    "q-t-done-lk3",
+    "q-t-done-lk3"
+   ],
+   "D2T.S<->V0p.N": [
+    "p-t-done-lk2",
+    "p-t-done-lk2"
+   ],
+   "D2T.W<->S2.E": [
+    "go2",
+    "go2"
+   ],
+   "Vp.N<->DBr.S": [
+    "p-t-done-lk3",
+    "p-t-done-lk3"
+   ]
+  }
+ },
+ "study": "glue-class boundary census (tick 35)"
+}

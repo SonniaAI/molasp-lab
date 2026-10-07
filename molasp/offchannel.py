@@ -555,9 +555,10 @@ def apply_lock_glue_scope(build, scope="family", canon=None):
     import copy
     if scope == "family":
         return copy.deepcopy(build)
-    if scope != "row":
+    if scope not in ("row", "class"):
         raise ValueError(
-            f"lock_glue_scope must be 'family' or 'row', got {scope!r}")
+            f"lock_glue_scope must be 'family', 'row' or 'class', "
+            f"got {scope!r}")
     if canon is None:
         canon = canonical_assembly(build)
     new = copy.deepcopy(build)
@@ -566,19 +567,33 @@ def apply_lock_glue_scope(build, scope="family", canon=None):
     def value_family(g):
         return g.endswith(SHARED_VALUE_SUFFIXES)
 
+    def class_extra(g):
+        # 'class' (tick 35) extends the row rule to the glue classes
+        # row never qualified — the designs/004 boundary (go* spine
+        # entries, and*/base/w* relays) — with the strength-2 spine
+        # self-relays exempt (designs/002: strength-1 spines attach
+        # nothing in row 1 at tau=2).  Value bonds keep EXACTLY the
+        # row treatment, so 'class' is row plus the class-glue
+        # renames and nothing else.
+        return (not value_family(g)) and (not g.startswith("SP"))
+
     renames = []
     for (x, y) in sorted(canon):
         t = canon[(x, y)]
         east = canon.get((x + 1, y))
-        if east is not None and east.startswith("L"):
+        if east is not None:
             g = tiles[t].get("E")
-            if g and g == tiles[east].get("W") and value_family(g):
+            e_rule = east.startswith("L") and value_family(g)
+            c_rule = scope == "class" and class_extra(g)
+            if g and g == tiles[east].get("W") and (e_rule or c_rule):
                 ng = f"{g}-lk{y}"
                 renames += [(t, "E", ng), (east, "W", ng)]
         north = canon.get((x, y + 1))
         if north is not None:
             g = tiles[t].get("N")
-            if g and g == tiles[north].get("S") and value_family(g):
+            n_rule = value_family(g) or (
+                scope == "class" and class_extra(g))
+            if g and g == tiles[north].get("S") and n_rule:
                 ng = f"{g}-lk{y + 1}"
                 renames += [(t, "N", ng), (north, "S", ng)]
     for t, face, ng in renames:
@@ -598,8 +613,10 @@ def lock_glue_scope_reports(build, canon=None):
     if canon is None:
         canon = canonical_assembly(build)
     row_build = apply_lock_glue_scope(build, "row", canon)
+    class_build = apply_lock_glue_scope(build, "class", canon)
     fam_rep = check_d4(build, canon)
     row_rep = check_d4(row_build, canon)
+    class_rep = check_d4(class_build, canon)
 
     def repair_bonds(b):
         # the two census substitution pairs (tick 24): D1T fills the
@@ -612,7 +629,125 @@ def lock_glue_scope_reports(build, canon=None):
     return {
         "family": fam_rep,
         "row": row_rep,
+        "class": class_rep,
         "row_build": row_build,
+        "class_build": class_build,
         "repair_bonds": {
-            "family": repair_bonds(build), "row": repair_bonds(row_build)},
+            "family": repair_bonds(build), "row": repair_bonds(row_build),
+            "class": repair_bonds(class_build)},
     }
+
+
+# ---------- glue-CLASS boundary (designs/004, tick 35) ------------------
+
+
+def glue_class(g):
+    """Classify a glue name (``-lk{i}`` scope tags stripped): the
+    shared value families — the repairability/squattability currency
+    (R3b, R4) — vs the structural classes (spine, go* entries,
+    and*/base relays, one-off caps/relays) that the row rule never
+    qualified: the designs/004 glue-CLASS boundary."""
+    import re
+    base = re.sub(r"-lk\d+$", "", g)
+    if base.endswith(SHARED_VALUE_SUFFIXES):
+        return "value"
+    if base.startswith("SP"):
+        return "spine"
+    if base.startswith("go"):
+        return "go"
+    if base.startswith("and"):
+        return "and"
+    if base.startswith("base") or base.startswith("vb"):
+        return "base"
+    if base.startswith("f-"):
+        return "fact"
+    if base.endswith("-relay"):
+        return "relay"
+    return "cap"
+
+
+def glue_class_census(build, canon=None):
+    """Enumerate every glue's users (tile faces + seed slots) and
+    classify each as ``canonical_pair`` / ``seed_bond`` /
+    ``inert_single`` / ``shared``.
+
+    A non-value glue that is canonical_pair-exclusive cannot host
+    an off-channel channel: a scope rename touches exactly its two
+    canonical faces, and no third use exists to split.  This census
+    is the machine check that the glue-CLASS boundary is inert for
+    a given inventory — run it on every new build family.  A
+    ``shared`` non-value glue is the honest boundary where the
+    ``class`` scope starts to bite (tick 35: none exists in
+    BUILD1/2/3 — the census receipt pins it)."""
+    if canon is None:
+        canon = canonical_assembly(build)
+    users = {}
+    for t, faces in sorted(build["tiles"].items()):
+        for face, g in sorted(faces.items()):
+            if g:
+                users.setdefault(g, []).append(f"{t}.{face}")
+    for slot, g in sorted(build["seed"].items()):
+        users.setdefault(g, []).append(f"seed{slot[0]}")
+    canon_pairs = set()
+    for (x, y) in sorted(canon):
+        t = canon[(x, y)]
+        east = canon.get((x + 1, y))
+        if east is not None:
+            canon_pairs.add(frozenset((f"{t}.E", f"{east}.W")))
+        north = canon.get((x, y + 1))
+        if north is not None:
+            canon_pairs.add(frozenset((f"{t}.N", f"{north}.S")))
+    out = {}
+    for g, ulist in sorted(users.items()):
+        faces = [u for u in ulist if not u.startswith("seed")]
+        seeds = [u for u in ulist if u.startswith("seed")]
+        status = "shared"
+        if len(ulist) == 1:
+            status = "inert_single"
+        elif len(faces) == 2 and not seeds and any(
+                frozenset(faces) == p for p in canon_pairs):
+            status = "canonical_pair"
+        elif len(faces) == 1 and len(seeds) == 1:
+            status = "seed_bond"
+        out[g] = {"class": glue_class(g), "users": sorted(ulist),
+                  "status": status}
+    return out
+
+
+def scope_bond_identity(build, scope_a, scope_b, canon=None):
+    """Exact matching-predicate comparison of two scoped builds:
+    for every opposing tile-face pair in the inventory (plus every
+    tile S-face vs seed slot), the bond strength under ``scope_a``
+    vs ``scope_b``.
+
+    kTAM/aTAM dynamics depend only on this predicate and the bond
+    strengths, so an EMPTY diff proves the two scopes are
+    kinetically identical for that inventory — the machine form of
+    "the class boundary is inert" (tick 35).  Unlike a sampled
+    channel census this enumeration is complete, so no Monte Carlo
+    is needed to decide it."""
+    if canon is None:
+        canon = canonical_assembly(build)
+    a = apply_lock_glue_scope(build, scope_a, canon)
+    b = apply_lock_glue_scope(build, scope_b, canon)
+    diff = {}
+    for t1 in sorted(a["tiles"]):
+        for f1 in ("N", "S", "E", "W"):
+            for t2 in sorted(a["tiles"]):
+                if t1 == t2:
+                    continue
+                f2 = OPPOSITE[f1]
+                sa = glue_strength(a["tiles"][t1].get(f1),
+                                   a["tiles"][t2].get(f2))
+                sb = glue_strength(b["tiles"][t1].get(f1),
+                                   b["tiles"][t2].get(f2))
+                if sa != sb:
+                    diff[f"{t1}.{f1}<->{t2}.{f2}"] = [sa, sb]
+    for t in sorted(a["tiles"]):
+        for slot, gs in sorted(a["seed"].items()):
+            sa = glue_strength(a["tiles"][t].get("S"), gs)
+            sb = glue_strength(b["tiles"][t].get("S"),
+                               b["seed"].get(slot))
+            if sa != sb:
+                diff[f"{t}.S<->seed{slot[0]}"] = [sa, sb]
+    return diff
