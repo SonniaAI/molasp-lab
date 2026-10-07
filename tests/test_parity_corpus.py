@@ -79,9 +79,10 @@ class TestReceiptPins(unittest.TestCase):
         self.assertEqual(by["PC3"]["dead_variant_glues"], ["and1_r"])
         self.assertEqual(by["PC4"]["dead_variant_glues"],
                          ["and1_r", "unit1_r"])
-        # Stage 3 (tick 50): PC4's unit1_r is now EMITTED machinery
-        # (UD3r on the terminal false row) and BFS-proved absent —
-        # non-vacuous for every dead glue in the corpus.
+        # Stage 4 (tick 51): PC4's and1_r AND unit1_r are now both
+        # EMITTED machinery (AD3r AND-body reader + UD3r unit reader
+        # on the terminal false row) and BFS-proved absent — every
+        # dead glue in the corpus is non-vacuous.
         self.assertTrue(by["PC3"]["dead_glues_absent"]["and1_r"])
         for glue in ("and1_r", "unit1_r"):
             self.assertTrue(by["PC4"]["dead_glues_absent"][glue])
@@ -131,6 +132,23 @@ class TestBFSRecompute(unittest.TestCase):
             names = {t for _p, t in a}
             self.assertNotIn("DBr", names)
             self.assertNotIn("Ur", names)
+
+    def test_b4_pc4_and_body_dead_reader_emitted(self):
+        # Stage 4 (tick 51): the AND-bodied false head emits its
+        # reader half (AD3r: W reads the and1_r conduit glue, S reads
+        # the TRUE conjunct q-t-done — the never-realizes proof must
+        # survive a live S bond) and BFS proves the tile absent from
+        # every producible assembly.
+        build, seen, terminals, decodes, exp = self._recompute("PC4")
+        self.assertEqual(decodes, {exp})
+        self.assertEqual(
+            build["tiles"]["AD3r"],
+            {"W": "and1_r", "S": "q-t-done",
+             "E": "r-t", "N": "r-t-done"})
+        self.assertEqual(build["row_of"]["AD3r"], 3)
+        placed = {t for asm in seen for _p, t in asm}
+        self.assertIn("AD3r", build["tiles"])  # emitted, not assumed
+        self.assertNotIn("AD3r", placed)
 
 
 if __name__ == "__main__":

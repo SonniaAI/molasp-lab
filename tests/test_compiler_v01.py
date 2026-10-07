@@ -67,33 +67,40 @@ class TestParity(unittest.TestCase):
         self._parity("build2", PROGRAMS["P_OA_minus_q"])
 
     def test_p3_build3(self):
-        # Stage 3 (tick 50) moves the terminal F-cap basis: compiled
-        # build3 is the hand BUILD3 plus the emitted terminal dead
-        # reader UD3r (predicted-false r, unit body p).  Minus that
-        # one tile the compiled signature equals the hand build.
+        # Stage 4 (tick 51) moves the terminal F-cap basis again:
+        # compiled build3 is the hand BUILD3 plus the emitted dead
+        # readers UD3r (unit body p, stage 3) and AD3r (AND body
+        # p,q — reader half only, stage 4).  Minus those two tiles
+        # the compiled signature equals the hand build.
         b = compiled("x", PROGRAMS["P_OA_minus_p"])
         self.assertEqual(b["tiles"]["UD3r"],
                          {"W": "unit1_r", "S": "p-t-done",
                           "E": "r-t", "N": "r-t-done"})
+        self.assertEqual(b["tiles"]["AD3r"],
+                         {"W": "and1_r", "S": "q-t-done",
+                          "E": "r-t", "N": "r-t-done"})
         self.assertEqual(b["row_of"]["UD3r"], 3)
+        self.assertEqual(b["row_of"]["AD3r"], 3)
+        dead = {"UD3r", "AD3r"}
         merged = dict(b)
         merged["tiles"] = {k: v for k, v in b["tiles"].items()
-                           if k != "UD3r"}
+                           if k not in dead}
         merged["row_of"] = {k: v for k, v in b["row_of"].items()
-                            if k != "UD3r"}
+                            if k not in dead}
         self.assertEqual(structural_signature(merged),
                          structural_signature(BUILDS["build3"]),
-                         "build3 minus UD3r: compiled signature differs "
-                         "from hand build")
+                         "build3 minus dead readers: compiled signature "
+                         "differs from hand build")
 
     def test_p4_tile_counts(self):
         self.assertEqual(len(compiled("x", PROGRAMS["P_OA"])["tiles"]), 14)
         self.assertEqual(
             len(compiled("x", PROGRAMS["P_OA_minus_q"])["tiles"]), 14)
         self.assertEqual(
-            len(compiled("x", PROGRAMS["P_OA_minus_p"])["tiles"]), 13)
-        # 13 = 12 + UD3r: stage 3 (tick 50) emits the terminal dead
-        # reader for predicted-false r (unit body p); BUILD1/2 count
+            len(compiled("x", PROGRAMS["P_OA_minus_p"])["tiles"]), 14)
+        # 14 = 12 + UD3r + AD3r: stage 3 (tick 50) emits the unit
+        # dead reader for predicted-false r and stage 4 (tick 51)
+        # the AND-body reader half (body p,q); BUILD1/2 counts
         # unmoved.
 
     def test_p4_least_model_prediction(self):

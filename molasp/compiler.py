@@ -369,17 +369,37 @@ def compile_program(text: str, predicted=None, name=None):
                     # stacked dead readers mutually give 1 each).
                     # PC4/PC10's dead links become EMITTED machinery
                     # whose absence from every assembly BFS-proves.
-                    # AND bodies stay deferred (PC4's and1_r).
-                    unit_no = 0
+                    # Stage 4: AND bodies emit the READER half only
+                    # (the DB-shaped tile).  The conduit half stays
+                    # unemitted: its S face reads {hi}-t-done, which
+                    # is LIVE whenever hi is true (a false head's
+                    # AND body needs only one dead conjunct), so the
+                    # conduit could become producible and change the
+                    # assembly set.  The reader's never-realizes is
+                    # glue arithmetic: W = the vj conduit glue
+                    # and{and_no}_{a}, unique to this body and
+                    # exposed nowhere (no true variant of a false
+                    # head exists); S reads {lo}-t-done, bonding at
+                    # most 1 (a true lo's basis, or stacked dead
+                    # readers).  Max 1 < TAU 2 (PC4's and1_r).
+                    and_no = unit_no = 0
                     for body in rules[a]:
-                        if len(body) != 1:
-                            continue            # AND body: deferred
-                        unit_no += 1
-                        vj = f"unit{unit_no}_{a}"
-                        emit(f"UD{i}{a}" if unit_no == 1 else
-                             f"UD{i}{a}{unit_no}",
-                             {"W": vj, "S": f"{body[0]}-t-done",
-                              "E": f"{a}-t", "N": f"{a}-t-done"}, i)
+                        if len(body) == 1:
+                            unit_no += 1
+                            vj = f"unit{unit_no}_{a}"
+                            emit(f"UD{i}{a}" if unit_no == 1 else
+                                 f"UD{i}{a}{unit_no}",
+                                 {"W": vj, "S": f"{body[0]}-t-done",
+                                  "E": f"{a}-t", "N": f"{a}-t-done"}, i)
+                        elif len(body) == 2:
+                            and_no += 1
+                            hi, lo = sorted(
+                                body, key=lambda x: -row_of_atom[x])
+                            vj = f"and{and_no}_{a}"
+                            emit(f"AD{i}{a}" if and_no == 1 else
+                                 f"AD{i}{a}{and_no}",
+                                 {"W": vj, "S": f"{lo}-t-done",
+                                  "E": f"{a}-t", "N": f"{a}-t-done"}, i)
             else:                               # relay the V column north
                 emit(f"V{i}{a1}", {"W": f"{a}-f", "E": f"{a}-f",
                                    "S": below_v, "N": below_v}, i)
@@ -397,19 +417,37 @@ def compile_program(text: str, predicted=None, name=None):
                     # (stacked dead readers mutually give 1 each), so
                     # the dead link is EMITTED machinery whose absence
                     # from every assembly BFS-proves — not vacuous
-                    # non-emission.  AND-bodied false heads and the
-                    # terminal false row keep the plain false basis
-                    # (PC4 pins the terminal F-cap; deferred).
-                    unit_no = 0
+                    # non-emission.  The terminal false row emits the
+                    # same readers (stage 3).  Stage 4: AND bodies
+                    # emit the READER half only, same proof — W is
+                    # the vj conduit glue and{and_no}_{a}, unique to
+                    # the body and exposed nowhere; S reads
+                    # {lo}-t-done at strength <= 1 (a true lo's basis
+                    # or stacked dead readers).  The conduit half
+                    # stays unemitted: its S face reads {hi}-t-done,
+                    # live whenever hi is true (a false head's AND
+                    # body needs only one dead conjunct), risking a
+                    # producible dead conduit.  Width > 2: skipped
+                    # (pre-existing silent-acceptance boundary of
+                    # false heads, unchanged by this stage).
+                    and_no = unit_no = 0
                     for body in rules[a]:
-                        if len(body) != 1:
-                            continue            # AND body: deferred
-                        unit_no += 1
-                        vj = f"unit{unit_no}_{a}"
-                        emit(f"UD{i}{a}" if unit_no == 1 else
-                             f"UD{i}{a}{unit_no}",
-                             {"W": vj, "S": f"{body[0]}-t-done",
-                              "E": f"{a}-t", "N": f"{a}-t-done"}, i)
+                        if len(body) == 1:
+                            unit_no += 1
+                            vj = f"unit{unit_no}_{a}"
+                            emit(f"UD{i}{a}" if unit_no == 1 else
+                                 f"UD{i}{a}{unit_no}",
+                                 {"W": vj, "S": f"{body[0]}-t-done",
+                                  "E": f"{a}-t", "N": f"{a}-t-done"}, i)
+                        elif len(body) == 2:
+                            and_no += 1
+                            hi, lo = sorted(
+                                body, key=lambda x: -row_of_atom[x])
+                            vj = f"and{and_no}_{a}"
+                            emit(f"AD{i}{a}" if and_no == 1 else
+                                 f"AD{i}{a}{and_no}",
+                                 {"W": vj, "S": f"{lo}-t-done",
+                                  "E": f"{a}-t", "N": f"{a}-t-done"}, i)
                 d_north[i] = f"{a}-f-done"
                 v_north[i] = below_v
 

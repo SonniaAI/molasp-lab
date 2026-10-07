@@ -231,13 +231,14 @@ class TestDeadReaderEmissionStage2(unittest.TestCase):
         self.assertNotIn("UD4r", placed)
 
     def test_v01_builds_byte_stable(self):
-        # Registered receipt counts (tick 46/48; PC4 at tick 50),
-        # hardcoded: stage 3 moves ONLY terminal-false-head programs
-        # (PC4 12->13 = +UD3r); every other verified build is
-        # unmoved and regeneration of run.out cannot make the
-        # stability pin vacuous.
+        # Registered receipt counts (tick 46/48; PC4 at ticks 50/51),
+        # hardcoded: stages 3-4 move ONLY terminal-false-head programs
+        # (PC4 12->13 = +UD3r, then 13->14 = +AD3r, the AND-body
+        # reader half); every other verified build is unmoved and
+        # regeneration of run.out cannot make the stability pin
+        # vacuous.
         registered = {"PC1": (8, 15), "PC2": (14, 45), "PC3": (14, 35),
-                      "PC4": (13, 35), "PC5": (16, 70), "PC6": (18, 85),
+                      "PC4": (14, 35), "PC5": (16, 70), "PC6": (18, 85),
                       "PC7": (20, 100), "PC8": (18, 85), "PC9": (12, 35)}
         for name, (prog, model, _note) in sorted(CORPUS.items()):
             rep = check_program(name, prog, model)
