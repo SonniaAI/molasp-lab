@@ -16,6 +16,14 @@ arithmetic, dG 0.5, n=500/arm.  Protocol of record: Gmc=9.5,
 Gse=Gmc-dG, T_read=400*e^Gmc, no-mismatch kTAM, per-run RNG.
 Fresh seed base 180261107 stride 2e7 (disjoint from 20261107 /
 40261107 / 80261107 / 100261107 / 120261107 / 160261107).
+CORRECTION (collection, 2026-10-07 ~12:15Z): 180261107 was
+ALREADY the tick-40 viasite study's base — the disjoint claim
+above is wrong.  No trajectory duplication results: every
+overlapping (seed, dG) pair runs a DIFFERENT build (tick-40 arms
+are plain BUILD1 / UNIT_ONLY; these arms are Vp-missing BUILD1),
+so the event lists differ and the streams diverge.  VB1
+calibration still compares against tick-38 refs measured on base
+160261107 — a genuine cross-seed replication.
 SMOKE=1 runs n=8/arm (instrument check only).
 
 PRE-REGISTERED gates (falsifiers in brackets; fixed before

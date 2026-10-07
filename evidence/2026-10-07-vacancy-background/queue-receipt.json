@@ -1,0 +1,21 @@
+{
+  "job": "hxq-d1a6980228f8b409",
+  "request_id": "d1a6980228f8b409a40195aac7212f1ca04d2b646bda17b79c47bf555d78dcf0",
+  "nonce": "vacancy-bg-v1",
+  "image": "paperclip-test",
+  "image_id": "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd",
+  "archive_blob": "e99f71fd24ca83bc230fd1f676bcf5fe40f8308e31ceff594470e56bbe50d20a",
+  "result_blob": "d14783a94d123c12cdc7581be0959020ec2a1dc44512c7e2f5efb6417d1136c2",
+  "node": "spark-4a06",
+  "execution_status": 0,
+  "created": "2026-10-07T12:07:22Z",
+  "admitted": "2026-10-07T12:07:26Z",
+  "started": "2026-10-07T12:07:27Z",
+  "finished": "2026-10-07T12:07:30Z",
+  "pre_registration_commit": "aeb3fe0",
+  "command": [
+    "python3",
+    "source/evidence/2026-10-07-vacancy-background/ktam_vacancy_bg.py"
+  ],
+  "source_issue": "SON-4808"
+}

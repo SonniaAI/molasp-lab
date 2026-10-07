@@ -107,3 +107,33 @@ squatters from the transient background. d4 consequence: the
 lock_misplacements transient layer (tick 39) is the right warning
 surface — its w_read channels are exactly what freezes under any
 future read-reinforcement knob.
+
+### Evaluated addendum (tick 41, SON-4808): the vacancy background measured
+
+The Vp-missing s2 arm's fill starvation (tick 38: 0.904 -> 0.412) is
+not a single-channel effect. Pre-registered probe VB1–VB5
+(evidence/2026-10-07-vacancy-background/, job hxq-d1a6980228f8b409):
+
+- VB2 CONFIRMED, 78/78: every terminal L3@(3,2) rides the W ->
+  DBr@(2,2) read — the static pair layer's one-substitution claim,
+  now kinetic.
+- VB3 INCONCLUSIVE with the residual as the finding: fill survives
+  at 0.481 even with NO terminal L3, because the misplaced
+  CANONICAL lock L2 squats the via site (2,2) itself (150/500,
+  this design's solo class under s2). The vacancy background is a
+  three-way contention: classic fill vs L2 via-site squatter vs
+  DBr->L3 stack; fill | L3 present = 0.0.
+- VB5 FALSIFIED: L3 loses the first-attach race (0.214); family
+  contrast shows L3 first-attaching at 0.72 yet never terminal.
+  Misplacements are ACCRETED (late capture onto a settled
+  background), not raced into. Principle #6: reinforcement does
+  not need to win races — it only needs to make one late arrival
+  permanent.
+- VB4 INCONCLUSIVE as registered: the dwell clause normalized over
+  all 500 trajectories (flaw); the stability clause alone passed at
+  1.0. Kept un-promoted.
+
+Design consequence: any future lock-reinforcement knob must be
+priced against the FULL contention set of the affected vacancy
+(fill, via-site lock squat, reader stack), not against a single
+hazard class.
