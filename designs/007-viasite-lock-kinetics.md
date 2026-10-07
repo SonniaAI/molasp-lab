@@ -171,3 +171,31 @@ enumeration, tick-37 rule — no cluster job).
 - Honest boundary: L3@(2,2) (54/500) needs a second background
   event — outside single-species scope by construction, recorded
   not asserted (C4 correction).
+
+## Evaluated — dG / read-window extension (tick 43, SON-4813)
+
+The single-operating-point trade table above is now resolved on
+the dG axis (`evidence/2026-10-07-contention-dg-sweep/`, gates
+DW1–DW7 pre-registered at `236f91b`, n=500/arm):
+
+- **Three regimes.**  Frozen (dG 0.5): first-come is destiny — s2
+  persistence 0.872, fill 0.412 (tick-42 calibration replicated
+  cross-seed).  Marginal (dG 2): persistence 0.520 but the re-roll
+  is a near-fair coin (D2T 232 : L2 229), fill 0.464 — the lottery
+  survives as a stationary split.  Churn (dG 4): fill 0.564,
+  4×-window 0.798 — re-rolls accumulate and favor the fill.
+  Starvation (dG 7): fill 0, partial 0.0008.
+- **The family row of the trade table was a low-dG number** (DW6
+  FALSIFIED): at dG 4 the bare family channel collapses — fill
+  0.074, site dwell 0.113, partial 0.633; b=1 nucleation
+  intermediates cannot survive to their stabilizing partner, and
+  the 4× window does not rescue it (0.054) — a window cannot fix
+  a nucleation barrier.
+- **The s2 knob's sign flips with dG** (principle #7): the same
+  doubling that mints frozen squatters at dG 0.5 is the only
+  channel that carries growth at dG 4 (0.074 → 0.564; win4
+  0.054 vs 0.798) — attachments stick at effective b=2 on
+  arrival, dwell 0.113 → 0.967.  Compiler guidance: lock-read
+  reinforcement is regime-dependent; price it against the
+  operating point's nucleation barrier, not as a universal
+  hazard or cure.

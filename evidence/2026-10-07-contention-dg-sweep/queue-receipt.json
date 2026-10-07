@@ -1,0 +1,26 @@
+{
+ "job": "hxq-05864a1974ee155e",
+ "requestId": "05864a1974ee155e653a3341a39b14116ef978f26f5ae23c7368bf418785c643",
+ "nonce": "contention-dg-v1",
+ "owner": "529f369d-676b-46ff-a2f5-3af52e130bdf",
+ "issue": "e2586bc8-c0a3-487d-a1fe-1e6f74d0f2f1",
+ "image": "paperclip-test",
+ "cpu": 1,
+ "memory": "1Gi",
+ "wall": 3600,
+ "archive_blob": "4d119753aa3380d80c767a6870e56023748204794b194100e07b06b964bed127",
+ "archive_head": "236f91beaa603e78126a27f69af4edd8cb99c82e",
+ "command": [
+  "python3",
+  "source/evidence/2026-10-07-contention-dg-sweep/ktam_contention_dg.py"
+ ],
+ "created": "2026-10-07T14:06:30Z",
+ "admitted": "2026-10-07T14:06:35Z",
+ "collected": "2026-10-07T14:24Z",
+ "state": "complete",
+ "node": "spark-4a06",
+ "exit_status": 0,
+ "pre_registration_commit": "236f91beaa603e78126a27f69af4edd8cb99c82e",
+ "seed_base": 200261107,
+ "n_per_arm": 500
+}
