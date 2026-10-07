@@ -119,3 +119,27 @@ glues the current `-t`/`-t-done` qualification does not cover) —
 extending the rule to `-f`/`-f-done` is the recorded follow-up;
 until then the knob eliminates the value-family hazard class, not
 every hazard.
+
+## Evaluated (tick 30, 2026-10-07)
+
+The tick-29 boundary is closed: the qualification rule now covers all
+four shared value-family suffixes (`-t`/`-t-done`/`-f`/`-f-done`;
+`SHARED_VALUE_SUFFIXES` in `molasp/offchannel.py`). Row scope zeroes
+the lock-hazard and misread classes on all three AND inventories —
+BUILD1 (value family), BUILD2 (the falsity chain: `Vp@(3,2)` and
+`Fr@(3,3)` rode `q-f`/`r-f` lock reads) and BUILD3 (`Fp@(3,3)` rode
+`p-f`) — with every canonical assembly still >= tau=2 (pinned in
+`tests/test_glue_scope.py`, suite 219 OK / 1 skip). The remaining
+boundary is glue CLASS, not family: non-value glues (spine, `go*`
+entries, caps, `and*`/`w*` relays) are never qualified; no lock
+hazard in the current inventories rides them.
+
+The kinetic arm of the evaluation is pre-registered and queued
+(`../evidence/2026-10-07-row-scope-ktam/ktam_row_scope.py`,
+predictions RS1-RS4 with falsifiers, committed before the job runs).
+Two smoke observations recorded pre-registration: raw read-time
+occupancy of a b=1 transient hold is ~0.38-0.5 at this protocol
+point (equilibrium arithmetic), so RS2 gates STABLE (b>=2) fill;
+and one n=8 terminal showed a D2T+Vp mutual pair reconstituting
+b=2 under row scope — the recombination risk RS2 honestly carries
+into the n=500 run.

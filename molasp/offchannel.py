@@ -53,6 +53,11 @@ from __future__ import annotations
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 
+# The four shared value-family glue suffixes (true and false) that
+# row scope qualifies (tick 30; previously -t/-t-done only — the
+# false-family lock squats survived, see apply_lock_glue_scope).
+SHARED_VALUE_SUFFIXES = ("-t", "-t-done", "-f", "-f-done")
+
 # designs/002 v2.0 row-typed-spine exemption: spine self-bonds are
 # strength 2 (with strength-1 spines nothing attaches in row 1 at
 # tau=2); all other matched glues are cooperative strength 1.
@@ -299,6 +304,19 @@ def apply_lock_glue_scope(build, scope="family", canon=None):
     all three are the same bonds).  Not a free fix: the repair
     channel dies with the hazards (measured trade in
     ``lock_glue_scope_reports``).
+
+    The qualified families are ALL four shared value-family
+    suffixes — true and false (``-t`` / ``-t-done`` / ``-f`` /
+    ``-f-done``, tick 30).  The tick-29 rule covered the true
+    families only, which left the false-family lock squats alive
+    (BUILD3 ``Fp@(3,3)``, whose row reads its lock off ``p-f``;
+    BUILD2 ``Vp@(3,2)`` / ``Fr@(3,3)``) — an honest boundary that
+    is now closed: those squats ride the same row-shared family
+    bonds and die under the same qualification.  The remaining
+    boundary is glue CLASS, not family: non-value glues (spine,
+    ``go*`` entries, caps, ``and*`` relays, ``w*`` relays) are
+    never qualified — no hazard in the current inventories rides
+    them at a lock site.
     """
     import copy
     if scope == "family":
@@ -312,7 +330,7 @@ def apply_lock_glue_scope(build, scope="family", canon=None):
     tiles = new["tiles"]
 
     def value_family(g):
-        return g.endswith("-t") or g.endswith("-t-done")
+        return g.endswith(SHARED_VALUE_SUFFIXES)
 
     renames = []
     for (x, y) in sorted(canon):
