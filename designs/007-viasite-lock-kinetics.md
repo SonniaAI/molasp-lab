@@ -76,3 +76,34 @@ from 160261107/20261107/40261107/80261107/100261107/120261107).
   remains outside: no missing-species arm in this study.
 - n=500/arm gives binomial CI ~±0.04 at p=0.3; gates with 0.02
   margins are read as stated, INCONCLUSIVE band honored.
+
+## Evaluated (tick-40 collection, c286cb6 pre-registration)
+
+Job hxq-380801377b9433e5 (nonce viasite-v2, exit 0; viasite-v1
+exit-2'd on the /work-vs-/work/source path mistake, envelope kept).
+Verdicts: **V1/V3/V5/V6 CONFIRMED, V2/V4 INCONCLUSIVE** (both inside
+their pre-registered bands, neither falsified).
+
+- **V1** — the flip is real and large: stable via-lock terminals
+  0.416 (s2_b1) / 0.448 (s2_unit) vs 0.082 / 0.086 family.
+- **V2** — mechanism confirmed at falsifier level (fam dwell 0.18,
+  attach 3425 events = many-transient; s2 dwell 0.96, 526 events =
+  rare-frozen), but fam dwell beat the 0.15 confirmed-band (events
+  accumulate ~6.9/traj) → INCONCLUSIVE as registered.
+- **V3** — 208/480 = 43% of not-strict_filled s2_b1 terminals carry
+  a stable via-lock: the leading completion hazard under s2.
+- **V4** — fam blocked 0.240 vs ref 0.308 (0.068 off, fresh seeds);
+  decode-only strict 0.614 vs 0.568 consistent → INCONCLUSIVE, not
+  protocol drift.
+- **V5** — 0.326 at dG 2 < 0.416 at dG 0.5 (starvation direction).
+- **V6** — 0.448 on UNIT_ONLY: corpus-general, matching the census.
+
+Reading: reinforcement converts the via-site race from lopsided
+(canonical occupant wins) to first-come (both frozen) — the coin
+flip the family encoding never tosses. Combined with tick-38's
+migration finding, the lever family is now bounded twice over:
+reinforcement moves hazard between classes AND mints new frozen
+squatters from the transient background. d4 consequence: the
+lock_misplacements transient layer (tick 39) is the right warning
+surface — its w_read channels are exactly what freezes under any
+future read-reinforcement knob.

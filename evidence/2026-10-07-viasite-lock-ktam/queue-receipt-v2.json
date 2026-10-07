@@ -1,0 +1,31 @@
+{
+  "admitted": true,
+  "archive_blob": "165acee82c35533b0e50d251529d9d27f229961d58fd3316f5a44b7ea8c9371e",
+  "command": [
+    "python3",
+    "source/evidence/2026-10-07-viasite-lock-ktam/ktam_viasite_lock.py"
+  ],
+  "execution_status": 0,
+  "image": "paperclip-test",
+  "image_digest": "sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd",
+  "job": "hxq-380801377b9433e5",
+  "nonce": "viasite-v2",
+  "predecessor_failed_request": "6272df72e5f314a78bd9ab0c6eaaca702756284fa4c0ee7c4d691bae5fd7dab2 (viasite-v1: command path ran from /work, archive mounts at /work/source; exit 2, envelope kept as queue-receipt-v1-failed.txt)",
+  "request_id": "380801377b9433e509c9999405d83043bcce4f8d20905246b4fd277c75439ef1",
+  "resources": {
+    "cpu": 1,
+    "memory": "1Gi",
+    "wall": 3600
+  },
+  "result_blob": "bd2e641974fa20d39f87044c9f2995bcf269c7882c3a447ea6c7d92a572287fc",
+  "state": "complete",
+  "submitted_at": "2026-10-07T11:10:52Z",
+  "verdicts": {
+    "V1": "CONFIRMED",
+    "V2": "INCONCLUSIVE",
+    "V3": "CONFIRMED",
+    "V4": "INCONCLUSIVE",
+    "V5": "CONFIRMED",
+    "V6": "CONFIRMED"
+  }
+}
