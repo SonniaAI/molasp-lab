@@ -88,6 +88,10 @@ CORPUS = {
     "PC8": ("p. q. s. r :- p, s. r :- p.", {"p", "q", "s", "r"},
             "n=4, AND+unit at four rows: does the BUILD1 shape "
             "generalize past n=3"),
+    "PC9": ("p. q :- p. r :- q.", {"p", "q", "r"},
+            "n=3, live two-link unit chain (designs/008 PC9, v0.2 "
+            "stage 1): first intermediate derived row — G1/G2 "
+            "relaxed, the chain truth relayed up the V column"),
 }
 
 # name -> (program text, expected exception class name, message
@@ -102,18 +106,37 @@ REFUSALS = {
     "PR2": ("p. q.", "UnsupportedGeometry",
             "terminal", None,
             "fact-true at the terminal row"),
-    "PR3": ("p. q. r :- p. s :- r.", "UnsupportedGeometry",
-            "non-terminal", None,
-            "rule atom below the terminal row"),
+    "PR3": ("p. q :- p. s. r :- q.", "UnsupportedGeometry",
+            "non-adjacent", None,
+            "chain literal two+ rows below its reader (the v0.2 "
+            "stage-1 split of the old rule-atom-below-terminal "
+            "refusal, which is now legal chain geometry)"),
     "PR4": ("p. q. r :- q.", "UnsupportedGeometry",
             "via-carried", None,
-            "unit literal not at row 1"),
+            "unit literal not at row 1 (adjacent-below FACT readers "
+            "stay a designs/002 geometry)"),
     "PR5": ("p. q. s. r :- p, q, s.", "UnsupportedGeometry",
             "slot widening", None,
             "body width 3"),
     "PR6": ("p. r :- p, q.", "CompileError",
             "d3 support", {"p", "r"},
             "underivable predicted-true atom (wrong-compile arm)"),
+    "PR7": ("p. z. q :- p. q :- p. r :- q.", "UnsupportedGeometry",
+            "truth-OR relay", None,
+            "OR at an intermediate derived row (v0.2 stage 1 admits "
+            "single-body chains only)"),
+    "PR8": ("p. q :- p. r :- q. s :- r.", "UnsupportedGeometry",
+            "chain depth", None,
+            "second intermediate derived row (designs/008 §6 "
+            "boundary: chain length 2 only)"),
+    "PR9": ("p. q. s. q2 :- p. r :- q2, s. r :- q2.",
+            "UnsupportedGeometry", "row-1 via", None,
+            "designs/008 PC11: AND lo-literal at row 3, not the "
+            "row-1 via (still refused in v0.2 stage 1)"),
+    "PR10": ("p. s. q2 :- p. r :- q2, p.", "UnsupportedGeometry",
+             "derived row", None,
+             "AND conduit over an adjacent-below DERIVED row would "
+             "read its variant glue, not a truth-typed value"),
 }
 
 

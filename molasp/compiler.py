@@ -45,10 +45,16 @@ tests/test_compiler_v01.py; identical (seed, row_of, tiles) means
 the identical assembly system, hence identical BFS verdicts.
 
 Untested geometry raises UnsupportedGeometry rather than emitting a
-guess: b >= 3 bodies, unit variants whose literal is not via-carried,
-conjunctive variants whose literals are not (adjacent-below, row-1),
-and programs needing > 1 derived row chain beyond the corpus shape
-are refused loudly until a design pins them.
+guess: b >= 3 bodies, unit variants whose literal is neither
+via-carried (row-1) nor an adjacent-below derived row, conjunctive
+variants whose literals are not (adjacent-below fact, row-1 via),
+OR/AND bodies or a second derived row at a non-terminal row, and
+non-adjacent chain reads are refused loudly until a design pins
+them.  Legal unit-chain links (designs/008 stage 1: at most one
+intermediate derived row, single unit body) are emitted: the
+intermediate reader relays its atom's truth-typed t-done glue up the
+V column (the chain link), and the D column carries each row's
+value/variant done glue northward.
 """
 from __future__ import annotations
 
@@ -200,29 +206,58 @@ def compile_program(text: str, predicted=None, name=None):
     emit("L1", {"W": f"{a1}-t", "S": "base1", "N": "base2"}, 1)
     seed = {(0, 0): "SP1", (1, 0): f"f-{a1}", (2, 0): "vb1", (3, 0): "base1"}
 
+    # v0.2 stage 1 (designs/008): northward column glues.  The D
+    # column exposes each row's value (fact rows) or variant-conduit
+    # (derived rows) done glue; the V column relays the row-1 via
+    # until an intermediate derived row replaces it with its own
+    # truth-typed t-done glue — the chain link a reader above reads.
+    d_north = {1: f"{a1}-{'t' if a1 in predicted else 'f'}-done"}
+    v_north = {1: via}
+    intermediate_rows = []
+
     # rows 2..n
     for i in range(2, n + 1):
         a = rows[i]
         below = rows[i - 1]
         below_done = f"{below}-{'t' if below in predicted else 'f'}-done"
+        below_d = d_north[i - 1]   # D-column glue the row below exposes
+        below_v = v_north[i - 1]   # V-column glue (via or chain link)
         emit(f"S{i}", {"S": f"SP{i}", "E": f"go{i}", "N": f"SP{i + 1}"}, i)
 
         if a in predicted:
             bodies = rules.get(a, [])
-            if i != n and bodies:
-                raise UnsupportedGeometry(
-                    f"rule atom {a!r} at non-terminal row {i}: variant "
-                    "readers occupy the via column; multi-derived-row "
-                    "chains are untested geometry")
+            intermediate = bool(bodies) and i != n
+            if intermediate:
+                if len(bodies) > 1:
+                    raise UnsupportedGeometry(
+                        f"rule atom {a!r} at non-terminal row {i} with "
+                        f"{len(bodies)} bodies: OR at an intermediate "
+                        "derived row needs a northward truth-OR relay "
+                        "(each variant conduit exposes its own glue); "
+                        "untested (designs/008 stage 1 admits single-"
+                        "body chains)")
+                if any(len(b) >= 2 for b in bodies):
+                    raise UnsupportedGeometry(
+                        f"rule atom {a!r} at non-terminal row {i}: AND "
+                        "at an intermediate derived row is untested "
+                        "(designs/008 stage 1 admits unit-body chains "
+                        "only)")
+                if intermediate_rows:
+                    raise UnsupportedGeometry(
+                        f"chain depth > 2 at row {i}: a second "
+                        "intermediate derived row is unexamined geometry "
+                        "(designs/008 §6 boundary)")
             if not bodies:                     # fact true at row >= 2
                 if i == n:
                     raise UnsupportedGeometry(
                         f"fact-true {a!r} at terminal row: no corpus "
                         "build pins a terminal V tile (refused)")
-                emit(f"D{i}T", {"W": f"go{i}", "S": below_done,
+                emit(f"D{i}T", {"W": f"go{i}", "S": below_d,
                                 "E": f"{a}-t", "N": f"{a}-t-done"}, i)
-                emit(f"V{i}{a1}", {"W": f"{a}-t", "E": f"{a}-t", "S": via,
-                                  "N": via}, i)
+                emit(f"V{i}{a1}", {"W": f"{a}-t", "E": f"{a}-t",
+                                   "S": below_v, "N": below_v}, i)
+                d_north[i] = f"{a}-t-done"
+                v_north[i] = below_v
             else:
                 and_no, unit_no = 0, 0
                 for j, body in enumerate(bodies):
@@ -245,6 +280,19 @@ def compile_program(text: str, predicted=None, name=None):
                                 f"must sit at (adjacent-below, row-1 via), "
                                 f"got rows "
                                 f"{(row_of_atom[hi], row_of_atom[lo])}")
+                        if hi in rules:
+                            raise UnsupportedGeometry(
+                                f"conjunctive variant of {a!r}: adjacent-"
+                                f"below literal {hi!r} is a derived row — "
+                                "the slot-A conduit would read its variant "
+                                "glue, not a truth-typed value (untested, "
+                                "designs/008 stage 1)")
+                        if below_v != via:
+                            raise UnsupportedGeometry(
+                                f"conjunctive variant of {a!r}: row-1 via "
+                                f"relay suspended below row {i} (a derived "
+                                "row occupies the V column); untested "
+                                "(designs/008 stage 1)")
                         emit(f"D{chr(65)}{a}" if and_no == 1 else
                              f"D{chr(65)}{a}{and_no}",
                              {"W": f"go{i}", "S": f"{hi}-t-done",
@@ -256,16 +304,36 @@ def compile_program(text: str, predicted=None, name=None):
                         reads = {hi, lo}
                     else:                        # unit variant (b == 1)
                         lit = body[0]
-                        if row_of_atom[lit] != 1:
+                        if row_of_atom[lit] == 1:
+                            if below_v != via:
+                                raise UnsupportedGeometry(
+                                    f"unit variant of {a!r}: row-1 via "
+                                    f"relay suspended below row {i} (a "
+                                    "derived row occupies the V column); "
+                                    "untested (designs/008 stage 1)")
+                        elif lit == below and lit in rules:
+                            pass   # chain link (designs/008 stage 1):
+                            # the reader's true-typed {lit}-t-done read
+                            # is carried by the derived row below — it
+                            # realizes iff that atom is true, so dead
+                            # links stay dead by value typing.
+                        elif lit in rules:
+                            raise UnsupportedGeometry(
+                                f"unit variant of {a!r}: chain literal "
+                                f"{lit!r} at row {row_of_atom[lit]} is "
+                                "non-adjacent (must sit directly below "
+                                "its reader); untested geometry")
+                        else:
                             raise UnsupportedGeometry(
                                 f"unit variant of {a!r}: literal {lit!r} "
-                                "not via-carried (row-1); direct-below unit "
+                                "not via-carried (row-1) nor an adjacent-"
+                                "below derived row; direct-below FACT "
                                 "readers are a designs/002 geometry, "
-                                "unwired in v0.1")
+                                "unwired in v0.2 stage 1")
                         cnames = (f"C{a}", f"U{a}") if unit_no == 1 else \
                                  (f"C{a}{unit_no}", f"U{a}{unit_no}")
                         emit(cnames[0],
-                             {"W": f"go{i}", "S": below_done, "E": vj,
+                             {"W": f"go{i}", "S": below_d, "E": vj,
                               "N": f"{vj}-done"}, i)          # conduit
                         emit(cnames[1],
                              {"W": vj, "S": f"{lit}-t-done", "E": f"{a}-t",
@@ -277,20 +345,26 @@ def compile_program(text: str, predicted=None, name=None):
                             f"but body is {sorted(set(body))}")
             lock_n = f"cap{n}" if i == n else f"base{i + 1}"
             emit(f"L{i}", {"W": f"{a}-t", "S": f"base{i}", "N": lock_n}, i)
+            if intermediate:
+                intermediate_rows.append(i)
+                d_north[i] = f"unit1_{a}-done"
+                v_north[i] = f"{a}-t-done"
         else:                                   # predicted false
-            emit(f"D{i}F{a}", {"W": f"go{i}", "S": below_done,
+            emit(f"D{i}F{a}", {"W": f"go{i}", "S": below_d,
                                "E": f"{a}-f", "N": f"{a}-f-done"}, i)
             lock_n = f"cap{n}" if i == n else f"base{i + 1}"
             if i == n:                          # terminal: inert cap
-                emit(f"F{a}", {"W": f"{a}-f", "E": f"{a}-f", "S": via,
-                               "N": "rf-relay"}, i)
+                emit(f"F{a}", {"W": f"{a}-f", "E": f"{a}-f",
+                               "S": below_v, "N": "rf-relay"}, i)
                 emit(f"L{i}f{a}", {"W": f"{a}-f", "S": f"base{i}",
                                   "N": lock_n}, i)
-            else:                               # relay the via north
-                emit(f"V{i}{a1}", {"W": f"{a}-f", "E": f"{a}-f", "S": via,
-                                  "N": via}, i)
+            else:                               # relay the V column north
+                emit(f"V{i}{a1}", {"W": f"{a}-f", "E": f"{a}-f",
+                                   "S": below_v, "N": below_v}, i)
                 emit(f"L{i}", {"W": f"{a}-f", "S": f"base{i}",
                                "N": lock_n}, i)
+                d_north[i] = f"{a}-f-done"
+                v_north[i] = below_v
 
     build = {
         "name": name or "compiled",
