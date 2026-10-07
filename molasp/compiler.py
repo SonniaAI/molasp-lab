@@ -384,6 +384,14 @@ def compile_program(text: str, predicted=None, name=None):
                     # readers).  Max 1 < TAU 2 (PC4's and1_r).
                     and_no = unit_no = 0
                     for body in rules[a]:
+                        if len(body) > 2:
+                            raise UnsupportedGeometry(
+                                f"body width {len(body)} for false "
+                                f"head {a!r} (row {i}): dead-reader "
+                                "emission pins unit and AND bodies "
+                                "only; slot widening untested "
+                                "(designs/003 honest limit; false-head "
+                                "side closed by designs/008 stage 5)")
                         if len(body) == 1:
                             unit_no += 1
                             vj = f"unit{unit_no}_{a}"
@@ -427,11 +435,20 @@ def compile_program(text: str, predicted=None, name=None):
                     # stays unemitted: its S face reads {hi}-t-done,
                     # live whenever hi is true (a false head's AND
                     # body needs only one dead conjunct), risking a
-                    # producible dead conduit.  Width > 2: skipped
-                    # (pre-existing silent-acceptance boundary of
-                    # false heads, unchanged by this stage).
+                    # producible dead conduit.  Width > 2: refused
+                    # (designs/008 stage 5: the silent-acceptance
+                    # boundary of false heads is closed on both the
+                    # terminal and non-terminal sides).
                     and_no = unit_no = 0
                     for body in rules[a]:
+                        if len(body) > 2:
+                            raise UnsupportedGeometry(
+                                f"body width {len(body)} for false "
+                                f"head {a!r} (row {i}): dead-reader "
+                                "emission pins unit and AND bodies "
+                                "only; slot widening untested "
+                                "(designs/003 honest limit; false-head "
+                                "side closed by designs/008 stage 5)")
                         if len(body) == 1:
                             unit_no += 1
                             vj = f"unit{unit_no}_{a}"

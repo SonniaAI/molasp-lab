@@ -137,6 +137,15 @@ REFUSALS = {
              "derived row", None,
              "AND conduit over an adjacent-below DERIVED row would "
              "read its variant glue, not a truth-typed value"),
+    "PR11": ("q. t. r :- p, q, t. r :- p.", "UnsupportedGeometry",
+             "for false head", None,
+             "designs/008 stage 5: body width 3 on a predicted-false "
+             "TERMINAL head now refused (silently skipped before)"),
+    "PR12": ("q. t. r :- p, q, t. r :- p. s :- r.",
+             "UnsupportedGeometry", "for false head", None,
+             "designs/008 stage 5: body width 3 on a predicted-false "
+             "NON-TERMINAL head (s reads r above it) now refused "
+             "(silently skipped before)"),
 }
 
 

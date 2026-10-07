@@ -123,7 +123,7 @@ ALL_OK True
     "p",
     "r"
    ],
-   "seconds_bfs": 0.002,
+   "seconds_bfs": 0.001,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -288,7 +288,7 @@ ALL_OK True
     "r",
     "s"
    ],
-   "seconds_bfs": 0.004,
+   "seconds_bfs": 0.003,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -391,6 +391,18 @@ ALL_OK True
   {
    "message": "conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row \u2014 the slot-A conduit would read its variant glue, not a truth-typed value (untested, de",
    "name": "PR10",
+   "ok": true,
+   "raised": "UnsupportedGeometry"
+  },
+  {
+   "message": "body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c",
+   "name": "PR11",
+   "ok": true,
+   "raised": "UnsupportedGeometry"
+  },
+  {
+   "message": "body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c",
+   "name": "PR12",
    "ok": true,
    "raised": "UnsupportedGeometry"
   }
