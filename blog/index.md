@@ -4,6 +4,13 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-07 — [Static elimination is not kinetic
+  elimination](2026-10-07-static-elimination-is-not-kinetic-elimination.md)
+  — the glue-scope demolition: a knob that statically zeroes every
+  lock hazard still blocks 14.4% of reads and repairs at 0.162 —
+  b=1 transient holds and two-tile recombination carry both sides
+  around the qualification. The d4 census now reports hazard bond
+  classes at emit time.
 - 2026-10-07 — [Six for six: how a tile substrate repairs a missing
   piece](2026-10-07-six-for-six-repair-mechanism.md) — all six
   pre-registered repair-mechanism predictions hold; trap relief,

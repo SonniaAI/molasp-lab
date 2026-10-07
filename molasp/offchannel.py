@@ -26,6 +26,10 @@ Report shape (``check_d4``)::
       "off_channel": {"x,y": {tile: bond, ...}, ...},
       "off_channel_sites_per_species": {tile: ["x,y", ...], ...},
       "lock_hazards": {"x,y": {tile: bond, ...}, ...},   # lock sites only
+      "lock_hazards_stable": {...},    # subset with bond >= 2 (tau)
+      "lock_hazards_transient": {...},  # subset with bond < 2
+      "lock_pair_channels": {"stable": {...}, "transient": {...}},
+                                     # deep-probe channels split at tau
       "lock_deep_probe": {"x,y": {west_tile: {tile: bond}}},
       "lock_misreads": {"x,y": {west_tile: {lock_tile: bond}}},
       "measured_context": {... quoted numbers + sources ...},
@@ -38,6 +42,19 @@ of row).  The deep probe substitutes the west neighbour of each
 lock site with every tile that bonds there before testing lock-site
 channels — a bounded two-site search catching channels that need a
 single background substitution.
+
+The stable/transient split (tick 31, designs/004 follow-up): the
+pre-registered row-scope kTAM sweep FALSIFIED the elimination
+reading — under row scope every canonical-background lock hazard
+is statically gone, yet reads still block at 0.144, carried by
+b=1 channels (the west-substitution pair class, e.g. the D2T+Vp
+mutual pair, and non-west-axis holds outside the probe).  The
+census therefore reports the bond class of every hazard and the
+pair-channel layer separately, quoting the measured context, so a
+static ``lock_hazards {}`` can never again be read as kinetic
+elimination.  ``pair_probe_bound`` records the west-bounded
+coverage of the probe (DBr@(3,3), 72/500 under row scope, rides a
+non-west axis and is invisible to it by construction).
 
 Conventions (this geometry family, designs/001-003): the
 canonical assembly is derived structurally per row — the spine
@@ -73,9 +90,19 @@ MEASURED_CONTEXT = {
         "D1T fills V0p vacancy": 0.749, "D2T fills Vp vacancy": 0.901,
         "V0p repairs D1T-missing": 0.94, "Vp repairs D2T-missing": 0.97},
     "lock_dwell_ratio_nonpqr_over_pqr": 4.5059,
+    "row_scope_kinetics": {
+        "read_lock_squat_blocked_dG0.5": 0.144,
+        "surviving_lock_squats_of_500": {
+            "Vp@(3,2)": 72, "DBr@(3,3)": 72, "V0p@(3,1)": 0},
+        "stable_b2_repair_fill": 0.162,
+        "b1_transient_equilibrium_occupancy": 0.38,
+        "family_refs": {"blocked": 0.27, "stable_repair_fill": 0.908,
+                        "misread": 0.056},
+    },
     "sources": [
         "evidence/2026-10-07-repair-mechanism/trap_grid.out (R3b, R4)",
         "evidence/2026-10-07-vp-residual/vp_residual.out (P2 dwell)",
+        "evidence/2026-10-07-row-scope-ktam/row_scope.out (RS1-RS4)",
     ],
 }
 
@@ -222,6 +249,38 @@ def lock_misreads_from(probe):
     return out
 
 
+def split_lock_hazards(hazards, tau=2):
+    """The bond-class split of a lock-hazard table (tick 31,
+    designs/004 follow-up): ``stable`` holds at bond >= tau —
+    on-site squatters that survive read-out by arithmetic; the
+    rest is the ``transient`` layer — single-bond holds at
+    equilibrium ~0.38 occupancy at the protocol point, the class
+    that carried the measured 0.144 row-scope read-block after
+    every static hazard died."""
+    stable, transient = {}, {}
+    for site, squatters in hazards.items():
+        for tile, b in squatters.items():
+            tgt = stable if b >= tau else transient
+            tgt.setdefault(site, {})[tile] = b
+    return {"stable": stable, "transient": transient}
+
+
+def split_pair_channels(probe, tau=2):
+    """The deep probe split at tau: substitution-ENABLED lock-site
+    channels by bond class.  This is the layer that survives glue
+    qualification — under row scope the only static survivor class
+    is here ({west D2T -> Vp@(3,2)} at b=1, the smoke-predicted
+    mutual pair, measured 72/500), and the stable b=2 recombination
+    channel (0.162 repair fill) is this table's b>=2 face."""
+    stable, transient = {}, {}
+    for site, wests in probe.items():
+        for west, channels in wests.items():
+            for tile, b in channels.items():
+                tgt = stable if b >= tau else transient
+                tgt.setdefault(site, {}).setdefault(west, {})[tile] = b
+    return {"stable": stable, "transient": transient}
+
+
 def check_d4(build, canon=None, *, lock_sites=None, strength=None):
     """Emit-time off-channel census (d4).  WARNING severity: returns
     the report; never gates emission (designs/004 A3)."""
@@ -235,15 +294,24 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
         for tile in squatters:
             per_species.setdefault(tile, []).append(site)
     probe = lock_deep_probe(build, canon, lock_sites, strength)
+    hazards = {s: sq for s, sq in oc.items()
+               if s in {skey(l) for l in lock_sites}}
+    haz_split = split_lock_hazards(hazards)
     report = {
         "system": build.get("name", "<unnamed>"),
         "severity": "warning",
         "off_channel": oc,
         "off_channel_sites_per_species": {
             t: sorted(s) for t, s in sorted(per_species.items())},
-        "lock_hazards": {s: sq for s, sq in oc.items()
-                         if s in {skey(l) for l in lock_sites}},
+        "lock_hazards": hazards,
+        "lock_hazards_stable": haz_split["stable"],
+        "lock_hazards_transient": haz_split["transient"],
         "lock_deep_probe": probe,
+        "lock_pair_channels": split_pair_channels(probe),
+        "pair_probe_bound": (
+            "one-west-substitution bounded: channels riding N/S/E "
+            "substitutions are outside the probe (measured example: "
+            "DBr@(3,3) survives row scope at 72/500, row_scope.out RS1)"),
         "lock_misreads": lock_misreads_from(probe),
         "measured_context": MEASURED_CONTEXT,
     }
@@ -255,9 +323,24 @@ def d4_report_lines(report):
     lines = [f"d4 off-channel census ({report['system']}) — "
              f"severity {report['severity']} (kinetic hazard, not a "
              "semantic error; does not gate emission)"]
-    for site, sq in sorted(report["lock_hazards"].items()):
+    for site, sq in sorted(report["lock_hazards_stable"].items()):
         for tile, b in sorted(sq.items()):
-            lines.append(f"  lock hazard: {tile} squats {site} at bond {b}")
+            lines.append(f"  lock hazard (stable, b>=2): {tile} squats "
+                         f"{site} at bond {b}")
+    for site, sq in sorted(report["lock_hazards_transient"].items()):
+        for tile, b in sorted(sq.items()):
+            lines.append(f"  lock hazard (b=1 transient): {tile} squats "
+                         f"{site} at bond {b} — equilibrium ~0.38 at the "
+                         "protocol point; not eliminated by glue "
+                         "qualification")
+    for cls, label in (("transient", "b=1"), ("stable", "b>=2")):
+        for site, wests in sorted(report["lock_pair_channels"][cls].items()):
+            for west, chans in sorted(wests.items()):
+                for tile, b in sorted(chans.items()):
+                    lines.append(f"  pair channel ({label}): {tile} at "
+                                 f"{site} (bond {b}) via west substitution "
+                                 f"{west} — substitution-enabled; measured "
+                                 "row-scope read-block 0.144 (RS1)")
     for site, wests in sorted(report["lock_misreads"].items()):
         for west, mis in sorted(wests.items()):
             for tile, b in sorted(mis.items()):

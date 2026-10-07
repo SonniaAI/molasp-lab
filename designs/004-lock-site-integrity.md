@@ -179,3 +179,25 @@ Follow-ups opened: d4 b=1 layer split (compiler guidance),
 trajectory-level mechanism of the surviving stable channel
 (history-aware rerun), kinetic test of the glue-CLASS boundary
 (never-qualified relays).
+
+## Follow-up implemented (tick 32): the d4 b=1 layer split
+
+`check_d4` now reports the bond class of every lock hazard —
+`lock_hazards_stable` (b>=2), `lock_hazards_transient` (b=1, the
+layer that carried the measured 0.144 row-scope read-block) — and
+the substitution-enabled class separately (`lock_pair_channels`,
+split the same way), with the measured row-scope numbers quoted in
+`measured_context.row_scope_kinetics` (read-block 0.144; survivors
+Vp@(3,2)/DBr@(3,3) 72/500 each; V0p pair channel 0/500 fired;
+stable repair floor 0.162; b=1 equilibrium ~0.38).  The deep
+probe's west-bounded coverage is recorded in-report
+(`pair_probe_bound`): DBr@(3,3) rides a non-west axis and is
+outside the probe by construction.  Pins:
+`tests/test_transient_split.py` — the row (3,2) pair channel
+{west D2T -> Vp} IS the measured 72/500 survivor, and the V0p pair
+channel is reported as a channel although it fired 0/500 (the
+census over-approximates; kinetics decides — labeled as such).
+A static `lock_hazards {}` is no longer readable as kinetic
+elimination.  Remaining follow-ups: trajectory-level mechanism of
+the surviving stable channel (history-aware rerun); kinetic test
+of the glue-CLASS boundary (never-qualified relays).
