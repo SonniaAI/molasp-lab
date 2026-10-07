@@ -1,5 +1,5 @@
 OR-AND parity corpus — compiler v0.1 (tick 46)
-programs: 9 compiling + 10 refusals | total wall 0.04s
+programs: 9 compiling + 12 refusals | total wall 0.03s
   PC1 ok=True  n=2 tiles= 8 asm= 15 term=1 decode=p+r locks=True dead=- absent=True bfs=0.00s
       axis: n=2, unit-only OR: the smallest admissible shape
   PC2 ok=True  n=3 tiles=14 asm= 45 term=2 decode=p+q+r locks=True dead=- absent=True bfs=0.00s
@@ -38,6 +38,10 @@ programs: 9 compiling + 10 refusals | total wall 0.04s
       axis: designs/008 PC11: AND lo-literal at row 3, not the row-1 via (still refused in v0.2 stage 1)
   PR10 ok=True  UnsupportedGeometry: conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row — the slot-A conduit would read its variant glue, not a truth-typed value (untested, de
       axis: AND conduit over an adjacent-below DERIVED row would read its variant glue, not a truth-typed value
+  PR11 ok=True  UnsupportedGeometry: body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c
+      axis: designs/008 stage 5: body width 3 on a predicted-false TERMINAL head now refused (silently skipped before)
+  PR12 ok=True  UnsupportedGeometry: body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c
+      axis: designs/008 stage 5: body width 3 on a predicted-false NON-TERMINAL head (s reads r above it) now refused (silently skipped before)
 ALL_OK True
 --- json ---
 {
