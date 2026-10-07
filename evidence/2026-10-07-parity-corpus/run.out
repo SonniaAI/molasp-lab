@@ -6,7 +6,7 @@ programs: 9 compiling + 10 refusals | total wall 0.04s
       axis: n=3, AND+unit (the tick-20 BUILD1 program, re-verified through the corpus path)
   PC3 ok=True  n=3 tiles=14 asm= 35 term=1 decode=p+r locks=True dead=and1_r absent=True bfs=0.00s
       axis: n=3, dead AND variant over predicted-false q (BUILD2 program): OR rescue + dead-reader absence
-  PC4 ok=True  n=3 tiles=12 asm= 35 term=1 decode=q locks=True dead=and1_r,unit1_r absent=True bfs=0.00s
+  PC4 ok=True  n=3 tiles=13 asm= 35 term=1 decode=q locks=True dead=and1_r,unit1_r absent=True bfs=0.00s
       axis: n=3, both rules dead, false terminal row (BUILD3 program): full foundedness demolition
   PC5 ok=True  n=4 tiles=16 asm= 70 term=1 decode=p+q+r+s locks=True dead=- absent=True bfs=0.00s
       axis: n=4, AND over (row-3 fact, row-1 via) with two middle facts: first exhaustive 4-row BFS
@@ -61,7 +61,7 @@ ALL_OK True
     "r"
    ],
    "seconds_bfs": 0.0,
-   "seconds_compile": 0.002,
+   "seconds_compile": 0.003,
    "terminal_decodes": [
     [
      "p",
@@ -136,7 +136,7 @@ ALL_OK True
   },
   {
    "assemblies": 35,
-   "d4_severity": "warning",
+   "d4_severity": "error",
    "dead_glues_absent": {
     "and1_r": true,
     "unit1_r": true
@@ -155,15 +155,15 @@ ALL_OK True
    "predicted": [
     "q"
    ],
-   "seconds_bfs": 0.001,
-   "seconds_compile": 0.004,
+   "seconds_bfs": 0.002,
+   "seconds_compile": 0.0,
    "terminal_decodes": [
     [
      "q"
     ]
    ],
    "terminals": 1,
-   "tiles": 12
+   "tiles": 13
   },
   {
    "assemblies": 70,
@@ -187,7 +187,7 @@ ALL_OK True
     "s"
    ],
    "seconds_bfs": 0.003,
-   "seconds_compile": 0.008,
+   "seconds_compile": 0.009,
    "terminal_decodes": [
     [
      "p",

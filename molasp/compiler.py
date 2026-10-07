@@ -358,6 +358,28 @@ def compile_program(text: str, predicted=None, name=None):
                                "S": below_v, "N": "rf-relay"}, i)
                 emit(f"L{i}f{a}", {"W": f"{a}-f", "S": f"base{i}",
                                   "N": lock_n}, i)
+                if a in rules:                  # designs/008 stage 3:
+                    # terminal dead-reader emission — same proof as
+                    # stage 2: least-model support kills every body
+                    # of a predicted-false head, so a unit body's
+                    # reader has zero matchable faces (S reads
+                    # {lit}-t-done for a false literal, emitted
+                    # nowhere; W is the vj conduit glue, which the
+                    # false basis emits nowhere; 1 per face < TAU 2,
+                    # stacked dead readers mutually give 1 each).
+                    # PC4/PC10's dead links become EMITTED machinery
+                    # whose absence from every assembly BFS-proves.
+                    # AND bodies stay deferred (PC4's and1_r).
+                    unit_no = 0
+                    for body in rules[a]:
+                        if len(body) != 1:
+                            continue            # AND body: deferred
+                        unit_no += 1
+                        vj = f"unit{unit_no}_{a}"
+                        emit(f"UD{i}{a}" if unit_no == 1 else
+                             f"UD{i}{a}{unit_no}",
+                             {"W": vj, "S": f"{body[0]}-t-done",
+                              "E": f"{a}-t", "N": f"{a}-t-done"}, i)
             else:                               # relay the V column north
                 emit(f"V{i}{a1}", {"W": f"{a}-f", "E": f"{a}-f",
                                    "S": below_v, "N": below_v}, i)

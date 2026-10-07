@@ -160,9 +160,10 @@ class TestPC10Stage2V02(unittest.TestCase):
         self.assertEqual(self.rep["terminal_decodes"], [["p"]])
 
     def test_full_locks_and_both_dead_paths_reported(self):
-        # Stage 2 extends dead_variant_glues past the terminal head:
-        # q's dead link is machinery now, so it is REPORTED and then
-        # proven absent (r's stays non-emission — terminal deferred).
+        # Stage 2 extended dead_variant_glues past the terminal head;
+        # stage 3 (tick 50) makes r's link EMITTED machinery too —
+        # both dead paths are now reported, emitted, and proven
+        # absent rather than vacuously non-emitted.
         self.assertTrue(self.rep["full_locks"])
         self.assertEqual(self.rep["dead_variant_glues"],
                          ["unit1_q", "unit1_r"])
@@ -170,10 +171,11 @@ class TestPC10Stage2V02(unittest.TestCase):
         self.assertTrue(self.rep["dead_glues_absent"]["unit1_r"])
 
     def test_scale_after_emission(self):
-        # 16 -> 17 tiles (UD3q added); assemblies/terminals unmoved —
-        # the dead reader cannot attach, so it adds no growth path.
+        # 16 -> 17 tiles (UD3q, tick 49) -> 18 (UD4r, tick 50 stage
+        # 3); assemblies/terminals unmoved — neither dead reader can
+        # attach, so neither adds a growth path.
         self.assertEqual(self.rep["n_rows"], 4)
-        self.assertEqual(self.rep["tiles"], 17)
+        self.assertEqual(self.rep["tiles"], 18)
         self.assertEqual(self.rep["assemblies"], 70)
         self.assertEqual(self.rep["terminals"], 1)
 
@@ -214,19 +216,28 @@ class TestDeadReaderEmissionStage2(unittest.TestCase):
         for t in ("D3Fq", "V3p", "L3"):
             self.assertIn(t, self.build["tiles"])
 
-    def test_terminal_false_row_unchanged(self):
-        # r keeps the v0.1 terminal F-cap basis (PC4 pins it); no UD
-        # tile is emitted for terminal false heads in stage 2.
+    def test_terminal_false_head_emits_dead_reader(self):
+        # Stage 3 (tick 50): the terminal predicted-false head r
+        # (row 4, unit body q, q false) emits its dead reader; the
+        # plain false row stays the false-cap relay (stage 1).  The
+        # reader is emitted machinery and BFS-proved absent.
         self.assertIn("Fr", self.build["tiles"])
         self.assertIn("L4fr", self.build["tiles"])
-        self.assertFalse(
-            [t for t in self.build["tiles"] if t.startswith("UD4")])
+        self.assertEqual(
+            self.build["tiles"]["UD4r"],
+            {"W": "unit1_r", "S": "q-t-done",
+             "E": "r-t", "N": "r-t-done"})
+        placed = {name for asm in self.seen for _pos, name in asm}
+        self.assertNotIn("UD4r", placed)
 
     def test_v01_builds_byte_stable(self):
-        # Registered receipt counts (tick 46/48), hardcoded: the
-        # emission must not move a single v0.1/v0.2-verified build.
+        # Registered receipt counts (tick 46/48; PC4 at tick 50),
+        # hardcoded: stage 3 moves ONLY terminal-false-head programs
+        # (PC4 12->13 = +UD3r); every other verified build is
+        # unmoved and regeneration of run.out cannot make the
+        # stability pin vacuous.
         registered = {"PC1": (8, 15), "PC2": (14, 45), "PC3": (14, 35),
-                      "PC4": (12, 35), "PC5": (16, 70), "PC6": (18, 85),
+                      "PC4": (13, 35), "PC5": (16, 70), "PC6": (18, 85),
                       "PC7": (20, 100), "PC8": (18, 85), "PC9": (12, 35)}
         for name, (prog, model, _note) in sorted(CORPUS.items()):
             rep = check_program(name, prog, model)

@@ -67,14 +67,34 @@ class TestParity(unittest.TestCase):
         self._parity("build2", PROGRAMS["P_OA_minus_q"])
 
     def test_p3_build3(self):
-        self._parity("build3", PROGRAMS["P_OA_minus_p"])
+        # Stage 3 (tick 50) moves the terminal F-cap basis: compiled
+        # build3 is the hand BUILD3 plus the emitted terminal dead
+        # reader UD3r (predicted-false r, unit body p).  Minus that
+        # one tile the compiled signature equals the hand build.
+        b = compiled("x", PROGRAMS["P_OA_minus_p"])
+        self.assertEqual(b["tiles"]["UD3r"],
+                         {"W": "unit1_r", "S": "p-t-done",
+                          "E": "r-t", "N": "r-t-done"})
+        self.assertEqual(b["row_of"]["UD3r"], 3)
+        merged = dict(b)
+        merged["tiles"] = {k: v for k, v in b["tiles"].items()
+                           if k != "UD3r"}
+        merged["row_of"] = {k: v for k, v in b["row_of"].items()
+                            if k != "UD3r"}
+        self.assertEqual(structural_signature(merged),
+                         structural_signature(BUILDS["build3"]),
+                         "build3 minus UD3r: compiled signature differs "
+                         "from hand build")
 
     def test_p4_tile_counts(self):
         self.assertEqual(len(compiled("x", PROGRAMS["P_OA"])["tiles"]), 14)
         self.assertEqual(
             len(compiled("x", PROGRAMS["P_OA_minus_q"])["tiles"]), 14)
         self.assertEqual(
-            len(compiled("x", PROGRAMS["P_OA_minus_p"])["tiles"]), 12)
+            len(compiled("x", PROGRAMS["P_OA_minus_p"])["tiles"]), 13)
+        # 13 = 12 + UD3r: stage 3 (tick 50) emits the terminal dead
+        # reader for predicted-false r (unit body p); BUILD1/2 count
+        # unmoved.
 
     def test_p4_least_model_prediction(self):
         for prog, want in (("P_OA", {"p", "q", "r"}),

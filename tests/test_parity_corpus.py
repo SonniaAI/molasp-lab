@@ -79,6 +79,12 @@ class TestReceiptPins(unittest.TestCase):
         self.assertEqual(by["PC3"]["dead_variant_glues"], ["and1_r"])
         self.assertEqual(by["PC4"]["dead_variant_glues"],
                          ["and1_r", "unit1_r"])
+        # Stage 3 (tick 50): PC4's unit1_r is now EMITTED machinery
+        # (UD3r on the terminal false row) and BFS-proved absent —
+        # non-vacuous for every dead glue in the corpus.
+        self.assertTrue(by["PC3"]["dead_glues_absent"]["and1_r"])
+        for glue in ("and1_r", "unit1_r"):
+            self.assertTrue(by["PC4"]["dead_glues_absent"][glue])
 
     def test_r5_refusal_flavors(self):
         got = {r["name"]: r for r in self.rep["refusals"]}
