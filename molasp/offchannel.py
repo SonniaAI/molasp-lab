@@ -37,6 +37,15 @@ Report shape (``check_d4``)::
                                   # lock tiles at non-own sites (ANY
                                   # site class) — the tile-class view
                                   # (tick 39, designs/006)
+      "vacancy_contention": {species: {"x,y": {tile: {
+                     "classes": [...], "bond": {knob: int},
+                     "faces": {face: bond}, "w_read": bool,
+                     "enables": {"L@x,y": {knob: {"b_with": int,
+                                               "b_without": int}}},
+                     "stable_under": [knob, ...]}}}},
+                                  # per-species vacancy backgrounds,
+                                  # contenders priced under every knob
+                                  # (tick 42, designs/007 consequence)
       "measured_context": {... quoted numbers + sources ...},
     }
 
@@ -118,6 +127,20 @@ MEASURED_CONTEXT = {
                 "class is minor at family strength and dominant "
                 "under the strength-2 lock read (K1/K2 FALSIFIED "
                 "as mitigation, tick 38)",
+    },
+    "vacancy_contention": {
+        "s2_west_site_terminal_occupants_of_500": {
+            "D2T": 203, "L2": 150, "DBr": 78, "L3": 54,
+            "D1T": 6, "S2": 4},
+        "fill_frac": {"family": 0.908, "s2": 0.406},
+        "fill_given_L3_present": 0.0,
+        "fill_given_L3_absent": 0.481,
+        "L3_west_match": "78/78 DBr",
+        "race_L3_first_frac": 0.214,
+        "note": "tick-41 s2 Vp-missing arm: the vacancy's west site "
+                "is three-way first-come contention (fill / via-squat "
+                "/ reader stack) — price reinforcement knobs against "
+                "the whole set (designs/007 consequence)",
     },
     "sources": [
         "evidence/2026-10-07-repair-mechanism/trap_grid.out (R3b, R4)",
@@ -475,6 +498,179 @@ def vacancy_relay_stacks(build, canon, strength=None, min_contacts=2):
     return out
 
 
+def matched_s2(build, asm, site, tile_name):
+    """Family matched strength with the lock-read bond doubled —
+    the tick-38 strength-2 rule, verbatim (promoted from the
+    evidence scripts to the census module tick 42, so knob pricing
+    lives beside the family arithmetic): a lock's W read into a
+    matching E glue bonds twice; dually a non-lock tile's E read
+    into a lock's matching W glue bonds twice."""
+    b = matched_strength(build, asm, site, tile_name)
+    faces = build["tiles"][tile_name]
+    if tile_name.startswith("L"):
+        g1 = faces.get("W")
+        nb = (site[0] - 1, site[1])
+        if nb[1] == 0 and nb in build["seed"]:
+            g2 = build["seed"][nb]
+        elif nb in asm:
+            g2 = build["tiles"][asm[nb]].get("E")
+        else:
+            g2 = None
+        if g1 and g2 and g1 == g2:
+            b += 1
+    else:
+        g1 = faces.get("E")
+        nb = (site[0] + 1, site[1])
+        if nb in asm and str(asm[nb]).startswith("L"):
+            g2 = build["tiles"][asm[nb]].get("W")
+            if g1 and g2 and g1 == g2:
+                b += 1
+    return b
+
+
+def vacancy_contention(build, canon=None, strength=None, bond_fns=None):
+    """Full vacancy contention sets, priced per knob (tick 42 — the
+    designs/007 design consequence: a lock-reinforcement knob must
+    be priced against the FULL contention set of the affected
+    vacancy — fill, via-site lock squat, reader stack — not against
+    one hazard class).
+
+    Species-death view: for every species S (one at a time), S is
+    removed from the inventory, its canonical sites are empty, and
+    the canonical map is otherwise kept (the tick-22/23 background).
+    At each of S's sites every remaining tile is a CONTENDER when it
+    has a family bond face, a per-knob own bond, or an enabling
+    stack (below).  Contender classes:
+
+    - ``fill`` — non-lock substitution fill (the repair channel;
+      the measured D2T@(2,2) b=2 substitution, tick 24);
+    - ``via_squatter`` / ``lock_squatter`` — a lock tile at the
+      vacancy; ``via_squatter`` carries the W-read flag (doubles
+      under s2 — the tick-39/40 solo class, L2@(2,2) measured);
+    - ``stack_partner`` — the contender's presence at the vacancy
+      lets a lock at a NEIGHBOURING site reach tau (load-bearing
+      pair: b_with >= 2 > b_without under some knob), the
+      cooperative channel a solo-bond census cannot price (measured:
+      DBr@(2,2) enables frozen L3@(3,2); 78/78 of terminal L3 ride
+      it, vacancy_bg.out VB2).
+
+    ``bond`` carries the contender's own bond under every knob in
+    ``bond_fns`` (default {"family": None, "s2": matched_s2}; the
+    family entry is the plain per-face sum); ``stable_under`` lists
+    the knobs under which the contender is stable — own bond >= 2
+    OR any enabled stack at b_with >= 2.  The pricing story the
+    layer pins (BUILD1, Vp removed, site 2,2): at family strength
+    ONE contender is stable (the D2T fill, b=2 — measured fill
+    0.908); under s2 THREE are stable at once (D2T unchanged, L2
+    w_read 1->2, DBr via the L3 stack) — first-come contention,
+    measured fill collapse 0.904 -> 0.406 (VB1/VB3).
+
+    Adversaries that need a SECOND vacancy event are out of scope
+    (single-species backgrounds only); multi-site species skip
+    self-vacancy neighbours when probing enabled stacks."""
+    if canon is None:
+        canon = canonical_assembly(build)
+    if bond_fns is None:
+        bond_fns = {"family": None, "s2": matched_s2}
+    species_sites = {}
+    for site, tile in canon.items():
+        species_sites.setdefault(tile, []).append(site)
+    out = {}
+    for sp in sorted(species_sites):
+        bld = dict(build)
+        bld["tiles"] = {t: g for t, g in build["tiles"].items()
+                        if t != sp}
+        bg = {s: t for s, t in canon.items() if t != sp}
+        own_vacancies = set(species_sites[sp])
+        sp_rec = {}
+        for v in sorted(species_sites[sp]):
+            contenders = {}
+            for tile in sorted(bld["tiles"]):
+                faces_fam = {}
+                for face, (dx, dy) in FACE_DIR.items():
+                    g1 = bld["tiles"][tile].get(face)
+                    if not g1:
+                        continue
+                    nx, ny = v[0] + dx, v[1] + dy
+                    if ny == 0 and (nx, 0) in build["seed"]:
+                        g2 = build["seed"][(nx, 0)]
+                    elif (nx, ny) in bg:
+                        g2 = bld["tiles"][bg[(nx, ny)]].get(
+                            OPPOSITE[face])
+                    else:
+                        continue
+                    b_face = glue_strength(g1, g2, strength)
+                    if b_face:
+                        faces_fam[face] = b_face
+                bonds = {}
+                for knob, fn in sorted(bond_fns.items()):
+                    bonds[knob] = (fn(bld, bg, v, tile) if fn
+                                   else sum(faces_fam.values()))
+                enables = {}
+                for face, (dx, dy) in sorted(FACE_DIR.items()):
+                    u = (v[0] + dx, v[1] + dy)
+                    if u == v or u in own_vacancies:
+                        continue
+                    g_t = bld["tiles"][tile].get(face)
+                    if not g_t:
+                        continue
+                    for lock in sorted(bld["tiles"]):
+                        if not lock.startswith("L"):
+                            continue
+                        g_l = bld["tiles"][lock].get(OPPOSITE[face])
+                        if not g_l or glue_strength(
+                                g_t, g_l, strength) < 1:
+                            continue
+                        asm_with = dict(bg)
+                        asm_with[v] = tile
+                        rec = {}
+                        for knob, fn in sorted(bond_fns.items()):
+                            if fn is None:
+                                b_with = matched_strength(
+                                    bld, asm_with, u, lock, strength)
+                                b_without = matched_strength(
+                                    bld, bg, u, lock, strength)
+                            else:
+                                b_with = fn(bld, asm_with, u, lock)
+                                b_without = fn(bld, bg, u, lock)
+                            rec[knob] = {"b_with": b_with,
+                                         "b_without": b_without}
+                        if any(r["b_with"] >= 2 and r["b_without"] < 2
+                               for r in rec.values()):
+                            enables[f"{lock}@{skey(u)}"] = rec
+                if not (faces_fam or enables
+                        or any(bonds.values())):
+                    continue
+                classes = []
+                w_read = faces_fam.get("W", 0) >= 1
+                if tile.startswith("L"):
+                    classes.append("via_squatter" if w_read
+                                   else "lock_squatter")
+                else:
+                    classes.append("fill")
+                if enables:
+                    classes.append("stack_partner")
+                stable = [k for k, b in sorted(bonds.items())
+                          if b >= 2]
+                for rec in enables.values():
+                    for knob, r in rec.items():
+                        if r["b_with"] >= 2 and knob not in stable:
+                            stable.append(knob)
+                contenders[tile] = {
+                    "classes": classes,
+                    "bond": bonds,
+                    "faces": faces_fam,
+                    "w_read": w_read,
+                    "enables": enables,
+                    "stable_under": sorted(stable),
+                }
+            if contenders:
+                sp_rec[skey(v)] = contenders
+        if sp_rec:
+            out[sp] = sp_rec
+    return out
+
+
 def check_d4(build, canon=None, *, lock_sites=None, strength=None):
     """Emit-time off-channel census (d4).  WARNING severity: returns
     the report; never gates emission (designs/004 A3)."""
@@ -513,6 +709,7 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
             "DBr@(3,3) survives row scope at 72/500, row_scope.out RS1)"),
         "lock_misreads": lock_misreads_from(probe),
         "lock_misplacements": mispl,
+        "vacancy_contention": vacancy_contention(build, canon, strength),
         "measured_context": MEASURED_CONTEXT,
     }
     return report
@@ -588,6 +785,34 @@ def d4_report_lines(report):
                 + ") — the misplaced-lock class measured dominant "
                   "under s2 (L2@3,3 67, L3@3,2 43, 82 Vp-arm of 500; "
                   "strength2.out K1/K2)")
+    for sp, sites in sorted(report.get("vacancy_contention",
+                                      {}).items()):
+        for site, contenders in sorted(sites.items()):
+            knob_sensitive = any(
+                c["stable_under"] and (
+                    "stack_partner" in c["classes"]
+                    or any(cl.endswith("squatter") for cl in c["classes"]))
+                for c in contenders.values())
+            if not knob_sensitive:
+                continue
+            parts = []
+            for tile, c in sorted(contenders.items()):
+                if not c["stable_under"]:
+                    continue
+                bonds = "/".join(str(c["bond"][k])
+                                 for k in sorted(c["bond"]))
+                parts.append(f"{tile}({'/'.join(c['classes'])}, "
+                             f"b {bonds}, stable "
+                             f"{'/'.join(c['stable_under'])})")
+            if not parts:
+                continue
+            lines.append(
+                f"  vacancy contention ({sp}-missing) at {site}: "
+                + "; ".join(parts)
+                + " — price lock-reinforcement knobs against the WHOLE "
+                  "set (measured s2 Vp-arm: fill 0.908 -> 0.406, "
+                  "first-come among three stable contenders; "
+                  "vacancy_bg.out VB1/VB3)")
     ctx = report["measured_context"]
     lines.append(
         "  measured context: lock-squat block rate "

@@ -137,3 +137,37 @@ Design consequence: any future lock-reinforcement knob must be
 priced against the FULL contention set of the affected vacancy
 (fill, via-site lock squat, reader stack), not against a single
 hazard class.
+
+### Priced (tick 42, SON-4810): the contention set made executable
+
+The design consequence above is now a d4 layer, not a note:
+`molasp.offchannel.vacancy_contention` — per-species vacancy
+backgrounds, every contender classified (fill / via_squatter /
+lock_squatter / stack_partner) and priced under every knob at once
+(default `{"family", "s2"}`; `matched_s2` promoted into the census
+module).  Receipt `evidence/2026-10-07-vacancy-contention/` (static
+enumeration, tick-37 rule — no cluster job).
+
+- **C1–C3, C5 CONFIRMED; C4 CONFIRMED after a disclosed
+  registration-defect correction** (the first clause's `>= 50`
+  threshold swept L3 (54) into a required set its own boundary
+  clause excluded; v1 receipt kept falsified, corrected clause
+  names the three dominant occupants — 203/150/78 vs 54).
+- **Family is minority-dominance, not monopoly**: BUILD1 Vp@2,2
+  family-stable = {D2T fill b=2, L2 via-squatter's stack channel}
+  — matching the measured family occupants 454/36 of 500.  Under
+  s2 the stable set mints to five {D1T, D2T, DBr, L2, V0p} while
+  the fill share collapses 454→203 (0.908→0.406): pricing story =
+  the knob does not need to beat the fill, it needs only to mint
+  enough frozen contenders to make the vacancy first-come.
+- **DBr's channel is priced as a stack partnership** (own family
+  bond 1; enables L3@(3,2) s2 b_with=2 > b_without=0) — the class
+  a solo-bond census cannot see (tick-39's M2 falsification, now
+  arithmetic).
+- **Minting is constructional**: every BUILD1/2/3 vacancy grows
+  its stable set under s2; lock and spine vacancies go from empty
+  to 3–6 frozen contenders (the lock's own vacancy is the most
+  knob-sensitive site class).
+- Honest boundary: L3@(2,2) (54/500) needs a second background
+  event — outside single-species scope by construction, recorded
+  not asserted (C4 correction).
