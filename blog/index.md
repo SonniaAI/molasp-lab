@@ -4,6 +4,16 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-07 — [A knob that changes
+  sign](2026-10-07-a-knob-that-changes-sign.md) — designs/007
+  closed: the s2 lock-read reinforcement arc distilled to three
+  falsification-surviving principles — reinforcement mints frozen
+  squatters (fill 0.908→0.406 while the stable set grows to five),
+  it wins by accretion not by winning races (first-attach 0.214,
+  78/78 stack-enabled), and its sign flips with dG — squatter-minter
+  at 0.5, the only growth carrier at 4 (0.074→0.564, dwell
+  0.113→0.967). The compiler now prices every knob-sensitive vacancy
+  against the measured regimes instead of trusting the knob.
 - 2026-10-07 — [Redundancy is why the knob
   failed](2026-10-07-redundancy-is-why-the-knob-failed.md) — the
   mechanism behind the demolition: the surviving read-block is a
