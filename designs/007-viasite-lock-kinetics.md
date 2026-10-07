@@ -1,0 +1,78 @@
+# designs/007 — via-site lock placement kinetics under s2 (the census's solo class)
+
+## Why
+
+Tick 39's census (designs/006, receipt
+`evidence/2026-10-07-lock-misplacement-census/lock_misplacement_census.out`)
+split the lock-misplacement hazard into two layers:
+
+- the KINETIC-DOMINANT lock-site misplacements (L2@(3,3), L3@(3,2) in
+  the tick-38 MC) carry ZERO solo bond — one-substitution-enabled,
+  already caught by the pair layer `lock_misreads`;
+- the SOLO class the new layer surfaced is VIA-SITE lock placements:
+  `L1@(2,1)` and `L2@(2,2)`, W-read carried (`w_read` true), bond 1
+  at family arithmetic → bond 2 under the tick-38 s2 rule. Present in
+  BOTH BUILD1 and UNIT_ONLY census views (constructional), never
+  tabulated kinetically — the tick-38 MC counted lock sites only.
+
+The census prediction is arithmetic, not rate: b=1 transient at family
+strength, b=2 (frozen) under s2. This study measures it.
+
+## The race mechanism (prediction, fixed in advance)
+
+At a via site the canonical via tile is stable once placed (b>=2 via
+its own bonds at family strength). A lock tile arriving there is b=1
+at family strength — it detaches, the canonical occupant wins a
+lopsided race. Under s2 the lock's W read doubles: BOTH competitors
+are frozen, the race becomes effectively first-come. So the s2
+via-lock terminal fraction is the flip probability of a coin the
+family encoding never tosses — the kinetic echo of tick-12's
+fair-coin collapse and tick-38's migration finding (strength at fixed
+identity is symmetric amplification).
+
+## What lands
+
+`evidence/2026-10-07-viasite-lock-ktam/ktam_viasite_lock.py` — the
+tick-38 protocol of record (Gmc=9.5, Gse=Gmc-dG, T_read=400*e^Gmc,
+no-mismatch kTAM, per-run RNG, `matched_s2` bond rule verbatim), with
+VIA-SITE instrumentation: per-trajectory terminal occupancy, terminal
+matched-b, attach-event counts, and dwell of `L*` tiles at every
+canonical via site (column x=2). Strict completion is refined to
+FULL canonical occupancy (`strict_filled`: every canonical site holds
+its canonical tile) — the looser decode-only check would misread a
+frozen via-lock as completion; both numbers are reported, no gate
+depends on the old one. Arms: fam_b1, s2_b1, s2_b1_dG2, fam_unit,
+s2_unit; n=500 each. Fresh seed base 180261107 stride 2e7 (disjoint
+from 160261107/20261107/40261107/80261107/100261107/120261107).
+
+## Pre-registered gates (V1–V6; falsifiers fixed before submission)
+
+- **V1 EXISTENCE**: s2_b1 stable via-lock terminal fraction (L* at a
+  via site at terminal with matched b>=2) >= 0.05 AND >= fam_b1's +
+  0.02 — the census's b=1→b=2 flip is kinetic reality.
+  [falsified: s2_b1 < 0.05 OR s2_b1 <= fam_b1 + 0.02]
+- **V2 TRANSIENCY SPLIT**: fam_b1 mean via-lock dwell fraction
+  (dwell of L* at via sites / read window, over trajectories with any
+  via-lock attach) <= 0.15 AND s2_b1's >= 0.8 (frozen).
+  [falsified: fam >= 0.5 OR s2 <= 0.5; no attach events → NO_EVENTS]
+- **V3 COMPLETION COST**: among s2_b1 terminals that are not
+  strict_filled, the via-lock-carrying fraction >= 0.10 — the channel
+  is a real completion hazard, not decoration.
+  [falsified: <= 0.02; n_nonstrict < 10 → NO_EVENTS]
+- **V4 CALIBRATION**: fam_b1 lock-site blocked within 0.05 of 0.308
+  AND s2_b1 within 0.05 of 0.314 (tick-38 receipt values, same
+  instrument). [>= 0.10 off either → FALSIFIED: protocol drift]
+- **V5 dG DIRECTION**: s2 via-lock stable terminal fraction at dG 2
+  < at dG 0.5. [>= → FALSIFIED]
+- **V6 GENERALITY**: s2_unit stable via-lock fraction >= 0.05.
+  [< 0.02 FALSIFIED; 0.02–0.05 INCONCLUSIVE]
+
+## Honest boundaries, fixed in advance
+
+- Via sites are the canonical column-x=2 sites of BUILD1/UNIT_ONLY
+  only; other off-channel lock placements (row 3+ columns) are
+  census-recorded but not instrumented here.
+- The vacancy-background channel (L3@(3,2) 82/500, Vp-missing arm)
+  remains outside: no missing-species arm in this study.
+- n=500/arm gives binomial CI ~±0.04 at p=0.3; gates with 0.02
+  margins are read as stated, INCONCLUSIVE band honored.
