@@ -165,3 +165,44 @@ Consequences:
 
 No cluster job (registered method; deterministic static enumeration,
 complete predicate — same standing rule as tick 35).
+
+## (b) Picked + pre-registered (tick 38, 2026-10-07)
+
+Prerequisite met (tick 37: trade table corpus-general at census level).
+The encoding: **strength-2 lock-read bond** — the first kinetic lever at
+fixed bond identity (R1 contrast: renames change identity, strength
+changes kinetics). A lock tile's W-face glue pair counts 2 instead of 1,
+on both evaluation sides (the lock's own W bond and any tile's E bond
+into a placed lock); site-agnostic and structural (any `L*` W read).
+Value relays, done glues, base relays and squatter bonds stay strength 1
+— both hazard classes keep their intrinsic bonds.
+
+Pre-registration (gates fixed before any MC ran; script
+`evidence/2026-10-07-strength2-lock/ktam_strength2.py`, this commit):
+
+- Arms (family scope): BUILD1 plain + Vp-missing x {family, s2} at dG
+  0.5; s2 at dG 2.0 (both); UNIT_ONLY (the designs/005 generality arm)
+  x {family, s2} at dG 0.5. n=500/arm, 8 arms. Protocol of record;
+  fresh seed base 160261107 stride 2e7.
+- K1 s2_b1 blocked <= 0.22 [>= 0.27 falsified; between inconclusive]
+- K2 s2_b1_Vp stable D2T fill >= 0.85 [<= 0.70 falsified] (the classic
+  fill's E->L2 bond doubles, so repair holds or rises)
+- K3 s2_b1 blocked cohort is the Vp+DBr lo-read stack, co-occurrence
+  >= 0.7 [<= 0.4 falsified; n_blocked < 10 -> NO_EVENTS]
+- K4 s2_b1 strict-pqr >= 0.55 [<= 0.45 falsified]
+- K5 calibration fam refs 0.27 blocked / 0.908 fill within 0.05
+  [any >= 0.10 off: protocol drift, stop reading]
+- K6 dG direction: s2 blocked and fill both strictly lower at dG 2
+  [either >= falsified]
+- K7 generality: s2_unit blocked <= fam_unit blocked
+  [> fam + 0.02 falsified]
+- K8 lock capture: median first-passage of L2@(3,2) strictly lower
+  under s2 [>= falsified] — the registered squat-dwell vs
+  lock-capture-time prediction, priced against the published b=1
+  equilibrium ~0.38 at dG 0.5.
+
+n=8 smoke (instrument only, gates not evaluated) caught three defects
+before registration: a dropped `dg` argument, the missing-species canon
+inheritance (Vp-missing keeps BUILD1's canonical map — the vacancy is a
+site whose canonical occupant was removed), and the `is_vp` arm-name
+predicate missing the `_dG2` suffix arms. All fixed; smoke exit 0.
