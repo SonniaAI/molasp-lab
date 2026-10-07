@@ -363,6 +363,31 @@ def compile_program(text: str, predicted=None, name=None):
                                    "S": below_v, "N": below_v}, i)
                 emit(f"L{i}", {"W": f"{a}-f", "S": f"base{i}",
                                "N": lock_n}, i)
+                if a in rules:                  # designs/008 stage 2:
+                    # explicit dead-reader emission.  Least-model
+                    # support guarantees every body of a false head
+                    # is dead, so a unit body's reader can never
+                    # realize: its S face reads {lit}-t-done, which a
+                    # false literal emits nowhere, and its W face is
+                    # the vj conduit glue, which the false basis
+                    # emits nowhere.  With match strength 1 < TAU 2
+                    # per face the tile has zero matchable faces
+                    # (stacked dead readers mutually give 1 each), so
+                    # the dead link is EMITTED machinery whose absence
+                    # from every assembly BFS-proves — not vacuous
+                    # non-emission.  AND-bodied false heads and the
+                    # terminal false row keep the plain false basis
+                    # (PC4 pins the terminal F-cap; deferred).
+                    unit_no = 0
+                    for body in rules[a]:
+                        if len(body) != 1:
+                            continue            # AND body: deferred
+                        unit_no += 1
+                        vj = f"unit{unit_no}_{a}"
+                        emit(f"UD{i}{a}" if unit_no == 1 else
+                             f"UD{i}{a}{unit_no}",
+                             {"W": vj, "S": f"{body[0]}-t-done",
+                              "E": f"{a}-t", "N": f"{a}-t-done"}, i)
                 d_north[i] = f"{a}-f-done"
                 v_north[i] = below_v
 

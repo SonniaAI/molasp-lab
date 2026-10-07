@@ -12,10 +12,14 @@ relaxation landed in molasp/compiler.py (tick 48):
   - The old PR3 program (middle-fact chain `p. q. r :- p. s :- r.`)
     is legal chain geometry now and verifies: 4 rows, 16 tiles, 70
     assemblies, 1 terminal.
-  - PC10 keeps its v0.1 fact-false-row basis VERBATIM (16 tiles / 70
-    assemblies pinned tick 47): stage 1 rules predicted-false rule
-    atoms keep the plain false row — that row IS the false-cap relay;
-    explicit dead-reader emission for false derived heads is deferred.
+  - PC10 in stage 2 (designs/008 §3, this tick): the intermediate
+    false derived head q now CARRIES ITS DEAD READER EXPLICITLY —
+    tile UD3q (W=unit1_q, S=z-t-done) is emitted machinery whose
+    zero matchable faces (match strength 1 < TAU 2 each) BFS-prove
+    it can never realize: 17 tiles / 70 assemblies / 1 terminal /
+    full locks, model {p} unchanged.  The terminal false row keeps
+    the v0.1 F-cap basis (PC4 pins it); terminal dead-reader
+    emission and AND-bodied false heads stay deferred.
   - CYC survives untouched (order falsifier is geometry-independent).
   - PC11 still refuses — now honestly: its AND lo-literal sits at row
     3, not the row-1 via (PR9). The derived-hi conduit hazard is
@@ -31,7 +35,7 @@ not design predictions.
 import unittest
 
 from molasp.compiler import CompileError, UnsupportedGeometry
-from molasp.parity import check_program, compile_program
+from molasp.parity import CORPUS, check_program, compile_program, producible
 
 
 class TestChainCorpusV02(unittest.TestCase):
@@ -137,12 +141,14 @@ class TestChainRefusalsV02(unittest.TestCase):
         self.assertIn("designs/002", str(cm.exception))
 
 
-class TestPC10BaselineV02(unittest.TestCase):
-    """PC10 keeps the v0.1 fact-false-row basis verbatim in stage 1:
-    a predicted-false rule atom's plain false row IS the false-cap
-    relay (V-column relay + f-typed value); explicit dead-reader
-    emission for false derived heads is deferred to a later stage.
-    The tick-47 baseline numbers must not move."""
+class TestPC10Stage2V02(unittest.TestCase):
+    """PC10 after the stage-2 dead-reader emission (designs/008 §3):
+    the intermediate false derived row (q at row 3) keeps the plain
+    false row as its false-cap relay AND now emits its dead reader
+    tile UD3q explicitly — the dead link is emitted machinery whose
+    absence from every producible assembly is BFS-proved, not
+    vacuous non-emission.  Measured tick 49 (2026-10-07): 4 rows,
+    17 tiles, 70 assemblies, 1 terminal."""
 
     @classmethod
     def setUpClass(cls):
@@ -153,18 +159,80 @@ class TestPC10BaselineV02(unittest.TestCase):
         self.assertEqual(self.rep["predicted"], ["p"])
         self.assertEqual(self.rep["terminal_decodes"], [["p"]])
 
-    def test_baseline_full_locks_and_dead_reader(self):
+    def test_full_locks_and_both_dead_paths_reported(self):
+        # Stage 2 extends dead_variant_glues past the terminal head:
+        # q's dead link is machinery now, so it is REPORTED and then
+        # proven absent (r's stays non-emission — terminal deferred).
         self.assertTrue(self.rep["full_locks"])
-        self.assertEqual(self.rep["dead_variant_glues"], ["unit1_r"])
+        self.assertEqual(self.rep["dead_variant_glues"],
+                         ["unit1_q", "unit1_r"])
+        self.assertTrue(self.rep["dead_glues_absent"]["unit1_q"])
         self.assertTrue(self.rep["dead_glues_absent"]["unit1_r"])
 
-    def test_baseline_scale_unchanged(self):
-        # 4 rows, 16 tiles, 70 assemblies, 1 terminal — identical to
-        # the v0.1 probe (tick 47): the basis swap did not move them.
+    def test_scale_after_emission(self):
+        # 16 -> 17 tiles (UD3q added); assemblies/terminals unmoved —
+        # the dead reader cannot attach, so it adds no growth path.
         self.assertEqual(self.rep["n_rows"], 4)
-        self.assertEqual(self.rep["tiles"], 16)
+        self.assertEqual(self.rep["tiles"], 17)
         self.assertEqual(self.rep["assemblies"], 70)
         self.assertEqual(self.rep["terminals"], 1)
+
+
+class TestDeadReaderEmissionStage2(unittest.TestCase):
+    """The emitted dead reader itself (designs/008 §3 machinery):
+    exact faces, BFS-proved non-realization, the false-cap basis it
+    sits alongside, the deferred terminal boundary, and v0.1/v0.2
+    byte-stability against the registered tick-46/48 receipt counts
+    (hardcoded here so regeneration of run.out cannot make the
+    stability pin vacuous)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.build = compile_program("p. q :- z. r :- q.", name="PC10")
+        cls.seen, cls.terminals = producible(cls.build)
+
+    def test_dead_reader_emitted_with_exact_faces(self):
+        # q sits at row 3 (rows: p, z, q, r).  W is the vj conduit
+        # glue the false basis never emits; S is the dead literal's
+        # truth-typed done glue, emitted nowhere because z is false.
+        self.assertEqual(
+            self.build["tiles"].get("UD3q"),
+            {"W": "unit1_q", "S": "z-t-done",
+             "E": "q-t", "N": "q-t-done"})
+
+    def test_dead_reader_never_realizes(self):
+        # With match strength 1 < TAU 2 per face and every face a
+        # glue no tile exposes, UD3q can never attach: it appears in
+        # NO producible assembly (stacked dead readers would mutually
+        # give 1 each — still below TAU).
+        placed = {name for asm in self.seen for _pos, name in asm}
+        self.assertNotIn("UD3q", placed)
+
+    def test_false_cap_basis_sits_alongside(self):
+        # The plain false row stays the false-cap relay (designs/008
+        # stage 1): D-column conduit, V-column relay, lock all kept.
+        for t in ("D3Fq", "V3p", "L3"):
+            self.assertIn(t, self.build["tiles"])
+
+    def test_terminal_false_row_unchanged(self):
+        # r keeps the v0.1 terminal F-cap basis (PC4 pins it); no UD
+        # tile is emitted for terminal false heads in stage 2.
+        self.assertIn("Fr", self.build["tiles"])
+        self.assertIn("L4fr", self.build["tiles"])
+        self.assertFalse(
+            [t for t in self.build["tiles"] if t.startswith("UD4")])
+
+    def test_v01_builds_byte_stable(self):
+        # Registered receipt counts (tick 46/48), hardcoded: the
+        # emission must not move a single v0.1/v0.2-verified build.
+        registered = {"PC1": (8, 15), "PC2": (14, 45), "PC3": (14, 35),
+                      "PC4": (12, 35), "PC5": (16, 70), "PC6": (18, 85),
+                      "PC7": (20, 100), "PC8": (18, 85), "PC9": (12, 35)}
+        for name, (prog, model, _note) in sorted(CORPUS.items()):
+            rep = check_program(name, prog, model)
+            self.assertTrue(rep["ok"], name)
+            self.assertEqual((rep["tiles"], rep["assemblies"]),
+                             registered[name], name)
 
 
 if __name__ == "__main__":

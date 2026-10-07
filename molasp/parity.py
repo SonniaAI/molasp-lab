@@ -216,24 +216,27 @@ def decode(build, asm):
 
 def dead_variant_glues(build):
     """vj channel glues of variants whose body is not satisfied by
-    the predicted model (the dead paths that must never realize)."""
+    the predicted model (the dead paths that must never realize).
+    designs/008 stage 2: every derived row reports, not just the
+    terminal head — an intermediate false head's dead link is now
+    emitted machinery (the UD reader tile reads exactly this vj
+    glue on its W face), so its absence is checked, not assumed."""
     facts, rules, _order = parse_program(build["program"])
     predicted = set(build["predicted"])
-    head = build["rows"][len(build["rows"])]
     dead = set()
-    for body in rules.get(head, []):
-        if not set(body) <= predicted:
-            kind = "and" if len(body) >= 2 else "unit"
-            j = 0
-            for other in rules[head]:
-                if len(other) >= 2 and kind == "and":
-                    j += 1
-                    if other == body:
-                        dead.add(f"{kind}{j}_{head}")
-                elif len(other) < 2 and kind == "unit":
-                    j += 1
-                    if other == body:
-                        dead.add(f"{kind}{j}_{head}")
+    for _row, head in sorted(build["rows"].items()):
+        if head not in rules:
+            continue
+        and_no = unit_no = 0
+        for body in rules[head]:
+            if len(body) >= 2:
+                and_no += 1
+                vj = f"and{and_no}_{head}"
+            else:
+                unit_no += 1
+                vj = f"unit{unit_no}_{head}"
+            if not set(body) <= predicted:
+                dead.add(vj)
     return dead
 
 

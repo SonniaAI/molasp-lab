@@ -61,7 +61,7 @@ ALL_OK True
     "r"
    ],
    "seconds_bfs": 0.0,
-   "seconds_compile": 0.003,
+   "seconds_compile": 0.002,
    "terminal_decodes": [
     [
      "p",
@@ -90,7 +90,7 @@ ALL_OK True
     "q",
     "r"
    ],
-   "seconds_bfs": 0.003,
+   "seconds_bfs": 0.002,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -123,7 +123,7 @@ ALL_OK True
     "p",
     "r"
    ],
-   "seconds_bfs": 0.001,
+   "seconds_bfs": 0.002,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -220,7 +220,7 @@ ALL_OK True
     "r",
     "s"
    ],
-   "seconds_bfs": 0.004,
+   "seconds_bfs": 0.003,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -288,7 +288,7 @@ ALL_OK True
     "r",
     "s"
    ],
-   "seconds_bfs": 0.004,
+   "seconds_bfs": 0.003,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -321,7 +321,7 @@ ALL_OK True
     "r"
    ],
    "seconds_bfs": 0.001,
-   "seconds_compile": 0.004,
+   "seconds_compile": 0.003,
    "terminal_decodes": [
     [
      "p",
