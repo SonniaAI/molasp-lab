@@ -258,3 +258,15 @@ Open (pre-registered, queued): the dG sweep of both stack channels
 channel did (0.314 → 0.118 → 0.000)?  Script + gates committed at
 the pre-registration commit BEFORE the job (see
 `evidence/2026-10-07-stack-dg-sweep/`).
+
+### Closed (tick 34, same day): the stack-channel dG sweep
+
+S1-S4 all confirmed/calibrated (evidence/2026-10-07-stack-dg-sweep):
+both stack channels starve monotonically to zero by dG 4, the
+vertical stack is the entire blocked cohort wherever it fires
+(co-occurrence 1.0), and the redundant b>=3 fan is the surviving
+channel at every dG with events. Redundancy explains the knob's
+failure at dG 0.5; it does not survive thermodynamics. The
+glue-scope study is fully closed through its kinetic arm; the
+open items are the glue-CLASS boundary kinetic test and the
+founder-gated collaborator/venue shortlist.

@@ -1,0 +1,20 @@
+/queue-input/source.tgz: OK
+HX-OUT-BEGIN:1751ba31889ec345950258e5f500081c3a9557af5294e3b4d233b460f5acae0d
+HX-FILE:status
+0
+
+HX-FILE:stderr
+
+HX-FILE:stdout
+{"Gse_rule": "Gmc - dG", "Gmc": 9.5, "dG_grid": [0.5, 2.0, 4.0], "T_read_rule": "400*exp(Gmc)", "n_per_arm": 500, "seed_base": 120261107, "seed_stride": 20000000, "model": "kTAM v3 no-mismatch; systems = BUILD1 row scope {plain, Vp-missing}; stack-channel dG sweep (recombination.out mechanism, S1-S4)", "predictions": ["S1 row_build1 blocked(dG4) <= 0.02 AND monotone [>= 0.10 at dG4 falsified]", "S2 row_Vp stable fill(dG4) <= 0.02 AND monotone [>= 0.10 falsified]", "S3 stable-hold b_ge3 frac >= 0.8 at every dG with n_stable >= 10 [< 0.5 falsified]", "S4 dG0.5 within 0.05 of 0.141 blocked / 0.155 fill [>= 0.10 drift falsified]"], "references": {"row_build1_blocked_dG0.5": 0.141, "row_Vp_stable_fill_dG0.5": 0.155}}
+{"system": "P_AND_corrected", "key": "row_build1", "dG": 0.5, "n": 500, "blocked_frac": 0.14, "vstack_frac": 0.14, "vstack_of_blocked": 1.0, "stable_fill": 0.14, "stable_n": 70, "b22_hist": {"3": 35, "4": 35}, "b_ge3_frac": 1.0, "lb_any_frac": 0.0, "mean_relay_contacts": 3.5}
+{"system": "P_AND_corrected", "key": "row_build1", "dG": 2.0, "n": 500, "blocked_frac": 0.006, "vstack_frac": 0.006, "vstack_of_blocked": 1.0, "stable_fill": 0.006, "stable_n": 3, "b22_hist": {"4": 3}, "b_ge3_frac": 1.0, "lb_any_frac": 0.0, "mean_relay_contacts": 4.0}
+{"system": "P_AND_corrected", "key": "row_build1", "dG": 4.0, "n": 500, "blocked_frac": 0.0, "vstack_frac": 0.0, "vstack_of_blocked": 0.0, "stable_fill": 0.0, "stable_n": 0, "b22_hist": {}, "b_ge3_frac": null, "lb_any_frac": null, "mean_relay_contacts": null}
+{"system": "P_AND_corrected_missing_Vp", "key": "row_Vp", "dG": 0.5, "n": 500, "blocked_frac": 0.046, "vstack_frac": 0.0, "vstack_of_blocked": 0.0, "stable_fill": 0.128, "stable_n": 64, "b22_hist": {"2": 1, "3": 63}, "b_ge3_frac": 0.9844, "lb_any_frac": 0.0156, "mean_relay_contacts": 2.984}
+{"system": "P_AND_corrected_missing_Vp", "key": "row_Vp", "dG": 2.0, "n": 500, "blocked_frac": 0.0, "vstack_frac": 0.0, "vstack_of_blocked": 0.0, "stable_fill": 0.04, "stable_n": 20, "b22_hist": {"2": 2, "3": 18}, "b_ge3_frac": 0.9, "lb_any_frac": 0.1, "mean_relay_contacts": 2.9}
+{"system": "P_AND_corrected_missing_Vp", "key": "row_Vp", "dG": 4.0, "n": 500, "blocked_frac": 0.0, "vstack_frac": 0.0, "vstack_of_blocked": 0.0, "stable_fill": 0.0, "stable_n": 0, "b22_hist": {}, "b_ge3_frac": null, "lb_any_frac": null, "mean_relay_contacts": null}
+VERDICTS {"S1": {"blocked": {"0.5": 0.14, "2.0": 0.006, "4.0": 0.0}, "monotone": true, "call": "confirmed"}, "S2": {"stable_fill": {"0.5": 0.128, "2.0": 0.04, "4.0": 0.0}, "monotone": true, "call": "confirmed"}, "S3": {"b_ge3_by_dG": {"0.5": 0.9844, "2.0": 0.9, "4.0": null}, "call": "confirmed"}, "S4": {"dev_blocked": 0.001, "dev_fill": 0.027, "call": "calibrated"}}
+
+HX-QUEUE-EXIT:0
+HX-OUT-END:1751ba31889ec345950258e5f500081c3a9557af5294e3b4d233b460f5acae0d
+

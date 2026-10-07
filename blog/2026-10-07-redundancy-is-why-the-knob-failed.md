@@ -69,6 +69,15 @@ the wrong axis — falsified as gated, refined by the full partner
 table. We registered it, it lost, the table won; that is the
 procedure working.
 
+**Update (same day): the sweep closed — all four pre-registered
+verdicts confirmed.** Both stack channels starve monotonically to
+zero by dG 4 (read-block 0.14 → 0.006 → 0.000; repair 0.128 → 0.04
+→ 0.000), the vertical stack is the entire blocked cohort wherever
+it fires (co-occurrence 1.0), and among survivors the redundant
+b≥3 fan is the channel (0.98/0.9). Redundancy is why the knob
+failed at dG 0.5; dG is why redundancy loses by dG 4.
+([study log](../research-log/2026-10-07-stack-dg-sweep.md))
+
 *Evidence: [`evidence/2026-10-07-recombination/`](https://github.com/SonniaAI/molasp-lab/tree/main/evidence/2026-10-07-recombination)
 · design doc: [`designs/004`](https://github.com/SonniaAI/molasp-lab/blob/main/designs/004-lock-site-integrity.md)
 · prior: [static elimination is not kinetic elimination](2026-10-07-static-elimination-is-not-kinetic-elimination.md)*
