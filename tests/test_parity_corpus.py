@@ -18,6 +18,7 @@ quoted in the tick-46 log entry after running the exact CI command.
 """
 import json
 import os
+import re
 import unittest
 
 from molasp.parity import (
@@ -94,6 +95,42 @@ class TestReceiptPins(unittest.TestCase):
             r = got[name]
             self.assertTrue(r["ok"], (name, r))
             self.assertEqual(r["raised"], spec[1], name)
+
+
+class TestReceiptSelfConsistency(unittest.TestCase):
+    """The receipt must be reproducible by its own generator.
+
+    Tick 53 (SON-4835 QA route-back): a committed receipt once
+    carried a stale human section (10-refusal header, no PR11/PR12
+    lines) under a spliced 12-entry JSON block -- no single run of
+    parity_run.py could produce it. These pins make an assembled
+    receipt fail the suite instead of shipping.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.text = open(RECEIPT, encoding="utf-8").read()
+        cls.human = cls.text.split("--- json ---", 1)[0]
+        cls.rep = _receipt_json()
+
+    def test_header_counts_match_json(self):
+        m = re.search(r"programs: (\d+) compiling \+ (\d+) refusals",
+                      self.human)
+        self.assertIsNotNone(m, "header counts line missing")
+        self.assertEqual(int(m.group(1)), len(self.rep["corpus"]))
+        self.assertEqual(int(m.group(2)), len(self.rep["refusals"]))
+
+    def test_human_names_match_json(self):
+        corpus = set(re.findall(r"^  (PC\d+) ok=", self.human, re.M))
+        refusals = set(re.findall(r"^  (PR\d+) ok=", self.human, re.M))
+        self.assertEqual(corpus, {r["name"] for r in self.rep["corpus"]})
+        self.assertEqual(refusals,
+                         {r["name"] for r in self.rep["refusals"]})
+
+    def test_all_ok_banner_matches_json(self):
+        m = re.search(r"^ALL_OK (True|False)$", self.human, re.M)
+        self.assertIsNotNone(m, "ALL_OK banner missing")
+        self.assertEqual(m.group(1), str(self.rep["all_ok"]))
 
 
 class TestBFSRecompute(unittest.TestCase):
