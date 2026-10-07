@@ -16,7 +16,7 @@
  ],
  "created": "2026-10-07T14:06:30Z",
  "admitted": "2026-10-07T14:06:35Z",
- "collected": "2026-10-07T14:24Z",
+ "collected": null,
  "state": "complete",
  "node": "spark-4a06",
  "exit_status": 0,

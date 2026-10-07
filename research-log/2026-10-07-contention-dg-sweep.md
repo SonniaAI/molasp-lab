@@ -96,3 +96,12 @@ earned its keep.
 `contention_dg.out` (9 arm records + verdicts), `queue-receipt.json`
 (job, request id, archive head `236f91b`, exit 0), pre-registration
 in the git history at `236f91b`.  Pins: `tests/test_contention_dg.py`.
+
+- **Correction (2026-10-07, follow-up commit):** the collection
+  commit (14:17:03Z) carried `queue-receipt.json` with
+  `"collected": "2026-10-07T14:24Z"` — a value future-dated at write
+  time (caught by QA run 9fad03e4).  Reset to `null`, the house style
+  of every prior receipt.  Evidenced true collection ≈ 14:16Z
+  (admitted 14:06:35Z + ~9.5 min queue runtime; results were in hand
+  before the 14:17:03Z commit).  Data, instrument, and verdicts
+  untouched — DW6 falsification stands (QA byte-gate rerun verified).
