@@ -104,7 +104,9 @@ class TestTrapGridReceipt(unittest.TestCase):
         ref = self.header["tick23_reference_pqr"]
         for row in self.rows:
             if row["key"] in ref:
-                expected = ref[row["key"]][row["dGmc"]]
+                # JSON round-trip stringifies the float dG keys
+                # ("0.5"/"2.0"/"4.0"); coerce the lookup, not the data.
+                expected = ref[row["key"]][str(row["dGmc"])]
                 self.absLT(row["pqr_frac"], expected, 0.12,
                            "%s dG %s" % (row["key"], row["dGmc"]))
 

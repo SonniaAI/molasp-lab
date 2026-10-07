@@ -109,8 +109,60 @@ repair-mechanism-v2).
   whether the residual 0.15 is noise or a second mechanism is
   exactly what v2's V0p/D1T/D2T arms decide.
 
-Full verdicts R2-R4 land with the v2 receipt (trap_grid.out); the
-receipt-pin tests activate then.
+**v2 run (job hxq-7cb04524b6e6bb84, request 7cb04524…, nonce
+repair-mechanism-v2, image paperclip-test@sha256:323d04c2…,
+spark-4a06, exit 0, ~3 min): ALL SIX PRE-REGISTERED VERDICTS
+PASS.** Receipts: trap_grid.out (26 JSON lines: header, 24 rows,
+verdicts) + queue-receipt-v2.json; receipt-pin tests active.
+
+- **R2 CONFIRMED** (trap relief explains exceeds-parity):
+  conditional-on-clean-locks strict pqr at dG 0.5 — build1 0.781,
+  V0p-missing 0.797, Vp-missing 0.927; max gap 0.1457, inside the
+  0.15 falsifier gate. The v2 arms NARROW the story: V0p's
+  exceeds-parity (1.23×) is *pure* trap relief (conditional gap
+  vs build1: 0.016); the residual 0.146 belongs to Vp-missing
+  alone — the one system whose repair is the D2T b=2 substitution
+  (90% of terminals). Consistent with the substitution channel
+  assembling *faster* than the canonical path, but a conditioning
+  selection effect (read-time cleanliness cannot undo kinetic
+  history) is not excludable at n=500. Honest verdict: trap relief
+  is the dominant mechanism; a ≤ 0.15 second-order Vp effect
+  remains open.
+- **R3a CONFIRMED**: build1 non-pqr top squatters at dG 0.5 are
+  Vp@(3,2)=107 and V0p@(3,1)=52 — exactly the static census's two
+  lock squatters, exactly the two exceeds-parity deaths. The
+  Vp@(3,2)+DBr@(3,3) squatter stack persists (DBr@(3,3)=70,
+  Vp@(3,3)=59 — row-3 transients, non-strict by the lock-name
+  test).
+- **R3b CONFIRMED both arms**: V0p-missing strict-pqr terminals
+  hold D1T@(2,1) in 256/342 = 74.9% (L1 22.8%, Vp 2.3%);
+  Vp-missing hold D2T@(2,2) in 389/432 = 90.1% (L2 9.9%). The
+  reader/value interchange is symmetric: D1T-missing is repaired
+  by V0p@(1,1) (290/309 = 94%) and D2T-missing by Vp@(1,2)
+  (291/301 = 97%) — the value-typed glue family substitutes in
+  BOTH directions, reader-for-value and value-for-reader.
+- **R3c CONFIRMED at the ceiling**: L3-missing strict pqr at dG 0.5
+  is 23/500 (4.6%; tick-23 measured 18/500 = 3.6%); ALL 23 hold
+  L2@(3,3) and ALL 23 carry the west enabler Vp@(2,3) (the D2T
+  variant is allowed by the census but unexercised at these
+  seeds). L2@(3,3) misreads TRUE through a b=1 west bond to
+  whatever exposes q-t — the structural channel, trajectory-
+  confirmed at fraction 1.0. pqr_clean_frac is 0.0 everywhere:
+  every strict pqr in L3-missing IS the misread.
+- **R4 CONFIRMED**: build1 lock-squat rate 0.314 → 0.118 → 0.000
+  monotone in dG; Vp-missing ratio crosses below 1 by dG 4
+  (0.704; pqr 0.694 vs build1 0.986). The crossover the law
+  predicted: trap relief vanishes with the squatters while the
+  repair channel starves with monomer — at dG 4 the missing
+  species is a pure loss.
+
+The H-ladder law survives everything thrown at it: L2 survives
+Vp's death on its base-chain (S+N) pair; L3's only own pair is
+S+W and W needs DBr — which is why DBr repairs least
+(0.244/0.096/0.026, collapsing) and DAr-missing stays vacant
+(None 167/229 at dG 0.5). Repair is the norm because value-glue
+families make tiles interchangeable; the price is the row-agnostic
+"-t" misread, now measured end-to-end.
 
 ## Honest limits
 

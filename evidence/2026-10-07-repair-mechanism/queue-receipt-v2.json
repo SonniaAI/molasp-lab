@@ -1,0 +1,19 @@
+{
+  "id": "7cb04524b6e6bb846ebec0e7b2faae0295eeb0240227eb3b6cf899a896157f1d",
+  "job": "hxq-7cb04524b6e6bb84",
+  "nonce": "repair-mechanism-v2",
+  "image": "paperclip-test",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd"
+  ],
+  "image_verified": true,
+  "node": "spark-4a06",
+  "cpu": 1,
+  "memory": 1073741824,
+  "wall": 3600,
+  "state": "complete",
+  "execution_status": 0,
+  "result_blob": "b37c1bcabfd8eed6bd95eaa8bca7c607f1a1932ad2c524e3a624795dd5e85fd1",
+  "admitted": 1791335724.3422127,
+  "finished": 1791335915.1837711
+}
