@@ -111,7 +111,57 @@ When picked: pre-register a dG grid on BUILD1 family scope + one
 designs/005 arm, predicting squat-dwell vs lock-capture-time from the
 published b=1 equilibrium (~0.38 at dG 0.5) before any run.
 
-## Evaluated (tick 37, 2026-10-07) — appended after the run
+## Evaluated (tick 37, 2026-10-07)
 
-To be appended with machine verdicts; receipt at
-`evidence/2026-10-07-census-generality/census_generality.out`.
+Receipt `evidence/2026-10-07-census-generality/census_generality.out`;
+pre-registration (this file + the script, gates verbatim) landed at 79d1f90
+BEFORE the census ran. Machine verdicts: **G1 CONFIRMED, G2 CONFIRMED,
+G3 FALSIFIED as registered (refined below), G4 CONFIRMED.**
+
+- **G1 CONFIRMED — H-construction wins.** Every arm, down to the
+  one-fact `p.` compile, reports lock squatters, and every squatter is
+  a V-class via relay at b=1: MINIMAL `{V0p@(3,1)}`;
+  AND_ONLY/UNIT_ONLY `{V0p@(3,1), V2p@(3,2)}`; DEEP_FACTS `{V0p, V2p,
+  V3p}` — one per fact relay, exactly what the emission rule
+  (`V{i}{a}: W={a}-t, E={a}-t`) predicts. The lock-squat signature is
+  NOT an OR-sharing artifact; the arc's trade table and d4 guidance
+  are corpus-general at census level.
+- **G2 CONFIRMED** — no stable solo hazard in any arm; BUILD1's
+  bond-class signature ({V0p:1, Vp:1} transient) replicates
+  out-of-family unchanged.
+- **G3 FALSIFIED as registered — and the refinement is the finding.**
+  UNIT_ONLY enumerates stack channels (24 pairs across two adjacent
+  lock-site pairs), so "stack channels track AND reader geometry" is
+  wrong. The receipt shows the discriminating class is the **lo-read
+  stack**: the terminal reader's SOUTH face carries the row-1 via
+  glue (`p-t-done`) whether the body is a 2-literal AND (`DBr.S`) or
+  a unit read (`Ur.S`), and the V relay below presents it north.
+  AND_ONLY `V2p+DBr @ 3,2|3,3` and UNIT_ONLY `V2p+Ur @ 3,2|3,3`
+  enumerate with the SAME signature (lower solo 1, upper solo 0,
+  mutual vertical 1) — BUILD1's measured family-scope read-block
+  channel exactly. DEEP_FACTS repeats the class per depth
+  (`V3p+DBr @ 3,3|3,4`). The cooperative stack class is as
+  constructional as the solo squat class: expect it in every ≥2-row
+  v0.1 compile (census-level claim).
+- **G4 CONFIRMED** — off-channel sites 3 (MINIMAL) < 7 (AND_ONLY,
+  UNIT_ONLY) < 10 (DEEP_FACTS); depth scales the census monotonically
+  in the via relays.
+
+Consequences:
+
+1. The duality claim's scope widens, at census level, from "one
+   family's three inventories" to "every v0.1 compile shape with ≥2
+   rows". Kinetic bounds remain BUILD1-measured — no new kinetic claim
+   is made here (honest boundary; RS1/RS2 taught exactly this
+   distinction).
+2. d4 interpretation note: `lock_stack_channels` pairs where the
+   reader's south face is the row-1 via glue are the read-block
+   class regardless of rule shape — flag them as lo-read stacks when
+   reading a census.
+3. Deferred (b) strength-2 lock encoding: prerequisite MET (the trade
+   table is corpus-general at census level). When picked, price
+   against BOTH classes — the solo b=1 transient squat and the
+   lo-read cooperative stack.
+
+No cluster job (registered method; deterministic static enumeration,
+complete predicate — same standing rule as tick 35).
