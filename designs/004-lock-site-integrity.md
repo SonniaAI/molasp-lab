@@ -222,3 +222,39 @@ kinetically refines the tick-32 pair-channel reading:
   0.155 relay-stack repair, 98.7% b=3) quoted in
   measured_context.row_scope_kinetics. Pair channels stay, labeled
   as sub-classes. Acceptance: pins against recombination.out.
+
+## Follow-up implemented (tick 34): stack classes are emit-time
+## report fields
+
+`check_d4` now carries both cooperative classes, per the refinement
+above (pins: `tests/test_stack_classes.py`, suite 255 OK / 1 skip):
+
+- `lock_stack_channels` — a two-site mutual-support enumeration at
+  vertically adjacent lock sites.  Each pair records the mutual
+  N-S bond, the in-stack totals, and the SOLO bonds against the
+  pure canonical background: the measured read-block channel
+  `Vp+DBr @ 3,2|3,3` enumerates with solo 0/0 under row scope —
+  cooperative-only, invisible to the one-site census, matching the
+  141/141 co-occurrence (H3).  Under family scope the same pair
+  reads solo 1/0 (Vp's b=1 transient layer): the class is a
+  property of the scope, not the tile names.
+- `vacancy_relay_stacks` — per-site filler relay FANS: per axis,
+  the direct canonical contact (if any) and every squatter relay
+  tile whose axis glue matches.  D2T at the vacancy (2,2)
+  enumerates the measured 2-of-3 stack exactly (S canonical V0p +
+  N DAr + W S2 relays; solo total bond 1 under row scope, 2 under
+  family), and `measured_context.row_scope_kinetics` quotes the
+  redundancy numbers (stable fill 0.155, b=3 fraction 0.9871,
+  lb_any 0.0129) so no single-partner severity axis is read off a
+  fan by accident.
+
+Human-readable `d4_report_lines` filters to the cooperative-only
+stacks and high-redundancy fans; the machine report carries the
+full enumeration (census over-approximates; kinetics decides —
+the standing rule).  WARNING severity unchanged; d4 never gates.
+
+Open (pre-registered, queued): the dG sweep of both stack channels
+— does 2-of-3 redundancy starve with dG the way the solo family
+channel did (0.314 → 0.118 → 0.000)?  Script + gates committed at
+the pre-registration commit BEFORE the job (see
+`evidence/2026-10-07-stack-dg-sweep/`).

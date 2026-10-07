@@ -96,6 +96,11 @@ MEASURED_CONTEXT = {
             "Vp@(3,2)": 72, "DBr@(3,3)": 72, "V0p@(3,1)": 0},
         "stable_b2_repair_fill": 0.162,
         "b1_transient_equilibrium_occupancy": 0.38,
+        "vertical_stack_read_block_dG0.5": 0.141,
+        "vertical_stack_cooccurrence": "141/141 (Vp@(3,2)+DBr@(3,3), H3)",
+        "relay_stack_stable_fill_dG0.5": 0.155,
+        "relay_stack_b3_frac": 0.9871,
+        "relay_stack_lb_any_frac": 0.0129,
         "family_refs": {"blocked": 0.27, "stable_repair_fill": 0.908,
                         "misread": 0.056},
     },
@@ -103,6 +108,7 @@ MEASURED_CONTEXT = {
         "evidence/2026-10-07-repair-mechanism/trap_grid.out (R3b, R4)",
         "evidence/2026-10-07-vp-residual/vp_residual.out (P2 dwell)",
         "evidence/2026-10-07-row-scope-ktam/row_scope.out (RS1-RS4)",
+        "evidence/2026-10-07-recombination/recombination.out (H1-H4)",
     ],
 }
 
@@ -281,6 +287,116 @@ def split_pair_channels(probe, tau=2):
     return {"stable": stable, "transient": transient}
 
 
+def vertical_lock_stacks(build, canon, lock_sites, strength=None):
+    """Two-site cooperative channels in the lock column (tick 33/34,
+    the VERTICAL LOCK-STACK class): pairs of squatters at vertically
+    adjacent lock sites that bond EACH OTHER, so each is held in the
+    other's presence even when every single-site bond against the
+    canonical background is zero — invisible to the one-site census.
+    This is the class that carried the measured row-scope read-block
+    (Vp@(3,2) + DBr@(3,3): 141/141 of blocked terminals,
+    recombination.out H3; west D2T co-stacks but is not
+    load-bearing).  Per adjacent lock-site pair, records every
+    mutually-supporting pair with its solo bonds (against the pure
+    canonical background — the one-site census view) and in-stack
+    totals, so ``solo == 0`` channels read as cooperative-only."""
+    locks = set(lock_sites)
+    out = {}
+    for lo in sorted(lock_sites):
+        hi = (lo[0], lo[1] + 1)
+        if hi not in locks or hi not in canon:
+            continue
+        pairs = {}
+        for t1 in sorted(build["tiles"]):
+            if t1 == canon[lo]:
+                continue
+            for t2 in sorted(build["tiles"]):
+                if t2 == canon[hi]:
+                    continue
+                bmut = glue_strength(build["tiles"][t1].get("N"),
+                                     build["tiles"][t2].get("S"), strength)
+                if bmut < 1:
+                    continue
+                a1 = dict(canon)
+                a1[hi] = t2
+                b1 = matched_strength(build, a1, lo, t1, strength)
+                a2 = dict(canon)
+                a2[lo] = t1
+                b2 = matched_strength(build, a2, hi, t2, strength)
+                if b1 < 1 or b2 < 1:
+                    continue
+                pairs[f"{t1}+{t2}"] = {
+                    "b_mutual_vertical": bmut,
+                    "b_lower_in_stack": b1,
+                    "b_upper_in_stack": b2,
+                    "b_lower_solo": matched_strength(
+                        build, canon, lo, t1, strength),
+                    "b_upper_solo": matched_strength(
+                        build, canon, hi, t2, strength),
+                }
+        if pairs:
+            out[f"{skey(lo)}|{skey(hi)}"] = pairs
+    return out
+
+
+def vacancy_relay_stacks(build, canon, strength=None, min_contacts=2):
+    """Cooperative vacancy-repair channels (tick 33/34, the VACANCY
+    RELAY-STACK class): non-canonical fillers whose hold at a site is
+    relayed through a FAN of neighbour contacts — direct canonical
+    bonds plus mutually-supporting squatter relays at adjacent sites.
+    This enumerates the redundancy that single-load-bearing analysis
+    misses: the measured row-scope repair channel is a 2-of-3 relay
+    stack D2T@(2,2) N->DAr + S->V0p + W->S2 (153/155 holds at b=3,
+    lb_any 0.0129 — recombination.out H1), so no single partner is
+    load-bearing and the channel survives killing any one bond class.
+    A filler enters the report when it has at least one squatter
+    relay AND at least ``min_contacts`` contact axes; its
+    ``solo_total_bond`` (pure-canonical-background arithmetic, the
+    repair_bonds view) separates family-style stable-by-arithmetic
+    fills (solo >= tau) from cooperative-only ones (solo < tau)."""
+    out = {}
+    for v in sorted(canon):
+        fillers = {}
+        for f in sorted(build["tiles"]):
+            if f == canon[v]:
+                continue
+            contacts = {}
+            n_squatter_axes = 0
+            for face, (dx, dy) in FACE_DIR.items():
+                u = (v[0] + dx, v[1] + dy)
+                if u not in canon:
+                    continue
+                g1 = build["tiles"][f].get(face)
+                if not g1:
+                    continue
+                axis = {}
+                if glue_strength(g1, build["tiles"][canon[u]].get(
+                        OPPOSITE[face]), strength) >= 1:
+                    axis["canonical"] = canon[u]
+                relays = [t for t in sorted(build["tiles"])
+                          if t != canon[u]
+                          and glue_strength(
+                              g1, build["tiles"][t].get(OPPOSITE[face]),
+                              strength) >= 1]
+                if relays:
+                    axis["squatter_relays"] = relays
+                    n_squatter_axes += 1
+                if axis:
+                    contacts[face] = axis
+            if contacts and n_squatter_axes >= 1 \
+                    and len(contacts) >= min_contacts:
+                fillers[f] = {
+                    "contacts": contacts,
+                    "n_relay_contacts": len(contacts),
+                    "n_squatter_relay_axes": n_squatter_axes,
+                    "solo_total_bond": matched_strength(
+                        build, canon, v, f, strength),
+                }
+        if fillers:
+            out[skey(v)] = fillers
+    return out
+
+
 def check_d4(build, canon=None, *, lock_sites=None, strength=None):
     """Emit-time off-channel census (d4).  WARNING severity: returns
     the report; never gates emission (designs/004 A3)."""
@@ -297,6 +413,8 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
     hazards = {s: sq for s, sq in oc.items()
                if s in {skey(l) for l in lock_sites}}
     haz_split = split_lock_hazards(hazards)
+    stacks = vertical_lock_stacks(build, canon, lock_sites, strength)
+    relays = vacancy_relay_stacks(build, canon, strength)
     report = {
         "system": build.get("name", "<unnamed>"),
         "severity": "warning",
@@ -308,6 +426,8 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
         "lock_hazards_transient": haz_split["transient"],
         "lock_deep_probe": probe,
         "lock_pair_channels": split_pair_channels(probe),
+        "lock_stack_channels": stacks,
+        "vacancy_relay_stacks": relays,
         "pair_probe_bound": (
             "one-west-substitution bounded: channels riding N/S/E "
             "substitutions are outside the probe (measured example: "
@@ -341,6 +461,37 @@ def d4_report_lines(report):
                                  f"{site} (bond {b}) via west substitution "
                                  f"{west} — substitution-enabled; measured "
                                  "row-scope read-block 0.144 (RS1)")
+    for pair_key, pairs in sorted(report["lock_stack_channels"].items()):
+        for pair, b in sorted(pairs.items()):
+            coop = (b["b_lower_solo"] == 0 or b["b_upper_solo"] == 0)
+            if not coop:
+                continue
+            lines.append(
+                f"  vertical lock stack: {pair} at {pair_key} "
+                f"(mutual N-S bond {b['b_mutual_vertical']}, in-stack "
+                f"b {b['b_lower_in_stack']}/{b['b_upper_in_stack']}, "
+                f"solo {b['b_lower_solo']}/{b['b_upper_solo']}"
+                + (" — cooperative-only: invisible to the one-site "
+                   "census; measured row read-block 0.141 rides "
+                   "this class (recombination.out H3)" if coop else "")
+                + ")")
+    for site, fillers in sorted(report["vacancy_relay_stacks"].items()):
+        for filler, fan in sorted(fillers.items()):
+            if fan["n_relay_contacts"] < 3 \
+                    and fan["n_squatter_relay_axes"] < 2:
+                continue
+            dirs = ", ".join(
+                f"{face}->" + "+".join(
+                    ([v["canonical"]] if "canonical" in v else [])
+                    + v.get("squatter_relays", []))
+                for face, v in sorted(fan["contacts"].items()))
+            lines.append(
+                f"  vacancy relay stack: {filler} at {site} — "
+                f"{fan['n_relay_contacts']} contact axes ({dirs}); "
+                f"solo total bond {fan['solo_total_bond']}. "
+                "Redundant fan: single-load-bearing analysis does not "
+                "apply (measured row repair 0.155 at 98.7% b=3, "
+                "lb_any 0.0129 — recombination.out H1)")
     for site, wests in sorted(report["lock_misreads"].items()):
         for west, mis in sorted(wests.items()):
             for tile, b in sorted(mis.items()):

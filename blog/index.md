@@ -4,6 +4,14 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-07 — [Redundancy is why the knob
+  failed](2026-10-07-redundancy-is-why-the-knob-failed.md) — the
+  mechanism behind the demolition: the surviving read-block is a
+  vertical lock stack (141/141 co-occurrence) and the surviving
+  repair is a 2-of-3 relay stack (153/155 at b=3, lb_any 1.29%) —
+  no single bond to break, which is exactly why single-bond
+  qualification failed. The d4 census now reports both cooperative
+  classes at emit time.
 - 2026-10-07 — [Static elimination is not kinetic
   elimination](2026-10-07-static-elimination-is-not-kinetic-elimination.md)
   — the glue-scope demolition: a knob that statically zeroes every
