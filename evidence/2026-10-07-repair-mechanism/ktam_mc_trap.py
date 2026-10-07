@@ -274,7 +274,13 @@ def main():
             census_pqr = Counter()
             for o in outs:
                 if o[0] == "pqr":
-                    census_pqr.update(o[5])
+                    # NOTE: never Counter.update(a str-valued dict) — the
+                    # empty-Counter fast path silently copies the strings,
+                    # then string-concatenates, and only raises on a novel
+                    # key (v1 job died exactly here). Count "site:tile"
+                    # pairs instead, matching the R3c keys.
+                    census_pqr.update(
+                        "%s:%s" % kv for kv in o[5].items())
             key = api.removed or "build1"
             row = {
                 "system": api.build["name"], "key": key,

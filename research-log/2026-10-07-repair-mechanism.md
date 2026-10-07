@@ -78,8 +78,39 @@ of that interchangeability is the row-agnostic "-t" misread.
 
 ## kTAM half
 
-(collected after the queue job completes; see trap_grid.out receipt
-and the tick card for verdicts R2-R4.)
+**v1 run (job hxq-71568fa80ca466b4) failed post-simulation — harness
+bug, not science.** All 12,000 trajectories simulated, then
+aggregation crashed: `Counter.update(str-valued dict)` abuses
+Python's empty-Counter fast path (a silent `dict.update` copy), then
+string-concatenates counts (the receipt shows `"0,1": "S1S1..."`)
+and only raises `TypeError` when a novel key meets an int.
+Fixed to count `"site:tile"` pairs (comment in-source); receipt
+kept as queue-result-v1-failed.txt. Resubmitted as v2 (job
+hxq-7cb04524b6e6bb84, request 7cb04524b6e6bb…, nonce
+repair-mechanism-v2).
+
+**Partial v1 evidence (valid counters, census field garbage):**
+- build1 dG 0.5/2/4: pqr 0.554/0.758/0.986; read-time lock-squat
+  rate 0.314/0.118/0.000 (R4 monotonicity already visible, and the
+  dG-4 zero is striking); pqr-and-blocked 9/3/0.
+- Top squatters at dG 0.5: Vp@(3,2)=107, DBr@(3,3)=70, Vp@(3,3)=59,
+  V0p@(3,1)=52 — **R3a confirmed early** (Vp top-1 at (3,2), V0p
+  top-1 at (3,1)). New structural insight: the Vp@(3,2) squatter
+  exposes N=p-t-done, and DBr rides it — Vp@(3,2)+DBr@(3,3) is a
+  mutual b=2 squatter STACK (squatters stabilizing squatters),
+  parallel to the tick-22 DBr+L3 repair trap.
+- Vp-missing dG 0.5: pqr 0.864 (ratio 1.56, reproducing tick-23's
+  1.53), vacancy occupied by D2T in 389/432 = 90% of strict-pqr
+  terminals (L2 10%) — **R3b_Vp confirmed at 90%**, the b=2
+  substitution channel from the static census. Blocked only 6.8%.
+- Preliminary R2: conditional-on-clean pqr build1 0.781 vs Vp-missing
+  0.927 — gap 0.146, under the 0.15 falsifier gate but not the
+  0.10 target; trap relief explains most of the exceeds-parity gap,
+  whether the residual 0.15 is noise or a second mechanism is
+  exactly what v2's V0p/D1T/D2T arms decide.
+
+Full verdicts R2-R4 land with the v2 receipt (trap_grid.out); the
+receipt-pin tests activate then.
 
 ## Honest limits
 
