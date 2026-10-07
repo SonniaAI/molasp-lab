@@ -1,0 +1,272 @@
+"""d4 — emit-time off-channel census (designs/004, lock-site integrity).
+
+Given the emitted tile inventory, the seed, and the predicted
+canonical assembly (one site per tile), enumerate every (site, tile)
+pair with total bond >= 1 that is not the canonical occupant: the
+misincorporation channels the no-mismatch kTAM actually exposes.
+This is the compiler-facing lift of the tick-24 measurement code
+(``evidence/2026-10-07-repair-mechanism/trap_census.py``, whose
+published receipt this module's tests pin against).
+
+Severity: WARNING, not fatal.  d2/d3 fire on wrong compiles; a
+squatter is a kinetic hazard with measured dG dependence (→ 0 by
+dG 4), not a semantic error.  The report therefore carries the
+measured kinetic context (R4 squat decay, R3b repair rates, P2
+dwell ratio) so a consumer can weigh the repairability trade —
+value-glue sharing buys substitution repair (74.9–97%) at the cost
+of lock squatters (31.4% blocked at dG 0.5) and the cross-row lock
+misread (23/23 of the L3-arm false positives) — with numbers, not a
+default nobody noticed.
+
+Report shape (``check_d4``)::
+
+    {
+      "system": <build name>,
+      "severity": "warning",
+      "off_channel": {"x,y": {tile: bond, ...}, ...},
+      "off_channel_sites_per_species": {tile: ["x,y", ...], ...},
+      "lock_hazards": {"x,y": {tile: bond, ...}, ...},   # lock sites only
+      "lock_deep_probe": {"x,y": {west_tile: {tile: bond}}},
+      "lock_misreads": {"x,y": {west_tile: {lock_tile: bond}}},
+      "measured_context": {... quoted numbers + sources ...},
+    }
+
+``lock_misreads`` is the subset of the one-west-substitution deep
+probe where the channel tile is itself a lock tile (the L2-style
+cross-row misread: a lock reads any ``-t`` glue as TRUE regardless
+of row).  The deep probe substitutes the west neighbour of each
+lock site with every tile that bonds there before testing lock-site
+channels — a bounded two-site search catching channels that need a
+single background substitution.
+
+Conventions (this geometry family, designs/001-003): the
+canonical assembly is derived structurally per row — the spine
+tile (no W glue) sits at x=0, the row-entry tile (``go{i}`` on W)
+at x=1, the remaining via/conduit tile at x=2, and the lock tile
+(named ``L*``, the lab's decode-reader convention) at x=3 — from
+``row_of`` (``canonical_assembly``); lock sites follow the same
+``L*`` convention.  Both canon and lock_sites can be supplied
+explicitly for other conventions.
+"""
+from __future__ import annotations
+
+FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
+OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
+
+# designs/002 v2.0 row-typed-spine exemption: spine self-bonds are
+# strength 2 (with strength-1 spines nothing attaches in row 1 at
+# tau=2); all other matched glues are cooperative strength 1.
+DEFAULT_STRENGTH = {("SP1", "SP1"): 2, ("SP2", "SP2"): 2, ("SP3", "SP3"): 2}
+
+# Measured kinetic context quoted verbatim into every report so the
+# hazard severity is read against numbers, not vibes.  Sources are
+# committed receipts; d4 itself is static arithmetic (non-goal:
+# kinetics — designs/004).
+MEASURED_CONTEXT = {
+    "squat_blocked_rate_by_dG": {"0.5": 0.314, "2.0": 0.118, "4.0": 0.000},
+    "substitution_repair_rates": {
+        "D1T fills V0p vacancy": 0.749, "D2T fills Vp vacancy": 0.901,
+        "V0p repairs D1T-missing": 0.94, "Vp repairs D2T-missing": 0.97},
+    "lock_dwell_ratio_nonpqr_over_pqr": 4.5059,
+    "sources": [
+        "evidence/2026-10-07-repair-mechanism/trap_grid.out (R3b, R4)",
+        "evidence/2026-10-07-vp-residual/vp_residual.out (P2 dwell)",
+    ],
+}
+
+
+def glue_strength(g1, g2, strength=None):
+    """Bond strength of two opposing face glues (0 when either is
+    blank or the names differ)."""
+    if not g1 or not g2:
+        return 0
+    table = DEFAULT_STRENGTH if strength is None else strength
+    if (g1, g2) in table:
+        return table[(g1, g2)]
+    return 1 if g1 == g2 else 0
+
+
+def matched_strength(build, asm, site, tile_name, strength=None):
+    """Total bond strength for ``tile_name`` at ``site`` given
+    assembly ``asm`` (seed cells always present, exposing their
+    north faces; sites at y=0 read the seed glue table directly)."""
+    faces = build["tiles"][tile_name]
+    total = 0
+    for face, (dx, dy) in FACE_DIR.items():
+        g1 = faces.get(face)
+        if not g1:
+            continue
+        nx, ny = site[0] + dx, site[1] + dy
+        if ny == 0 and (nx, 0) in build["seed"]:
+            g2 = build["seed"][(nx, 0)]
+        elif (nx, ny) in asm:
+            g2 = build["tiles"][asm[(nx, ny)]].get(OPPOSITE[face])
+        else:
+            continue
+        total += glue_strength(g1, g2, strength)
+    return total
+
+
+def canonical_assembly(build):
+    """Derive the predicted canonical assembly (one site per tile)
+    from ``row_of`` and the row structure: per row, the spine tile
+    (no W glue) at x=0, the row-entry tile (``go{i}`` on W) at x=1,
+    the remaining via/conduit tile at x=2, the lock tile (``L*``) at
+    x=3.  Name-agnostic except for the ``L*`` lock convention, so
+    slot-B readers with D-prefix names (e.g. DBr at x=2 in the AND
+    builds) place correctly."""
+    by_row = {}
+    for tname, row in build["row_of"].items():
+        by_row.setdefault(row, []).append(tname)
+    canon = {}
+    for row, tnames in sorted(by_row.items()):
+        spine = [t for t in tnames if not build["tiles"][t].get("W")]
+        entry = [t for t in tnames
+                 if build["tiles"][t].get("W") == f"go{row}"]
+        lock = [t for t in tnames if t.startswith("L")]
+        via = [t for t in tnames
+               if t not in spine and t not in entry and t not in lock]
+        placed = {0: spine, 1: entry, 2: via, 3: lock}
+        for x, bucket in placed.items():
+            if len(bucket) != 1:
+                raise ValueError(
+                    f"row {row}: column {x} is not one-tile ({bucket}); "
+                    "the designs/003 row structure does not hold — pass "
+                    "canon explicitly")
+            canon[(x, row)] = bucket[0]
+    return canon
+
+
+def infer_lock_sites(canon):
+    """Lock sites = canonical occupants named ``L*`` (the decode
+    readers; lab convention from designs/003)."""
+    return tuple(sorted(s for s, t in canon.items() if t.startswith("L")))
+
+
+def skey(site):
+    return "%d,%d" % site
+
+
+def off_channel(build, canon, strength=None):
+    """The who-can-squat-where table: per site, every non-canonical
+    inventory tile bonding >= 1 against the canonical background."""
+    table = {}
+    for site in sorted(canon):
+        squatters = {}
+        for tile in sorted(build["tiles"]):
+            if tile == canon[site]:
+                continue
+            b = matched_strength(build, canon, site, tile, strength)
+            if b >= 1:
+                squatters[tile] = b
+        if squatters:
+            table[skey(site)] = squatters
+    return table
+
+
+def lock_deep_probe(build, canon, lock_sites, strength=None):
+    """Channels at each lock site allowing one WEST-neighbour
+    substitution of the canonical background: per lock site,
+    {west_substitute: {lock-site tile: bond}} for bonds >= 1 by any
+    tile other than the canonical lock tile (any channel when the
+    canonical lock tile is absent from the inventory)."""
+    out = {}
+    for lock in sorted(lock_sites):
+        west = (lock[0] - 1, lock[1])
+        if west not in canon:
+            continue
+        west_canon = canon[west]
+        west_options = []
+        if west_canon in build["tiles"]:
+            west_options.append(west_canon)
+        for tile in sorted(build["tiles"]):
+            if tile == west_canon:
+                continue
+            if matched_strength(build, canon, west, tile, strength) >= 1:
+                west_options.append(tile)
+        found = {}
+        for wtile in west_options:
+            bg = dict(canon)
+            bg[west] = wtile
+            channels = {}
+            for tile in sorted(build["tiles"]):
+                if tile == canon[lock]:
+                    continue
+                b = matched_strength(build, bg, lock, tile, strength)
+                if b >= 1:
+                    channels[tile] = b
+            if channels:
+                found[wtile] = channels
+        if found:
+            out[skey(lock)] = found
+    return out
+
+
+def lock_misreads_from(probe):
+    """Subset of the deep probe where the lock-site channel tile is
+    itself a lock tile — the cross-row misread class (a lock reads
+    any ``-t`` glue on W as TRUE, regardless of row).  Deep-probe
+    channels already exclude the canonical lock tile, so every
+    ``L*`` channel here is a WRONG-row lock sitting at a lock site."""
+    out = {}
+    for site, wests in probe.items():
+        for west, channels in wests.items():
+            mis = {t: b for t, b in channels.items() if t.startswith("L")}
+            if mis:
+                out.setdefault(site, {})[west] = mis
+    return out
+
+
+def check_d4(build, canon=None, *, lock_sites=None, strength=None):
+    """Emit-time off-channel census (d4).  WARNING severity: returns
+    the report; never gates emission (designs/004 A3)."""
+    if canon is None:
+        canon = canonical_assembly(build)
+    if lock_sites is None:
+        lock_sites = infer_lock_sites(canon)
+    oc = off_channel(build, canon, strength)
+    per_species = {}
+    for site, squatters in oc.items():
+        for tile in squatters:
+            per_species.setdefault(tile, []).append(site)
+    probe = lock_deep_probe(build, canon, lock_sites, strength)
+    report = {
+        "system": build.get("name", "<unnamed>"),
+        "severity": "warning",
+        "off_channel": oc,
+        "off_channel_sites_per_species": {
+            t: sorted(s) for t, s in sorted(per_species.items())},
+        "lock_hazards": {s: sq for s, sq in oc.items()
+                         if s in {skey(l) for l in lock_sites}},
+        "lock_deep_probe": probe,
+        "lock_misreads": lock_misreads_from(probe),
+        "measured_context": MEASURED_CONTEXT,
+    }
+    return report
+
+
+def d4_report_lines(report):
+    """Human-readable warning block for the emit log."""
+    lines = [f"d4 off-channel census ({report['system']}) — "
+             f"severity {report['severity']} (kinetic hazard, not a "
+             "semantic error; does not gate emission)"]
+    for site, sq in sorted(report["lock_hazards"].items()):
+        for tile, b in sorted(sq.items()):
+            lines.append(f"  lock hazard: {tile} squats {site} at bond {b}")
+    for site, wests in sorted(report["lock_misreads"].items()):
+        for west, mis in sorted(wests.items()):
+            for tile, b in sorted(mis.items()):
+                lines.append(f"  lock misread: {tile} at {site} (bond {b}) "
+                             f"via west substitution {west}")
+    ctx = report["measured_context"]
+    lines.append(
+        "  measured context: lock-squat block rate "
+        + " -> ".join(f"{v} (dG {k})" for k, v in
+                      sorted(ctx["squat_blocked_rate_by_dG"].items(),
+                             key=lambda kv: float(kv[0])))
+        + f"; substitution repair "
+        + "/".join(str(v) for v in
+                   ctx["substitution_repair_rates"].values())
+        + f"; non-pqr lock dwell {ctx['lock_dwell_ratio_nonpqr_over_pqr']}x "
+          "pqr — pick the read window against these numbers")
+    return lines

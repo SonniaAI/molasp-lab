@@ -31,6 +31,11 @@ Emit-time checks (both fatal, both static):
       under the prediction has its head predicted; support: every
       predicted non-fact atom has a live rule).  This is the check
       that fired on the tick-20 wrong compile W2.
+  d4  off-channel census (designs/004) — WARNING severity, attached
+      to the emitted build as ``build["d4"]``: every (site, tile)
+      misincorporation channel the inventory admits against the
+      canonical assembly, lock-site hazards called out, measured
+      kinetic context quoted.  Reports, never gates.
 
 Output: a build dict in exactly the tiles_orand BUILDS shape
 (name/rows/row_of/seed/tiles), so the existing aTAM BFS checkers
@@ -46,6 +51,8 @@ and programs needing > 1 derived row chain beyond the corpus shape
 are refused loudly until a design pins them.
 """
 from __future__ import annotations
+
+from . import offchannel
 
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
@@ -285,7 +292,7 @@ def compile_program(text: str, predicted=None, name=None):
                 emit(f"L{i}", {"W": f"{a}-f", "S": f"base{i}",
                                "N": lock_n}, i)
 
-    return {
+    build = {
         "name": name or "compiled",
         "rows": rows,
         "row_of": row_of,
@@ -294,6 +301,16 @@ def compile_program(text: str, predicted=None, name=None):
         "predicted": predicted,
         "program": text,
     }
+    # d4 off-channel census (designs/004): WARNING severity — a
+    # squatter is a kinetic hazard, not a semantic error, so this
+    # reports and never gates.  A d4 failure records itself instead
+    # of blocking emission (A3: d2/d3 behaviour unchanged).
+    try:
+        build["d4"] = offchannel.check_d4(build)
+    except Exception as exc:                      # noqa: BLE001
+        build["d4"] = {"severity": "error",
+                       "detail": f"d4 census failed: {exc}"}
+    return build
 
 
 def structural_signature(build):
