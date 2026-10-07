@@ -206,3 +206,37 @@ before registration: a dropped `dg` argument, the missing-species canon
 inheritance (Vp-missing keeps BUILD1's canonical map — the vacancy is a
 site whose canonical occupant was removed), and the `is_vp` arm-name
 predicate missing the `_dG2` suffix arms. All fixed; smoke exit 0.
+
+## (b) Evaluated (tick 38, 2026-10-07) — FALSIFIED as a mitigation; the class migration is the finding
+
+Receipt `evidence/2026-10-07-strength2-lock/strength2.out` (pre-
+registration 63d12d9 precedes the job; archive blob = HEAD tarball).
+Machine verdicts: **K5 CONFIRMED (calibrated: 0.308/0.904 vs refs
+0.27/0.908), K8 CONFIRMED (lock capture accelerates 25097 → 21444) —
+K1, K2, K3, K6, K7 FALSIFIED.**
+
+- K1: s2 blocked 0.314 vs family 0.308 — no read-block relief. The
+  squatter class MIGRATES: Vp@3,2 123→49, V0p@3,1 75→27, lo-read
+  stack co-occurrence 0.305→0.096 (K3), replaced by misplaced LOCK
+  tiles L2@3,3 67 / L3@3,2 43 riding the site-agnostic strength-2 W
+  read + base relays.
+- K2: substitution repair collapses 0.904 → 0.412 (L3@3,2 82/500
+  squats the vacancy's east lock in the Vp arm, starving the fill's
+  E→lock bond).
+- K7: UNIT_ONLY worsens 0.268 → 0.352 with the identical misplaced-
+  lock signature — corpus-general failure.
+- K6: dG 2 starves the block (0.314→0.146) but the fill RISES
+  (0.412→0.464) — wrong direction for a mitigation knob.
+
+**Principle (third sibling): kinetic reinforcement is not hazard
+elimination** — static elimination ≠ kinetic elimination (tick 31),
+renames are blind to displaced-pair recombination (R1), strength is
+blind to displaced placement. The duality survives its first
+non-rename knob: the hazard is carried by the glue, not the tile.
+
+Consequences: (b) closed as a failed mitigation; the compiler-guidance
+line (d4 census) remains the only lever with a measured win. Future
+encodings price against BOTH the V-classes and the L-misplacement
+class this study discovered; d4 should flag lock-tile off-channel
+placements as a distinct hazard class (invisible in the family census:
+base-relay b=1 only, dominant the moment lock bonds are reinforced).
