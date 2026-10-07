@@ -201,3 +201,24 @@ A static `lock_hazards {}` is no longer readable as kinetic
 elimination.  Remaining follow-ups: trajectory-level mechanism of
 the surviving stable channel (history-aware rerun); kinetic test
 of the glue-CLASS boundary (never-qualified relays).
+
+## Refinement (tick 33, 2026-10-07) — stack classes, not pair channels
+
+The history-aware recombination study (evidence/2026-10-07-
+recombination, job hxq-e38ad7f3d5f377b9, pre-registered at 3fa1b4a)
+kinetically refines the tick-32 pair-channel reading:
+
+- The row read-block (0.141) is carried by the VERTICAL lock stack
+  Vp@(3,2) N<->DBr@(3,3) (141/141 co-occurrence), not the
+  {west D2T -> Vp} pair: D2T@(2,2) co-stacks (E-bond 141/142) but
+  no D2T removal unseats Vp (mutual_pair_link 0/141).
+- The row stable repair channel (0.155) is a 2-of-3 REDUNDANT
+  relay stack N->DAr + S->V0p + W->S2 (153/155 at b=3; E->L2 in
+  zero row holds). Single-partner load-bearing analysis is
+  therefore the WRONG severity axis for the row-scope regime.
+- d4 follow-up (next implementer): extend check_d4 reporting with
+  (a) the vertical lock-stack class and (b) the vacancy relay-stack
+  class, with the measured row context (0.141 vertical-stack block;
+  0.155 relay-stack repair, 98.7% b=3) quoted in
+  measured_context.row_scope_kinetics. Pair channels stay, labeled
+  as sub-classes. Acceptance: pins against recombination.out.

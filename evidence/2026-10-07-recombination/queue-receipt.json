@@ -1,0 +1,28 @@
+{
+  "admitted": 1791344017.179502,
+  "archive_blob": "4684430d9030cd7d0a7a60717a74b736b8a9c1821a5365bb38f99fb94a78d67a",
+  "collection": "result collected in-run 2026-10-07T03:34Z via job_queue.py result; HX-FILE sections parsed; stdout -> recombination.out (10 lines)",
+  "command": [
+    "python3",
+    "/work/source/evidence/2026-10-07-recombination/ktam_recombination.py"
+  ],
+  "cpu": 1,
+  "execution_status": 0,
+  "finished": 1791344044.5251064,
+  "hx_queue_exit": 0,
+  "id": "e38ad7f3d5f377b9345dd9f376f49208508e0e8af2a6fb724369808a0404b957",
+  "image": "paperclip-test",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a347c2fdd"
+  ],
+  "image_verified": true,
+  "job": "hxq-e38ad7f3d5f377b9",
+  "memory": 1073741824,
+  "node": "spark-4a06",
+  "nonce": "recombination-v1",
+  "pre_registration_commit": "3fa1b4a3a17c667a3b4b230c0086ebf8b3c842f3",
+  "state": "complete",
+  "submit_state_at_submit": "queued",
+  "wall": 3600,
+  "wall_seconds": 27.3
+}
