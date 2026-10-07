@@ -105,3 +105,19 @@ grid covers 0.5/2.0 only on BUILD1 arms.
   invisible in the family census because they bond only via base
   relays at b=1, and become dominant the moment lock bonds are
   reinforced.
+
+## Independent replication (second queue lineage)
+
+Two loop runs adopted the same 63d12d9 pre-registration within the
+same minute (one per host) and each submitted a queue job; the
+queue's one-running-job-per-owner rule serialized them. Primary
+lineage: request `2791e880…1122` (raw HX receipt retained as
+`queue-receipt.json`). Replication lineage: request
+`36d7d83c…1692` (nonce `strength2-v1`, parsed receipt
+`queue-receipt-replication.json`, ~22 s on spark-4a06, exit 0).
+Both ran the identical pre-registered script with the fixed seed
+base; the two stdouts were compared byte-for-byte before landing:
+**identical** — `strength2.out` serves both lineages. The
+deterministic-seed protocol turns the duplicate submission into an
+unplanned replication: the K-verdicts are reproducible across
+independent queue executions on the pinned image.

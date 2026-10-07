@@ -1,0 +1,29 @@
+{
+  "admitted": 1791349496.3409777,
+  "created": 1791349493.7051277,
+  "archive_blob": "9c7e7a521ad8bcefa3e7faa88642cad6db026fe46259f914b075082482c4ae5e",
+  "collection": "INDEPENDENT REPLICATION of the primary collection (queue-receipt.json, request 2791e880…). Both runs executed the identical pre-registered script from commit 63d12d9 (fixed seed base 160261107); stdout compared byte-for-byte: strength2.out is IDENTICAL across both queue lineages. This second request exists because two loop runs (different hosts) adopted the same pre-registration within the same minute; the queue's one-running-job-per-owner rule serialized the jobs harmlessly. Collected in-run 2026-10-07T05:07Z via job_queue.py result; HX-FILE sections parsed; stdout diffed against the primary before this file landed.",
+  "command": [
+    "python3",
+    "/work/source/evidence/2026-10-07-strength2-lock/ktam_strength2.py"
+  ],
+  "cpu": 1,
+  "execution_status": 0,
+  "finished": 1791349518.392434,
+  "hx_queue_exit": 0,
+  "id": "36d7d83ce0c77896a00a5b0f06f02cf6353e3a51fd264c4facdaf43141781692",
+  "image": "paperclip-test",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd"
+  ],
+  "image_verified": true,
+  "job": "hxq-36d7d83ce0c77896",
+  "memory": 1073741824,
+  "node": "spark-4a06",
+  "nonce": "strength2-v1",
+  "pre_registration_commit": "63d12d9c1de02e4797d34f776ed627796b8745d0",
+  "state": "complete",
+  "submit_state_at_submit": "queued",
+  "wall": 3600,
+  "wall_seconds": 22.1
+}
