@@ -32,6 +32,11 @@ Report shape (``check_d4``)::
                                      # deep-probe channels split at tau
       "lock_deep_probe": {"x,y": {west_tile: {tile: bond}}},
       "lock_misreads": {"x,y": {west_tile: {lock_tile: bond}}},
+      "lock_misplacements": {"x,y": {lock_tile: {"bond": int,
+                     "faces": {face: bond}, "w_read": bool}}},
+                                  # lock tiles at non-own sites (ANY
+                                  # site class) — the tile-class view
+                                  # (tick 39, designs/006)
       "measured_context": {... quoted numbers + sources ...},
     }
 
@@ -104,11 +109,23 @@ MEASURED_CONTEXT = {
         "family_refs": {"blocked": 0.27, "stable_repair_fill": 0.908,
                         "misread": 0.056},
     },
+    "strength2_lock_misplacements": {
+        "s2_b1": {"L1@(3,2)": 5, "L2@(3,3)": 67, "L3@(3,2)": 43},
+        "s2_b1_Vp_arm": {"L3@(3,2)": 82},
+        "s2_unit": {"L1@(3,2)": 3, "L2@(3,3)": 83, "L3@(3,2)": 44},
+        "fam_refs": {"L2@(3,3)": 10, "unit_L2@(3,3)": 12},
+        "note": "terminal squatter counts /500: the misplaced-lock "
+                "class is minor at family strength and dominant "
+                "under the strength-2 lock read (K1/K2 FALSIFIED "
+                "as mitigation, tick 38)",
+    },
     "sources": [
         "evidence/2026-10-07-repair-mechanism/trap_grid.out (R3b, R4)",
         "evidence/2026-10-07-vp-residual/vp_residual.out (P2 dwell)",
         "evidence/2026-10-07-row-scope-ktam/row_scope.out (RS1-RS4)",
         "evidence/2026-10-07-recombination/recombination.out (H1-H4)",
+        "evidence/2026-10-07-strength2-lock/strength2.out "
+        "(K1/K2 terminal squatter tables)",
     ],
 }
 
@@ -200,6 +217,67 @@ def off_channel(build, canon, strength=None):
         if squatters:
             table[skey(site)] = squatters
     return table
+
+
+def lock_misplacements(build, canon, strength=None, bond_fn=None):
+    """Lock-tile off-channel PLACEMENTS (tick 39, designs/006): the
+    TILE-class view of the census — every site (any site class)
+    where a lock tile (``L*``) that is not the canonical occupant
+    bonds >= 1 against the canonical background.
+
+    This is the class the strength-2 falsification discovered (tick
+    38): at family strength the misplaced locks ride base relays
+    and the W read at b=1 — present in ``off_channel`` but surfaced
+    by no lock layer, because every existing layer filters by SITE
+    class (lock sites only) or by substitution probe; the family
+    census therefore read "all V-class squatters" (G1) while the
+    L*-placements waited on the glue.  The moment lock bonds are
+    reinforced they dominate (measured: L2@(3,3) 67/500, L3@(3,2)
+    43/500, 82/500 in the Vp arm — strength2.out K1/K2).
+
+    Channel record: ``bond`` is the total under the caller's
+    arithmetic — ``bond_fn=None`` gives the family-strength census
+    bond; pass the tick-38 ``matched_s2`` for the strength-2 view
+    (any ``L*`` W read doubled).  ``faces`` is always the
+    family-strength per-face decomposition, and ``w_read`` flags
+    the W-face channel — the face a strength-reinforced lock read
+    doubles, i.e. exactly the channels that gain under s2.
+    Sites keyed ``x,y`` like every census layer."""
+    out = {}
+    for site in sorted(canon):
+        placements = {}
+        for tile in sorted(build["tiles"]):
+            if not tile.startswith("L") or tile == canon[site]:
+                continue
+            fam_faces = {}
+            for face, (dx, dy) in FACE_DIR.items():
+                g1 = build["tiles"][tile].get(face)
+                if not g1:
+                    continue
+                nx, ny = site[0] + dx, site[1] + dy
+                if ny == 0 and (nx, 0) in build["seed"]:
+                    g2 = build["seed"][(nx, 0)]
+                elif (nx, ny) in canon:
+                    g2 = build["tiles"][canon[(nx, ny)]].get(
+                        OPPOSITE[face])
+                else:
+                    continue
+                b_face = glue_strength(g1, g2, strength)
+                if b_face:
+                    fam_faces[face] = b_face
+            if bond_fn is not None:
+                total = bond_fn(build, canon, site, tile)
+            else:
+                total = sum(fam_faces.values())
+            if total >= 1:
+                placements[tile] = {
+                    "bond": total,
+                    "faces": fam_faces,
+                    "w_read": fam_faces.get("W", 0) >= 1,
+                }
+        if placements:
+            out[skey(site)] = placements
+    return out
 
 
 def lock_deep_probe(build, canon, lock_sites, strength=None):
@@ -415,6 +493,7 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
     haz_split = split_lock_hazards(hazards)
     stacks = vertical_lock_stacks(build, canon, lock_sites, strength)
     relays = vacancy_relay_stacks(build, canon, strength)
+    mispl = lock_misplacements(build, canon, strength)
     report = {
         "system": build.get("name", "<unnamed>"),
         "severity": "warning",
@@ -433,6 +512,7 @@ def check_d4(build, canon=None, *, lock_sites=None, strength=None):
             "substitutions are outside the probe (measured example: "
             "DBr@(3,3) survives row scope at 72/500, row_scope.out RS1)"),
         "lock_misreads": lock_misreads_from(probe),
+        "lock_misplacements": mispl,
         "measured_context": MEASURED_CONTEXT,
     }
     return report
@@ -497,6 +577,17 @@ def d4_report_lines(report):
             for tile, b in sorted(mis.items()):
                 lines.append(f"  lock misread: {tile} at {site} (bond {b}) "
                              f"via west substitution {west}")
+    for site, mis in sorted(report["lock_misplacements"].items()):
+        for tile, ch in sorted(mis.items()):
+            lines.append(
+                f"  lock misplacement: {tile} at {site} "
+                f"(bond {ch['bond']}, faces {ch['faces']}"
+                + (", w-read channel — doubles under a "
+                   "strength-reinforced lock read" if ch["w_read"]
+                   else "")
+                + ") — the misplaced-lock class measured dominant "
+                  "under s2 (L2@3,3 67, L3@3,2 43, 82 Vp-arm of 500; "
+                  "strength2.out K1/K2)")
     ctx = report["measured_context"]
     lines.append(
         "  measured context: lock-squat block rate "
