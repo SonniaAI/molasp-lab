@@ -101,3 +101,21 @@ Kinetic rates (d4 is static arithmetic); proofreading/tile
 concentration tuning; multi-geometry generalisation — the census runs
 on whatever geometry the compiler emits, but the *numbers quoted here*
 are the 4-column AND build only.
+
+## Evaluated (tick 29, 2026-10-07)
+
+The knob is implemented and measured: `molasp/offchannel.py::
+apply_lock_glue_scope` + `lock_glue_scope_reports` (d4 under both
+scopes at emit time), pinned in `tests/test_glue_scope.py`, numbers
+and related-work positioning in
+`research-log/2026-10-07-glue-scope-related-work.md`.
+Row scope on BUILD1: lock hazards {} and lock misreads {} with the
+canonical assembly intact (every site still ≥ τ=2); repair bonds
+D1T/D2T at their vacancy sites 2/2 → 1/1 — "kills the misread
+channel and the lock squat and the substitution repair" holds as
+stated, all three being the same bonds. Honest boundary found on
+BUILD3: Fp@(3,3) survives row scope (its hold rides false-family
+glues the current `-t`/`-t-done` qualification does not cover) —
+extending the rule to `-f`/`-f-done` is the recorded follow-up;
+until then the knob eliminates the value-family hazard class, not
+every hazard.

@@ -270,3 +270,97 @@ def d4_report_lines(report):
         + f"; non-pqr lock dwell {ctx['lock_dwell_ratio_nonpqr_over_pqr']}x "
           "pqr — pick the read window against these numbers")
     return lines
+
+
+# ---------- lock_glue_scope knob (designs/004) ---------------------------
+
+def apply_lock_glue_scope(build, scope="family", canon=None):
+    """Return a copy of ``build`` under the ``lock_glue_scope`` knob
+    (designs/004).  ``family`` (the emitted default) returns the
+    build unchanged: value glues (``{atom}-t`` / ``{atom}-t-done``)
+    are shared across a row's tiles, buying substitution repair
+    (74.9-97% measured) at the cost of lock squatters and the
+    cross-row lock misread.  ``row`` qualifies the shared
+    value-family bonds per canonical row so the lock column no
+    longer reads the propagation family:
+
+    - lock-read bonds (west via E <-> lock W) become ``{g}-lk{i}``
+      for the lock's row ``i`` — the canonical read survives, the
+      V.W-vs-V.E squat (same glue on both via faces) does not;
+    - canonical vertical relay bonds on value glues become
+      ``{g}-lk{i+1}`` for the row pair they span — the relay
+      survives, the cross-row substitution holds that ride it do
+      not.
+
+    Every rename touches a canonical bond on BOTH faces, so the
+    canonical assembly's bond profile is unchanged by construction;
+    what breaks is every OFF-channel use of the same bonds — squat,
+    misread enabler, and substitution repair together (designs/004:
+    all three are the same bonds).  Not a free fix: the repair
+    channel dies with the hazards (measured trade in
+    ``lock_glue_scope_reports``).
+    """
+    import copy
+    if scope == "family":
+        return copy.deepcopy(build)
+    if scope != "row":
+        raise ValueError(
+            f"lock_glue_scope must be 'family' or 'row', got {scope!r}")
+    if canon is None:
+        canon = canonical_assembly(build)
+    new = copy.deepcopy(build)
+    tiles = new["tiles"]
+
+    def value_family(g):
+        return g.endswith("-t") or g.endswith("-t-done")
+
+    renames = []
+    for (x, y) in sorted(canon):
+        t = canon[(x, y)]
+        east = canon.get((x + 1, y))
+        if east is not None and east.startswith("L"):
+            g = tiles[t].get("E")
+            if g and g == tiles[east].get("W") and value_family(g):
+                ng = f"{g}-lk{y}"
+                renames += [(t, "E", ng), (east, "W", ng)]
+        north = canon.get((x, y + 1))
+        if north is not None:
+            g = tiles[t].get("N")
+            if g and g == tiles[north].get("S") and value_family(g):
+                ng = f"{g}-lk{y + 1}"
+                renames += [(t, "N", ng), (north, "S", ng)]
+    for t, face, ng in renames:
+        tiles[t][face] = ng
+    return new
+
+
+def lock_glue_scope_reports(build, canon=None):
+    """d4 under both glue-family scopes — the emit-time view of the
+    repairability trade (designs/004): ``family`` buys substitution
+    repair and pays in lock squatters + the cross-row misread;
+    ``row`` kills both hazard classes and the repair channel with
+    them.  Also carries ``repair_bonds``: the static bond strength
+    of the two census substitution tiles at their vacancy sites
+    under each scope (the repair channel's stable-b=2 arithmetic,
+    same bonds the census measures)."""
+    if canon is None:
+        canon = canonical_assembly(build)
+    row_build = apply_lock_glue_scope(build, "row", canon)
+    fam_rep = check_d4(build, canon)
+    row_rep = check_d4(row_build, canon)
+
+    def repair_bonds(b):
+        # the two census substitution pairs (tick 24): D1T fills the
+        # V0p vacancy at (2,1), D2T the Vp vacancy at (2,2) — skipped
+        # for inventories without those tiles (e.g. wrong compiles).
+        pairs = (("D1T", (2, 1)), ("D2T", (2, 2)))
+        return {t: matched_strength(b, canon, s, t)
+                for t, s in pairs if t in b["tiles"]}
+
+    return {
+        "family": fam_rep,
+        "row": row_rep,
+        "row_build": row_build,
+        "repair_bonds": {
+            "family": repair_bonds(build), "row": repair_bonds(row_build)},
+    }
