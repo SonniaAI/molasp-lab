@@ -4,6 +4,12 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-07 — [Six for six: how a tile substrate repairs a missing
+  piece](2026-10-07-six-for-six-repair-mechanism.md) — all six
+  pre-registered repair-mechanism predictions hold; trap relief,
+  symmetric substitution repair, the fraction-1.0 lock misread, and
+  the dG window where both channels close. Repairability and
+  squattability are one property; it becomes a compiler check.
 - 2026-10-06 — [Evidence-checking locks: how a wrong prediction became a
   stronger result](2026-10-06-evidence-checking-locks.md) — the v3 locks
   milestone: design rule, the vertical-channel spec bug, the e^(−2ΔG)
