@@ -1,0 +1,41 @@
+/* molasp-lab reading copy — editorial theme, light + dark */
+:root {
+  --paper:#f7f4ee; --ink:#181510; --muted:#6d6455; --rule:#e2dccb;
+  --panel:#141210; --panel-ink:#e8e2d2; --accent:#a3341f; --link:#1e4d6b;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper:#16130f; --ink:#e8e2d2; --muted:#a99f8a; --rule:#2e2a22;
+          --panel:#0e0c0a; --panel-ink:#e8e2d2; --accent:#e0603b; --link:#7db6d6; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0 auto; padding: 0 1.25rem 4rem; max-width: 46rem;
+  background: var(--paper); color: var(--ink);
+  font: 400 19px/1.72 Charter, Georgia, "Times New Roman", serif;
+  text-rendering: optimizeLegibility;
+}
+header.site {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding: 1.1rem 0 .9rem; border-bottom: 1px solid var(--rule);
+  margin-bottom: 2.2rem;
+}
+.brand { font-weight: 700; letter-spacing: .02em; text-decoration: none; color: var(--ink); font-size: 1.05rem; }
+nav { display: flex; gap: 1.1rem; font: 500 .82rem/1 system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+nav a { color: var(--muted); text-decoration: none; }
+nav a:hover { color: var(--accent); }
+h1 { font-size: 1.75rem; line-height: 1.25; margin: 0 0 .4rem; }
+h2 { font-size: 1.25rem; margin: 2.4rem 0 .8rem; }
+h3 { font-size: 1.05rem; margin: 0 0 .35rem; }
+a { color: var(--link); }
+p.meta { color: var(--muted); font: 500 .8rem/1.5 system-ui, sans-serif; letter-spacing: .05em; text-transform: uppercase; margin: 0 0 1.6rem; }
+figure.hero { margin: 0 0 1.6rem; }
+figure.hero img { width: 100%; height: auto; border-radius: 6px; display: block; }
+pre { background: var(--panel); color: var(--panel-ink); padding: .9rem 1.1rem; border-radius: 6px; overflow-x: auto; font: 400 .84rem/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+code { background: rgba(127,127,127,.14); padding: .08em .3em; border-radius: 3px; font: 400 .86em ui-monospace, Menlo, monospace; }
+pre code { background: transparent; padding: 0; }
+blockquote { margin: 1.2rem 0; padding: .2rem 1.1rem; border-left: 3px solid var(--accent); color: var(--muted); }
+article.card { border-top: 1px solid var(--rule); padding: 1.1rem 0; }
+article.card time { color: var(--muted); font: 500 .74rem/1.5 system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+section.docs ul, ul.docs { columns: 2; gap: 2rem; font-size: .92em; }
+footer { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); color: var(--muted); font: 400 .82rem/1.6 system-ui, sans-serif; }
