@@ -1,0 +1,25 @@
+{
+  "id": "6da45fb7e03bf7369671ef1af1e552884a5b347052243555e242cc0612b0c593",
+  "job": "hxq-6da45fb7e03bf736",
+  "nonce": "row-scope-v2",
+  "image": "paperclip-test",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd"
+  ],
+  "image_verified": true,
+  "node": "spark-4a06",
+  "cpu": 1,
+  "memory": 1073741824,
+  "wall": 3600,
+  "archive_blob": "a94436024cf9a0813a574289df2496bbaee5e7b856c5d39d034c6657518dba1a",
+  "command": [
+    "python3",
+    "/work/source/evidence/2026-10-07-row-scope-ktam/ktam_row_scope.py"
+  ],
+  "state": "complete",
+  "execution_status": 0,
+  "result_blob": "963e0c1198ea1eba425e2f94e797bb7dd141c05eeb4624cef72847e63c517209",
+  "admitted": 1791341887.8540308,
+  "finished": 1791341909.83514,
+  "created": 1791341885.6993418
+}

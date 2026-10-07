@@ -143,3 +143,39 @@ point (equilibrium arithmetic), so RS2 gates STABLE (b>=2) fill;
 and one n=8 terminal showed a D2T+Vp mutual pair reconstituting
 b=2 under row scope — the recombination risk RS2 honestly carries
 into the n=500 run.
+
+## Evaluated (tick 31, 2026-10-07) — kinetic arm closes the glue-scope study
+
+The pre-registered row-scope kTAM validation ran (RS1–RS4, n=500/arm at
+dG 0.5, read-time census; script pre-registered at fb3e08e; the v1
+invocation failure and byte-identical v2 rerun are pinned in the
+receipts). Machine verdicts: RS1 FALSIFIED (row squat-block 0.144, not
+≤ 0.02 — b=1 transient holds still block reads), RS2 FALSIFIED (stable
+D2T repair survives at 0.162, not ≤ 0.02), RS3 CONFIRMED (misread 0.000
+AND row pqr 0.762 = family + 0.18), RS4 CALIBRATED (0.044/0.019
+deviations vs the v2 references).
+
+The knob's measured trade at this protocol point, replacing the static
+extremes recorded at ticks 29/30:
+
+- family: squat-block 0.27, stable repair 0.908, misread 0.056, pqr 0.582
+- row: squat-block 0.144, stable repair 0.162, misread 0.000, pqr 0.762
+
+Consequences for this design doc:
+
+1. "Row scope zeroes the hazard classes" is a statement about b≥2 holds
+   only. The d4 census must add (or at least footnote) a b=1 transient
+   layer: kinetically ~0.14 read-block at dG 0.5 survives qualification
+   (family 0.27).
+2. The repair floor under row scope is 0.162 stable fill — degraded
+   5.6x, not eliminated. The repairability/squattability duality
+   survives the knob that removes the value-family sharing:
+   single-bond geometry keeps both the read-cost and a recombined
+   repair channel alive.
+3. Canonical kinetics IMPROVE under row scope (+0.18 strict-pqr): trap
+   relief at the scope level, consistent with R2/P1.
+
+Follow-ups opened: d4 b=1 layer split (compiler guidance),
+trajectory-level mechanism of the surviving stable channel
+(history-aware rerun), kinetic test of the glue-CLASS boundary
+(never-qualified relays).
