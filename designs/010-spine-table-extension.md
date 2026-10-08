@@ -227,3 +227,17 @@ a measurement error: the generator rewrites its own `.out`, so a
 disk-vs-stdout compare is self-referential. `git status` vs HEAD
 caught it; every future receipt compare must run against HEAD
 (`git diff HEAD -- <receipt>`), never the working-tree file.
+
+## §10.7 Addendum (tick 64, SON-4856): closure measured through n=9
+
+§10.4's "no second hidden cap" was measured at n=5 only. The tick-64
+survey (receipt `evidence/2026-10-08-n6-build-survey/probe.out`;
+record `research-log/2026-10-08-n6-build-survey.md`) extends the
+PC12-DOC family with decorative facts to n=6..9 under pre-registered
+predictions P1–P6: full locks, unique terminal, and full-model decode
+at every n; no refusal as the unit-via distance grows to 7 (p row 1 →
+q2 row n−1). Assemblies fit C(n+4, 4) exactly at every measured point
+n=4..9 — an empirical closed form, unproven from the enumerator
+(open; tick-65 candidate). Scope: one family, one geometry; this
+widens the measured support of §10.4, it is not a theorem. Pins:
+`tests/test_n6_build_survey.py`.

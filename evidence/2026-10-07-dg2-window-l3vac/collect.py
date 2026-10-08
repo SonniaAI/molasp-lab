@@ -21,7 +21,15 @@ Usage:
     python3 collect.py run.out            # writes collection.md
     python3 collect.py run.out -          # writes fragment to stdout
 
-Exit codes: 0 ok; 2 verdict mismatch; 3 malformed run output.
+Exit codes: 0 ok; 2 verdict mismatch; 3 malformed run output;
+64 usage error (wrong argument count).
+
+Tick-64 fix: the documented two-argument file mode previously fell
+into the usage branch, which returned 3 — the code documented as
+"malformed run output" — so a valid run.out was indistinguishable
+from a bad one.  Root cause was never the parser or the file-write
+branch (tick-63 suspicion): the argv-count gate simply never
+implemented the documented default destination.
 """
 import json
 import sys
@@ -220,10 +228,11 @@ def render(per, vs):
 
 
 def main(argv):
-    if len(argv) != 3:
-        print(__doc__)
-        return 3
-    src, dst = argv[1], argv[2]
+    if len(argv) < 2 or len(argv) > 3:
+        print(__doc__, file=sys.stderr)
+        return 64
+    src = argv[1]
+    dst = argv[2] if len(argv) == 3 else "collection.md"
     with open(src) as fh:
         text = fh.read()
     try:

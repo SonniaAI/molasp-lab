@@ -13,6 +13,7 @@ Threshold sources: pre-registration docstring frozen at df958f2
 """
 import importlib.util
 import os
+import tempfile
 import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -194,6 +195,49 @@ class TestCheckAndRender(unittest.TestCase):
                        "DW8", "DW9", "DW10", "DW11", "LV1", "LV2",
                        "CONFIRMED", "INCONCLUSIVE"):
             self.assertIn(needle, frag)
+
+
+class TestFileModeDefaultDestination(unittest.TestCase):
+    """Tick-64 regression: the documented two-argument file mode
+    (`collect.py run.out`) used to fall into the usage branch and
+    return 3 — the code documented as 'malformed run output' — so
+    file-mode exits were untrustworthy after tick 63's collection
+    (dash mode was the working path).  The fix defaults the
+    destination to collection.md and gives usage errors their own
+    exit code so a usage mistake can never masquerade as a malformed
+    run again."""
+
+    def test_two_arg_file_mode_writes_collection_md(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src = os.path.join(tmp, "run.out")
+            with open(src, "w") as fh:
+                fh.write(fixture_stdout())
+            cwd = os.getcwd()
+            os.chdir(tmp)
+            try:
+                rc = collect.main(["collect.py", src])
+                self.assertEqual(rc, 0)
+                out = os.path.join(tmp, "collection.md")
+                self.assertTrue(os.path.exists(out))
+                with open(out) as fh:
+                    self.assertIn("tick 47 collection", fh.read())
+            finally:
+                os.chdir(cwd)
+
+    def test_three_arg_file_mode_still_writes_named_destination(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            src = os.path.join(tmp, "run.out")
+            dst = os.path.join(tmp, "frag.md")
+            with open(src, "w") as fh:
+                fh.write(fixture_stdout())
+            self.assertEqual(
+                collect.main(["collect.py", src, dst]), 0)
+            self.assertTrue(os.path.exists(dst))
+
+    def test_usage_error_is_distinct_from_malformed(self):
+        self.assertEqual(collect.main(["collect.py"]), 64)
+        self.assertEqual(
+            collect.main(["collect.py", "a", "b", "c"]), 64)
 
 
 if __name__ == "__main__":
