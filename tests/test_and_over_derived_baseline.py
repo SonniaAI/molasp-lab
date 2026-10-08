@@ -60,27 +60,41 @@ def _model(text):
     return set(least_model(facts, derived))
 
 
-class AndOverDerivedTrueHeadRefusals(unittest.TestCase):
-    """Gate A fires on the honest (i-1, i-2) placement; gate B is
-    unreachable behind it (PR9-flavor refusal, first)."""
+class AndOverDerivedTrueHeadPositionalArm(unittest.TestCase):
+    """Stage 6 (designs/009 §9.3, tick 60): the derived-hi positional
+    i-2 arm ACCEPTS the honest (i-1, i-2) placement the baseline
+    refused.  PC12-N4 (n=4) is the first fully-assembling
+    AND-over-derived build: unique terminal, full locks, decode ==
+    least model.  PC12-DOC (n=5) compiles but is SPINE-CAPPED at
+    row 5 — measured: the STRENGTH table stops at SP4, so S5 cannot
+    attach (pair strength 1 < TAU 2); the 4-row prefix decodes
+    correctly.  A pre-existing corpus cap (every n<=4 build), not a
+    stage-6 gate; recorded in designs/009 §9.4."""
 
-    def test_pc12_doc_refuses_gate_a_with_rows_4_3(self):
-        with self.assertRaises(UnsupportedGeometry) as cm:
-            compile_program(PC12_DOC, name="PC12doc")
-        msg = str(cm.exception)
-        self.assertIn("conjunctive variant of 'r'", msg)
-        self.assertIn("row-1 via", msg)
-        self.assertIn("got rows (4, 3)", msg)
-        self.assertNotIn("derived row", msg)  # gate B never speaks
+    def test_pc12_n4_compiles_decodes_full_model_with_locks(self):
+        v = check_program("PC12n4", PC12_N4, {"p", "q", "q2", "r"})
+        self.assertEqual(v["predicted"], ["p", "q", "q2", "r"])
+        self.assertEqual(v["terminal_decodes"], [["p", "q", "q2", "r"]])
+        self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
+                          v["terminals"]), (4, 16, 70, 1))
+        self.assertTrue(v["full_locks"])
+        self.assertTrue(v["ok"])
 
-    def test_pc12_n4_refuses_gate_a_with_rows_3_2(self):
-        with self.assertRaises(UnsupportedGeometry) as cm:
-            compile_program(PC12_N4, name="PC12n4")
-        msg = str(cm.exception)
-        self.assertIn("conjunctive variant of 'r'", msg)
-        self.assertIn("row-1 via", msg)
-        self.assertIn("got rows (3, 2)", msg)
-        self.assertNotIn("derived row", msg)
+    def test_pc12_doc_compiles_but_spine_capped_at_row_5(self):
+        v = check_program("PC12doc", PC12_DOC,
+                          {"p", "q", "q2", "r", "s"})
+        self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
+                          v["terminals"]), (5, 20, 70, 1))
+        self.assertFalse(v["full_locks"])   # L5 unreachable: SP5 pair
+        self.assertEqual(v["terminal_decodes"],
+                         [["p", "q", "q2", "s"]])
+
+    def test_pc12_doc_reader_swap_layout_measured(self):
+        build = compile_program(PC12_DOC, name="PC12doc")
+        # consumer-aware passthrough + reader swap (designs/009 §9.2)
+        self.assertEqual(build["tiles"]["Cq2"]["N"], "q-t-done")
+        self.assertEqual(build["tiles"]["DAr"]["S"], "q-t-done")
+        self.assertEqual(build["tiles"]["DBr"]["S"], "q2-t-done")
 
     def test_both_least_models_are_full(self):
         # semantic ground truth: both PC12 shapes carry q2 and r
@@ -144,30 +158,17 @@ class AndOverDerivedFalseHeadSilentAcceptance(unittest.TestCase):
         self.assertIn("column 2 is not one-tile",
                       build["d4"]["detail"])
 
-    def test_pr14_compiles_and_decodes_least_model(self):
-        # designs/009 §4 registered PR14 as a must-stay-LOUD
-        # refusal; measured: it silently compiles.
-        v = check_program("PR14doc", PR14_DOC, {"p", "q", "q2", "s"})
-        self.assertEqual(v["predicted"], ["p", "q", "q2", "s"])
-        self.assertEqual(v["terminal_decodes"], [["p", "q", "q2", "s"]])
-        self.assertEqual(v["dead_variant_glues"], ["and1_r"])
-        self.assertTrue(all(v["dead_glues_absent"].values()))
-        self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
-                          v["terminals"]), (6, 25, 70, 1))
-        self.assertFalse(v["full_locks"])  # z and r rows lock-free
-        self.assertEqual(v["d4_severity"], "error")
-
-    def test_pr14_unlocked_rows_are_z_and_r(self):
-        build = compile_program(PR14_DOC, name="PR14doc")
-        self.assertEqual(build["rows"], {1: "p", 2: "s", 3: "q",
-                                         4: "q2", 5: "z", 6: "r"})
-        _seen, terminals = producible(build)
-        _atoms, locked = decode(build, terminals[0])
-        self.assertEqual(locked, 4)
-        self.assertIn("Fr", build["tiles"])   # false-cap relay
-        self.assertIn("AD6r", build["tiles"])  # AND dead reader
-        self.assertIn("column 2 is not one-tile",
-                      build["d4"]["detail"])
+    def test_pr14_refuses_gate_a_union_naming_both_arms(self):
+        # stage 6 closes the tick-55 silent acceptance (loud refusal
+        # restored; message names both accepted placements).
+        with self.assertRaises(UnsupportedGeometry) as cm:
+            compile_program(PR14_DOC, name="PR14doc")
+        msg = str(cm.exception)
+        self.assertIn("conjunctive variant of false head 'r'", msg)
+        self.assertIn("gate A union", msg)
+        self.assertIn("row-1 via (fact hi)", msg)
+        self.assertIn("positional i-2 passthrough", msg)
+        self.assertIn("got rows (hi 5, lo 4, derived 4)", msg)
 
 
 if __name__ == "__main__":

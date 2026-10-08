@@ -34,14 +34,14 @@ programs: 9 compiling + 12 refusals | total wall 0.03s
       axis: OR at an intermediate derived row (v0.2 stage 1 admits single-body chains only)
   PR8 ok=True  UnsupportedGeometry: chain depth > 2 at row 3: a second intermediate derived row is unexamined geometry (designs/008 §6 boundary)
       axis: second intermediate derived row (designs/008 §6 boundary: chain length 2 only)
-  PR9 ok=True  UnsupportedGeometry: conjunctive variant of 'r': literals must sit at (adjacent-below, row-1 via), got rows (4, 3)
-      axis: designs/008 PC11: AND lo-literal at row 3, not the row-1 via (still refused in v0.2 stage 1)
-  PR10 ok=True  UnsupportedGeometry: conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row — the slot-A conduit would read its variant glue, not a truth-typed value (untested, de
+  PR10 ok=True  UnsupportedGeometry: conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row — the designs/009 §9.2 Option II arm reads it as the chain link with the lo at the posi
       axis: AND conduit over an adjacent-below DERIVED row would read its variant glue, not a truth-typed value
   PR11 ok=True  UnsupportedGeometry: body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c
       axis: designs/008 stage 5: body width 3 on a predicted-false TERMINAL head now refused (silently skipped before)
   PR12 ok=True  UnsupportedGeometry: body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c
       axis: designs/008 stage 5: body width 3 on a predicted-false NON-TERMINAL head (s reads r above it) now refused (silently skipped before)
+  PR14 ok=True  UnsupportedGeometry: conjunctive variant of false head 'r' (row 6): gate A union (designs/009 §9.3) runs for false heads too — accepted placements are hi adjacent-below (i-1) with l
+      axis: designs/009 §9.3 stage 6: predicted-false AND head whose derived literal (q2) sits at i-2, not adjacent-below — the gate A union now runs for false heads too (silent acceptance measured tick 55; closed tick 60). PR9 (the old PC11 refusal) compiles under the positional i-2 arm and moved to the stage-6 pins
 ALL_OK True
 --- json ---
 {
@@ -65,7 +65,7 @@ ALL_OK True
     "r"
    ],
    "seconds_bfs": 0.0,
-   "seconds_compile": 0.002,
+   "seconds_compile": 0.001,
    "terminal_decodes": [
     [
      "p",
@@ -94,7 +94,7 @@ ALL_OK True
     "q",
     "r"
    ],
-   "seconds_bfs": 0.002,
+   "seconds_bfs": 0.001,
    "seconds_compile": 0.0,
    "terminal_decodes": [
     [
@@ -191,7 +191,7 @@ ALL_OK True
     "s"
    ],
    "seconds_bfs": 0.003,
-   "seconds_compile": 0.008,
+   "seconds_compile": 0.007,
    "terminal_decodes": [
     [
      "p",
@@ -387,13 +387,7 @@ ALL_OK True
    "raised": "UnsupportedGeometry"
   },
   {
-   "message": "conjunctive variant of 'r': literals must sit at (adjacent-below, row-1 via), got rows (4, 3)",
-   "name": "PR9",
-   "ok": true,
-   "raised": "UnsupportedGeometry"
-  },
-  {
-   "message": "conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row \u2014 the slot-A conduit would read its variant glue, not a truth-typed value (untested, de",
+   "message": "conjunctive variant of 'r': adjacent-below literal 'q2' is a derived row \u2014 the designs/009 \u00a79.2 Option II arm reads it as the chain link with the lo at the posi",
    "name": "PR10",
    "ok": true,
    "raised": "UnsupportedGeometry"
@@ -407,6 +401,12 @@ ALL_OK True
   {
    "message": "body width 3 for false head 'r' (row 4): dead-reader emission pins unit and AND bodies only; slot widening untested (designs/003 honest limit; false-head side c",
    "name": "PR12",
+   "ok": true,
+   "raised": "UnsupportedGeometry"
+  },
+  {
+   "message": "conjunctive variant of false head 'r' (row 6): gate A union (designs/009 \u00a79.3) runs for false heads too \u2014 accepted placements are hi adjacent-below (i-1) with l",
+   "name": "PR14",
    "ok": true,
    "raised": "UnsupportedGeometry"
   }

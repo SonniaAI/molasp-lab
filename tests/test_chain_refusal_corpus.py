@@ -87,15 +87,19 @@ class TestChainRefusalsV02(unittest.TestCase):
             compile_program("q :- r. r :- q.", name="CYC")
         self.assertIn("dependency cycle", str(cm.exception))
 
-    def test_pc11_refused_on_and_lo_row(self):
-        # designs/008 PC11: q2 is legal intermediate geometry now, but
-        # r's AND reads s at row 3 — not the row-1 via.
-        with self.assertRaises(UnsupportedGeometry) as cm:
-            compile_program(
-                "p. q. s. q2 :- p. r :- q2, s. r :- q2.",
-                name="PC11", predicted={"p", "q", "s", "q2", "r"})
-        self.assertIn("conjunctive variant of 'r'", str(cm.exception))
-        self.assertIn("row-1 via", str(cm.exception))
+    def test_pc11_compiles_on_positional_i2_arm(self):
+        # designs/009 §9.3 stage 6 (tick 60): PC11's AND (r :- q2, s)
+        # has its derived literal adjacent-below and its fact lo at
+        # i-2 — the positional arm accepts it (refused at the row-1
+        # via gate through v0.2 stage 1).  n=5: spine-capped at row 5
+        # like every n>4 build (STRENGTH stops at SP4); the passthrough
+        # re-typing is the measured pin.
+        build = compile_program(
+            "p. q. s. q2 :- p. r :- q2, s. r :- q2.",
+            name="PC11", predicted={"p", "q", "s", "q2", "r"})
+        self.assertEqual(build["tiles"]["Cq2"]["N"], "s-t-done")
+        self.assertIn("DAr", build["tiles"])
+        self.assertIn("DBr", build["tiles"])
 
     def test_non_adjacent_chain_refused(self):
         # The old G1-before-G2 probe shape: q at row 2 is legal, but

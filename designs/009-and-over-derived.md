@@ -243,11 +243,42 @@ lives in the predicted-true branch only). Stage 6 closes that:
 PR14's `z` lo (not below the terminal) refuses loudly; PR13-dead
 (lo `q` at i−2, positional arm) stays an accepted dead-cascade pin.
 
+> **Tick-60 landing correction (measured, 2026-10-08).** Two prose
+> slips in the paragraph above, corrected in place rather than
+> silently rewritten. (1) PR13-dead's lo `q` sits at **i−3**, not
+> i−2 — inserting the false row `z` (row 4) pushes `q2` to row 5 and
+> the terminal to row 6 (rows pinned tick 55: {1:p,2:s,3:q,4:z,5:q2,
+> 6:r}), the same row-shift that §9.4 corrected for PR13-doc. The
+> landed false-head gate therefore checks **hi adjacency plus
+> derived-literal adjacency** (the derived literal of the body must
+> sit at i−1): PR13-dead passes (q2 at 5 = i−1) and its dead reader
+> stays dead by the W-arithmetic strength argument, which is
+> position-independent in the lo; PR14 fails it (derived q2 at 4).
+> (2) By the compiler's row-sort convention PR14's `z` is the **hi**
+> (row 5, adjacent-below), not the lo; the refusal message reports
+> `got rows (hi 5, lo 4, derived 4)` so the convention is explicit
+> in the pin.
+
 ### 9.4 Corpus and predicted arithmetic
 
 | name | program | least model (hand) | prediction |
 | --- | --- | --- | --- |
 | PC12 | `p. s. q. q2 :- p. r :- q2, q.` | {p,s,q,q2,r} | unique terminal decode, full locks; ~24–28 tiles (PR13-dead measured 26 at the same n=5, tick-55), O(70–250) assemblies (PR13-dead's 70 is the n=5 precedent), BFS-static |
+
+> **Tick-60 landing correction (measured, 2026-10-08).** The PC12
+> row's "full locks" prediction is **demolished for n=5 and confirmed
+> for n=4**. Measured: the parity STRENGTH table stops at SP4, so
+> the row-5 spine tile S5 (S = SP5) bonds its south neighbour at
+> strength 1 < TAU 2 and can never attach — every n>4 build is
+> spine-capped at a 4-row prefix (PR13-dead's "correct decode, 4 of
+> 6 rows lock" was this cap all along, not an AND-head property; its
+> 26-tile count is inventory, not assembly). PC12-DOC (n=5) compiles,
+> decodes its 4-row prefix {p,q,q2,s} in a unique terminal, 20 tiles
+> / 70 assemblies / 4 of 5 locks. **PC12-N4 (n=4) is the first
+> fully-assembling AND-over-derived build**: 16 tiles, 70 assemblies,
+> unique terminal, FULL locks, decode == least model {p,q,q2,r}, ok.
+> Extending the spine table past SP4 is a separate, explicitly
+> designed step (candidate stage 7), not slipped in here.
 | PR13-dead | `p. s. q. q2 :- z. r :- q2, q.` (the measured tick-55 shape; the §4 `q2 :- s` row was wrong in-place — `s` a fact makes q2 true) | {p,q,s} | AND reader absent while row locks hold; tick-51 strength argument RE-DERIVED at x=1: `DA'`.W = vj unique to the body, `DA'`.S ≤ 1 even on a true lo → max 1 < TAU 2 |
 | PR14 | `p. s. q. q2 :- p. r :- q2, z.` | — | loud refusal, union gate A, false-head side |
 

@@ -215,6 +215,25 @@ def compile_program(text: str, predicted=None, name=None):
     v_north = {1: via}
     intermediate_rows = []
 
+    # designs/009 §9.2 consumer-aware lookahead: when the row above
+    # a predicted-true intermediate derived row reads that atom as
+    # the hi literal of an AND body, the conduit's N face re-types
+    # from the conduit glue (unit1_{a}-done) to the passthrough of
+    # the row-below D-column value, and d_north carries that same
+    # passthrough north.  Unit-consumer rows (PC9/PC10) never fire
+    # this and keep the stage-1 layout byte-identically.
+    passthrough_rows = set()
+    for k in range(2, n):
+        consumer = rows[k + 1]
+        if consumer not in predicted:
+            continue
+        for body in rules.get(consumer, []):
+            if len(body) == 2:
+                b_hi, _b_lo = sorted(body,
+                                     key=lambda x: -row_of_atom[x])
+                if b_hi == rows[k]:
+                    passthrough_rows.add(k)
+
     # rows 2..n
     for i in range(2, n + 1):
         a = rows[i]
@@ -274,33 +293,67 @@ def compile_program(text: str, predicted=None, name=None):
                             "widening untested (designs/003 honest limit)")
                     if len(body) == 2:
                         hi, lo = sorted(body, key=lambda x: -row_of_atom[x])
-                        if row_of_atom[hi] != i - 1 or row_of_atom[lo] != 1:
+                        if row_of_atom[hi] != i - 1 or (
+                                row_of_atom[lo] != 1
+                                and row_of_atom[lo] != i - 2):
                             raise UnsupportedGeometry(
                                 f"conjunctive variant of {a!r}: literals "
                                 f"must sit at (adjacent-below, row-1 via), "
                                 f"got rows "
                                 f"{(row_of_atom[hi], row_of_atom[lo])}")
-                        if hi in rules:
+                        derived_hi = hi in rules
+                        if derived_hi and row_of_atom[lo] != i - 2:
+                            # gate A positional arm (designs/009 §9.2/
+                            # §9.3): a derived adjacent-below hi is
+                            # read as the chain link, with the lo at
+                            # the positional i-2 D-column passthrough.
                             raise UnsupportedGeometry(
                                 f"conjunctive variant of {a!r}: adjacent-"
-                                f"below literal {hi!r} is a derived row — "
-                                "the slot-A conduit would read its variant "
-                                "glue, not a truth-typed value (untested, "
-                                "designs/008 stage 1)")
-                        if below_v != via:
+                                f"below literal {hi!r} is a derived row "
+                                "— the designs/009 §9.2 Option II arm "
+                                "reads it as the chain link with the lo "
+                                f"at the positional i-2 passthrough; lo "
+                                f"{lo!r} at row {row_of_atom[lo]} is not "
+                                "the passthrough row (the row-1 via arm "
+                                "is fact-hi only)")
+                        if not derived_hi and row_of_atom[lo] != 1:
+                            raise UnsupportedGeometry(
+                                f"conjunctive variant of {a!r}: literals "
+                                f"must sit at (adjacent-below, row-1 via), "
+                                f"got rows "
+                                f"{(row_of_atom[hi], row_of_atom[lo])}")
+                        if not derived_hi and below_v != via:
                             raise UnsupportedGeometry(
                                 f"conjunctive variant of {a!r}: row-1 via "
                                 f"relay suspended below row {i} (a derived "
                                 "row occupies the V column); untested "
                                 "(designs/008 stage 1)")
-                        emit(f"D{chr(65)}{a}" if and_no == 1 else
-                             f"D{chr(65)}{a}{and_no}",
-                             {"W": f"go{i}", "S": f"{hi}-t-done",
-                              "E": vj, "N": f"{vj}-done"}, i)
-                        emit(f"D{chr(66)}{a}" if and_no == 1 else
-                             f"D{chr(66)}{a}{and_no}",
-                             {"W": vj, "S": f"{lo}-t-done", "E": f"{a}-t",
-                              "N": f"{a}-t-done"}, i)
+                        if derived_hi:
+                            # designs/009 §9.2 reader-order swap: the
+                            # lo reader at x=1 south-reads the re-typed
+                            # passthrough by value typing (false lo →
+                            # f-done against a t-done read, bond 0);
+                            # the hi reader at x=2 south-reads the
+                            # UNCHANGED stage-1 chain link.
+                            emit(f"D{chr(65)}{a}" if and_no == 1 else
+                                 f"D{chr(65)}{a}{and_no}",
+                                 {"W": f"go{i}", "S": f"{lo}-t-done",
+                                  "E": vj, "N": f"{vj}-done"}, i)
+                            emit(f"D{chr(66)}{a}" if and_no == 1 else
+                                 f"D{chr(66)}{a}{and_no}",
+                                 {"W": vj, "S": f"{hi}-t-done",
+                                  "E": f"{a}-t",
+                                  "N": f"{a}-t-done"}, i)
+                        else:
+                            emit(f"D{chr(65)}{a}" if and_no == 1 else
+                                 f"D{chr(65)}{a}{and_no}",
+                                 {"W": f"go{i}", "S": f"{hi}-t-done",
+                                 "E": vj, "N": f"{vj}-done"}, i)
+                            emit(f"D{chr(66)}{a}" if and_no == 1 else
+                                 f"D{chr(66)}{a}{and_no}",
+                                 {"W": vj, "S": f"{lo}-t-done",
+                                 "E": f"{a}-t",
+                                 "N": f"{a}-t-done"}, i)
                         reads = {hi, lo}
                     else:                        # unit variant (b == 1)
                         lit = body[0]
@@ -332,9 +385,11 @@ def compile_program(text: str, predicted=None, name=None):
                                 "unwired in v0.2 stage 1")
                         cnames = (f"C{a}", f"U{a}") if unit_no == 1 else \
                                  (f"C{a}{unit_no}", f"U{a}{unit_no}")
+                        conduit_n = (below_d if i in passthrough_rows
+                                     else f"{vj}-done")
                         emit(cnames[0],
                              {"W": f"go{i}", "S": below_d, "E": vj,
-                              "N": f"{vj}-done"}, i)          # conduit
+                              "N": conduit_n}, i)          # conduit
                         emit(cnames[1],
                              {"W": vj, "S": f"{lit}-t-done", "E": f"{a}-t",
                               "N": f"{a}-t-done"}, i)         # reader
@@ -347,7 +402,8 @@ def compile_program(text: str, predicted=None, name=None):
             emit(f"L{i}", {"W": f"{a}-t", "S": f"base{i}", "N": lock_n}, i)
             if intermediate:
                 intermediate_rows.append(i)
-                d_north[i] = f"unit1_{a}-done"
+                d_north[i] = (below_d if i in passthrough_rows
+                              else f"unit1_{a}-done")
                 v_north[i] = f"{a}-t-done"
         else:                                   # predicted false
             emit(f"D{i}F{a}", {"W": f"go{i}", "S": below_d,
@@ -403,6 +459,32 @@ def compile_program(text: str, predicted=None, name=None):
                             and_no += 1
                             hi, lo = sorted(
                                 body, key=lambda x: -row_of_atom[x])
+                            derived_lit = (hi if hi in rules
+                                           else lo if lo in rules
+                                           else None)
+                            if (row_of_atom[hi] != i - 1
+                                    or (derived_lit is not None
+                                        and row_of_atom[derived_lit]
+                                        != i - 1)):
+                                # gate A union, false-head side
+                                # (designs/009 §9.3): the dead reader
+                                # is emitted machinery, but only for
+                                # the AND shape the design pins — the
+                                # hi (or derived) literal adjacent-
+                                # below, the fact lo at the row-1 via
+                                # or the positional i-2 passthrough.
+                                raise UnsupportedGeometry(
+                                    f"conjunctive variant of false head "
+                                    f"{a!r} (row {i}): gate A union "
+                                    "(designs/009 §9.3) runs for false "
+                                    "heads too — accepted placements "
+                                    "are hi adjacent-below (i-1) with lo "
+                                    "at the row-1 via (fact hi) or the "
+                                    "positional i-2 passthrough "
+                                    f"(derived hi); got rows "
+                                    f"(hi {row_of_atom[hi]}, lo "
+                                    f"{row_of_atom[lo]}, derived "
+                                    f"{row_of_atom.get(derived_lit)})")
                             vj = f"and{and_no}_{a}"
                             emit(f"AD{i}{a}" if and_no == 1 else
                                  f"AD{i}{a}{and_no}",
@@ -460,6 +542,28 @@ def compile_program(text: str, predicted=None, name=None):
                             and_no += 1
                             hi, lo = sorted(
                                 body, key=lambda x: -row_of_atom[x])
+                            derived_lit = (hi if hi in rules
+                                           else lo if lo in rules
+                                           else None)
+                            if (row_of_atom[hi] != i - 1
+                                    or (derived_lit is not None
+                                        and row_of_atom[derived_lit]
+                                        != i - 1)):
+                                # gate A union, false-head side
+                                # (designs/009 §9.3): same accepted
+                                # placements as the true-head arm.
+                                raise UnsupportedGeometry(
+                                    f"conjunctive variant of false head "
+                                    f"{a!r} (row {i}): gate A union "
+                                    "(designs/009 §9.3) runs for false "
+                                    "heads too — accepted placements "
+                                    "are hi adjacent-below (i-1) with lo "
+                                    "at the row-1 via (fact hi) or the "
+                                    "positional i-2 passthrough "
+                                    f"(derived hi); got rows "
+                                    f"(hi {row_of_atom[hi]}, lo "
+                                    f"{row_of_atom[lo]}, derived "
+                                    f"{row_of_atom.get(derived_lit)})")
                             vj = f"and{and_no}_{a}"
                             emit(f"AD{i}{a}" if and_no == 1 else
                                  f"AD{i}{a}{and_no}",

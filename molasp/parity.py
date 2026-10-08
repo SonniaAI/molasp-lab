@@ -129,10 +129,6 @@ REFUSALS = {
             "chain depth", None,
             "second intermediate derived row (designs/008 §6 "
             "boundary: chain length 2 only)"),
-    "PR9": ("p. q. s. q2 :- p. r :- q2, s. r :- q2.",
-            "UnsupportedGeometry", "row-1 via", None,
-            "designs/008 PC11: AND lo-literal at row 3, not the "
-            "row-1 via (still refused in v0.2 stage 1)"),
     "PR10": ("p. s. q2 :- p. r :- q2, p.", "UnsupportedGeometry",
              "derived row", None,
              "AND conduit over an adjacent-below DERIVED row would "
@@ -146,6 +142,14 @@ REFUSALS = {
              "designs/008 stage 5: body width 3 on a predicted-false "
              "NON-TERMINAL head (s reads r above it) now refused "
              "(silently skipped before)"),
+    "PR14": ("p. s. q. q2 :- p. r :- q2, z.",
+             "UnsupportedGeometry", "gate A union", None,
+             "designs/009 §9.3 stage 6: predicted-false AND head "
+             "whose derived literal (q2) sits at i-2, not adjacent-"
+             "below — the gate A union now runs for false heads too "
+             "(silent acceptance measured tick 55; closed tick 60). "
+             "PR9 (the old PC11 refusal) compiles under the "
+             "positional i-2 arm and moved to the stage-6 pins"),
 }
 
 
