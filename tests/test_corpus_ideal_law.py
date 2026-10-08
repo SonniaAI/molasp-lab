@@ -135,5 +135,30 @@ class NameContention(unittest.TestCase):
                                  delta)
 
 
+# Tick-76 correction (SON-4883): the "PR9 hole of one" claimed in
+# the tick-66 log, the counting-law blog post and guide 04 never
+# existed.  PR9's refusal-registry text (molasp/parity.py @
+# 4b71903, removed by the stage-6 landing ff60932 with the diff
+# note "PR9-out (compiles now)") is BYTE-IDENTICAL to the PC11
+# pin in EXTRAS above: the shape designed as designs/009's
+# PC11, refused at tick 48 and registered as PR9, compiling again
+# since stage 6, was probed inside the 14/14 law under its
+# candidate name.  The corpus-wide presence law covered every
+# compiling shape with a known text from the day it was measured.
+PR9_REGISTRY_TEXT = "p. q. s. q2 :- p. r :- q2, s. r :- q2."
+
+
+class PR9HoleOfOneClosed(unittest.TestCase):
+    """The hole of one is closed by identity, not by a new probe."""
+
+    def test_pr9_registry_text_is_the_pc11_pin(self):
+        self.assertEqual(PROGRAMS["PC11"], PR9_REGISTRY_TEXT)
+
+    def test_pr9_shape_is_inside_the_law(self):
+        _b, seen, presence, wf, _hist = _derive("PC11")
+        self.assertEqual(presence, wf)
+        self.assertEqual(len(seen), ASSEMBLIES["PC11"])
+
+
 if __name__ == "__main__":
     unittest.main()

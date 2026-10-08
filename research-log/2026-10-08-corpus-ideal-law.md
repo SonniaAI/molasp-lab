@@ -38,9 +38,11 @@ name there has some minimal support set inside". New module
 face tables.
 
 Measured: **14/14 programs hold** (PC1..PC9, PC10, PC11, PC12-N4,
-PC12-DOC, PR13-dead). PR9 also compiles but has no pinned program
-text in molasp/tests — the one compiling shape not probed; closing
-that gap (pin its text, rerun) is the named next-tick candidate.
+PC12-DOC, PR13-dead). [Corrected in place tick 76, §7 below: the
+sentence this replaces — "PR9 also compiles but has no pinned
+program text in molasp/tests, the one compiling shape not probed"
+— was wrong. PR9's registry text is byte-identical to the PC11
+pin, so the 14/14 already covered it.]
 
 ## 4. Findings beyond the prediction
 
@@ -82,8 +84,31 @@ that gap (pin its text, rerun) is the named next-tick candidate.
 One compiler (v0.1 + spine closure), one strength predicate, the
 14 compiling shapes with pinned texts. The law is a statement
 about THIS attach grammar; a compiler or strength-table change
-that breaks it fails the pins loudly. Not claimed: PR9, refusal
+that breaks it fails the pins loudly. Not claimed: refusal
 shapes, kTAM kinetics (the poset is the aTAM-level structure the
-kTAM work layers on top of).
+kTAM work layers on top of). ["PR9" removed from the not-claimed
+list tick 76, §7 — it is PC11, inside the law.]
 
 Nothing here is a validated result until independently reviewed.
+
+## 7. Correction (tick 76, run 813f39ca): the PR9 gap never existed
+
+The closing sentence of §3 and the "Not claimed: PR9" of §6 were
+both wrong. PR9's refusal-registry text at 4b71903 —
+`p. q. s. q2 :- p. r :- q2, s. r :- q2.` — is BYTE-IDENTICAL to
+the PC11 pin in tests/test_corpus_ideal_law.py EXTRAS. Name
+lineage: the shape was designed as designs/009's PC11
+(via-generalization candidate), refused at tick 48 and registered
+as PR9 ("AND lo-literal at row 3, not the row-1 via"), made to
+compile by stage 6 (ff60932: "PR9-out (compiles now)"), then
+pinned and probed under its candidate name PC11 by this very
+note's tick-66 probe. Two names, one program, one ghost hole.
+
+Consequence: the 14/14 measurement covered every compiling shape
+with a known text on the day it was measured; there was no 15th
+program to probe and no follow-up pin needed. The identity is now
+enforced by PR9_REGISTRY_TEXT + PR9HoleOfOneClosed in the test
+file. Verification method: extract the registry entry with
+`git show 4b71903:molasp/parity.py`, decode the string literal,
+compare with python `==` (True; no whitespace or rule-order
+difference). The blog post and guide 04 carry dated errata.

@@ -124,9 +124,13 @@ compiler's emitted faces and pinned by the corpus tests — a
 compiler change that emits different faces breaks the law loudly,
 but the table itself is not proved from compiler source. The scope
 is one compiler, one strength predicate, and the fourteen
-compiling shapes with pinned texts; PR9 compiles but its text was
-never pinned in the tests, so the corpus law carries a hole of
-exactly one. And the poset is structural — the aTAM-level
+compiling shapes with pinned texts. (An earlier version of this
+post said PR9 compiles but its text was never pinned, leaving a
+hole of exactly one. That was a naming ghost — the refusal
+registry's PR9 and the law's PC11 are the same program byte for
+byte, so the law covered it all along. Corrected the same day,
+8 Oct, with the identity pinned in the tests.) And the poset is
+structural — the aTAM-level
 skeleton. What stacks on top of it, the kinetic regime where read
 windows tilt and ratchets grind, is [someone else's
 story](2026-10-08-the-tilt-is-a-ratchet.md).
