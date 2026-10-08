@@ -117,7 +117,11 @@ class TestSeverityTiers(unittest.TestCase):
         s = oc.contention_severity(BUILD1, dg=1.5, canon=self.canon)
         self.assertTrue(s["interpolated"])
         joined = " ".join(s["boundary_notes"])
-        self.assertIn("dG-2 window arm is untested", joined)
+        self.assertIn("dG-2 arm MEASURED", joined)
+        self.assertIn("vanishing-hazard ratchet", joined)
+        self.assertIn("window-indexed", joined)
+        self.assertIn("labelled choice, not a silent default", joined)
+        self.assertNotIn("window arm is untested", joined)
         self.assertIn("persist_n=1", joined)
         self.assertIn("outside the tick-42 five-name", joined)
 

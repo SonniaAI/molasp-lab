@@ -832,8 +832,15 @@ def contention_severity(build, dg=None, canon=None, strength=None,
         "anchors": REGIME_ANCHORS[regime],
         "vacancies": vacancies,
         "boundary_notes": [
-            "read-window axis priced only at dG 4 (win4 arms); the "
-            "dG-2 window arm is untested",
+            "read-window axis: dG-2 arm MEASURED (DW9->VH arc; "+
+            "evidence/2026-10-07-dg2win-l3vac, evidence/2026-10-08-*): "+
+            "4x window tilts the split 367:131 (share 0.737) via a "+
+            "vanishing-hazard ratchet (fill detach hazard 4.05e-7 -> "+
+            "5.35e-9 by phase 2; forward-integrated share dev 0.0035 "+
+            "held-out, 0.0254 fresh)",
+            "MARGINAL tier is window-indexed in its honest form; "+
+            "pricing severity at one fixed window (the check_d4 "+
+            "default) is a labelled choice, not a silent default",
             "starvation persist rests on persist_n=1 (single event)",
             "L3@(2,2) (54/500) sits outside the tick-42 five-name "
             "census; priced as measured, not enumerated",
