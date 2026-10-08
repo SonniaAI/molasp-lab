@@ -101,3 +101,43 @@ Collection disclosure for this tick (pre-collection state): the
 durable products are the frozen-gate instrument, this
 pre-registration, and the validated queued request; no verdicts are
 claimed before the run lands.
+
+## 6. Collection outcome (same tick, ~16:06Z)
+
+Request `36844ce2…4577` ran ~22 s, **HX-QUEUE-EXIT:0**, stderr empty.
+Raw stdout saved verbatim as
+`evidence/2026-10-08-dw10-phase-chain/run.out`; rendered fragment as
+`collection.md` in the same directory. Machine verdicts (verbatim):
+
+- **CAL_OK** — pooled orig census EXACTLY 367:131:2; trajectory
+  identity with DW9 proven; every number below inherits it.
+- **TI1 NO_FIT / TI2 NO_FIT** — NOT falsified: the phase-stationary
+  framing is unidentifiable at frozen MIN_FIT=20 because the
+  process stops being an ergodic chain late in the window. Phase
+  detach counts (fit range, verbatim): phase 1 churns both species
+  (att/det D2T 292/180, L2 270/148); phase 2 det_D2T **4** (att 54);
+  phase 3 det_D2T **0** (att 16); phase 4 det_D2T **1** (att 7);
+  L2 keeps detaching throughout (det_L2 82/28/16). D2T's detach
+  hazard vanishes while L2 churn continues.
+- **TI3 CONFIRMED** — snapshot pair-share sweeps 0.503 (t_read/4) →
+  0.646 → 0.704 (3/4), delta 0.201 ≫ 0.03; terminal 0.737, fresh
+  0.716.
+
+Readout (post-hoc, labelled, no gate): the share is not stationary —
+it sweeps monotone from ≈ the near-fair per-roll odds (0.503 ≈ 0.52)
+to 0.70+ because **D2T becomes absorbing** while L2 keeps churning:
+a one-way ratchet, not drift and not mere slow mixing. The
+homogeneous fit-range pi_pair 0.7124 (DW9's 0.697–0.712 reproduced
+at the top edge) lands within 0.0255 of the held-out 0.7379 — as the
+ratchet's time-average, not a governing stationary law. Against the
+pre-registered map: closest branch "moving occupancy share under
+homogeneous attach odds", refined from initialization/slow-mixing to
+a structural absorbing-D2T ratchet.
+
+Named next falsifier (pre-register before running): **VH1
+vanishing-hazard ratchet** — fit per-phase D2T detach hazard
+(CONFIRM if monotone to ≈0 by phases 3–4), forward-integrate the
+fitted non-homogeneous chain from the 1/4-window snapshot state to
+t_read, predict the held-out terminal share within ±0.05. Holds →
+the DW9 tilt is fully accounted and designs/007 window pricing gets
+its measured basis; non-monotone hazard → reopen at the hazard shape.
