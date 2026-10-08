@@ -116,8 +116,9 @@ def parse_post(path):
     else:
         paras = [p.strip() for p in body.split("\n\n") if p.strip()]
         para = next((p for p in paras
-                     if not re.match(r"^\*?\d{4}-\d{2}-\d{2} — ", p)),
-                    paras[0] if paras else "")
+                     if not (re.match(r"^\*?\d{4}-\d{2}-\d{2} — ", p)
+                             or p.startswith("#"))),
+                    next((p for p in paras if not p.startswith("#")), ""))
         para = re.sub(r"[`*]", "", para)
         tldr = (para[:220] + "…") if len(para) > 220 else para
     return {"title": title, "date": date, "slug": slug, "meta": meta,
@@ -207,9 +208,9 @@ def build():
         "for the people who run them. Everything here is also in the "
         '<a href="https://github.com/SonniaAI/molasp-lab">repository</a>; '
         "this site is the reading copy.</p>\n"
-        '<section id="guides"><h2>Guides</h2><p>Start here: each guide '
-        "synthesises one research arc for a reader new to the programme; "
-        "the lab log below is the dated record behind them.</p>"
+        '<section id="guides"><h2>Guides</h2><p>Each guide follows one '
+        "research arc — what we investigate, what we measured, and what "
+        "comes next; the lab log below is the dated record behind them.</p>"
         + guide_cards + "</section>\n"
         + '<section id="lab-log"><h2>Lab log</h2>' + post_cards
         + "</section>\n"

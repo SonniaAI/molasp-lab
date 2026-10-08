@@ -2,9 +2,7 @@
 
 2026-10-08 — molasp-lab · synthesis, v1
 
-## Start here
-
-This guide is about the second half of the programme's promise: not just compiling logic into matter, but *knowing* the compile is right. It describes the two ways of knowing we use — exhaustive censusing and statistical sampling — what each can and cannot see, and the week's hardest lesson: what happens when a hazard has no single point of failure, and every check built to count single bonds goes blind exactly where the danger moved. If you take one sentence from this page, take that one.
+This guide is about the second half of the programme's promise: not just compiling logic into matter, but *knowing* the compile is right. It describes the two ways of knowing we use — exhaustive censusing and statistical sampling — what each can and cannot see, and what happens when a hazard has no single point of failure, and every check built to count single bonds goes blind exactly where the danger moved.
 
 ## Two kinds of claims
 
@@ -18,15 +16,15 @@ The methodological rule that makes both kinds useful: **write the falsifier firs
 
 The first hazard checks enumerated single bonds and one-west substitution pairs — one bond, or a pair of bonds around one site. That model went blind in exactly one place, and the trajectories found it there: two cooperative stacks where each member bonds *nothing* on its own, and which therefore do not exist in any vocabulary that counts single bonds.
 
-The **vertical lock stack** is one: `Vp` bonded vertically to `DBr`, and 141 of 141 blocked terminals held *both* members; neither bonds the canonical background alone. The one-site census read "clean" while the pair blocked a fifth of all reads.
+The **vertical lock stack** is one: a vertical bond pair between two neighbouring tiles, and 141 of 141 blocked terminals held *both* members; neither member bonds the canonical background alone. The one-site census read "clean" while the pair blocked a fifth of all reads.
 
 The **2-of-3 relay stack** is subtler: three contacts around a vacancy, any two of which suffice to hold a squatter. A single load-bearing partner existed in only 1.29% of holds. *There is no pair to break* — which is precisely why the single-bond countermeasure (row scope, guide two) degraded the channel by 5.6× and could not kill it.
 
-Both stacks then starved monotonically to zero by dG 4 (read-block 0.14 → 0.006 → 0.000; repair 0.128 → 0.04 → 0.000). Redundancy is why the knob failed at dG 0.5; dG is why redundancy loses by dG 4. Two facts about the same pair of stacks, and neither was visible from a vocabulary that counted single bonds.
+Both stacks then starved monotonically to zero by ΔG 4 (read-block 0.14 → 0.006 → 0.000; repair 0.128 → 0.04 → 0.000). Redundancy is why the knob failed at ΔG 0.5; ΔG is why redundancy loses by ΔG 4. Two facts about the same pair of stacks, and neither was visible from a vocabulary that counted single bonds.
 
 ## What the emit-time check does now
 
-The d4 census (designs/004) runs at compile time and reports three things the old checks could not say: the bond *class* of every hazard (single-bond transients versus stable multi-bond holds), the cooperative stack classes (vertical stacks and relay fans), and its own coverage boundary — it names the channels it cannot see (the `DBr` non-west axis) instead of silently omitting them. A static "no hazards" printout is now structurally unreadable as kinetic elimination, including by us. That is the property the whole checking apparatus is converging on: not fewer surprises, but surprises that announce themselves at compile time, in the vocabulary the design is written in.
+The emit-time census (designs/004) runs at compile time and reports three things the old checks could not say: the bond *class* of every hazard (single-bond transients versus stable multi-bond holds), the cooperative stack classes (vertical stacks and relay fans), and its own coverage boundary — it names the channels it cannot see (the non-west bonding axis) instead of silently omitting them. A static "no hazards" printout is now structurally unreadable as kinetic elimination. That is the property the whole checking apparatus is converging on: not fewer surprises, but surprises that announce themselves at compile time, in the vocabulary the design is written in.
 
 - [The repairability arc summary](../research-log/2026-10-07-repairability-arc-summary.md)
 - [Designs/004 — lock-site integrity](../designs/004-lock-site-integrity.md)
