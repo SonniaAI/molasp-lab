@@ -33,6 +33,7 @@ the exact pristine commit) and record post-edit receipts against it.
     # or regenerate manually: run each generator in its evidence dir
     # and compare; TIMING_PATTERNS in probe.py define the mask.
 
-Reports, never gates (d4 semantics). Probe started ~04:13Z,
-2026-10-08 (wake 04:00Z); no finalization time recorded before the
-commit exists (tick-57 lesson).
+Reports, never gates (d4 semantics). Probe ran in the 04:00-04:06Z
+window 2026-10-08 (wake 04:00:23Z; probe commit 055b81d authored
+04:06:21Z). The first draft of this note said ~04:13Z — future-dated
+vs the commit, corrected in the follow-up commit (tick-57 lesson).

@@ -1,7 +1,9 @@
 # Stage-6 Option II probe-first baseline (tick 59)
 
-Date: 2026-10-08, work started ~04:13Z (wake 04:00Z); time anchored
-to this tick's commit, not an anticipated finish (tick-57 lesson).
+Date: 2026-10-08, run window 04:00:23Z (wake) to 04:06:21Z (commit
+055b81d) — time anchored to the commit hash, not anticipated
+(tick-57 lesson; this entry's first draft said ~04:13Z, a future
+date vs the commit, corrected post-commit in the follow-up commit).
 Run: SON-4850. Compiler PRISTINE — no gate edits this tick.
 
 ## What this tick did
