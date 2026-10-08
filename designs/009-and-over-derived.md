@@ -124,3 +124,45 @@ Chain length 2 and AND width 2 only; depth > 2 and OR at an
 intermediate row stay refused (designs/008 §6); via-carry extension
 (Option II) remains rejected pending a design that does not touch
 the PC3/PC4 dead-reader pins; all counts in §5 are predictions.
+
+## 8. Stage-6 sequencing correction (tick 56, 2026-10-08 — measured, supersedes §3's "narrow A first, B second")
+
+Attempted landing of stage 6 as gated at tick 55 (gate A narrowed to
+(i−1, i−2), gate B relaxed, gate C value-re-typed) and reverted; both
+ends of the sequencing fail, for independent reasons:
+
+1. **Gate A cannot be a replacement — only a union.** The
+   census-generality arms' AND terminals read lo = the row-1 atom
+   through the V-column via relay at n>3 (`got rows (3, 1)`,
+   measured: census-receipt recompute and chain-corpus byte-stability
+   pins both fail under the narrowed check). Every v0.1 AND with a
+   row-1 lo works through that channel. Narrowed gate A refuses them:
+   a receipt-breaking narrowing, not a relaxation. Stage 6 must accept
+   **(i−1, 1) via-channel OR (i−1, i−2) positional**, never the
+   replacement.
+
+2. **The positional-lo channel does not exist for a derived hi.** The
+   DB half of the AND reader sits at column 2 and reads its lo value
+   from the V-column tile at row i−1 — but an intermediate derived
+   row's V tile carries the *chain link* (`{hi}-t-done`), which is
+   load-bearing for the unit readers above it (PC9/PC10 pins; the
+   stage-1 relay). The lo row's own `{lo}-t-done` N face sits two rows
+   down at column 1 and is unreachable from row i. Measured shape with
+   A-narrow + B-relax + value-typed C landed: PC12-N4 refuses at gate C
+   with "the V column at row 3 carries 'q2-t-done', not the lo value
+   'q-t-done'" — the honest sound of the missing channel. Gate B's
+   relaxation alone *is* sound name-wise (DA.S = `{hi}-t-done` already
+   matches the D-column chain link), but PC12's DB.S would be a dead
+   glue: BFS would show `r` absent from terminal decodes — a silent
+   dead build, the class tick 52 closed.
+
+**Consequence:** stage 6 = Option II (§3): a second N-face channel on
+the intermediate derived row re-emitting the row below's
+`{lo}-t-done`, with the false-link over-production guard §3 names;
+gate A as union. The §4 corpus choice PC12 is unreachable by gate
+moves alone. The false-head decision (PR13-dead/PR14 silent
+acceptance, tick 55) is unchanged and still open.
+
+Compiler left pristine at 4b71903; suite `Ran 421 tests` / `OK
+(skipped=1)` before and after. Evidence: research-log
+2026-10-08-and-over-derived-stage6-correction.md.
