@@ -11,9 +11,9 @@ Every number on this site deserves to be doubted in one of three ways, and knowi
 These are structural claims in the sense of [guide three](03-how-we-check-a-design.md): exhaustive, re-runnable, and re-run automatically.
 
 - The v3 glue-table assertions: wrong decision tiles producible in 0 of 10 assemblies; a unique terminal assembly decoding `{a}`; every lock-vs-wrong-value glue pair at strength 0 (`tests/test_tiles_v3.py`).
-- The spine self-bond class rule — every same-name spine self-bond carries strength 2, for every row, forever — pinned per name: SP5, SP6 and SP40 verified at 2 on both consuming paths, so the n>5 builders cannot silently disagree with the n≤4 corpus again.
+- The spine self-bond class rule — every same-name spine self-bond carries strength 2, for every row, forever — pinned per name: SP5, SP6 and SP40 verified at 2 on both consuming paths, so the builders past four rows cannot silently disagree with the n≤4 corpus again.
 - Dead readers: every derived false head's dead reader is BFS-proved absent from every producible assembly. That is an emitted-machinery guarantee — the machinery is *there* and provably never bonds — not an omission.
-- The whole suite: 449 tests, run verbatim in the commit messages, so a regression shows up as a red check and not as a surprise in a paper.
+- The whole suite: 462 tests, run verbatim in the commit messages, so a regression shows up as a red check and not as a surprise in a paper.
 
 ## Simulation-bounded
 

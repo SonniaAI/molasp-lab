@@ -28,7 +28,7 @@ Reinforcement **mints** frozen squatters instead of beating the channel it aimed
 
 At dG 2 the contested vacancy looked like a fair coin: the correct fill and a misplaced squatter split the site 232 : 229, and we wrote that down as *stationary* — permanently, structurally fair. A pre-registered 4× read window at identical kinetics turned the split into 367 : 131 — 0.737 to the fill, decisively past the pre-registered 0.65 falsifier.
 
-The coin was a **snapshot**. Fairness came from freezing the experiment too early to see the bias. Roughly half of sites froze on their first attach, before any arrival-race bias could express itself; given time, biased re-rolls compound toward the fill, and the ratchet behind that (guide four's territory) is that a correct fill's detach hazard collapses by roughly 76× across the window while a squatter keeps re-rolling. The window's effect is itself a function of the operating point:
+The coin was a **snapshot**. Fairness came from freezing the experiment too early to see the bias. Roughly half of sites froze on their first attach, before any arrival-race bias could express itself; given time, biased re-rolls compound toward the fill, and the ratchet behind that (its ledger entry is guide four) is that a correct fill's detach hazard collapses by roughly 76× across the window while a squatter keeps re-rolling. The window's effect is itself a function of the operating point:
 
 | regime | read-window response |
 |---|---|
