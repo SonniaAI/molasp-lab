@@ -1,0 +1,55 @@
+{
+  "probe": "stage6-option2-preedit-baseline",
+  "tree_head": "ec49a73d79ceb0777fa04c7b5264a65424887bec",
+  "compiler": "pristine (no gate edits this tick; designs/009 \u00a79.5 step 1)",
+  "all_byte_identical": false,
+  "all_timing_normalized_identical": true,
+  "receipts": [
+    {
+      "generator": "evidence/2026-10-07-lock-misplacement-census/lock_misplacement_census.py",
+      "committed_receipt": "evidence/2026-10-07-lock-misplacement-census/lock_misplacement_census.out",
+      "committed_sha256": "b7a5c70f6272dcddd241c3a044d6dd1a15af739fd56906b4c6f3cfe35bf6cd32",
+      "regenerated_sha256": "b7a5c70f6272dcddd241c3a044d6dd1a15af739fd56906b4c6f3cfe35bf6cd32",
+      "byte_identical": true,
+      "timing_normalized_identical": true,
+      "regen_exit": 0,
+      "raw_diff_lines": []
+    },
+    {
+      "generator": "evidence/2026-10-07-census-generality/census_generality.py",
+      "committed_receipt": "evidence/2026-10-07-census-generality/census_generality.out",
+      "committed_sha256": "737f04a7a96b4c492cdce0ba538cb66d9d0fab505645930717e5b7ea2cc9f69a",
+      "regenerated_sha256": "737f04a7a96b4c492cdce0ba538cb66d9d0fab505645930717e5b7ea2cc9f69a",
+      "byte_identical": true,
+      "timing_normalized_identical": true,
+      "regen_exit": 0,
+      "raw_diff_lines": []
+    },
+    {
+      "generator": "evidence/2026-10-07-parity-corpus/parity_run.py",
+      "committed_receipt": "evidence/2026-10-07-parity-corpus/run.out",
+      "committed_sha256": "558560a4b13b9157e2ad3497886c0f3dc788a5cc0eba1d6339e5a97f993b769e",
+      "regenerated_sha256": "fa0c9715a05c316b9d1956579577996cd7048cbb46db19ace1f9185b4f2bdcc4",
+      "byte_identical": false,
+      "timing_normalized_identical": true,
+      "regen_exit": 0,
+      "raw_diff_lines": [
+        {
+          "line": 68,
+          "committed": "   \"seconds_compile\": 0.002,",
+          "regenerated": "   \"seconds_compile\": 0.001,"
+        },
+        {
+          "line": 97,
+          "committed": "   \"seconds_bfs\": 0.002,",
+          "regenerated": "   \"seconds_bfs\": 0.001,"
+        },
+        {
+          "line": 194,
+          "committed": "   \"seconds_compile\": 0.008,",
+          "regenerated": "   \"seconds_compile\": 0.007,"
+        }
+      ]
+    }
+  ]
+}
