@@ -11,6 +11,13 @@ guides are the reading copy, dated entries are the receipts. The site
 builder (`tools/build_blog.py`) renders guides first, then the dated
 log; the deployed site regenerates on every push to main.
 
+Style, for guides and every future page: write it as a proper essay — a
+clear introduction that tells the reader what they will get before they
+read on, no TL;DR block, jargon explained on first use, and a narrative
+line connecting the sections (Arthur's rule, 8 Oct). The index card for a
+page shows its TL;DR if present, otherwise its first paragraph — so the
+introduction has to earn the click on its own.
+
 - 2026-10-08 — [The tilt is a ratchet](2026-10-08-the-tilt-is-a-ratchet.md) — the DW9
   arc's mechanism, measured: under attach odds that stay homogeneous, the
   canonical fill's detach hazard collapses ~76× by the second window quartile
