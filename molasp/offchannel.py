@@ -81,6 +81,8 @@ explicitly for other conventions.
 """
 from __future__ import annotations
 
+import math
+
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 
@@ -824,7 +826,7 @@ def contention_severity(build, dg=None, canon=None, strength=None,
                 "minted": minted,
                 "note": note,
             }
-    return {
+    result = {
         "dg": dg,
         "regime": regime,
         "interpolated": interpolated,
@@ -847,6 +849,211 @@ def contention_severity(build, dg=None, canon=None, strength=None,
             "dg off the measured points 0.5/2/4/7 is nearest-regime "
             "pricing (interpolated=true)",
         ],
+    }
+    if regime == "marginal":
+        # designs/011: the MARGINAL tier is window-indexed — emit the
+        # measured/validated window curve with the pricing
+        result["window_pricing"] = marginal_window_pricing()
+    return result
+
+
+# ---------- window-indexed MARGINAL pricing (designs/011) ----------
+
+# VH-ratchet basis, quoted verbatim from the receipts (never asserted
+# here — pins live in tests/test_window_pricing.py).  Fit arm: BUILD1
+# Vp-missing, site (2,2), dG=2, s2, read grid 4x400*e^Gmc with Gmc
+# 9.5, seeds [0,500) of the DW9/DW10/VH identity chain.  Hazards are
+# PHASE-INDEXED on the fit grid: phase i covers the i-th quarter of
+# the 4x window; the forward integration starts at the 1/4-window
+# snapshot, so phases 2-4 are what it consumes.
+VH_BASIS = {
+    "arm": "BUILD1 Vp-missing, site (2,2), dG=2, s2, window grid "
+           "w x 400 e^Gmc, Gmc 9.5",
+    "sources": ["evidence/2026-10-08-vh-ratchet/run.out",
+                "evidence/2026-10-07-dg2win-l3vac/run.out (DW9-DW11)",
+                "evidence/2026-10-06-contention-dg (tick-43 anchors)"],
+    "quarter": 400.0 * math.exp(9.5),   # one w1 window == grid quarter
+    "lam": 0.00013237187264826007,      # pooled attach rate (fit)
+    "p": {"D2T": 0.2624466571834993,    # pooled attach odds (fit)
+           "L2": 0.24182076813655762,
+           "O": 0.4957325746799431},
+    "d_o": 2.689564148010662e-06,       # O churn (whole-window pool)
+    "haz_d2t": {1: 4.04664078990303e-07, 2: 5.348122115210481e-09,
+                 3: 0.0, 4: 1.0321999558539198e-09},
+    "haz_l2": {1: 2.1705866990530424e-07, 2: 1.5280356180070675e-07,
+                3: 6.806295950100927e-08, 4: 4.359141414272266e-08},
+    "v0": [0.0, 0.448, 0.488, 0.064],   # 1/4-window snapshot (E,D2T,L2,O)
+    "share_pred_w4_receipt": 0.7413549690850645,  # VH2/VH3 validated
+    "homo_pi_receipt": 0.7123954307622163,        # window-blind
+}                                                   # stationary
+
+# Measured window curve on the fit seeds — window w means read time
+# w x 400 e^Gmc.  The DW10 snapshot fracs 0.25/0.5/0.75 of the 4x
+# window ARE the w1/w2/w3 read points; w4 is the DW9 terminal census.
+WINDOW_MEASURED = {
+    1: {"d2t": 232, "l2": 229,
+        "source": "DW10 snap 0.25 == tick-43 s2_dg2 (232:229)"},
+    2: {"d2t": 318, "l2": 174, "source": "DW10 snap 0.5"},
+    3: {"d2t": 348, "l2": 146, "source": "DW10 snap 0.75"},
+    4: {"d2t": 367, "l2": 131,
+        "source": "DW9 terminal 367:131(:2)"},
+}
+FROZEN_QUOTE = {
+    "persist": 0.826, "window": 4,
+    "source": "DW11: frozen-squatter persistence is window-immune",
+}
+
+_WINDOW_TIERS = ((0.55, "contested"), (0.75, "ratchet-tilting"),
+                 (None, "ratchet-tilted"))
+
+
+def window_tier(share):
+    """Label a fill share on the MARGINAL window curve.
+
+    ``contested`` below 0.55 (the near-fair attach-coin regime — the
+    fill is NOT reliable), ``ratchet-tilting`` 0.55-0.75 (the ratchet
+    has engaged but the squatter holds 25-35%), ``ratchet-tilted``
+    from 0.75 (fill-dominant).  The thresholds are labelled choices
+    on a measured curve, not derived constants (designs/011)."""
+    for bound, label in _WINDOW_TIERS:
+        if bound is None or share < bound:
+            return label
+    return _WINDOW_TIERS[-1][1]
+
+
+def _mat_mul(A, B):
+    n = len(A)
+    return [[sum(A[i][k] * B[k][j] for k in range(n))
+             for j in range(n)] for i in range(n)]
+
+
+def _expm4(Q, dt):
+    """Matrix exponential — scaling-and-squaring + uniformization,
+    pure python (the VH construction, tick 70; E starts at ZERO
+    because the k=0 series term supplies e^{-mu h} I itself —
+    starting from I doubles the identity component).  Validated
+    against the 2-state closed form in tests."""
+    n = len(Q)
+    mu = max(-Q[i][i] for i in range(n))
+    x = mu * dt
+    m = 0
+    while x > 0.25:
+        x /= 2.0
+        m += 1
+    h = dt / (2 ** m)
+    P = [[(1.0 + Q[i][i] / mu) if i == j else Q[i][j] / mu
+          for j in range(n)] for i in range(n)]
+    E = [[0.0] * n for _ in range(n)]
+    term = math.exp(-mu * h)
+    Pv = [[(1.0 if i == j else 0.0) for j in range(n)]
+          for i in range(n)]   # P^k, starts at P^0 = I
+    for k in range(0, 200):
+        for i in range(n):
+            for j in range(n):
+                E[i][j] += term * Pv[i][j]
+        if term < 1e-20 and k > mu * h + 20:
+            break
+        term = term * (mu * h) / (k + 1)
+        Pv = _mat_mul(Pv, P)
+    for _ in range(m):
+        E = _mat_mul(E, E)
+    for i in range(n):
+        s = sum(E[i])
+        assert abs(s - 1.0) < 1e-6, "expm row sum %.12f" % s
+    return E
+
+
+def _build_Q(d_d2t, d_l2):
+    """The 4-state chain (E, D2T, L2, O): attach E->s at
+    ``lam * p_s``; phase-dependent detach for the pair states;
+    whole-window O churn."""
+    b = VH_BASIS
+    lam, p, d_o = b["lam"], b["p"], b["d_o"]
+    return [
+        [-lam, lam * p["D2T"], lam * p["L2"], lam * p["O"]],
+        [d_d2t, -d_d2t, 0.0, 0.0],
+        [d_l2, 0.0, -d_l2, 0.0],
+        [d_o, 0.0, 0.0, -d_o],
+    ]
+
+
+def _vh_share(window_mult, haz_d2t=None):
+    """Chain pair-share D2T/(D2T+L2) at read window ``window_mult``
+    (multiples of 400 e^Gmc).  Integrates the fit-grid phases from
+    the w1 snapshot: phase 2 covers w1->w2, phase 3 w2->w3, phase 4
+    w3->w4; beyond w4 the LAST fit-phase hazards are held
+    (extrapolation — designs/011 P3).  ``haz_d2t`` substitutes the
+    D2T hazard table (sensitivity arms only — receipts stay
+    authoritative in VH_BASIS)."""
+    if window_mult < 1:
+        raise ValueError("the chain starts at the w1 snapshot")
+    if haz_d2t is None:
+        haz_d2t = VH_BASIS["haz_d2t"]
+    v = list(VH_BASIS["v0"])
+    for step in range(int(round(window_mult)) - 1):
+        phi = min(2 + step, 4)
+        E = _expm4(_build_Q(haz_d2t[phi],
+                            VH_BASIS["haz_l2"][phi]),
+                   VH_BASIS["quarter"])
+        v = [sum(v[i] * E[i][j] for i in range(4)) for j in range(4)]
+    return v[1] / (v[1] + v[2])
+
+
+def marginal_window_pricing(windows=(1, 2, 3, 4, 8)):
+    """Window-indexed pricing for MARGINAL-regime fill-vs-squatter
+    contention (designs/011 — the tick-72 honest form made concrete).
+
+    Returns the measured window curve (quoted receipts), the chain
+    values (validated at w4: receipt 0.74135, held-out dev 0.0035,
+    fresh dev 0.0254), extrapolations beyond the fit grid (labelled),
+    tier labels, and the frozen-class quote (a window can tilt a
+    marginal vacancy but cannot repair first-come)."""
+    out = {}
+    for w in windows:
+        rec = {"window_mult": w,
+               "read_time": f"w x 400 e^Gmc at Gmc 9.5, dG 2"}
+        if w in WINDOW_MEASURED:
+            m = WINDOW_MEASURED[w]
+            rec["measured_share"] = m["d2t"] / float(
+                m["d2t"] + m["l2"])
+            rec["measured_census"] = f"{m['d2t']}:{m['l2']}"
+            rec["measured_source"] = m["source"]
+        if w == 1:
+            v0 = VH_BASIS["v0"]
+            rec["chain_share"] = v0[1] / (v0[1] + v0[2])
+            rec["chain_kind"] = ("snapshot init (fit range "
+                                 "112:122 = 0.4787)")
+        elif w <= 4:
+            rec["chain_share"] = _vh_share(w)
+            rec["chain_kind"] = ("fit-grid prediction (validated at "
+                                 "w4: receipt 0.74135, held-out dev "
+                                 "0.0035)")
+        else:
+            rec["chain_share"] = _vh_share(w)
+            rec["chain_kind"] = "EXTRAPOLATED (phase-4 hazards held)"
+            rec["hazard95_share"] = _vh_share(
+                w, {1: VH_BASIS["haz_d2t"][1],
+                    2: VH_BASIS["haz_d2t"][2],
+                    3: 3.2763010789370227e-09,
+                    4: 3.096599867561759e-09})
+            rec["hazard95_source"] = (
+                "Poisson-95 upper bounds on the late D2T hazards "
+                "(VH1 receipt 3.28e-9 / 3.10e-9) — the extrapolation "
+                "bracket, not a second prediction")
+        best = rec.get("measured_share", rec["chain_share"])
+        rec["tier"] = window_tier(best)
+        out[str(w)] = rec
+    return {
+        "basis": "VH ratchet fit — see VH_BASIS sources (quoted "
+                 "receipts, never asserted)",
+        "windows": out,
+        "frozen_class": FROZEN_QUOTE,
+        "homo_stationary": VH_BASIS["homo_pi_receipt"],
+        "note": "the read window is the third contention knob: the "
+                "fill-vs-squatter split moves 0.503 (w1, contested) "
+                "-> 0.737 (w4, tilted) while the FROZEN squatter "
+                "class persists (0.826) — a window can tilt a "
+                "marginal vacancy but cannot repair first-come",
     }
 
 
@@ -1015,6 +1222,18 @@ def d4_report_lines(report):
                     f"minted {','.join(s['minted']) or '-'} over "
                     f"family-stable {','.join(s['family_stable']) or '-'}; "
                     f"{s['note']}")
+    wp = sev.get("window_pricing") if sev else None
+    if wp:
+        curve = " -> ".join(
+            f"w{k} " + format(
+                v.get("measured_share", v["chain_share"]), ".3f")
+            for k, v in sorted(wp["windows"].items(),
+                               key=lambda kv: int(kv[0])))
+        lines.append(
+            "    window pricing (MARGINAL): fill share " + curve
+            + f" (frozen class window-immune "
+              f"{wp['frozen_class']['persist']}) — pick the read "
+              "window against this curve, not by default")
     ctx = report["measured_context"]
     lines.append(
         "  measured context: lock-squat block rate "
