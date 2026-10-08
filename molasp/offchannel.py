@@ -89,10 +89,13 @@ OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 # false-family lock squats survived, see apply_lock_glue_scope).
 SHARED_VALUE_SUFFIXES = ("-t", "-t-done", "-f", "-f-done")
 
-# designs/002 v2.0 row-typed-spine exemption: spine self-bonds are
-# strength 2 (with strength-1 spines nothing attaches in row 1 at
-# tau=2); all other matched glues are cooperative strength 1.
-DEFAULT_STRENGTH = {("SP1", "SP1"): 2, ("SP2", "SP2"): 2, ("SP3", "SP3"): 2}
+# designs/002 v2.0 row-typed-spine exemption, as the designs/010
+# §10.3 class closure rule (stage 7): spine self-bonds SPi<->SPi are
+# strength 2 for every i >= 1 (with strength-1 spines nothing
+# attaches in row 1 at tau=2); all other matched glues are
+# cooperative strength 1.  The ONE predicate lives in compiler.py and
+# is consumed below; the former enumerated DEFAULT_STRENGTH (SP1-3
+# only — the live row-4 divergence) is deleted (§10.4-1).
 
 # Measured kinetic context quoted verbatim into every report so the
 # hazard severity is read against numbers, not vibes.  Sources are
@@ -155,12 +158,17 @@ MEASURED_CONTEXT = {
 
 def glue_strength(g1, g2, strength=None):
     """Bond strength of two opposing face glues (0 when either is
-    blank or the names differ)."""
+    blank or the names differ).  Default: the compiler's class
+    closure predicate (designs/010 §10.3).  An explicit ``strength``
+    table still overrides per call (kinetic-sweep hypothesis
+    tables)."""
+    if strength is None:
+        from .compiler import glue_strength as _closure
+        return _closure(g1, g2)
     if not g1 or not g2:
         return 0
-    table = DEFAULT_STRENGTH if strength is None else strength
-    if (g1, g2) in table:
-        return table[(g1, g2)]
+    if (g1, g2) in strength:
+        return strength[(g1, g2)]
     return 1 if g1 == g2 else 0
 
 

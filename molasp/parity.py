@@ -42,6 +42,7 @@ from .compiler import (  # noqa: F401 (re-exported for test pins)
     CompileError,
     UnsupportedGeometry,
     compile_program,
+    glue_strength,
     least_model,
     parse_program,
 )
@@ -49,16 +50,10 @@ from .compiler import (  # noqa: F401 (re-exported for test pins)
 TAU = 2
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
-STRENGTH = {("SP1", "SP1"): 2, ("SP2", "SP2"): 2, ("SP3", "SP3"): 2,
-            ("SP4", "SP4"): 2}
-
-
-def glue_strength(g1, g2):
-    if not g1 or not g2:
-        return 0
-    if (g1, g2) in STRENGTH:
-        return STRENGTH[(g1, g2)]
-    return 1 if g1 == g2 else 0
+# Glue semantics: the single compiler closure predicate (re-exported
+# above) — spine self-bonds SPi<->SPi = 2 for all i >= 1, other
+# matched glues 1, mismatched/blank 0 (designs/010 §10.3; the former
+# SP1-4 enumerated table is deleted, unification §10.4-1).
 
 
 # ---- corpus ------------------------------------------------------------

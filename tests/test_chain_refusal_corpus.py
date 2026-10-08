@@ -91,15 +91,24 @@ class TestChainRefusalsV02(unittest.TestCase):
         # designs/009 §9.3 stage 6 (tick 60): PC11's AND (r :- q2, s)
         # has its derived literal adjacent-below and its fact lo at
         # i-2 — the positional arm accepts it (refused at the row-1
-        # via gate through v0.2 stage 1).  n=5: spine-capped at row 5
-        # like every n>4 build (STRENGTH stops at SP4); the passthrough
-        # re-typing is the measured pin.
+        # via gate through v0.2 stage 1).  n=5: FULL LOCKS since the
+        # stage-7 spine closure (designs/010 §10.4, tick 62; was
+        # spine-capped at row 5 while the enumerated STRENGTH table
+        # stopped at SP4); the passthrough re-typing is the measured
+        # pin.
         build = compile_program(
             "p. q. s. q2 :- p. r :- q2, s. r :- q2.",
             name="PC11", predicted={"p", "q", "s", "q2", "r"})
         self.assertEqual(build["tiles"]["Cq2"]["N"], "s-t-done")
         self.assertIn("DAr", build["tiles"])
         self.assertIn("DBr", build["tiles"])
+        v = check_program("PC11", "p. q. s. q2 :- p. r :- q2, s. r :- q2.",
+                          {"p", "q", "s", "q2", "r"})
+        self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
+                          v["terminals"]), (5, 22, 147, 2))
+        self.assertTrue(v["full_locks"])
+        self.assertEqual(v["terminal_decodes"],
+                         [["p", "q", "q2", "r", "s"]])
 
     def test_non_adjacent_chain_refused(self):
         # The old G1-before-G2 probe shape: q at row 2 is legal, but

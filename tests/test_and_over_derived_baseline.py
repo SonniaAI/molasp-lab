@@ -29,11 +29,13 @@ any gate moves:
     width>2 false heads.
   - Both silent acceptances decode correctly (terminal decodes ==
     least model; every dead glue BFS-proved absent from every
-    producible assembly) but are lock-incomplete (4 of 6 rows
-    lock) and their emitted builds break the designs/003
-    one-tile column-2 row structure (d4 census error severity,
-    which reports and never gates): PR13-dead row 5 column 2
-    carries [V5p, UD5q2]; PR14 row 6 column 2 carries [Fr, AD6r].
+    producible assembly).  Tick-55 baseline: lock-incomplete (4 of 6
+    rows lock, spine cap).  Since the stage-7 spine closure
+    (designs/010 §10.4-3, tick 62) PR13-dead locks all 6 rows; the
+    emitted builds still break the designs/003 one-tile column-2 row
+    structure (d4 census error severity, which reports and never
+    gates): PR13-dead row 5 column 2 carries [V5p, UD5q2]; PR14 row
+    6 column 2 carries [Fr, AD6r].
 
 All numbers below are measured probe output (2026-10-08 tick 55),
 not design predictions. Nothing here is a validated result; these
@@ -65,11 +67,12 @@ class AndOverDerivedTrueHeadPositionalArm(unittest.TestCase):
     i-2 arm ACCEPTS the honest (i-1, i-2) placement the baseline
     refused.  PC12-N4 (n=4) is the first fully-assembling
     AND-over-derived build: unique terminal, full locks, decode ==
-    least model.  PC12-DOC (n=5) compiles but is SPINE-CAPPED at
-    row 5 — measured: the STRENGTH table stops at SP4, so S5 cannot
-    attach (pair strength 1 < TAU 2); the 4-row prefix decodes
-    correctly.  A pre-existing corpus cap (every n<=4 build), not a
-    stage-6 gate; recorded in designs/009 §9.4."""
+    least model.  PC12-DOC (n=5) was SPINE-CAPPED at row 5 through
+    tick 61 (the enumerated STRENGTH table stopped at SP4, so S5
+    bonded at 1 < TAU 2; the 4-row prefix decoded correctly —
+    designs/009 §9.4).  The stage-7 class closure (designs/010,
+    tick 62) removed the cap: measured full locks at n=5, decode ==
+    the FULL least model {p,q,q2,r,s}."""
 
     def test_pc12_n4_compiles_decodes_full_model_with_locks(self):
         v = check_program("PC12n4", PC12_N4, {"p", "q", "q2", "r"})
@@ -80,14 +83,14 @@ class AndOverDerivedTrueHeadPositionalArm(unittest.TestCase):
         self.assertTrue(v["full_locks"])
         self.assertTrue(v["ok"])
 
-    def test_pc12_doc_compiles_but_spine_capped_at_row_5(self):
+    def test_pc12_doc_full_locks_at_n5_after_spine_closure(self):
         v = check_program("PC12doc", PC12_DOC,
                           {"p", "q", "q2", "r", "s"})
         self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
-                          v["terminals"]), (5, 20, 70, 1))
-        self.assertFalse(v["full_locks"])   # L5 unreachable: SP5 pair
+                          v["terminals"]), (5, 20, 126, 1))
+        self.assertTrue(v["full_locks"])  # L5 attaches: SP5 class
         self.assertEqual(v["terminal_decodes"],
-                         [["p", "q", "q2", "s"]])
+                         [["p", "q", "q2", "r", "s"]])
 
     def test_pc12_doc_reader_swap_layout_measured(self):
         build = compile_program(PC12_DOC, name="PC12doc")
@@ -132,7 +135,9 @@ class AndOverDerivedFalseHeadSilentAcceptance(unittest.TestCase):
     """PR13-dead and PR14 COMPILE today: false AND heads bypass
     gates A/B/C entirely (dead-reader emission is unconditional
     below the width>2 refusal). Correct decode, incomplete locks,
-    d4-reported row-structure break in the emitted build."""
+    d4-reported row-structure break in the emitted build — full locks
+    since the stage-7 spine closure (designs/010 §10.4-3, tick 62);
+    the dead readers stay BFS-absent (falsifier not triggered)."""
 
     def test_pr13_dead_compiles_and_decodes_least_model(self):
         v = check_program("PR13dead", PR13_DEAD, {"p", "q", "s"})
@@ -140,19 +145,20 @@ class AndOverDerivedFalseHeadSilentAcceptance(unittest.TestCase):
         self.assertEqual(v["terminal_decodes"], [["p", "q", "s"]])
         self.assertEqual(v["dead_variant_glues"], ["and1_r", "unit1_q2"])
         self.assertTrue(all(v["dead_glues_absent"].values()))
-        # measured shape of the silent acceptance
+        # measured shape of the silent acceptance (stage-7 closure:
+        # assemblies grew from the prefix-capped 70, all rows lock)
         self.assertEqual((v["n_rows"], v["tiles"], v["assemblies"],
-                          v["terminals"]), (6, 26, 70, 1))
-        self.assertFalse(v["full_locks"])  # 4 of 6 rows lock
+                          v["terminals"]), (6, 26, 210, 1))
+        self.assertTrue(v["full_locks"])  # 6 of 6 rows lock
         self.assertEqual(v["d4_severity"], "error")
 
-    def test_pr13_dead_unlocked_rows_are_the_false_derived_rows(self):
+    def test_pr13_dead_all_six_rows_lock_after_spine_closure(self):
         build = compile_program(PR13_DEAD, name="PR13dead")
         self.assertEqual(build["rows"], {1: "p", 2: "s", 3: "q",
                                          4: "z", 5: "q2", 6: "r"})
         _seen, terminals = producible(build)
         _atoms, locked = decode(build, terminals[0])
-        self.assertEqual(locked, 4)
+        self.assertEqual(locked, 6)
         self.assertIn("V5p", build["tiles"])   # emitted column-2
         self.assertIn("UD5q2", build["tiles"])  # collision pair
         self.assertIn("column 2 is not one-tile",

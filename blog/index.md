@@ -4,6 +4,15 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-08 — [The cap that wasn't a law](2026-10-08-the-cap-that-wasnt-a-law.md) — designs/010
+  landed: the n>4 "spine cap" was an inventory artifact (three
+  divergent strength tables, the longest SP1–4), not substrate
+  physics. One class-closure predicate (every same-name SPi↔SPi
+  self-bond = 2) lifted it with zero collateral — census receipts
+  byte-identical, n≤4 corpus unchanged, dead readers still
+  BFS-absent — and the first n=5 build assembles to a unique
+  terminal with full locks (70→126 assemblies, decode = full least
+  model).
 - 2026-10-07 — [A knob that changes
   sign](2026-10-07-a-knob-that-changes-sign.md) — designs/007
   closed: the s2 lock-read reinforcement arc distilled to three

@@ -58,12 +58,35 @@ value/variant done glue northward.
 """
 from __future__ import annotations
 
+import re
+
 from . import offchannel
 
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 TAU = 2
-STRENGTH = {("SP1", "SP1"): 2, ("SP2", "SP2"): 2, ("SP3", "SP3"): 2}
+
+# designs/010 §10.3 class closure rule (stage 7): the row-typed-spine
+# exemption of designs/002 v2.0 is a CLASS property, not a finite
+# enumeration — every same-name SPi<->SPi spine self-bond (i >= 1; the
+# emitter mints SP{i} per row) carries strength 2, and every other
+# matched pair keeps the cooperative fallback 1.  This is the ONE
+# predicate; parity.py and offchannel.py consume it, and their
+# divergent SP1-3 / SP1-4 enumerated tables are deleted (unification,
+# designs/010 §10.4-1).  Strictly SP<digits> names (the emitter's own
+# shape), so no non-spine glue can ride the closure silently.
+_SPINE_GLUE_RE = re.compile(r"SP[1-9][0-9]*")
+
+
+def glue_strength(g1, g2):
+    """Bond strength of two opposing face glues: 0 when either is
+    blank or the names differ; 2 for spine self-bonds (class closure,
+    designs/010 §10.3); 1 for every other matched pair."""
+    if not g1 or not g2:
+        return 0
+    if g1 == g2:
+        return 2 if _SPINE_GLUE_RE.fullmatch(g1) else 1
+    return 0
 
 
 class CompileError(Exception):

@@ -148,3 +148,82 @@ strengthened 1→2, or a dead reader resurfaces at n=5 → the bare class
 rule is falsified; fall back to a name-shape-guarded rule (literal
 `SP<n>` pattern), re-run the census, and re-review. Do not ship a
 silent strengthening to buy row 5.
+
+## 10.6 Landing record (tick 62, 2026-10-08, SON-4852)
+
+Option A landed as the single closure predicate in `compiler.py`
+(`glue_strength` backed by `_SPINE_GLUE_RE`, strict `SP[1-9][0-9]*`
+fullmatch); `parity.py` re-exports it and its SP1–4 table is deleted;
+`offchannel.py` delegates by default (explicit per-call `strength=`
+tables still override) and `DEFAULT_STRENGTH` (SP1–3) is deleted;
+the vestigial `compiler.py` STRENGTH is gone. No other semantic edits
+in the landing commit. Suite: `Ran 425 tests in 1.180s / OK
+(skipped=1)` — 421 + the four §10.4-1 unification pins in
+`tests/test_spine_closure_unification.py`.
+
+Measured outcomes (§10.4, verbatim):
+
+1. **Unification ✓** — `parity.glue_strength is compiler.glue_strength`;
+   SP4/SP5/SP6/SP40 = 2 on BOTH paths; value glues 1; mismatched and
+   blank 0; explicit-table override honored.
+2. **PC12-DOC (n=5) ✓ (primary shape)** — (5 rows, 20 tiles, **126**
+   assemblies, 1 terminal), full_locks **TRUE**, decode == the FULL
+   least model **{p,q,q2,r,s}**. Row 5 attached; no second hidden cap.
+3. **PR13-dead ✓** — rows locked **4 → 6**, assemblies **70 → 210**,
+   dead readers `and1_r`/`unit1_q2` **still BFS-absent** (falsifier
+   did not fire). Terminal decode {p,q,s} unchanged; d4 severity
+   still "error" (reported, not gated).
+4. **Byte-stability ✓ (with one predicted healing, corrected
+   in place)** — lock-misplacement regenerates BYTE-IDENTICAL
+   (`b7a5c70f…cd32`). The census-generality receipt is NOT
+   byte-identical — exactly ONE line changes (the DEEP_FACTS arm,
+   `p. q. s. r :- s, p.`), and the field diff is exactly 9 leaves,
+   every one an `S3+S4` lock-stack channel count 1→2: the SP4↔SP4
+   spine self-bond on the OFFCHANNEL path, previously under-priced
+   by its SP1–3 table — i.e. the row-4 divergence healing §10.4-1
+   pre-registered, now recorded in the receipt itself. The committed
+   receipt is updated to the regenerated content. The parity-corpus
+   receipt differs only in `seconds_*`/wall fields (timing-masked
+   identical; the corpus is n≤4 — PC1–PC9 + the PR refusals).
+   PC12-N4 stays (4,16,70,1) with full locks.
+5. **PC11 ✓** — (5 rows, 22 tiles, 147 assemblies, **2 terminals**,
+   both decoding the full model {p,q,q2,r,s}), full locks; the
+   pin/comment in `test_chain_refusal_corpus.py` carries the measured
+   shape.
+
+**Falsifier: NOT triggered.** The only 1→2 strengthening anywhere
+in the receipts is the SPINE pair SP4↔SP4 on the offchannel path
+(the S3+S4 healing above — parity already priced it at 2; this is
+unification, not a new strengthening); no NON-spine pair changed,
+and no dead-reader resurrection (BFS-absent). The bare class rule stands; no name-shape fallback
+needed — the predicate already matches strictly `SP<digits>`, the
+emitter's own shape, so nothing else can ride the closure silently.
+
+**Record-keeping slips in THIS note, corrected in place (caught by
+the pins, not silently rewritten):**
+
+- §10.1 quotes the PC12-DOC program as `r :- q2, z.` — the pinned
+  fixture (tick 55/60, `tests/test_and_over_derived_baseline.py`)
+  is `r :- q2, q.`; the quote is PR14's z-channel transcription
+  bleed. The §10.1 measured row (5 rows, 20 tiles) matches the
+  fixture, not the quote.
+- §10.4-2 predicted "decode == least model {p,q,s,q2} (r stays
+  dead: z absent)" — that prediction follows the slipped quote.
+  Measured: decode == the FULL model {p,q,q2,r,s} (r is TRUE and now
+  reachable at row 5). The primary prediction (full_locks TRUE,
+  unique terminal) holds.
+- §10.4-5's "exhaustive" flip list omitted the PR13-dead
+  measured-shape pins (`(6,26,70,1)`→`(6,26,210,1)`, full_locks
+  `assertFalse`→`assertTrue`, `locked == 4`→`6`), which §10.4-3 had
+  pre-registered as predictions; they flipped exactly as predicted.
+
+The cap is closed: n>4 builds are no longer spine-capped. Next
+frontier: n=6+ build survey and offchannel-path kinetic reports
+beyond row 4 (the healed row-4 divergence deserves its own receipt).
+
+**Receipt-compare methodology correction (same tick):** the first
+in-tick compare said "census-generality byte-identical" — that was
+a measurement error: the generator rewrites its own `.out`, so a
+disk-vs-stdout compare is self-referential. `git status` vs HEAD
+caught it; every future receipt compare must run against HEAD
+(`git diff HEAD -- <receipt>`), never the working-tree file.
