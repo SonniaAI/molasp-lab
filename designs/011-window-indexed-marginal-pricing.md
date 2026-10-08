@@ -105,3 +105,18 @@ already cross-seed stable via the DW9 CAL / CC3 chain).
 - The frozen class has no window pricing because it has no window
   dependence (measured 0.826 at w4): a window can tilt a marginal
   vacancy but cannot repair first-come.
+
+## Figure (tick 79, 2026-10-08)
+
+`assets/011-window-curve.svg` — deterministic render of this design's
+emitted curve by `tools/window_curve_svg.py` (dependency-free SVG;
+every number is read from `marginal_window_pricing()`, committed
+receipts only — the tick-37 static rule).  It shows the four measured
+census points (w1–w4), the chain fit solid through w4 and dashed
+beyond it, the w8 hazard-95 bracket, the tier bands, the window-blind
+stationary, and the DW11 frozen-persist line.  The w8 point is drawn
+open and labelled VERDICT PENDING until the pre-registered falsifier
+(queue request ed50c7ba…4daa85) lands; the collection note re-renders
+or retires the extrapolated arm per the interpretation map in
+`research-log/2026-10-08-w8-hazardhold.md`.  Pinned by
+`tests/test_window_curve_svg.py`.
