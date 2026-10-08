@@ -101,3 +101,36 @@ pre-registered: 1 CPU, 1 GiB, wall 1800 s, image paperclip-test.
 Tick disclosure: no compiler/design step advanced this tick; the
 durable product is the collection forensics, the corrected and
 pre-validated v2 request, and the two durable lessons above.
+
+## 6. Addendum (same tick): v2 COMPLETED — guard PASSED, collection landed
+
+- v2 `5a243215…77e8e`: state complete, HX-QUEUE-EXIT:0, finished
+  2026-10-08T10:05:42Z (~39 s runtime). Raw stdout saved verbatim as
+  `evidence/2026-10-07-dg2-window-l3vac/run.out` (4 per-arm records
+  at n=500 + verdicts JSON + VERDICTS line).
+- Mismatch guard: `collect.py run.out -` PASSED (exit 0) — all six
+  verdicts independently recomputed from raw per-arm numbers and
+  agreed with the script's machine verdicts. Rendered fragment saved
+  as `collection.md` (same content dash-mode emitted).
+- INSTRUMENT QUIRK (open, next tick): file-mode `collect.py run.out`
+  exits 3 (malformed) on the SAME input dash-mode accepts — the
+  exit-3 path is not the parser (parse skips blanks and both runs
+  share it); suspect main()'s file-write branch. Do not trust
+  file-mode exit codes until fixed; dash mode is the working path.
+- VALIDATED READOUT (guard-checked, n=500/arm):
+  DW8 CONFIRMED (dG-2 window gain: fill 0.734 vs ref 0.464, gain
+  +0.270 >= 0.10); DW9 FALSIFIED (D2T 367 : L2 131 -> share 0.737 >
+  0.65 — the longer window breaks the near-fair dG-2 coin into a
+  one-sided D2T-heavy split); DW10 CONFIRMED (family fill 0.984 >=
+  0.70 — window-neutral family channel); DW11 CONFIRMED (frozen
+  persistence 0.826 >= 0.80); LV1 CONFIRMED (L3 contender class:
+  pooled episode persistence 0.867 over 113 episodes, census 0.100);
+  LV2 CONFIRMED (window stability: census diff 0.004 <= 0.05).
+- Calibration exactness: probe arm fill 0.412 vs tick-43 ref 0.412;
+  L3 terminal census 50/500 = 0.100 vs ref 0.100 — dead-on.
+- Science consequence (for next design tick): the dG-2 "coin" was an
+  artifact of the short window — DW9's falsification + DW8's gain
+  mean the marginal regime is window-tilable toward D2T, which
+  reopens the dead-reader persistence question at dG-2 with a longer
+  read window. Candidate: blog post on the demolition (DW9) once the
+  design note is drafted.
