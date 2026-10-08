@@ -166,3 +166,99 @@ acceptance, tick 55) is unchanged and still open.
 Compiler left pristine at 4b71903; suite `Ran 421 tests` / `OK
 (skipped=1)` before and after. Evidence: research-log
 2026-10-08-and-over-derived-stage6-correction.md.
+
+## 9. Stage-6 Option II design (tick 58, 2026-10-08 — DESIGN ONLY; implements §8's consequence)
+
+Grounded in the live compiler at `a4a53f5` (lines cited from
+`molasp/compiler.py` as of that commit). Nothing here is compiled,
+emitted, or BFS-verified; every count stays `predicted` until the
+landing tick measures it.
+
+### 9.1 The structural problem, restated in columns
+
+At an AND terminal row `i` above an intermediate derived row
+`i−1`, the reader needs TWO south value reads. Column layout of the
+derived row (from emission order, `W`-chained east): spine x=0,
+conduit `C{hi}` x=1 (N = `unit1_{hi}-done`, the conduit chain glue
+— `d_north[i-1]`), reader `U{hi}` x=2 (N = `{hi}-t-done`, the
+stage-1 chain link — `v_north[i-1]`), lock `L` x=3 (N = `base{i}`,
+load-bearing). The lo value `{lo}-t-done` is exposed northward only
+at row `i−2` x=1 — two rows down, unreachable by adjacency. §8.2's
+measured refusal ("the V column at row 3 carries 'q2-t-done', not
+the lo value") is exactly this: v0.1's DB sits at x=2 and south-reads
+the chain link, not the lo value.
+
+### 9.2 The channel: D-column value passthrough + reader-order swap
+
+Option II, concretely — no new glue names, no new column:
+
+1. **Consumer-aware north-face layout on the derived row.** When
+   the row above reads the derived atom as the hi literal of an AND
+   body (a compile-time lookahead: one derived row, depth ≤ 2, one
+   consumer — all pinned by designs/008 §6), the derived row's
+   conduit re-types its N face from the conduit glue to the
+   **passthrough of the row-below D-column value**: `C{hi}` gets
+   `N = below_d` (= `d_north[i-2]` = `{lo}-t-done` for a true lo
+   fact, `{lo}-f-done` for a false one), and `d_north[i-1]` is set
+   to that same passthrough instead of `unit1_{hi}-done`. The
+   conduit-chain consumer of `unit1_{hi}-done` is the row above's
+   D-column S read — absent by construction in this shape (the AND
+   terminal emits no conduit-chain read). Unit-consumer shapes
+   (PC9/PC10) keep the stage-1 layout byte-identically: `C{hi}.N`
+   stays `unit1_{hi}-done` and `U{hi}.N` stays the chain link.
+2. **Reader-order swap for derived-hi ANDs.** The AND pair emits
+   lo-reader-first: `DA'` at x=1 (`W = go{i}`, `S = {lo}-t-done`,
+   `E = vj`, `N = {vj}-done`) — its S read is v0.1's own positional
+   arithmetic (`D-tile S = below_d`, now the passthrough value) —
+   and `DB'` at x=2 (`W = vj`, `S = {hi}-t-done`, `E = {a}-t`,
+   `N = {a}-t-done`) — its S read south-bonds `U{hi}.N`, the
+   UNCHANGED chain link (this is §2's gate-B re-typing, landed in
+   the column where the link actually lives). Face strengths are
+   untouched (value glues strength 1, spine `go{i}` strength 2), so
+   the AND pair's bond arithmetic is exactly v0.1's.
+3. **False-link guard, inherited not added.** The second channel is
+   not a new glue: it re-exposes the row-below's value-typed done
+   glue. A false lo yields `{lo}-f-done` on the passthrough while
+   the true-head reader's S reads `{lo}-t-done` — bond 0, dead by
+   value typing, the stage-1 argument verbatim. Over-production on
+   false links reduces to the existing question "which tiles can
+   south-match a value done glue at x=1" — priced by the d4 census
+   at landing.
+
+First documented consequence: derived-hi AND readers are
+position-incompatible with fact-hi AND readers (hi read moves x=1 →
+x=2). No corpus build reads a derived hi today (gate B refused
+them all), so no pin can break; recorded here so the landing tick
+names the case split in the compiler, not just the tiles.
+
+### 9.3 Gate A as union (both head polarities)
+
+`row_of_atom[lo] == 1 OR row_of_atom[lo] == i-2`. The row-1 via arm
+keeps today's arithmetic for every existing build (the §8.1 census
+receipts must re-verify byte-identically — probe BEFORE the gate
+edit, the tick-56 lesson). The positional arm is new. Crucially the
+union check runs for **predicted-false heads too**: tick-55
+measured PR13-dead/PR14 compiling with gates bypassed (gate code
+lives in the predicted-true branch only). Stage 6 closes that:
+PR14's `z` lo (not below the terminal) refuses loudly; PR13-dead
+(lo `q` at i−2, positional arm) stays an accepted dead-cascade pin.
+
+### 9.4 Corpus and predicted arithmetic
+
+| name | program | least model (hand) | prediction |
+| --- | --- | --- | --- |
+| PC12 | `p. s. q. q2 :- p. r :- q2, q.` | {p,s,q,q2,r} | unique terminal decode, full locks; ~24–28 tiles (PR13-dead measured 26 at the same n=5, tick-55), O(70–250) assemblies (PR13-dead's 70 is the n=5 precedent), BFS-static |
+| PR13-dead | `p. s. q. q2 :- z. r :- q2, q.` (the measured tick-55 shape; the §4 `q2 :- s` row was wrong in-place — `s` a fact makes q2 true) | {p,q,s} | AND reader absent while row locks hold; tick-51 strength argument RE-DERIVED at x=1: `DA'`.W = vj unique to the body, `DA'`.S ≤ 1 even on a true lo → max 1 < TAU 2 |
+| PR14 | `p. s. q. q2 :- p. r :- q2, z.` | — | loud refusal, union gate A, false-head side |
+
+Pins at landing, in order: (1) census + corpus receipts
+byte-identical BEFORE any gate edit; (2) PC9/PC10 byte-stability
+under the consumer-aware emission (unit-consumer layout unchanged);
+(3) PC12 model/locks/dead-glue absence; (4) PR13-dead reader
+absence BFS-proved; (5) PR14 refusal message names both accepted
+placements. Honest boundaries, recorded not hidden: false-head
+lock completion at n=5 stays open (tick-55 measured 4/6, d4
+collision reported — acceptance, not refusal, is the current
+behavior and this design does not change it); the compile-time
+lookahead is a case split the landing must name explicitly; OR at
+an intermediate row and depth > 2 remain refused (designs/008 §6).
