@@ -18,6 +18,13 @@ line connecting the sections (Arthur's rule, 8 Oct). The index card for a
 page shows its TL;DR if present, otherwise its first paragraph — so the
 introduction has to earn the click on its own.
 
+- 2026-10-08 — [The number of buildable things](2026-10-08-the-number-of-buildable-things.md) — the counting-law arc,
+  closed: the four-column family's producible assemblies are exactly the partitions inside
+  a 4×n box — 70, 126, 210, …, 1820, all C(n+4,4), machine-checked in both directions to
+  n=12 — and corpus-wide, BFS presence sets equal the well-founded sets of the face-table
+  grammar in 14 of 14 compiling programs, after the naive DAG-ideal draft was falsified
+  first (local or-support is the norm). The honest boundary: PC11's 147 name-labelled
+  assemblies sit over 126 presence sets — names contend above the poset the physics counts.
 - 2026-10-08 — [The tilt is a ratchet](2026-10-08-the-tilt-is-a-ratchet.md) — the DW9
   arc's mechanism, measured: under attach odds that stay homogeneous, the
   canonical fill's detach hazard collapses ~76× by the second window quartile
