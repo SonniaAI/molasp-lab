@@ -47,6 +47,10 @@ bracket arm 0.81585, CAL-arm terminal share at w8.
   (job `hxq-8acaa3c85db7ed7c`), image paperclip-test, 1 cpu / 1Gi /
   wall 2400 s, submitted 21:06Z; state queued (ci admission floor on
   spark-4a06) — waiting for resources is legitimate, no resubmit.
+  **[SUPERSEDED tick 77, ~23:05Z — see Addendum: the recorded command
+  lacked the `source/` prefix (tick-68 failure class), caught
+  PRE-admission; v1 cancelled, replaced by request
+  `ed50c7baf2d8b935bb118f25758394ddfb04a671e902f39bfa66721b274daa85`.]**
 - Issue monitor scheduled on SON-4881: external_service /
   cluster-job-queue, nextCheckAt 21:35Z, timeoutAt 23:30Z,
   maxAttempts 6, recoveryPolicy wake_owner.  Collection wake will
@@ -63,3 +67,42 @@ bracket arm 0.81585, CAL-arm terminal share at w8.
   always was: a sensitivity arm, not a fit).
 - CAL_FAIL: instrument drift; everything VOID, diagnose before any
   science claim.
+
+## Addendum (tick 77, SON-4885, wake 23:01Z) — v1 superseded PRE-admission
+
+At the collection probe the queued v1 request had still not been
+admitted (~2 h on the ci admission floor).  Reading its RECORDED
+command revealed a fatal payload-path bug, the exact tick-68 failure
+class: `python3 ktam_w8_hazardhold.py` — no `source/` prefix, so on
+admission the job would have died within seconds looking for the
+harness at `/work/ktam_w8_hazardhold.py`.  The tick-74 archive was
+flat-root, which would have needed `source/ktam_w8_hazardhold.py`;
+the recorded command had neither form.  Caught before admission, so
+v1 never ran: no receipt contamination, no admission slot burned.
+
+Disposition:
+
+- v1 `8acaa3c8…c7e4` cancelled (owner-scoped; state verified
+  `cancelled`).
+- v2 request
+  `ed50c7baf2d8b935bb118f25758394ddfb04a671e902f39bfa66721b274daa85`
+  (job `hxq-ed50c7baf2d8b935`, nonce `molasp-w8-hazardhold-t77`),
+  same image/limits (paperclip-test, 1 cpu / 1 Gi / wall 2400 s),
+  archive rebuilt in the PROVEN tick-63/70 repo-mirroring layout:
+  harness at `evidence/2026-10-08-w8-hazardhold/`, `tiles_and.py` +
+  `tiles_death.py` + `molasp/{__init__,offchannel,compiler}.py` at
+  the archive root; command
+  `python3 source/evidence/2026-10-08-w8-hazardhold/ktam_w8_hazardhold.py`
+  (same shape as the VH request's recorded command).
+- Clean-extraction SMOKE re-run on the rebuilt archive (extracted
+  into `<simwork>/source`, cwd `<simwork>`): exit 0, JSON receipt +
+  VERDICTS line emitted.  The harness file is byte-identical to the
+  committed instrument (copied from f56f393), so the frozen CAL/W8
+  gates are unchanged and the pre-registration stands as written.
+- Queue state at submit: queued (same ci admission floor) —
+  legitimate wait, no resubmit; monitor re-armed on SON-4885.
+
+Lesson (generalizes tick 68's): the recorded-command check belongs
+at EVERY probe of a queued request, not only at submit time — and
+prefer the repo-mirroring archive layout so recorded commands are
+grep-comparable against prior successful requests.
