@@ -85,3 +85,41 @@ seed-history-dependent, reopening DW9's number as an estimate.
 Collection disclosure for this tick: the durable products are the
 frozen-gate instrument, this pre-registration, and the validated
 queued request; no verdicts are claimed before the run lands.
+
+## 5. Collection outcome (same tick, ~15:12Z)
+
+v2 request `6a1259244274e4e7f6aca5ac61a8f21167b2bac8bc1d7b6280e9cea755746eff`
+ran ~22 s, HX-QUEUE-EXIT:0. Verdicts (receipt:
+evidence/2026-10-08-dw9-compounding-chain/run.out + collection.md):
+
+- **CAL_OK** — pooled orig census EXACTLY 367:131:2: the
+  instrument is the tick-63 instrument; passive logging perturbed
+  nothing.
+- **CC1 FALSIFIED / CC2 FALSIFIED** — the compounding-chain
+  account (frozen survivors + compounded re-rollers) misses the
+  held-out share by 0.162 and the fresh share by 0.143 (~3x the
+  band). The S5 mechanism hypothesis dies; the mechanism search
+  reopens.
+- **CC3 CONFIRMED** — fresh-seed share 0.716; the DW9 tilt is a
+  stable regime number (|delta| = 0.021).
+- Post-hoc (labeled, no gate): the PURE stationary pi_pair
+  (0.697-0.712) sits within 0.02-0.04 of both measured shares —
+  the failure is the mixture's frozen-survivor component, not the
+  chain rates. Next falsifier candidate: time-inhomogeneous chain
+  per window phase, to be pre-registered before running.
+- Fitted parameters: per-roll pair odds 0.52-0.55 (near-fair, not
+  the 0.575 first-attach race); dwell ratio D2T:L2 ~ 2.3; f
+  0.396-0.402; fs_pair 0.368-0.390 (L2-favored first stables).
+
+## 6. v1 failure (root-caused, superseded same tick)
+
+Request `7822cd5b...06e4` (nonce dw9-compound-v1) failed in ~11 s:
+command lacked the `source/` prefix — the queue extracts the
+archive into /work/source and runs from /work (verified against
+the tick-63 v2 request record's command
+`python3 source/evidence/...`). Archive content was never at fault
+(clean-extraction smoke had passed; CAL_OK on v2 proves the
+payload). Ops lesson: read the recorded command of a prior
+SUCCESSFUL request before submitting; the tick-63 research log's
+"mimicking /work" smoke prose elided the source/ root and
+propagated the drift.

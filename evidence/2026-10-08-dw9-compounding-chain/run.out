@@ -1,0 +1,15 @@
+/queue-input/source.tgz: OK
+HX-OUT-BEGIN:6a1259244274e4e7f6aca5ac61a8f21167b2bac8bc1d7b6280e9cea755746eff
+HX-FILE:status
+0
+
+HX-FILE:stderr
+
+HX-FILE:stdout
+{"n_per_range": 500, "seed0": 260261107, "dg": 2.0, "win_mult": 4.0, "orig_terminal": {"D2T": 367, "L2": 131, "other": 2, "share": 0.7369477911646586}, "heldout_terminal": {"D2T": 183, "L2": 65, "other": 2, "share": 0.7379032258064516}, "fresh_terminal": {"D2T": 358, "L2": 142, "other": 0, "share": 0.716}, "fit_half": {"ok": true, "p": {"D2T": 0.2624466571834993, "L2": 0.24182076813655762, "other": 0.4957325746799431}, "d": {"D2T": 6.011937892123909e-08, "L2": 1.3721209015649543e-07}, "pi_pair": 0.712395430762216, "f": 0.396, "fs_pair_share": 0.36813186813186816, "p_mix": 0.5760670599605983, "att": {"L2": 340, "D2T": 369, "DBr": 393, "L3": 36, "D1T": 132, "V0p": 134, "S2": 2}, "det": {"L2": 274, "D2T": 185, "DBr": 393, "L3": 36, "D1T": 132, "V0p": 134, "S2": 2}, "mean_spell_D2T": 16633571.70256325, "mean_spell_L2": 7287987.515236181, "rolls_per_traj": 5.624, "per_roll_pair_odds": 0.5204513399153737}, "fit_all": {"ok": true, "p": {"D2T": 0.2753475754493048, "L2": 0.2282129535435741, "other": 0.49643947100712105}, "d": {"D2T": 7.210715383728361e-08, "L2": 1.3726795060167134e-07}, "pi_pair": 0.6966797397708616, "f": 0.402, "fs_pair_share": 0.38992042440318303, "p_mix": 0.5733624949930548, "att": {"L2": 673, "D2T": 812, "DBr": 805, "L3": 73, "D1T": 288, "V0p": 293, "S2": 5}, "det": {"L2": 542, "D2T": 445, "DBr": 805, "L3": 72, "D1T": 288, "V0p": 293, "S2": 4}, "mean_spell_D2T": 13868249.497915165, "mean_spell_L2": 7285021.708394503, "rolls_per_traj": 5.898, "per_roll_pair_odds": 0.5468013468013468}, "deviations": {"CC1": 0.1618, "CC2": 0.1426}}
+{"CAL": "CAL_OK", "CC1": "FALSIFIED", "CC2": "FALSIFIED", "CC3": "CONFIRMED"}
+VERDICTS {"CAL": "CAL_OK", "CC1": "FALSIFIED", "CC2": "FALSIFIED", "CC3": "CONFIRMED"}
+
+HX-QUEUE-EXIT:0
+HX-OUT-END:6a1259244274e4e7f6aca5ac61a8f21167b2bac8bc1d7b6280e9cea755746eff
+
