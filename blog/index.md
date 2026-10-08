@@ -4,6 +4,15 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-08 — [The tilt is a ratchet](2026-10-08-the-tilt-is-a-ratchet.md) — the DW9
+  arc's mechanism, measured: under attach odds that stay homogeneous, the
+  canonical fill's detach hazard collapses ~76× by the second window quartile
+  (4.05e-7 → 5.35e-9 → 0 → 1.03e-9) while the squatter keeps re-rolling — a
+  vanishing-hazard ratchet, after the compounding-chain and phase-stationary
+  accounts died first. Forward-integrated from the quarter-window snapshot,
+  the fitted chain predicts the held-out terminal census within 0.0035 (7×
+  better than stationary) and fresh seeds within noise (0.0254 ≈ 1.26 SE).
+  designs/007's MARGINAL pricing is now window-indexed with a measured basis.
 - 2026-10-08 — [The coin was a snapshot](2026-10-08-the-coin-was-a-snapshot.md) — DW9
   demolished: the dG-2 "near-fair coin" (232:229) was a stationary-split
   claim the experiment never tested. The pre-registered 4× read window

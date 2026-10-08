@@ -236,3 +236,27 @@ knob → mechanism → thermodynamic closure → regime pricing →
 compiler surface.  Remaining honest boundaries (dG-2 window arm,
 L3-at-vacancy class) are recorded in the artifact, not owed by
 this design.
+
+## Post-closure addendum — the dG-2 window arm is measured (tick 71, 2026-10-08)
+
+This design closed with the dG-2 window arm recorded as an untested
+boundary. It has since been measured across four pre-registered stages
+(DW9 window → compounding chain → DW10 phase chain → VH ratchet; receipts
+under `evidence/2026-10-07-dg2win-l3vac/` and `evidence/2026-10-08-*/`):
+the 4× window tilts the split to 367:131 (share 0.737, falsifier 0.65),
+the compounding and phase-stationary accounts falsified or NO_FIT, and
+the surviving mechanism is a **vanishing-hazard ratchet** — fill detach
+hazard collapse ~76× by window phase 2 (4.05e-7 → 5.35e-9 → 0 → 1.03e-9)
+under homogeneous attach odds, squatter hazard alive (2.17e-7 → 4.36e-8).
+The fitted non-homogeneous chain forward-integrated from the quarter-window
+snapshot predicts the terminal census within 0.0035 (held-out seeds) and
+0.0254 (fresh seeds, ≈1.26 SE).
+
+Consequence for the surface: the MARGINAL tier's honest form is
+**window-indexed**, with a measured, phase-resolved basis; severity priced
+at a single fixed window (the current `check_d4` default) is now a labelled
+choice, not a silent default. Updating the emitted `boundary_notes` text to
+match is a candidate compiler micro-step, deliberately not slipped into
+this addendum. The design stays CLOSED — its story now ends with a measured
+window response rather than an open boundary. Blog:
+`blog/2026-10-08-the-tilt-is-a-ratchet.md`.
