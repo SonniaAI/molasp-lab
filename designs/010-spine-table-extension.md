@@ -241,3 +241,23 @@ n=4..9 — an empirical closed form, unproven from the enumerator
 (open; tick-65 candidate). Scope: one family, one geometry; this
 widens the measured support of §10.4, it is not a theorem. Pins:
 `tests/test_n6_build_survey.py`.
+
+## §10.8 Addendum (tick 65, SON-4859): the C(n+4,4) fit is derived, not fitted
+
+§10.7's "empirical closed form" upgrade. The decorative-fact
+family's attach grammar (read off the emitted face tables: spine
+attaches on the tile below alone via the §10.3 class closure's
+strength-2 SPi/SPi; columns 1–3 each need below + west, two
+strength-1 glues) makes every reachable assembly an order ideal of
+the four-column poset — column heights n ≥ h0 ≥ h1 ≥ h2 ≥ h3 ≥ 0,
+partitions inside a 4×n box, classically C(n+4,4). Machine-checked
+exhaustively in BOTH directions at n=4..12 (reached shapes ==
+explicit ideal set; assemblies ↔ shapes bijective; tick-64 anchors
+reproduced; receipt `evidence/2026-10-08-binomial-derivation/probe.out`,
+record `research-log/2026-10-08-binomial-derivation.md`; pins
+`tests/test_binomial_ideals.py`). New rows n=10/11/12: 1001/1365/1820
+= C(14,4)/C(15,4)/C(16,4), unique terminal throughout. Residual
+hand-step: the grammar table is read off emitted faces (corpus-
+pinned), not proved from compiler source. Scope still one family;
+extending the poset argument across the compiling corpus (PR13-dead
+shares the grammar, 210 at n=6) is a §10.9 candidate.
