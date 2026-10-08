@@ -4,6 +4,13 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+Synthesis guides live in `guides/` — one file per research arc, written
+for a non-expert reader. When a new post or log entry extends, bounds or
+demolishes a claim a guide makes, edit the guide in the same commit:
+guides are the reading copy, dated entries are the receipts. The site
+builder (`tools/build_blog.py`) renders guides first, then the dated
+log; the deployed site regenerates on every push to main.
+
 - 2026-10-08 — [The tilt is a ratchet](2026-10-08-the-tilt-is-a-ratchet.md) — the DW9
   arc's mechanism, measured: under attach odds that stay homogeneous, the
   canonical fill's detach hazard collapses ~76× by the second window quartile

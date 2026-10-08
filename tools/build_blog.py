@@ -3,7 +3,8 @@
 
 Reads the markdown the lane maintains and renders a deployable static site:
 
-  blog/*.md          -> <date>-<slug>.html   (post pages, hero art if present)
+  blog/guides/*.md   -> <slug>.html          (synthesis guides, non-expert reading path)
+  blog/<date>-*.md   -> <date>-<slug>.html   (dated lab-log entries, hero art if present)
   designs/*.md       -> designs/<name>.html  (design docs, plain layout)
   research-log/*.md  -> research-log/<name>.html (working notes, plain layout)
   blog/index.md      -> index.html           (timeline of posts + sections)
@@ -29,6 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BLOG = ROOT / "blog"
 DESIGNS = ROOT / "designs"
 RLOG = ROOT / "research-log"
+GUIDES = BLOG / "guides"
 ASSETS = BLOG / "assets"
 OUT = ROOT / "_site"
 
@@ -38,7 +40,8 @@ MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
 
 NAV = (
     '<header class="site"><a class="brand" href="index.html">molasp-lab</a>'
-    '<nav><a href="index.html">Posts</a>'
+    '<nav><a href="index.html#guides">Guides</a>'
+    '<a href="index.html#lab-log">Lab log</a>'
     '<a href="index.html#designs">Designs</a>'
     '<a href="index.html#research-log">Research log</a>'
     '<a href="https://github.com/SonniaAI/molasp-lab">Repository</a></nav></header>'
@@ -141,6 +144,19 @@ def build():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
 
+    guides = []
+    if GUIDES.exists():
+        for path in sorted(GUIDES.glob("*.md")):
+            guide = parse_post(path)
+            hero = hero_for(path)
+            body = (hero
+                    + '<h1 class="post-title">{}</h1>\n<p class="meta">{}</p>\n{}'
+                    .format(H.escape(guide["title"]), H.escape(guide["meta"]),
+                            to_html(guide["body"])))
+            (OUT / (guide["slug"] + ".html")).write_text(
+                page(guide["title"], body), encoding="utf-8")
+            guides.append(guide)
+
     posts = []
     for path in sorted(BLOG.glob("*.md")):
         if path.name == "index.md":
@@ -170,13 +186,14 @@ def build():
                     anchor=anchor, name=folder_name.replace("-", " ").title(),
                     items=items))
 
-    cards = []
-    for p in posts:
-        cards.append(
-            '<article class="card"><time>{}</time><h3><a href="{}.html">'
-            "{}</a></h3><p>{}</p></article>".format(
-                H.escape(p["meta"] or p["date"]), p["slug"],
-                H.escape(p["title"]), H.escape(p["tldr"][:400])))
+    def card(p, tag):
+        return ('<article class="card"><time>{}</time><h3><a href="{}.html">'
+                "{}</a></h3><p>{}</p></article>".format(
+                    H.escape(p["meta"] or tag), p["slug"],
+                    H.escape(p["title"]), H.escape(p["tldr"][:400])))
+
+    guide_cards = "".join(card(g, "Synthesis") for g in guides)
+    post_cards = "".join(card(p, p["date"]) for p in posts)
 
     banner = ""
     if (ASSETS / "banner.png").exists():
@@ -190,7 +207,12 @@ def build():
         "for the people who run them. Everything here is also in the "
         '<a href="https://github.com/SonniaAI/molasp-lab">repository</a>; '
         "this site is the reading copy.</p>\n"
-        '<section id="posts"><h2>Posts</h2>' + "".join(cards) + "</section>\n"
+        '<section id="guides"><h2>Guides</h2><p>Start here: each guide '
+        "synthesises one research arc for a reader new to the programme; "
+        "the lab log below is the dated record behind them.</p>"
+        + guide_cards + "</section>\n"
+        + '<section id="lab-log"><h2>Lab log</h2>' + post_cards
+        + "</section>\n"
         + doc_section(DESIGNS, "designs", "designs")
         + doc_section(RLOG, "research-log", "research-log"))
     (OUT / "index.html").write_text(page("molasp-lab", index_body),
