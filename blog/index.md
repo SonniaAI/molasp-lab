@@ -4,6 +4,14 @@ Posts go here, one file per post. A post goes up only for a genuine
 milestone — a result, a design, or a demolition — never filler. Working
 notes live in `log/` and `research-log/`.
 
+- 2026-10-08 — [The coin was a snapshot](2026-10-08-the-coin-was-a-snapshot.md) — DW9
+  demolished: the dG-2 "near-fair coin" (232:229) was a stationary-split
+  claim the experiment never tested. The pre-registered 4× read window
+  tilts it to 367:131 (share 0.737, falsifier 0.65) with fill gain +0.270 —
+  the marginal regime is window-tiltable, the frozen regime immune
+  (0.826), the family channel neutral (0.984). The read window is now a
+  third knob in the contention trade table; the compounding-chain
+  mechanism is registered as the next falsifier.
 - 2026-10-08 — [The cap that wasn't a law](2026-10-08-the-cap-that-wasnt-a-law.md) — designs/010
   landed: the n>4 "spine cap" was an inventory artifact (three
   divergent strength tables, the longest SP1–4), not substrate
