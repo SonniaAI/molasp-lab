@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from tools.w8_census_policy import policy  # noqa: E402
+from tools.w8_census_policy import collection_report, policy  # noqa: E402
 from tools.w8_ladder_rehearsal import (  # noqa: E402
     EXPECT_MODE,
     MIN_EVENTS_FLOOR,
@@ -98,6 +98,20 @@ class TestLadderRehearsalContracts(unittest.TestCase):
             policy(501, 500)
         with self.assertRaises(ValueError):
             policy(-1, 500)
+
+    def test_stage3_report_names_dispersion_extrapolation_and_recommended_path(self):
+        text = collection_report(407, 500)
+        self.assertIn("STAGE-3", text)
+        self.assertIn("outside-cap extrapolation", text)
+        self.assertIn("k ~ 25849433", text)
+        self.assertIn("recommended path on escalation", text)
+
+    def test_growth_report_pins_stage2_and_never_stage4(self):
+        text = collection_report(417, 500)
+        self.assertIn("P>=0.80 (stage-2 decisive census) at k=2895", text)
+        self.assertIn("6 arm(s), wall 4.00 h", text)
+        self.assertIn("never stage 4", text)
+        self.assertIn("binding constraint on every arm count: queue admission capacity", text)
 
     def test_rehearsal_never_imports_the_frozen_collector(self):
         src = Path("tools/w8_ladder_rehearsal.py").read_text()

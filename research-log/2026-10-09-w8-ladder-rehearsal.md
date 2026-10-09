@@ -71,8 +71,8 @@ ValueError, pinned.
 ## Suite
 
 Exact CI command `python3 -m unittest discover -s tests`:
-`Ran 646 tests in 7.736s / OK (skipped=1)` = 636 + 10 new pins in
-`tests/test_w8_ladder_rehearsal.py` (all ten names present in verbose
+`Ran 648 tests in 8.276s / OK (skipped=1)` = 636 + 12 new pins in
+`tests/test_w8_ladder_rehearsal.py` (all twelve names present in verbose
 discovery output).
 
 ## Queue state at landing (operational, not science)
