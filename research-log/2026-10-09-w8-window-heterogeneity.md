@@ -117,3 +117,45 @@ asymptotic test and that boundary are pinned in tests.
   bounded `cluster-job-queue` monitor to that source issue if it waits.
 - No blog this tick: this is a design, not a measured milestone. No wet-lab
   execution and no paper/preprint submission.
+
+## Collection (2026-10-09; tick 103, SON-4943)
+
+**Automated result; independent QA review is pending.** This is evidence for
+the registered simulator/protocol only, not a statement about physical
+molecular replicates or proof that all seed windows are identical.
+
+- Owned queue request `41a71291dbaf418343d65b3af6bb7b181f8b59f2cac3978b382f93ec741065e9`
+  completed on `spark-4a06` with exit 0. The verified `paperclip-test` image
+  digest is `sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd`;
+  job and request provenance are retained in
+  `evidence/2026-10-09-w8-window-heterogeneity/queue-status.json`.
+- Exact output imported as `run.out` (SHA-256
+  `6ca7334efe1f2ae79acc396b87383367a7d7931e9f7ad14487389357c1433fa7`;
+  result blob SHA-256 `b709867bc43606085242b0ef6df8ad4e6bedc8672ea411036212ab3bada1eca2`).
+  Calibration passed exactly: mid-w4 D2T:L2 = 367:131 (other=2).
+- Independent collection from the raw six counts cross-checked the
+  instrument's verdict: `HETEROGENEITY_NOT_DETECTED`; Pearson
+  chi-square(5) = 2.7713095514, p = 0.7351922075, alpha = 0.05.
+  This does not prove identical windows. The pooled pair-terminal share is
+  22,111/29,989 = 0.7373036780 (Wilson-95 [0.73229, 0.74225]); zero windows
+  were at least 0.02 or 0.03 above the historical family rate 1110/1499.
+- Per-window counts (other states excluded from the D2T:L2 denominator):
+
+  | Block | D2T | L2 | Other | Pair n | D2T share | Wilson-95 |
+  |---:|---:|---:|---:|---:|---:|---:|
+  | 8 | 3644 | 1355 | 1 | 4999 | 0.72895 | [0.71645, 0.74109] |
+  | 9 | 3707 | 1291 | 2 | 4998 | 0.74170 | [0.72938, 0.75364] |
+  | 10 | 3692 | 1307 | 1 | 4999 | 0.73855 | [0.72619, 0.75054] |
+  | 11 | 3675 | 1324 | 1 | 4999 | 0.73515 | [0.72274, 0.74720] |
+  | 12 | 3696 | 1302 | 2 | 4998 | 0.73950 | [0.72715, 0.75148] |
+  | 13 | 3697 | 1299 | 4 | 4996 | 0.73999 | [0.72765, 0.75197] |
+
+- The audit receipt is `evidence/2026-10-09-w8-window-heterogeneity/verdict.json`;
+  `tools/collect_w8_window_resolution.py` validates the frozen block/seed
+  identity, calibration, intervals and descriptive counts, then independently
+  recomputes the Pearson test and refuses instrument disagreement. New
+  regression tests cover the no-detection, registered two-hot, void-calibration
+  and identity-mismatch paths. Exact CI suite: `Ran 712 tests in 9.012s / OK
+  (skipped=1)`.
+- No blog post this tick: the automated computational result is recorded for
+  review first; no paper/preprint or wet-lab work.

@@ -1,0 +1,82 @@
+{
+  "admitted": 1791566605.1037128,
+  "cleanup_pending": false,
+  "collection_errors": [],
+  "created": 1791566601.9145703,
+  "dump_complete": true,
+  "execution_status": 0,
+  "finished": 1791567290.5194938,
+  "id": "41a71291dbaf418343d65b3af6bb7b181f8b59f2cac3978b382f93ec741065e9",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd"
+  ],
+  "image_verified": true,
+  "job": "hxq-41a71291dbaf4183",
+  "job_status": {
+    "completionTime": "2026-10-09T17:34:44Z",
+    "conditions": [
+      {
+        "lastProbeTime": "2026-10-09T17:34:44Z",
+        "lastTransitionTime": "2026-10-09T17:34:44Z",
+        "message": "Reached expected number of succeeded pods",
+        "reason": "CompletionsReached",
+        "status": "True",
+        "type": "SuccessCriteriaMet"
+      },
+      {
+        "lastProbeTime": "2026-10-09T17:34:44Z",
+        "lastTransitionTime": "2026-10-09T17:34:44Z",
+        "message": "Reached expected number of succeeded pods",
+        "reason": "CompletionsReached",
+        "status": "True",
+        "type": "Complete"
+      }
+    ],
+    "ready": 0,
+    "startTime": "2026-10-09T17:23:25Z",
+    "succeeded": 1,
+    "terminating": 0,
+    "uncountedTerminatedPods": {}
+  },
+  "node": "spark-4a06",
+  "pod_statuses": [
+    {
+      "containers": [
+        {
+          "name": "attempt",
+          "terminated": {
+            "exitCode": 0,
+            "finishedAt": "2026-10-09T17:34:42Z",
+            "reason": "Completed",
+            "signal": null,
+            "startedAt": "2026-10-09T17:23:25Z"
+          }
+        }
+      ],
+      "message": null,
+      "name": "hxq-41a71291dbaf4183-64dht",
+      "phase": "Succeeded",
+      "reason": null,
+      "uid": "104dea74-9704-483a-8ff8-e317fbe5e761"
+    }
+  ],
+  "protocol": 2,
+  "reason": "resource claim admitted",
+  "request": {
+    "archive_blob": "4003e764aaa2e22e403f3812b206acceec6dca6d6303b7edbed9537d651f9dec",
+    "command": [
+      "python3",
+      "source/evidence/2026-10-09-w8-window-heterogeneity/ktam_w8_windows.py"
+    ],
+    "cpu": 1,
+    "files": {},
+    "image": "paperclip-test",
+    "issue": "d7cc3a51-ca69-4589-aba0-f85232bd1424",
+    "memory": 1073741824,
+    "nonce": "molasp-w8-window-heterogeneity-tick103-son4943",
+    "owner": "529f369d-676b-46ff-a2f5-3af52e130bdf",
+    "wall": 2400
+  },
+  "result_blob": "b709867bc43606085242b0ef6df8ad4e6bedc8672ea411036212ab3bada1eca2",
+  "state": "complete"
+}

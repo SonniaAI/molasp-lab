@@ -1,0 +1,161 @@
+{
+  "branch": "HETEROGENEITY_NOT_DETECTED",
+  "calibration": {
+    "mid_w4_D2T_L2_other": [
+      367,
+      131,
+      2
+    ],
+    "status": "CAL_OK"
+  },
+  "cross_check": "ok",
+  "descriptive": {
+    "historical_family_rate": 0.7404936624416277,
+    "pooled_D2T": 22111,
+    "pooled_pair_n": 29989,
+    "pooled_pair_rate": 0.7373036780152723,
+    "pooled_pair_wilson95": [
+      0.73229,
+      0.74225
+    ],
+    "windows_at_least_family_plus": {
+      "at_least_family_plus_0.02": 0,
+      "at_least_family_plus_0.03": 0
+    }
+  },
+  "instrument_primary": {
+    "branch": "HETEROGENEITY_NOT_DETECTED",
+    "metrics": {
+      "alpha": 0.05,
+      "df": 5,
+      "p_value": 0.7351922075242888,
+      "pooled_share": 0.7373036780152723,
+      "statistic": 2.77130955136489
+    }
+  },
+  "interpretation": "The pre-registered test did not detect between-window heterogeneity at alpha=.05 for this simulator/protocol; this is not proof that the windows are identical.",
+  "primary": {
+    "alpha": 0.05,
+    "df": 5,
+    "p_value": 0.7351922075242889,
+    "pooled_share": 0.7373036780152723,
+    "statistic": 2.7713095513648907
+  },
+  "registration": {
+    "alpha": 0.05,
+    "blocks": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "calibration_D2T_L2": [
+      367,
+      131
+    ],
+    "calibration_seed0": 260261107,
+    "df": 5,
+    "n_per_window": 5000,
+    "primary_test": "Pearson homogeneity",
+    "seed0": [
+      380261107,
+      400261107,
+      420261107,
+      440261107,
+      460261107,
+      480261107
+    ]
+  },
+  "request_id": "41a71291dbaf418343d65b3af6bb7b181f8b59f2cac3978b382f93ec741065e9",
+  "schema": 1,
+  "source_run_out_sha256": "6ca7334efe1f2ae79acc396b87383367a7d7931e9f7ad14487389357c1433fa7",
+  "tool": "collect_w8_window_resolution",
+  "windows": [
+    {
+      "D2T": 3644,
+      "L2": 1355,
+      "block": 8,
+      "n_trajectories": 5000,
+      "other": 1,
+      "pair_n": 4999,
+      "seed0": 380261107,
+      "share": 0.7289457891578316,
+      "wilson95": [
+        0.71645,
+        0.74109
+      ]
+    },
+    {
+      "D2T": 3707,
+      "L2": 1291,
+      "block": 9,
+      "n_trajectories": 5000,
+      "other": 2,
+      "pair_n": 4998,
+      "seed0": 400261107,
+      "share": 0.7416966786714686,
+      "wilson95": [
+        0.72938,
+        0.75364
+      ]
+    },
+    {
+      "D2T": 3692,
+      "L2": 1307,
+      "block": 10,
+      "n_trajectories": 5000,
+      "other": 1,
+      "pair_n": 4999,
+      "seed0": 420261107,
+      "share": 0.7385477095419084,
+      "wilson95": [
+        0.72619,
+        0.75054
+      ]
+    },
+    {
+      "D2T": 3675,
+      "L2": 1324,
+      "block": 11,
+      "n_trajectories": 5000,
+      "other": 1,
+      "pair_n": 4999,
+      "seed0": 440261107,
+      "share": 0.7351470294058812,
+      "wilson95": [
+        0.72274,
+        0.7472
+      ]
+    },
+    {
+      "D2T": 3696,
+      "L2": 1302,
+      "block": 12,
+      "n_trajectories": 5000,
+      "other": 2,
+      "pair_n": 4998,
+      "seed0": 460261107,
+      "share": 0.7394957983193278,
+      "wilson95": [
+        0.72715,
+        0.75148
+      ]
+    },
+    {
+      "D2T": 3697,
+      "L2": 1299,
+      "block": 13,
+      "n_trajectories": 5000,
+      "other": 4,
+      "pair_n": 4996,
+      "seed0": 480261107,
+      "share": 0.7399919935948759,
+      "wilson95": [
+        0.72765,
+        0.75197
+      ]
+    }
+  ]
+}

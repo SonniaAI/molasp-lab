@@ -1,0 +1,14 @@
+{
+  "blob_source": "/tmp/son4943-33f36142-queue-result.frame",
+  "exit_status": 0,
+  "imported_at": "2026-10-09T17:45:08Z",
+  "interpretation": "none \u2014 the verdict chain starts at tools/collect_w8.py",
+  "request_id": "41a71291dbaf418343d65b3af6bb7b181f8b59f2cac3978b382f93ec741065e9",
+  "run_out": {
+    "bytes": 1947,
+    "sha256": "6ca7334efe1f2ae79acc396b87383367a7d7931e9f7ad14487389357c1433fa7"
+  },
+  "schema": 1,
+  "stderr": null,
+  "tool": "import_queue_result"
+}
