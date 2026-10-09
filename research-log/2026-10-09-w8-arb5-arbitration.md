@@ -87,8 +87,51 @@ committed tool on [(375,500),(106,153),(x5,500)].
 
 ## Submission record
 
-(filled at submission)
+- Pre-registration commit: 8497967 (pushed; suite 668 OK / 1 skip;
+  clean-extraction SMOKE exit 0).
+- Request d158d5fbfb988dd4bd1c09450e07dbe34114419b29b7d2cd9f274ff1e4a94977
+  (job hxq-d158d5fbfb988dd4, nonce molasp-w8-arb5-t98, paperclip-test,
+  1 cpu / 1Gi / wall 2400 s, archive = repo-mirroring layout,
+  command `python3 source/evidence/2026-10-09-w8-arb5/ktam_w8_arb5.py`).
+- Admitted ~2 s after submission; ran ~34 s; HX-QUEUE-EXIT: 0.
+- Receipt: evidence/2026-10-09-w8-arb5/queue-receipt.json
+  (collected: null house style; true times above and in
+  run.out.import.json).
 
 ## Collection (same tick)
 
-(filled after collection)
+- run.out imported byte-exactly via tools/import_queue_result.py
+  (sha256 ea81bc35a2d88f7527471ab162e862811ac66b8f49e91c40ec1f654648311715).
+- **CAL_OK exact** — mid-window pair census 367:131 over the CAL arm;
+  the DW9 → VH → w8 identity chain holds for a fourth queued run.
+- **ARM5 datum**: x5 = 370/500 (share 0.740), other = 0, Wilson-95
+  [0.69983, 0.77651].
+- **Pairwise**: P3 = 0.60568 (vs arm-3 rate 0.750),
+  P4 = 0.022641 (vs arm-4 rate 0.69281), alpha = 0.05.
+- **Branch: ARM4_SMALLN** (P3 ≥ α, P4 < α). Arm-4's low share
+  (106/153) is a small-n artifact of n=153; arm-level shares are
+  consistent with one w8 rate; the tick-97 POOLING_CONTESTED
+  receipt is resolved in favour of account (S).
+- Descriptive 3-arm dispersion receipt (committed tool, exact
+  counts): arms (375,500), (106,153), (370,500) → POOLING_SUPPORTED,
+  min_exact_p 1.385823e-1 — arm-4 is no longer an outlier once
+  arm-5 pins the rate.
+- Pre-registered consequence applies: the pooling premise behind
+  the census ladder is restored at the arm level; the pooled line
+  datum 481/653 (0.7366) becomes claimable; the ladder may resume
+  mechanically (stage-1 line window was [489,491] — the pooled
+  datum sits BELOW the window, so the ladder's own reading is
+  grow-or-stage-2 per the frozen policy, not a verdict).
+- The w8 REFUTED verdict (tick 96) is unchanged by this branch:
+  pooled ~0.74 remains far below the hold-last prediction 0.83376
+  and inside the trend arm's reach (0.76415 lies within arm-5's
+  Wilson-95 [0.69983, 0.77651]).
+- Honest boundary: pairwise power at n=500 separates the two
+  reference rates (0.750 vs 0.693) only when x5 lands outside the
+  AMBIGUOUS_MIDDLE band (~358–367); x5 = 370 did. A block effect
+  smaller than ~0.03 in rate would not be detectable by this
+  design — the branch adjudicates the OBSERVED arm-4 gap, not all
+  possible block structure.
+
+Time-box disclosure: the tick ran past the 30-minute budget
+(collection landing), disclosed per the tick-48 precedent.

@@ -1,0 +1,3 @@
+{"n_cal": 500, "n_arm5": 500, "seed0_cal": 260261107, "seed0_arm5": 320261107, "dg": 2.0, "win_mult": 8.0, "t_mid_is_w4": true, "cal_mid_w4": {"D2T": 367, "L2": 131, "other": 2, "share": 0.7369477911646586}, "cal_terminal_w8": {"D2T": 376, "L2": 123, "other": 1, "share": 0.7535070140280561}, "arm5_mid_w4": {"D2T": 359, "L2": 140, "other": 1, "share": 0.7194388777555111}, "arm5_terminal_w8": {"D2T": 370, "L2": 130, "other": 0, "share": 0.74}, "references": {"arm3": {"x": 375, "k": 500}, "arm4": {"x": 106, "k": 153}}, "pairwise": {"p3": 0.6056792260452524, "p4": 0.02264067973620655, "alpha": 0.05}, "branch": "ARM4_SMALLN", "arm5_wilson95": [0.69983, 0.77651]}
+{"CAL": "CAL_OK", "ARB": "ARM4_SMALLN"}
+VERDICTS {"ARB": "ARM4_SMALLN", "CAL": "CAL_OK"}

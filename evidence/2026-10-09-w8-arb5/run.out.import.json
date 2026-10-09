@@ -1,0 +1,14 @@
+{
+  "blob_source": "/tmp/rsx-577d12ff/result.frame",
+  "exit_status": 0,
+  "imported_at": "2026-10-09T10:10:09Z",
+  "interpretation": "none \u2014 the verdict chain starts at tools/collect_w8.py",
+  "request_id": "d158d5fbfb988dd4bd1c09450e07dbe34114419b29b7d2cd9f274ff1e4a94977",
+  "run_out": {
+    "bytes": 755,
+    "sha256": "ea81bc35a2d88f7527471ab162e862811ac66b8f49e91c40ec1f654648311715"
+  },
+  "schema": 1,
+  "stderr": null,
+  "tool": "import_queue_result"
+}

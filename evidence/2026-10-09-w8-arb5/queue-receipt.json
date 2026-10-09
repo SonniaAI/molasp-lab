@@ -1,0 +1,30 @@
+{
+  "request_id": "d158d5fbfb988dd4bd1c09450e07dbe34114419b29b7d2cd9f274ff1e4a94977",
+  "job": "hxq-d158d5fbfb988dd4",
+  "nonce": "molasp-w8-arb5-t98",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "submitted": "2026-10-09T10:08:53Z",
+  "finished": "2026-10-09T10:09:29Z",
+  "exit_status": 0,
+  "run_out_sha256": "ea81bc35a2d88f7527471ab162e862811ac66b8f49e91c40ec1f654648311715",
+  "verdicts": {
+    "CAL": "CAL_OK",
+    "ARB": "ARM4_SMALLN"
+  },
+  "arm5_census": {
+    "D2T": 370,
+    "L2": 130,
+    "other": 0,
+    "n": 500
+  },
+  "pairwise": {
+    "p3": 0.6056792260452524,
+    "p4": 0.02264067973620655,
+    "alpha": 0.05
+  },
+  "dispersion_3arm": "POOLING_SUPPORTED (min_exact_p 1.385823e-1)",
+  "collected": null
+}
