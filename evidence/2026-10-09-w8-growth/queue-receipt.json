@@ -1,0 +1,18 @@
+{
+  "request_id": "341c27b37fe0e6e543b898899cdfcd74d27726a373226bb456e931648cb33c54",
+  "job": "hxq-341c27b37fe0e6e5",
+  "nonce": "molasp-w8-growth-t97",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "archive_blob": "4b8229f655a5b892eba8402a788e3d079095d8230ef88bfef1e12cba41a6a0ee",
+  "submitted": "2026-10-09T09:24:15Z",
+  "finished": "2026-10-09T09:24:39Z",
+  "exit_status": 0,
+  "run_out_sha256": "4816e509fb2d5670d2f4a82c2f8b5d0fc4b08e5914f21879483b84b248ae6eb8",
+  "verdicts": {"CAL": "CAL_OK", "GROWTH": "COUNTED"},
+  "growth_census": {"D2T": 106, "L2": 47, "other": 0, "n": 153},
+  "dispersion": "POOLING_CONTESTED (min_exact_p 5.6667e-3)",
+  "collected": null
+}
