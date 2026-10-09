@@ -120,3 +120,22 @@ open and labelled VERDICT PENDING until the pre-registered falsifier
 or retires the extrapolated arm per the interpretation map in
 `research-log/2026-10-08-w8-hazardhold.md`.  Pinned by
 `tests/test_window_curve_svg.py`.
+
+### Figure verdict modes (tick 82, 2026-10-09)
+
+`tools/window_curve_svg.py` now renders the w8 presentation in three
+modes: `pending` (default — byte-identical to the tick-79 render), and
+the two receipt-driven collection modes.  On a `CAL_OK+HELD` receipt
+(`--receipt verdict.json`) the w8 point is drawn CLOSED/measured with
+its census label and Wilson 95 bar, the bold pending line replaced by
+the measured-verdict line, while the dashed chain arm and hazard-95
+bracket remain visible as the prediction they were.  On
+`CAL_OK+REFUTED` the beyond-w4 extrapolation, hazard bracket and w8
+marker are quarantined out entirely per the pre-registered refutation
+action; w1–w4 measured receipts are untouched.  Non-verdictable
+receipts are refused (exit 2).  The whole collection-day application —
+figure + blog post + research-log addendum, numbers verbatim from the
+receipt — is one command: `tools/apply_w8_receipt.py`; only the
+designs/011 prose edit stays by hand.  Pinned end-to-end by
+`tests/test_apply_w8_receipt.py` (8 tests), including
+pending-byte-identity against the committed figure.
