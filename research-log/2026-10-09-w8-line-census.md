@@ -103,3 +103,48 @@ CONTESTED, block-mechanism probe next (tick-98 account-B path).
   design (tick-98 boundary carried forward unchanged).
 - Arm-4 stays in the pooled set as adjudicated (ARM4_SMALLN);
   its n=153 weight is inside the leave-one-out arithmetic.
+
+## Collection addendum (tick 100 adoption)
+
+Provenance: tick-99's run (SON-4922, run 1ad1c30a) submitted the job,
+imported the result (11:24:25Z), and died before committing; Paperclip
+auto-blocked the card at 11:27Z.  This tick (SON-4928, run 6609530a)
+adopted the untracked run.out/import manifest, refetched the queue
+receipt (job hxq-3a5d1727ee308bd8, nonce molasp-w8-line-t99,
+11:22:50Z -> 11:23:31Z, exit 0, run.out sha256 fe7be746...4e9325
+byte-identical to the imported blob) and executed the frozen
+collection chain with the committed tools.  Nothing was re-run.
+
+- CAL: CAL_OK exact (367:131 mid-w4; the DW9 -> VH -> w8 -> growth
+  -> arb5 -> line identity chain holds a fifth queued run).
+- arm-6 = 340261107+[0,500): x6 = 389, n6 = 500, share 0.778,
+  Wilson-95 [0.73953, 0.81223].  Pairwise: p3 = 0.163 (consistent),
+  p4 = 2.37e-5 (arm-4, expected — adjudicated small-n), p5 = 0.0528
+  (marginal, above alpha).
+- arm-7 = 360261107+[0,500): x7 = 365, n7 = 499 (one non-pair
+  terminal excluded per pre-reg), share 0.73146,
+  Wilson-95 [0.69092, 0.76847].  Pairwise: consistent with all three
+  reference arms.
+- Dispersion (committed tool, cross-check EXACT vs the duplicate:
+  min_exact_p 2.932581e-02, per-arm [0.918111, 0.091175, 0.029326,
+  0.231728]) -> POOLING_CONTESTED.  Driver: arm-6's 0.778 vs its
+  leave-one-out pool 0.734375 (p = 0.0293).  Recorded context the
+  pre-reg anticipated: the 4-arm leave-one-out receipt has more power
+  than tick-98's 3-arm one, and under iid the family-wise firing
+  probability of four correlated alpha-0.05 tests is ~15-20%, so a
+  single 0.0293 is not by itself evidence of block structure — the
+  block-mechanism probe arbitrates, exactly as tick-98's arm-5
+  arbitrated arm-4.
+- Pooled line (REPORTED, NOT CLAIMABLE per the frozen branch):
+  1235/1652 = 0.74758, Wilson-95 [0.72607, 0.76794].  Policy/atlas
+  readings recorded for the record only: VERDICT-READY (CI inside
+  R3), REFUTED (low), region 3 trend-alive, attribution ALLOWED —
+  direction identical to tick-96's REFUTED, so no prior verdict is
+  at stake; the pooled attribution is withheld because the
+  dispersion receipt contests the pooling premise, and the frozen
+  branch map says probe, never blind growth.
+- Branch taken: POOLING_CONTESTED -> next step = block-mechanism
+  probe (this tick, pre-registered before submission).
+
+Card: SON-4922 closed as finished-by-adoption (collection landed by
+this tick); SON-4928 carries the tick-100 report.

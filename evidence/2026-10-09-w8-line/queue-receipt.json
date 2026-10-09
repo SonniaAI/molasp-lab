@@ -1,0 +1,20 @@
+{
+  "request_id": "3a5d1727ee308bd8ee7f657ec79ae31cb72469aab3339e201a6e8bb019a4b530",
+  "job": "hxq-3a5d1727ee308bd8",
+  "nonce": "molasp-w8-line-t99",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "archive_blob": "e0002aa75e8c7acd12cf5a9a990dc3308eb9d53fe95c141d56e848ff563a74ed",
+  "submitted": "2026-10-09T11:22:50Z",
+  "finished": "2026-10-09T11:23:31Z",
+  "exit_status": 0,
+  "run_out_sha256": "fe7be746141c49fd3896aaf40ce2e192392eef56f249265e4ab9ea12743e9325",
+  "verdicts": {"CAL": "CAL_OK", "LINE": "POOLING_CONTESTED"},
+  "arm6": {"D2T": 389, "L2": 111, "other": 0, "n": 500, "share": 0.778},
+  "arm7": {"D2T": 365, "L2": 134, "other": 1, "n": 499, "share": 0.7314629258517034},
+  "dispersion": "POOLING_CONTESTED (min_exact_p 2.932581e-02, driver arm-6)",
+  "pooled_line_unclaimable": {"x": 1235, "k": 1652, "share": 0.7475786924939467, "wilson95": [0.72607, 0.76794]},
+  "provenance": "submitted+collected by tick-99 run (SON-4922) which died after import, before commit; receipt completed and landed by tick-100 run 6609530a (adoption, cross-checks exact)"
+}
