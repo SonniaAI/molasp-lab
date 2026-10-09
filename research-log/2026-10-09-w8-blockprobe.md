@@ -124,3 +124,64 @@ resolutions, not milestones).
   adoption consumed this tick's box); the pre-registration above is
   complete and frozen — the next tick submits, collects, and
   appends the addendum with zero design decisions.
+
+## Collection addendum (tick 101, SON-4931, run e77d144a)
+
+Job hxq-3a6099bef8caf34b (paperclip-test, 1 cpu / 1 Gi / 2400 s;
+admitted 13:04:04Z, finished 13:04:44Z, exit 0; run.out sha256
+99a093bb).  Disclosure: first attempt hxq-73b32c3a5f17ffce failed on
+a command-path error (archive mounts at /work/source, command ran
+relative to /work -> file not found, exit 2, no data consumed);
+resubmitted with the `source/` prefix on the byte-identical archive
+blob e07ab8f0.  Infrastructure fix only — arms, seeds, and the
+frozen reading map untouched.
+
+**CAL: 260261107 reads exactly 367:131** at the w4 mid-window census —
+the DW9 -> VH -> w8 -> growth -> arb5 -> line -> blockprobe identity
+chain holds on its sixth queued run.  Verdicts cross-check: q6, qF6,
+qF8 and the branch/control labels were recomputed independently from
+the raw counts in this run and match the harness exactly.
+
+**Datum.**
+
+| arm | census | share | Wilson-95 | test |
+| --- | --- | --- | --- | --- |
+| ARM6B (6's block, next window) | 372:500 | 0.744 | [0.70399, 0.78029] | q6 0.07557, qF6 0.87852 |
+| ARM8 (mid-stride control) | 391:500 | 0.782 | [0.74373, 0.81597] | qF8 0.03634 |
+
+**Branch: AMBIG_MIDDLE** (q6 >= a AND qF6 >= a; frozen map, no
+default).  **Control: HOT_NEIGHBORHOOD** (qF8 < a with x8/n8 above
+the family mean) — recorded WITH the primary branch per the frozen
+chain; it never overrides it.
+
+Reading, weighed exactly as pre-registered:
+
+- 6b, arm-6's own block and the adjacent window, returned to the
+  family mean (0.744 vs family 0.74049; qF6 0.879) and is only
+  marginally consistent with arm-6's own elevation (q6 0.0756 —
+  above alpha, inside AMBIG, nowhere near a reproduction).
+- The never-used mid-stride control window read 0.782 — as hot as
+  arm-6 itself (qF8 0.0363).  An arbitrary unaligned window can
+  read hot.
+- Together: the elevation phenomenon is not reproduced within block
+  340261107's next window, and it is not specific to that block
+  either.  Both pre-registered accounts stand; the probe is
+  underpowered to separate them, exactly what AMBIG_MIDDLE means.
+  The pre-registered honest note that x6b = 389 would have read
+  AMBIG_MIDDLE (not BLOCK_STRUCTURE) was never exercised: 6b did not
+  sit at arm-6's elevation.
+
+**Descriptive (labelled, no gates):** the 6-arm LOO dispersion over
+[(375,500),(370,500),(389,500),(365,499),(372,500),(391,500)] reads
+min_exact_p 8.892422e-02 -> POOLING_SUPPORTED, cross-checked EXACT
+against the committed w8_dispersion_receipt tool.  Per the frozen
+boundaries this cannot be promoted post hoc: the tick-99 4-arm
+CONTESTED receipt stands, and the pooled line datum 1235/1652 stays
+REPORTED-NOT-CLAIMABLE.
+
+**Zero design decisions taken.**  No blog (AMBIG_MIDDLE is a dispute
+resolution, not a milestone).  The next instrument is the next
+tick's pre-registration, now with these numbers in hand: window-level
+heavy tails (two hot windows out of six full-n windows) and the
+~0.02-0.03 rate-resolution boundary are the facts any successor
+instrument must engage.

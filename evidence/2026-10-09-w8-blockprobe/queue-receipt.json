@@ -1,0 +1,32 @@
+{
+  "request_id": "3a6099bef8caf34bec2c9fc28332215f4d3d85ab1d329b5d2574d062e40f0736",
+  "job": "hxq-3a6099bef8caf34b",
+  "nonce": "molasp-w8-blockprobe-t101b",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "archive_blob": "e07ab8f0b66ea91a8bff0e4fe8d55a26ca216e1cbc2a3714a89903579bf790ee",
+  "submitted": "2026-10-09T13:04:01Z",
+  "admitted": "2026-10-09T13:04:04Z",
+  "finished": "2026-10-09T13:04:44Z",
+  "exit_status": 0,
+  "run_out_sha256": "99a093bb3697cf051faa6274c39394eb40e18d7f021e932da842e85b0294aa1d",
+  "failed_attempt": {
+    "request_id": "73b32c3a5f17ffce5a81ce9bba3be54c39fb5cbed330e712c41e58a7f4681473",
+    "job": "hxq-73b32c3a5f17ffce",
+    "nonce": "molasp-w8-blockprobe-t101",
+    "error": "command path: archive mounts at /work/source but the job ran 'python3 evidence/...' relative to /work -> file not found, exit 2, no data consumed",
+    "fix": "command prefixed 'source/' (same archive blob byte-identical); infrastructure path fix only — arms, seeds, reading map untouched"
+  },
+  "verdicts": {"CAL": "CAL_OK", "PROBE": "AMBIG_MIDDLE"},
+  "cal": "260261107 exact 367:131 at w4 mid-window (identity chain DW9->VH->w8->growth->arb5->line->blockprobe, 6th queued run)",
+  "arm6b": {"D2T": 372, "L2": 128, "other": 0, "n": 500, "share": 0.744, "wilson95": [0.70399, 0.78029]},
+  "arm8": {"D2T": 391, "L2": 109, "other": 0, "n": 500, "share": 0.782, "wilson95": [0.74373, 0.81597]},
+  "probe_tests": {"q6": 0.07556848099319753, "qF6": 0.8785193073054489, "qF8": 0.03634072377748851, "alpha": 0.05},
+  "control_arm8": "HOT_NEIGHBORHOOD",
+  "dispersion6": {"min_exact_p": 0.08892422163941653, "verdict": "POOLING_SUPPORTED", "note": "descriptive, labelled, no gates; committed-tool cross-check EXACT"},
+  "independent_recompute": "q6/qF6/qF8/branch/control recomputed from raw counts in-run, exact match to harness VERDICTS",
+  "blog": "none - AMBIG_MIDDLE is a dispute resolution, not a milestone (frozen chain: blog only if BLOCK_STRUCTURE)",
+  "provenance": "pre-registered tick 100 (SON-4928, run 6609530a); submitted+collected+landed by tick 101 run e77d144a (SON-4931)"
+}
