@@ -63,7 +63,7 @@ the tick-37 rule — every input is a committed receipt)
 | --- | --- | --- |
 | P1 | chain w4 == receipt share_pred 0.74135 (implementation identity) | PASS — 0.74135 (delta < 5e-4) |
 | P2 | chain w2/w3 vs DW10 snapshots (never gates during the fit) | PASS — 0.65254 vs 0.64634 (+0.0062), 0.71067 vs 0.70445 (+0.0062); band ±0.05 |
-| P3 | w8 extrapolation in [0.81, 0.85], monotone above w4 | PASS — 0.83376 point; hazard-95 arm 0.81585; stationary ceiling 0.97865 |
+| P3 | w8 extrapolation in [0.81, 0.85], monotone above w4 | RETRACTED 2026-10-09 — measured w8 share 0.75 (375:500), Wilson-95 [0.71024, 0.78595]; frozen gate verdict CAL_OK+REFUTED (evidence/2026-10-08-w8-hazardhold/verdict.json) |
 | P4 | frozen class quoted, never computed | PASS — 0.826 at w4 (DW11), window-immune |
 
 **New validation finding.**  The VH chain was validated only at its
@@ -81,7 +81,7 @@ curve, point by point.
 | w2 | 0.64634 (318:174) | 0.65254 | ratchet-tilting |
 | w3 | 0.70445 (348:146) | 0.71067 | ratchet-tilting |
 | w4 | 0.73695 (367:131) | 0.74135 (receipt identity) | ratchet-tilting |
-| w8 | — | 0.83376 [0.81585 hazard-95] | ratchet-tilted |
+| w8 | 0.75 (375:125) REFUTED 2026-10-09 | ~~0.83376~~ extrapolation retracted | — (region 3, trend-alive) |
 
 (The w1 chain value is the fit-range snapshot 112:122 = 0.4787; the
 w1 measured point is the full-range census 232:229 = 0.50325 — the

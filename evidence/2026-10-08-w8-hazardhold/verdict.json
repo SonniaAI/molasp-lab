@@ -1,0 +1,42 @@
+{
+  "actions": [
+    "retract the designs/011 w8 tier entry (pre-registered refutation)",
+    "quarantine the extrapolated arm beyond w4 in the figure and designs/011",
+    "re-render designs/assets/011-window-curve.svg WITHOUT the beyond-w4 extrapolation",
+    "collection note names the hazard-hold assumption falsified at w8; the hazard-95 bracket stays what it always was: a sensitivity arm, not a fit"
+  ],
+  "branch": "CAL_OK+REFUTED",
+  "cross_check": "ok",
+  "descriptive": {
+    "cal_terminal_w8_census": {
+      "D2T": 376,
+      "L2": 123,
+      "other": 1,
+      "share": 0.7535070140280561
+    },
+    "dev_vs_pred_w8": 0.08375999999999995,
+    "fresh_mid_w4_dev_vs_dw9_receipt": 0.017466933867735457,
+    "fresh_mid_w4_dev_vs_vh_receipt": 0.004436291938716197,
+    "fresh_mid_w4_share": 0.7334669338677354,
+    "fresh_terminal_census": {
+      "D2T": 375,
+      "L2": 125,
+      "other": 0
+    },
+    "fresh_terminal_share": 0.75,
+    "fresh_w8_wilson95": [
+      0.71024,
+      0.78595
+    ],
+    "haz95_arm_distance": 0.06584999999999996
+  },
+  "harness_verdicts": {
+    "CAL": "CAL_OK",
+    "W8": "REFUTED"
+  },
+  "n_per_range": 500,
+  "recomputed_verdicts": {
+    "CAL": "CAL_OK",
+    "W8": "REFUTED"
+  }
+}

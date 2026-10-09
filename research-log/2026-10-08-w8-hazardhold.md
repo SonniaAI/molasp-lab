@@ -106,3 +106,24 @@ Lesson (generalizes tick 68's): the recorded-command check belongs
 at EVERY probe of a queued request, not only at submit time — and
 prefer the repo-mirroring archive layout so recorded commands are
 grep-comparable against prior successful requests.
+
+## Collection (2026-10-09, SON-4885) — CAL_OK+REFUTED
+
+Request `ed50c7baf2d8b935bb118f25758394ddfb04a671e902f39bfa66721b274daa85` (nonce molasp-w8-hazardhold-t77); receipt cross_check ok.
+Applied mechanically by `tools/apply_w8_receipt.py`; every number below
+is quoted from the receipt, none from memory.
+
+- fresh pair terminals w8: D2T 375 / L2 125 / other 0 (n_per_range 500)
+- fresh_terminal_share 0.75000 vs chain w8 point 0.83376 -> dev 0.08376 (pre-registered band +/-0.05)
+- Wilson 95 [0.71024, 0.78595]; hazard-95 arm distance 0.06585
+- fresh_mid_w4 share 0.73347 (DW9 receipt dev 0.01747; VH receipt dev 0.00444)
+- cal_terminal_w8 census D2T 376 / L2 123 / other 1
+
+The hazard-hold assumption is falsified at w8: fresh_terminal_share
+0.75000 lies outside the pre-registered +/-0.05 band around 0.83376.
+The beyond-w4 extrapolation is quarantined in figure and designs/011;
+the hazard-95 bracket stays a sensitivity arm, not a fit.
+
+Applied by this run: figure `designs/assets/011-window-curve.svg` re-rendered (refuted); blog post
+`blog/2026-10-09-window-pricing-w8-refuted.md` rendered. Remaining hand step per the receipt's
+action list: the designs/011 prose edit.

@@ -1,0 +1,14 @@
+{
+  "blob_source": "/tmp/rse-13bd93ef/w8-frame.txt",
+  "exit_status": 0,
+  "imported_at": "2026-10-09T08:07:46Z",
+  "interpretation": "none \u2014 the verdict chain starts at tools/collect_w8.py",
+  "request_id": "ed50c7baf2d8b935bb118f25758394ddfb04a671e902f39bfa66721b274daa85",
+  "run_out": {
+    "bytes": 770,
+    "sha256": "cea9d3350c5f1b5fda599434e243b30ff372da8778cc77a400f37e332768806d"
+  },
+  "schema": 1,
+  "stderr": null,
+  "tool": "import_queue_result"
+}
