@@ -164,11 +164,16 @@ class RefusalTests(unittest.TestCase):
 
 
 class PendingDefaultTests(unittest.TestCase):
-    def test_pending_render_still_byte_identical_to_committed_figure(self):
+    def test_refuted_render_still_byte_identical_to_committed_figure(self):
+        # Collection day 2026-10-09 (tick 96): the committed figure is now
+        # the REFUTED-mode render — the exact call apply_w8_receipt.py made
+        # (w8_mode="refuted", w8=None; extrapolation quarantined, measured
+        # point drawn).  Byte-identity premise flipped from pending to
+        # refuted when the w8 datum was applied; no hand edits stands.
         from tools.window_curve_svg import render
         committed = (Path(__file__).resolve().parents[1]
                      / "designs/assets/011-window-curve.svg").read_text()
-        self.assertEqual(render(), committed)
+        self.assertEqual(render(w8_mode="refuted"), committed)
 
 
 if __name__ == "__main__":
