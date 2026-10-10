@@ -7,7 +7,13 @@ six-window result or replace the registered primary Pearson analysis.
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
 from tools.w8_conditional_power import audit_scipy_tail, simulate_power
 
