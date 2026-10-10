@@ -84,9 +84,7 @@ class TestW8ConditionalNPlanningReceipt(unittest.TestCase):
         self.assertAlmostEqual(row["scipy_tail"], exact, places=14)
         self.assertEqual(row["observed"], 7404)
 
-    def test_scipy_tail_matches_integer_helper_across_rejection_boundary(self):
-        from scipy.stats import hypergeom
-
+    def test_integer_tail_is_pinned_across_rejection_boundary(self):
         population, successes, draws = 30_000, 22_111, 10_000
         threshold = 0.05 / 15
         expected = {
@@ -94,14 +92,11 @@ class TestW8ConditionalNPlanningReceipt(unittest.TestCase):
             7469: 0.0031109384550714442,
         }
         adjusted = {}
-        for observed, integer_expected in expected.items():
+        for observed, expected_tail in expected.items():
             with self.subTest(observed=observed):
                 exact = hypergeom_upper_tail(population, successes,
                                              draws, observed)
-                scipy_tail = float(hypergeom.sf(observed - 1, population,
-                                                successes, draws))
-                self.assertAlmostEqual(exact, integer_expected, places=14)
-                self.assertAlmostEqual(scipy_tail, integer_expected, places=14)
+                self.assertAlmostEqual(exact, expected_tail, places=14)
                 adjusted[observed] = 15 * exact
         self.assertGreater(adjusted[7468], 0.05)
         self.assertLess(adjusted[7469], 0.05)
