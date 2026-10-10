@@ -1,0 +1,556 @@
+{
+  "analysis": "prospective-exact-conditional-two-hot-sample-size-grid",
+  "deltas": [
+    0.01,
+    0.02
+  ],
+  "first_lower_bound_crossings": [
+    {
+      "delta": 0.01,
+      "first_tested_n": 20000,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.86173,
+      "previous_tested_n": 15000,
+      "previous_wilson_95": [
+        0.7238589743914409,
+        0.7293836144811497
+      ],
+      "target_power": 0.8,
+      "wilson_95": [
+        0.859576672776027,
+        0.8638555368735437
+      ]
+    },
+    {
+      "delta": 0.01,
+      "first_tested_n": 25000,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.93658,
+      "previous_tested_n": 20000,
+      "previous_wilson_95": [
+        0.859576672776027,
+        0.8638555368735437
+      ],
+      "target_power": 0.9,
+      "wilson_95": [
+        0.9350526205855979,
+        0.9380738386210191
+      ]
+    },
+    {
+      "delta": 0.01,
+      "first_tested_n": 30000,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.97325,
+      "previous_tested_n": 25000,
+      "previous_wilson_95": [
+        0.9350526205855979,
+        0.9380738386210191
+      ],
+      "target_power": 0.95,
+      "wilson_95": [
+        0.972231623886413,
+        0.974232018102527
+      ]
+    },
+    {
+      "delta": 0.02,
+      "first_tested_n": 5000,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.86718,
+      "previous_tested_n": 4000,
+      "previous_wilson_95": [
+        0.761137263976391,
+        0.7664024708019347
+      ],
+      "target_power": 0.8,
+      "wilson_95": [
+        0.8650624276276639,
+        0.8692693633189796
+      ]
+    },
+    {
+      "delta": 0.02,
+      "first_tested_n": 7500,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.97299,
+      "previous_tested_n": 5000,
+      "previous_wilson_95": [
+        0.8650624276276639,
+        0.8692693633189796
+      ],
+      "target_power": 0.9,
+      "wilson_95": [
+        0.971966920847543,
+        0.9739767411162159
+      ]
+    },
+    {
+      "delta": 0.02,
+      "first_tested_n": 7500,
+      "interpretation": "first tested grid point with pointwise Wilson lower bound at or above target; not an exact minimum-n guarantee",
+      "power_estimate": 0.97299,
+      "previous_tested_n": 5000,
+      "previous_wilson_95": [
+        0.8650624276276639,
+        0.8692693633189796
+      ],
+      "target_power": 0.95,
+      "wilson_95": [
+        0.971966920847543,
+        0.9739767411162159
+      ]
+    }
+  ],
+  "fixed_tail_crosscheck": {
+    "draws": 9994,
+    "integer_tail": 0.16575925160465094,
+    "observed": 7404,
+    "population": 29989,
+    "scipy_tail": 0.16575925160465146,
+    "successes": 22111
+  },
+  "limits": [
+    "fixed historical baseline p0=1110/1499 treated as known",
+    "four equal-rate windows and exactly two elevated windows",
+    "independent binomial pair-terminal outcomes with equal denominators",
+    "pointwise Wilson intervals quantify Monte Carlo error only",
+    "grid crossing is not an exact minimum-n or simultaneous guarantee",
+    "not a new kinetic result or physical-replicate inference"
+  ],
+  "n_per_window_grid": [
+    2500,
+    4000,
+    5000,
+    7500,
+    10000,
+    15000,
+    20000,
+    25000,
+    30000
+  ],
+  "replicates_per_cell": 100000,
+  "results": [
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 2500,
+      "pearson_chi2_approx_power": 0.14158895323827403,
+      "pearson_noncentrality": 1.7493368619253347,
+      "power_estimate": 0.12897,
+      "rejections": 12897,
+      "replicates": 100000,
+      "seed": 20261020,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.1269068966610008,
+        0.13106160817332257
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 4000,
+      "pearson_chi2_approx_power": 0.20877535373415862,
+      "pearson_noncentrality": 2.7989389790805355,
+      "power_estimate": 0.1999,
+      "rejections": 19990,
+      "replicates": 100000,
+      "seed": 20261021,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.19743283341474266,
+        0.20239022213542968
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 5000,
+      "pearson_chi2_approx_power": 0.256609442907212,
+      "pearson_noncentrality": 3.4986737238506693,
+      "power_estimate": 0.24784,
+      "rejections": 24784,
+      "replicates": 100000,
+      "seed": 20261022,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.2451737028702963,
+        0.25052566963064166
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 7500,
+      "pearson_chi2_approx_power": 0.3802312312530017,
+      "pearson_noncentrality": 5.248010585776005,
+      "power_estimate": 0.38282,
+      "rejections": 38282,
+      "replicates": 100000,
+      "seed": 20261023,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.3798118874160007,
+        0.38583711508106433
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 10000,
+      "pearson_chi2_approx_power": 0.5004011302780114,
+      "pearson_noncentrality": 6.997347447701339,
+      "power_estimate": 0.51208,
+      "rejections": 51208,
+      "replicates": 100000,
+      "seed": 20261024,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.5089815248537626,
+        0.5151775470854374
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 15000,
+      "pearson_chi2_approx_power": 0.7021089512563962,
+      "pearson_noncentrality": 10.49602117155201,
+      "power_estimate": 0.72663,
+      "rejections": 72663,
+      "replicates": 100000,
+      "seed": 20261025,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.7238589743914409,
+        0.7293836144811497
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 20000,
+      "pearson_chi2_approx_power": 0.8384268696694333,
+      "pearson_noncentrality": 13.994694895402677,
+      "power_estimate": 0.86173,
+      "rejections": 86173,
+      "replicates": 100000,
+      "seed": 20261026,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.859576672776027,
+        0.8638555368735437
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 25000,
+      "pearson_chi2_approx_power": 0.9188184767551107,
+      "pearson_noncentrality": 17.49336861925335,
+      "power_estimate": 0.93658,
+      "rejections": 93658,
+      "replicates": 100000,
+      "seed": 20261027,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.9350526205855979,
+        0.9380738386210191
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 30000,
+      "pearson_chi2_approx_power": 0.9617066939010289,
+      "pearson_noncentrality": 20.99204234310402,
+      "power_estimate": 0.97325,
+      "rejections": 97325,
+      "replicates": 100000,
+      "seed": 20261028,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.972231623886413,
+        0.974232018102527
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 2500,
+      "pearson_chi2_approx_power": 0.5043939044468518,
+      "pearson_noncentrality": 7.057968496236938,
+      "power_estimate": 0.5139,
+      "rejections": 51390,
+      "replicates": 100000,
+      "seed": 20261029,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.5108017480858448,
+        0.5169971840296254
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 4000,
+      "pearson_chi2_approx_power": 0.7388768364230818,
+      "pearson_noncentrality": 11.2927495939791,
+      "power_estimate": 0.76378,
+      "rejections": 76378,
+      "replicates": 100000,
+      "seed": 20261030,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.761137263976391,
+        0.7664024708019347
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 5000,
+      "pearson_chi2_approx_power": 0.8420469888529613,
+      "pearson_noncentrality": 14.115936992473875,
+      "power_estimate": 0.86718,
+      "rejections": 86718,
+      "replicates": 100000,
+      "seed": 20261031,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.8650624276276639,
+        0.8692693633189796
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 7500,
+      "pearson_chi2_approx_power": 0.9632297561667068,
+      "pearson_noncentrality": 21.17390548871081,
+      "power_estimate": 0.97299,
+      "rejections": 97299,
+      "replicates": 100000,
+      "seed": 20261032,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.971966920847543,
+        0.9739767411162159
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 10000,
+      "pearson_chi2_approx_power": 0.9931081408795855,
+      "pearson_noncentrality": 28.23187398494775,
+      "power_estimate": 0.99593,
+      "rejections": 99593,
+      "replicates": 100000,
+      "seed": 20261033,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.9955158953970072,
+        0.9963060041731463
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 15000,
+      "pearson_chi2_approx_power": 0.9998447510842907,
+      "pearson_noncentrality": 42.34781097742162,
+      "power_estimate": 0.99995,
+      "rejections": 99995,
+      "replicates": 100000,
+      "seed": 20261034,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.9998829479231967,
+        0.9999786428055316
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 20000,
+      "pearson_chi2_approx_power": 0.9999976716365558,
+      "pearson_noncentrality": 56.4637479698955,
+      "power_estimate": 1.0,
+      "rejections": 100000,
+      "replicates": 100000,
+      "seed": 20261035,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.999961586887417,
+        1.0
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 25000,
+      "pearson_chi2_approx_power": 0.9999999736731603,
+      "pearson_noncentrality": 70.57968496236937,
+      "power_estimate": 1.0,
+      "rejections": 100000,
+      "replicates": 100000,
+      "seed": 20261036,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.999961586887417,
+        1.0
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 30000,
+      "pearson_chi2_approx_power": 0.9999999997589447,
+      "pearson_noncentrality": 84.69562195484323,
+      "power_estimate": 1.0,
+      "rejections": 100000,
+      "replicates": 100000,
+      "seed": 20261037,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.999961586887417,
+        1.0
+      ]
+    }
+  ],
+  "rng": "NumPy Generator(PCG64)",
+  "seed_assignment": "20261020-20261037 in delta-major then n-major order",
+  "target_powers": [
+    0.8,
+    0.9,
+    0.95
+  ]
+}

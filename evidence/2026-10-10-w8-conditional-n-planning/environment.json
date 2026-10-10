@@ -1,0 +1,7 @@
+{
+  "captured_after_run": true,
+  "python": "3.11.2",
+  "numpy": "2.4.6",
+  "scipy": "1.17.1",
+  "note": "Captured immediately after the completed simulation from the same interpreter; the runner did not embed these versions in grid.json."
+}
