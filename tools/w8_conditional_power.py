@@ -7,7 +7,13 @@ windows. It does not analyze or replace the registered observed-data test.
 from __future__ import annotations
 
 import math
+import os
+import sys
 from itertools import combinations
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
 from tools.w8_conditional_exact import hypergeom_upper_tail
 from tools.w8_window_power import two_hot_power
