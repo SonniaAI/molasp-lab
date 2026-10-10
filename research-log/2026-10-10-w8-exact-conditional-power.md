@@ -22,6 +22,6 @@ Under this fixed-baseline, equal-n, independent-binomial two-hot alternative, th
 
 - Runner: `tools/w8_conditional_power.py`; tests: `tests/test_w8_conditional_power.py` and `tests/test_w8_conditional_power_receipt.py`.
 - Frozen machine-readable output: `evidence/2026-10-10-w8-exact-power/power.json`, SHA-256 `e359641d1a3f898d11e42692f110d66980c6dbbcf13afdcaccf1e24b911b9b96`. Environment: NumPy 2.4.6, SciPy 1.17.1; the full receipt pins seeds, counts, versions, tail cross-check, and intervals.
-- Exact repository CI command `python3 -m unittest discover -s tests -v`: **Ran 749 tests in 20.791s / OK (skipped=1)**; all 12 new test names appeared in discovery.
+- Exact repository CI command `python3 -m unittest discover -s tests -v`: **Ran 749 tests in 20.791s / OK (skipped=1)**; all 12 new test names appeared in discovery. Hosted GitHub Actions `unittest` on exact head `499fbd40` completed success at 00:24:52Z: https://github.com/SonniaAI/molasp-lab/actions/runs/38008896941/job/114084039424.
 - Limits: fixed historical baseline is treated as known; equal denominators and independent binomial windows are assumed; exactly two elevated windows are assumed. The interval reports Monte Carlo error only. This is neither an unconditional confidence bound nor a statement about arbitrary simulator heterogeneity or physical replicates. The observed six-window primary Pearson result and tick-108 exact-test non-rejection remain unchanged.
-- No new trajectories or cluster job, blog post, wet-lab activity, external contact, or paper/preprint submission.
+- Live GitHub issue and PR scans on final head found 0 open issues and 0 open PRs. No new trajectories or cluster job, blog post, wet-lab activity, external contact, or paper/preprint submission.
