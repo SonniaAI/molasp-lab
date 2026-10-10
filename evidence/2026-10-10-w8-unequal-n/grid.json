@@ -1,0 +1,377 @@
+{
+  "allocation_total_trials": 30000,
+  "alternative": {
+    "baseline_rate": 0.7404936624416277,
+    "deltas": [
+      0.01,
+      0.02
+    ],
+    "hot_windows": [
+      8,
+      9
+    ]
+  },
+  "analysis": "prospective-exact-conditional-two-hot-power-unequal-denominators",
+  "limits": [
+    "independent-binomial windows and fixed baseline rate",
+    "exactly two predesignated hot windows for power cells",
+    "Bonferroni conditional test targets a common-probability global null",
+    "unequal-n cases enumerate every pair; the two-largest-count shortcut is not used",
+    "Wilson and contrast intervals describe Monte Carlo error only",
+    "not a kinetic-trajectory result or an inference about physical replicates"
+  ],
+  "method": "for each of 15 fixed pairs, condition on total successes and use Hypergeometric(total_trials, total_successes, pair_trials); Bonferroni over 15",
+  "null": "all six window probabilities equal baseline_rate",
+  "numpy_version": "2.4.6",
+  "power_differences_vs_balanced": [
+    {
+      "allocation_vs_balanced": "hot_small",
+      "delta": 0.01,
+      "difference": -0.09914,
+      "mc_normal_95": [
+        -0.10261341997820686,
+        -0.09566658002179315
+      ]
+    },
+    {
+      "allocation_vs_balanced": "hot_large",
+      "delta": 0.01,
+      "difference": 0.027160000000000017,
+      "mc_normal_95": [
+        0.02330614764601453,
+        0.031013852353985506
+      ]
+    },
+    {
+      "allocation_vs_balanced": "hot_small",
+      "delta": 0.02,
+      "difference": -0.24151,
+      "mc_normal_95": [
+        -0.24518202722413282,
+        -0.23783797277586718
+      ]
+    },
+    {
+      "allocation_vs_balanced": "hot_large",
+      "delta": 0.02,
+      "difference": 0.03576999999999997,
+      "mc_normal_95": [
+        0.03296139055949994,
+        0.0385786094405
+      ]
+    }
+  ],
+  "replicates_per_cell": 100000,
+  "results": [
+    {
+      "allocation": "balanced",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": null,
+      "familywise_alpha": 0.05,
+      "fraction": 0.04459,
+      "hot_rate": null,
+      "hot_windows": [],
+      "rejections": 4459,
+      "replicates": 100000,
+      "seed": 20261040,
+      "total_trials": 30000,
+      "trials_per_window": [
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000
+      ],
+      "wilson_95": [
+        0.04332813014186929,
+        0.0458868572893336
+      ]
+    },
+    {
+      "allocation": "hot_small",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": null,
+      "familywise_alpha": 0.05,
+      "fraction": 0.04276,
+      "hot_rate": null,
+      "hot_windows": [],
+      "rejections": 4276,
+      "replicates": 100000,
+      "seed": 20261041,
+      "total_trials": 30000,
+      "trials_per_window": [
+        2500,
+        2500,
+        6250,
+        6250,
+        6250,
+        6250
+      ],
+      "wilson_95": [
+        0.041523523351396786,
+        0.044031604671798154
+      ]
+    },
+    {
+      "allocation": "hot_large",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": null,
+      "familywise_alpha": 0.05,
+      "fraction": 0.04359,
+      "hot_rate": null,
+      "hot_windows": [],
+      "rejections": 4359,
+      "replicates": 100000,
+      "seed": 20261042,
+      "total_trials": 30000,
+      "trials_per_window": [
+        6500,
+        6500,
+        4250,
+        4250,
+        4250,
+        4250
+      ],
+      "wilson_95": [
+        0.04234193082698865,
+        0.044873133430439395
+      ]
+    },
+    {
+      "allocation": "balanced",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "fraction": 0.24872,
+      "hot_rate": 0.7504936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 24872,
+      "replicates": 100000,
+      "seed": 20261043,
+      "total_trials": 30000,
+      "trials_per_window": [
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000
+      ],
+      "true_pair_minimum_count": 52692,
+      "true_pair_minimum_fraction": 0.52692,
+      "true_pair_minimum_wilson_95": [
+        0.5238245448495986,
+        0.53001338698842
+      ],
+      "wilson_95": [
+        0.24605049130004922,
+        0.2514088135938105
+      ]
+    },
+    {
+      "allocation": "balanced",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "fraction": 0.86553,
+      "hot_rate": 0.7604936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 86553,
+      "replicates": 100000,
+      "seed": 20261044,
+      "total_trials": 30000,
+      "trials_per_window": [
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000
+      ],
+      "true_pair_minimum_count": 93786,
+      "true_pair_minimum_fraction": 0.93786,
+      "true_pair_minimum_wilson_95": [
+        0.9363468696030485,
+        0.9393394912660004
+      ],
+      "wilson_95": [
+        0.8634014812475715,
+        0.8676304364623436
+      ]
+    },
+    {
+      "allocation": "hot_small",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "fraction": 0.14958,
+      "hot_rate": 0.7504936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 14958,
+      "replicates": 100000,
+      "seed": 20261045,
+      "total_trials": 30000,
+      "trials_per_window": [
+        2500,
+        2500,
+        6250,
+        6250,
+        6250,
+        6250
+      ],
+      "true_pair_minimum_count": 41952,
+      "true_pair_minimum_fraction": 0.41952,
+      "true_pair_minimum_wilson_95": [
+        0.41646458126088415,
+        0.4225816017137173
+      ],
+      "wilson_95": [
+        0.1473829058572212,
+        0.15180401558860146
+      ]
+    },
+    {
+      "allocation": "hot_small",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "fraction": 0.62402,
+      "hot_rate": 0.7604936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 62402,
+      "replicates": 100000,
+      "seed": 20261046,
+      "total_trials": 30000,
+      "trials_per_window": [
+        2500,
+        2500,
+        6250,
+        6250,
+        6250,
+        6250
+      ],
+      "true_pair_minimum_count": 84074,
+      "true_pair_minimum_fraction": 0.84074,
+      "true_pair_minimum_wilson_95": [
+        0.8384589730355647,
+        0.8429948491964723
+      ],
+      "wilson_95": [
+        0.6210131583455694,
+        0.6270173136659856
+      ]
+    },
+    {
+      "allocation": "hot_large",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "fraction": 0.27588,
+      "hot_rate": 0.7504936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 27588,
+      "replicates": 100000,
+      "seed": 20261047,
+      "total_trials": 30000,
+      "trials_per_window": [
+        6500,
+        6500,
+        4250,
+        4250,
+        4250,
+        4250
+      ],
+      "true_pair_minimum_count": 55397,
+      "true_pair_minimum_fraction": 0.55397,
+      "true_pair_minimum_wilson_95": [
+        0.55088711619915,
+        0.5570487374894777
+      ],
+      "wilson_95": [
+        0.2731184340107907,
+        0.27865878428279356
+      ]
+    },
+    {
+      "allocation": "hot_large",
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * min exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "fraction": 0.9013,
+      "hot_rate": 0.7604936624416277,
+      "hot_windows": [
+        8,
+        9
+      ],
+      "rejections": 90130,
+      "replicates": 100000,
+      "seed": 20261048,
+      "total_trials": 30000,
+      "trials_per_window": [
+        6500,
+        6500,
+        4250,
+        4250,
+        4250,
+        4250
+      ],
+      "true_pair_minimum_count": 95106,
+      "true_pair_minimum_fraction": 0.95106,
+      "true_pair_minimum_wilson_95": [
+        0.9497054247923467,
+        0.95237992197053
+      ],
+      "wilson_95": [
+        0.8994359628432956,
+        0.9031332067925452
+      ]
+    }
+  ],
+  "rng": "NumPy Generator(PCG64)",
+  "scipy_version": "1.17.1",
+  "seeds": {
+    "('balanced', 0.01)": 20261043,
+    "('balanced', 0.02)": 20261044,
+    "('balanced', None)": 20261040,
+    "('hot_large', 0.01)": 20261047,
+    "('hot_large', 0.02)": 20261048,
+    "('hot_large', None)": 20261042,
+    "('hot_small', 0.01)": 20261045,
+    "('hot_small', 0.02)": 20261046,
+    "('hot_small', None)": 20261041
+  }
+}
