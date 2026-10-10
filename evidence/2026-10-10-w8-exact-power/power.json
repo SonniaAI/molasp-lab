@@ -1,0 +1,94 @@
+{
+  "analysis": "prospective-design-calibration-exact-conditional-two-hot-test",
+  "baseline_rate": 0.7404936624416277,
+  "limits": [
+    "conditional pair-terminal binomial model, equal denominators",
+    "four windows at fixed historical baseline and two at baseline+delta",
+    "Monte Carlo Wilson intervals quantify simulation error only",
+    "not a new trajectory result, exact confidence bound, or physical-replicate claim"
+  ],
+  "n_per_window": 5000,
+  "numpy_version": "2.4.6",
+  "replicates_per_effect": 200000,
+  "results": [
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.01,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7504936624416277,
+      "n_per_window": 5000,
+      "pearson_chi2_approx_power": 0.256609442907212,
+      "pearson_noncentrality": 3.4986737238506693,
+      "power_estimate": 0.25034,
+      "rejections": 50068,
+      "replicates": 200000,
+      "seed": 20261010,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.2484462208873815,
+        0.2522433695145046
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.02,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7604936624416277,
+      "n_per_window": 5000,
+      "pearson_chi2_approx_power": 0.8420469888529613,
+      "pearson_noncentrality": 14.115936992473875,
+      "power_estimate": 0.864855,
+      "rejections": 172971,
+      "replicates": 200000,
+      "seed": 20261011,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.8633496697130044,
+        0.866346314801615
+      ]
+    },
+    {
+      "baseline_rate": 0.7404936624416277,
+      "candidate_pair_count": 15,
+      "decision_rule": "15 * minimum exact conditional upper-tail p < 0.05",
+      "delta": 0.03,
+      "familywise_alpha": 0.05,
+      "hot_rate": 0.7704936624416278,
+      "n_per_window": 5000,
+      "pearson_chi2_approx_power": 0.9973954720873225,
+      "pearson_noncentrality": 32.04222309235609,
+      "power_estimate": 0.99855,
+      "rejections": 199710,
+      "replicates": 200000,
+      "seed": 20261012,
+      "true_hot_blocks": [
+        8,
+        9
+      ],
+      "wilson_95": [
+        0.9983733874115349,
+        0.9987074613633579
+      ]
+    }
+  ],
+  "rng": "NumPy Generator(PCG64)",
+  "scipy_version": "1.17.1",
+  "tail_crosscheck": {
+    "draws": 9994,
+    "integer_tail": 0.16575925160465094,
+    "observed": 7404,
+    "population": 29989,
+    "scipy_tail": 0.16575925160465146,
+    "successes": 22111
+  }
+}
