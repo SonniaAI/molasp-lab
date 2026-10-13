@@ -32,13 +32,18 @@ Truth conventions (stated, not implied):
   every stratum p_i simultaneously.
 
 No gate is executed; the pooled contested line stays
-REPORTED-NOT-CLAIMABLE; the ladder stays PAUSED. Determinism: PCG64 with
-fixed per-scenario seeds; every pin below is byte-reproducible.
+REPORTED-NOT-CLAIMABLE; the ladder stays PAUSED. Determinism: stdlib
+Mersenne Twister (random.Random) with fixed per-scenario seeds and a
+cached lgamma binomial-CDF inversion sampler; NO third-party imports
+(the hosted unittest workflow is stdlib-only; see tick 123 repair);
+every pin below is byte-reproducible.
 """
 
 from __future__ import annotations
 
+import bisect
 import math
+import random
 
 try:  # package import (tests) and script import both supported
     from .w8_stratified_census import (
@@ -61,6 +66,47 @@ REPLICATES = 4000
 SEED_WORLD_A = 20261013
 SEED_WORLD_B = 20261014
 Z_WILSON = 1.96
+
+
+_LF_CACHE: dict[int, list[float]] = {}
+
+
+def _log_factorials(n: int) -> list[float]:
+    cached = _LF_CACHE.get(n)
+    if cached is None:
+        cached = [0.0]
+        for k in range(1, n + 1):
+            cached.append(cached[-1] + math.log(k))
+        _LF_CACHE[n] = cached
+    return cached
+
+
+class _BinomialCDF:
+    """Deterministic binomial sampler: cached log-CDF table (lgamma-free,
+    plain log-sum with max-shift) + bisection inversion of Random.random()."""
+
+    def __init__(self, n: int, p: float):
+        if n <= 0 or not 0.0 < p < 1.0:
+            raise ValueError("need n >= 1 and 0 < p < 1")
+        lf = _log_factorials(n)
+        lp = math.log(p)
+        l1p = math.log(1.0 - p)
+        lf_n = lf[n]
+        # log pmf = ln C(n,k) + k ln p + (n-k) ln(1-p)
+        logs = [lf_n + k * lp + (n - k) * l1p - lf[k] - lf[n - k]
+                for k in range(n + 1)]
+        shift = max(logs)
+        acc = 0.0
+        cdf = []
+        for value in logs:
+            acc += math.exp(value - shift)
+            cdf.append(acc)
+        total = cdf[-1]
+        self.cdf = [v / total for v in cdf]
+        self.cdf[-1] = 1.0  # guard floating-point drift at the right edge
+
+    def draw(self, rng: random.Random) -> int:
+        return bisect.bisect_left(self.cdf, rng.random())
 
 
 def _world_a_rates() -> tuple[list[float], list[int]]:
@@ -94,10 +140,9 @@ def simulate_world(label: str, rates: list[float], ns: list[int],
     if len(rates) != len(ns) or not rates or not ns:
         raise ValueError("rates and ns must be non-empty and aligned")
 
-    import numpy as np
-
-    rng = np.random.Generator(np.random.PCG64(seed))
-    draws = rng.binomial(ns, rates, size=(replicates, len(ns)))
+    rng = random.Random(seed)
+    tables = [_BinomialCDF(n, p) for n, p in zip(ns, rates)]
+    draws = [[t.draw(rng) for t in tables] for _ in range(replicates)]
 
     truths = _truths(rates, ns)
     q_star = truths["pooled_truth"]
