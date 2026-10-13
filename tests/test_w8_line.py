@@ -65,10 +65,22 @@ class TestLineConstants(unittest.TestCase):
 
 class TestReservedSeedsNeverRun(unittest.TestCase):
     def test_no_prior_run_out_contains_arm6_or_arm7_seeds(self):
-        this = "2026-10-09-w8-line"
+        # Legitimate runs of these seed blocks (whitelist):
+        # - 2026-10-09-w8-line: the tick-99 ORIGINAL burn of
+        #   arm-6 340261107+[0,500) and arm-7 360261107+[0,500).
+        # - 2026-10-13-w8-arm6: an accidental deterministic
+        #   partial REPLAY of arm-6 seeds [0,153) executed from a
+        #   stale named action; its scientific reading is WITHDRAWN
+        #   (see the CORRECTION in
+        #   research-log/2026-10-13-w8-arm6-prereg.md) but the
+        #   run.out is a legitimate record of what ran.
+        # Any OTHER run.out containing either seed is a seed-reuse
+        # bug - future arms must move to unburned blocks
+        # (380261107, 400261107, ...).
+        legit = ("2026-10-09-w8-line", "2026-10-13-w8-arm6")
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):
-            if this in str(p):
+            if any(d in str(p) for d in legit):
                 continue
             text = p.read_text(errors="replace")
             for seed in ("340261107", "360261107"):

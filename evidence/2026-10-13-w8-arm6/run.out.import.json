@@ -1,0 +1,14 @@
+{
+  "blob_source": "/tmp/son5138-3ebe8881/blob-b.txt",
+  "exit_status": 0,
+  "imported_at": "2026-10-13T14:13:08Z",
+  "interpretation": "none \u2014 the verdict chain starts at tools/collect_w8.py",
+  "request_id": "46d21783d9fb2c18e2ec8f351f032a799baadb868313c8935227614ada210eac",
+  "run_out": {
+    "bytes": 1357,
+    "sha256": "53d52e4ea58182f6da8c8cd63ef30da9ab13273897fc7d9ca6883c42d444a66b"
+  },
+  "schema": 1,
+  "stderr": null,
+  "tool": "import_queue_result"
+}

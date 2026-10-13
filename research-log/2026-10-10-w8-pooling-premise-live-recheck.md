@@ -1,5 +1,25 @@
 # W8 pooling-premise live recheck and escalation consumption (2026-10-10 tick)
 
+> **CORRECTED 2026-10-13 (SON-5138).** This entry's premise
+> summary and its "Named next action" were issued in error and
+> are SUPERSEDED. It re-lit the tick-97/98 thread (tick-97
+> POOLING_CONTESTED → tick-98 ARM4_SMALLN, pooled 481/653
+> claimable, ladder may resume) and ignored the later
+> tick-99/100/101 thread: the tick-99 LINE census had already
+> burned arm-6 seeds 340261107+[0,500) (389/500 = 0.778) and
+> arm-7 seeds 360261107+[0,500) (365/499), returned a four-arm
+> POOLING_CONTESTED receipt (min_exact_p 2.932581e-2, pooled line
+> 1235/1652 REPORTED-NOT-CLAIMABLE), and the tick-101 block probe
+> arbitrated to AMBIG_MIDDLE (control HOT_NEIGHBORHOOD) — dispute
+> unresolved, probe underpowered. The queue-chain facts below
+> (both waiters drained, admission floor cleared, escalation
+> consumed) remain correct; every "premise restored / datum
+> claimable / ladder resumes / arm-6 never run" statement below
+> is wrong for 2026-10-10 onward, and the arm-6 [0,153) action it
+> named was executed 2026-10-13 as an accidental deterministic
+> partial replay — see the correction section in
+> `research-log/2026-10-13-w8-arm6-prereg.md`.
+
 **Scope:** in-silico collection-day bookkeeping + design reading. No wet-lab,
 no submission, no new datum. Unreviewed working notes; the only verdict
 surfaces remain the frozen collector and atlas.

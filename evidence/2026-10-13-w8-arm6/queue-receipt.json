@@ -1,0 +1,47 @@
+{
+  "request_id": "46d21783d9fb2c18e2ec8f351f032a799baadb868313c8935227614ada210eac",
+  "job": "hxq-46d21783d9fb2c18",
+  "nonce": "molasp-w8-arm6-son5138-b",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "admitted": "2026-10-13T14:12:16.297Z",
+  "finished": "2026-10-13T14:12:39.151Z",
+  "exit_status": 0,
+  "run_out_sha256": "53d52e4ea58182f6da8c8cd63ef30da9ab13273897fc7d9ca6883c42d444a66b",
+  "verdicts_recorded_by_instrument": {
+    "CAL": "CAL_OK",
+    "GATE": "POOLING_CONTINUES"
+  },
+  "replay_status": {
+    "is_partial_replay": true,
+    "replay_of_request": "3a5d1727ee308bd8ee7f657ec79ae31cb72469aab3339e201a6e8bb019a4b530",
+    "replay_scope": "arm-6 seeds 340261107+[0,153) are a subset of tick-99 line arm-6 [0,500); same instrument lineage, same per-seed RNG, deterministic",
+    "prereg_premise": "\"never run\" was FALSE - the tick-110 named action was built on a stale state summary that ignored the tick-99/100/101 thread",
+    "correction": "research-log/2026-10-13-w8-arm6-prereg.md, CORRECTION section"
+  },
+  "scientific_reading": "WITHDRAWN - the POOLING_CONTINUES gate reading and the pooled 593/806 claim are retracted; the datum is a replayed subset statistic and MUST NOT enter any pool. Operative w8 state: tick-99 four-arm POOLING_CONTESTED stands (pooled line 1235/1652 REPORTED-NOT-CLAIMABLE), tick-101 probe AMBIG_MIDDLE with control HOT_NEIGHBORHOOD.",
+  "arm6_census": {
+    "D2T": 112,
+    "L2": 41,
+    "other": 0,
+    "n": 153
+  },
+  "gate_min_exact_p_recorded": 0.06744904677689005,
+  "dispersion_tool_crosscheck": "POOLING_SUPPORTED (min_exact_p 6.744905e-2) - arithmetic identity only; reading withdrawn",
+  "pooled_line_datum_withdrawn": {
+    "x": 593,
+    "k": 806,
+    "share": 0.7357320099255583
+  },
+  "first_attempt": {
+    "request_id": "b7e4e835db96af31f537a0f5327f1078ec90b8c876c365756178104d51eeb428",
+    "job": "hxq-b7e4e835db96af31",
+    "nonce": "molasp-w8-arm6-son5138",
+    "exit_status": 127,
+    "cause": "command passed to the queue client as one quoted argv word; timeout treated the whole string as the executable; no trajectories ran",
+    "source_blob": "a417844765c8cab6a49f2c9fe5f96f9a144604d0923d3fe43313b7eb30b7a5c8"
+  },
+  "collected": null
+}
