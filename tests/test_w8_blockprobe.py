@@ -72,9 +72,17 @@ class TestProbeConstants(unittest.TestCase):
 
 class TestFreshSeeds(unittest.TestCase):
     def test_no_prior_run_out_contains_probe_seeds(self):
+        # Legitimate receipts mentioning these bases:
+        # - this probe's own directory (the original burn).
+        # - 2026-10-13-w8-hotrepro: burned_context METADATA quoting
+        #   arm-8 provenance (tick 111); omission broke hosted CI at
+        #   2be73bb (repaired tick 112).
+        # - 2026-10-13-w8-blockpos: window-provenance METADATA in a
+        #   static-analysis receipt (tick 112) - no trajectories.
+        legit = ("2026-10-09-w8-blockprobe", "2026-10-13-w8-hotrepro", "2026-10-13-w8-blockpos")
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):
-            if "2026-10-09-w8-blockprobe" in str(p):
+            if any(d in str(p) for d in legit):
                 continue
             text = p.read_text(errors="replace")
             for seed in ("340261607", "350261107"):

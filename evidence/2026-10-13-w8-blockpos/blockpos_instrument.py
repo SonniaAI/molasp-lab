@@ -26,6 +26,10 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fi
 LINE = "evidence/2026-10-09-w8-line/run.out"
 BLOCKPROBE = "evidence/2026-10-09-w8-blockprobe/run.out"
 HOTREPRO = "evidence/2026-10-13-w8-hotrepro/run.out"
+# This instrument's OWN receipt quotes every window seed base as
+# provenance metadata; the seed-scan guard must skip it or any
+# re-run after collection would refuse on its own output.
+OWN_RECEIPT = "evidence/2026-10-13-w8-blockpos/run.out"
 
 # Frozen expected table: (block, pos, seed_base, offset, x, n, source, field)
 EXPECTED = [
@@ -86,7 +90,10 @@ def load_receipt(path):
 
 
 def census_pair_count(block):
-    return int(block["D2T"]) + int(block["L2"]) + int(block["other"])
+    # Receipt convention (verified on all three sources): share = D2T/(D2T+L2);
+    # "other" is a non-pair terminal class excluded from the pair denominator
+    # (arm-7: 365+134=499 pairs, other=1; cal: 367+131=498, other=2).
+    return int(block["D2T"]) + int(block["L2"])
 
 
 def build_windows(line_d, probe_d, hot_d):
@@ -129,9 +136,12 @@ def seed_scan():
     for base, spec in SEED_SCAN.items():
         hits = set()
         for f in glob.glob(os.path.join(REPO_ROOT, "evidence/*/run.out")):
+            rel = os.path.relpath(f, REPO_ROOT)
+            if rel == OWN_RECEIPT:
+                continue
             with open(f, "r", errors="replace") as fh:
                 if base in fh.read():
-                    hits.add(os.path.relpath(f, REPO_ROOT))
+                    hits.add(rel)
         want = set(spec["files"])
         detail[base] = {"expected": sorted(want), "found": sorted(hits), "ok": hits == want}
         ok = ok and hits == want
@@ -148,7 +158,14 @@ def guards(line_d, probe_d, hot_d, rows):
         "blockprobe": probe_d.get("cal_mid_w4"),
         "hotrepro": hot_d.get("cal_mid_w4"),
     }
-    g["cal_identity"] = {"values": cal, "ok": all(v == CAL_EXPECTED for v in cal.values())}
+    # Count-field comparison: the receipt blocks also carry a "share" key,
+    # so full-dict equality would fail on the extra field.
+    cal_ok = all(
+        v is not None
+        and {k: v.get(k) for k in ("D2T", "L2", "other")} == CAL_EXPECTED
+        for v in cal.values()
+    )
+    g["cal_identity"] = {"values": cal, "ok": cal_ok}
     g["hotrepro_cross_sums"] = {
         "afresh": hot_d["afresh_subwindows"][0]["x"] + hot_d["afresh_subwindows"][1]["x"]
         == hot_d["afresh_terminal_w8"]["D2T"] == 691,

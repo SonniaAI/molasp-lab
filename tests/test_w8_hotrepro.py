@@ -111,8 +111,10 @@ class TestReservedSeedsNeverRun(unittest.TestCase):
         # The fresh ranges 341261107+[0,1000) and 350261607+[0,1000)
         # must never appear in any committed run.out before this
         # probe's own evidence lands (legit whitelist: this probe's
-        # own directory once collected).
-        legit = ("2026-10-13-w8-hotrepro",)
+        # own directory once collected, plus 2026-10-13-w8-blockpos:
+        # window-provenance METADATA in a static-analysis receipt,
+        # tick 112 - no trajectories).
+        legit = ("2026-10-13-w8-hotrepro", "2026-10-13-w8-blockpos")
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):
             if any(d in str(p) for d in legit):

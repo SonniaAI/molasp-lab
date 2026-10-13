@@ -74,10 +74,21 @@ class TestReservedSeedsNeverRun(unittest.TestCase):
         #   (see the CORRECTION in
         #   research-log/2026-10-13-w8-arm6-prereg.md) but the
         #   run.out is a legitimate record of what ran.
+        # - 2026-10-13-w8-hotrepro: burned_context METADATA quoting
+        #   arm-6/arm-8 provenance (tick 111) - not a burn of these
+        #   ranges. Its omission here broke hosted CI at 2be73bb
+        #   (caught and repaired tick 112).
+        # - 2026-10-13-w8-blockpos: window-provenance METADATA in a
+        #   static-analysis receipt (tick 112) - no trajectories.
         # Any OTHER run.out containing either seed is a seed-reuse
         # bug - future arms must move to unburned blocks
         # (380261107, 400261107, ...).
-        legit = ("2026-10-09-w8-line", "2026-10-13-w8-arm6")
+        legit = (
+            "2026-10-09-w8-line",
+            "2026-10-13-w8-arm6",
+            "2026-10-13-w8-hotrepro",
+            "2026-10-13-w8-blockpos",
+        )
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):
             if any(d in str(p) for d in legit):

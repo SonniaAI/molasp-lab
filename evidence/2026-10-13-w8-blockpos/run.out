@@ -1,0 +1,284 @@
+{
+  "label": "W8_BLOCKPOS",
+  "status": "OK",
+  "windows": [
+    {
+      "block": "B340",
+      "pos": 1,
+      "seed_base": 340261107,
+      "offset": 0,
+      "x": 389,
+      "n": 500,
+      "source": "evidence/2026-10-09-w8-line/run.out",
+      "field": "arm6_terminal_w8",
+      "ok": true
+    },
+    {
+      "block": "B340",
+      "pos": 2,
+      "seed_base": 340261607,
+      "offset": 0,
+      "x": 372,
+      "n": 500,
+      "source": "evidence/2026-10-09-w8-blockprobe/run.out",
+      "field": "arm6b_terminal_w8",
+      "ok": true
+    },
+    {
+      "block": "B340",
+      "pos": 3,
+      "seed_base": 340262107,
+      "offset": 0,
+      "x": 347,
+      "n": 500,
+      "source": "evidence/2026-10-13-w8-hotrepro/run.out",
+      "field": "afresh_subwindows[0]",
+      "ok": true
+    },
+    {
+      "block": "B340",
+      "pos": 4,
+      "seed_base": 340262607,
+      "offset": 0,
+      "x": 344,
+      "n": 499,
+      "source": "evidence/2026-10-13-w8-hotrepro/run.out",
+      "field": "afresh_subwindows[1]",
+      "ok": true
+    },
+    {
+      "block": "B350",
+      "pos": 1,
+      "seed_base": 350261107,
+      "offset": 0,
+      "x": 391,
+      "n": 500,
+      "source": "evidence/2026-10-09-w8-blockprobe/run.out",
+      "field": "arm8_terminal_w8",
+      "ok": true
+    },
+    {
+      "block": "B350",
+      "pos": 2,
+      "seed_base": 350261607,
+      "offset": 0,
+      "x": 346,
+      "n": 500,
+      "source": "evidence/2026-10-13-w8-hotrepro/run.out",
+      "field": "bfresh_subwindows[0]",
+      "ok": true
+    },
+    {
+      "block": "B350",
+      "pos": 3,
+      "seed_base": 350262107,
+      "offset": 0,
+      "x": 368,
+      "n": 500,
+      "source": "evidence/2026-10-13-w8-hotrepro/run.out",
+      "field": "bfresh_subwindows[1]",
+      "ok": true
+    },
+    {
+      "block": "B360",
+      "pos": 1,
+      "seed_base": 360261107,
+      "offset": 0,
+      "x": 365,
+      "n": 499,
+      "source": "evidence/2026-10-09-w8-line/run.out",
+      "field": "arm7_terminal_w8",
+      "ok": true
+    }
+  ],
+  "excluded_windows": [
+    {
+      "block": "B360",
+      "pos": 1,
+      "seed_base": 360261107,
+      "offset": 0,
+      "x": 365,
+      "n": 499,
+      "source": "evidence/2026-10-09-w8-line/run.out",
+      "field": "arm7_terminal_w8",
+      "reason": "single-window block: no within-block position contrast"
+    }
+  ],
+  "guards": {
+    "expected_table": true,
+    "seed_scan": {
+      "detail": {
+        "340261107": {
+          "expected": [
+            "evidence/2026-10-09-w8-line/run.out",
+            "evidence/2026-10-13-w8-arm6/run.out",
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-09-w8-line/run.out",
+            "evidence/2026-10-13-w8-arm6/run.out",
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "340261607": {
+          "expected": [
+            "evidence/2026-10-09-w8-blockprobe/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-09-w8-blockprobe/run.out"
+          ],
+          "ok": true
+        },
+        "340262107": {
+          "expected": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "340262607": {
+          "expected": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "350261107": {
+          "expected": [
+            "evidence/2026-10-09-w8-blockprobe/run.out",
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-09-w8-blockprobe/run.out",
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "350261607": {
+          "expected": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "350262107": {
+          "expected": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-13-w8-hotrepro/run.out"
+          ],
+          "ok": true
+        },
+        "360261107": {
+          "expected": [
+            "evidence/2026-10-09-w8-line/run.out"
+          ],
+          "found": [
+            "evidence/2026-10-09-w8-line/run.out"
+          ],
+          "ok": true
+        }
+      },
+      "ok": true
+    },
+    "cal_identity": {
+      "values": {
+        "line": {
+          "D2T": 367,
+          "L2": 131,
+          "other": 2,
+          "share": 0.7369477911646586
+        },
+        "blockprobe": {
+          "D2T": 367,
+          "L2": 131,
+          "other": 2,
+          "share": 0.7369477911646586
+        },
+        "hotrepro": {
+          "D2T": 367,
+          "L2": 131,
+          "other": 2,
+          "share": 0.7369477911646586
+        }
+      },
+      "ok": true
+    },
+    "hotrepro_cross_sums": {
+      "afresh": true,
+      "bfresh": true
+    },
+    "ok": true
+  },
+  "observed": {
+    "pooled_first": {
+      "x": 780,
+      "n": 1000,
+      "share": 0.78,
+      "wilson95": [
+        0.75328,
+        0.80458
+      ]
+    },
+    "pooled_rest": {
+      "x": 1777,
+      "n": 2499,
+      "share": 0.7110844337735094,
+      "wilson95": [
+        0.693,
+        0.72852
+      ]
+    },
+    "T_obs": 0.06891556622649064,
+    "C_obs": 11.47951503006012,
+    "block_totals": {
+      "B340": {
+        "x": 1452,
+        "n": 1999
+      },
+      "B350": {
+        "x": 1105,
+        "n": 1500
+      }
+    }
+  },
+  "tests": {
+    "P1": {
+      "stat": 0.06891556622649064,
+      "p": 0.08333333333333333,
+      "perm_count": 144,
+      "floor": 0.006944444444444444,
+      "alternative": "first > rest",
+      "holm_adj": 0.08333333333333333,
+      "reject": false
+    },
+    "S2": {
+      "stat": 11.47951503006012,
+      "p": 0.034722222222222224,
+      "perm_count": 144,
+      "floor": 0.006944444444444444,
+      "alternative": "share declines with position (C small)",
+      "holm_adj": 0.06944444444444445,
+      "reject": false
+    },
+    "alpha_family": 0.05,
+    "multiplicity": "Holm-Bonferroni over {P1, S2}"
+  },
+  "branch": "POSITION_STRUCTURE_NOT_DETECTED",
+  "interpretation_limits": [
+    "directions chosen after seeing these same windows: p quantifies extremity under within-block exchangeability, not independent confirmation",
+    "enumeration floor p = 1/144",
+    "arm-7 excluded structurally (single-window block); reported as context only",
+    "~500-seed window resolution; sub-window structure undetected by construction",
+    "in-silico kTAM simulation only; no physical-replicate claim"
+  ]
+}
+VERDICTS {"P1": "NOT_DETECTED", "S2": "NOT_DETECTED", "BRANCH": "POSITION_STRUCTURE_NOT_DETECTED"}
