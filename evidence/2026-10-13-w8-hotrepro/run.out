@@ -1,0 +1,123 @@
+{
+ "afresh": {
+  "n": 999,
+  "x": 691
+ },
+ "afresh_subwindows": [
+  {
+   "n": 500,
+   "pair_n": 500,
+   "seed0": 340262107,
+   "share": 0.694,
+   "x": 347
+  },
+  {
+   "n": 500,
+   "pair_n": 499,
+   "seed0": 340262607,
+   "share": 0.6893787575150301,
+   "x": 344
+  }
+ ],
+ "afresh_terminal_w8": {
+  "D2T": 691,
+  "L2": 308,
+  "other": 1,
+  "share": 0.6916916916916916
+ },
+ "afresh_wilson95": [
+  0.66237,
+  0.71955
+ ],
+ "bfresh": {
+  "n": 1000,
+  "x": 714
+ },
+ "bfresh_subwindows": [
+  {
+   "n": 500,
+   "pair_n": 500,
+   "seed0": 350261607,
+   "share": 0.692,
+   "x": 346
+  },
+  {
+   "n": 500,
+   "pair_n": 500,
+   "seed0": 350262107,
+   "share": 0.736,
+   "x": 368
+  }
+ ],
+ "bfresh_terminal_w8": {
+  "D2T": 714,
+  "L2": 286,
+  "other": 0,
+  "share": 0.714
+ },
+ "bfresh_wilson95": [
+  0.68521,
+  0.74115
+ ],
+ "branch": "WINDOW_NOISE",
+ "burned_context": {
+  "arm6": {
+   "k": 500,
+   "offset": 0,
+   "seed0": 340261107,
+   "x": 389
+  },
+  "arm6_block_burned": {
+   "k": 1000,
+   "x": 761
+  },
+  "arm6b": {
+   "k": 500,
+   "offset": 500,
+   "seed0": 340261107,
+   "x": 372
+  },
+  "arm8": {
+   "k": 500,
+   "offset": 0,
+   "seed0": 350261107,
+   "x": 391
+  }
+ },
+ "cal": "CAL_OK",
+ "cal_mid_w4": {
+  "D2T": 367,
+  "L2": 131,
+  "other": 2,
+  "share": 0.7369477911646586
+ },
+ "combined_fresh": {
+  "n": 1999,
+  "share": 0.7028514257128564,
+  "wilson95": [
+   0.68244,
+   0.72248
+  ],
+  "x": 1405
+ },
+ "dg": 2.0,
+ "family": {
+  "k": 1499,
+  "x": 1110
+ },
+ "label": "W8_HOTREPRO",
+ "n_cal": 500,
+ "n_fresh": 1000,
+ "q0": 0.7404936624416277,
+ "seed0_afresh": 340262107,
+ "seed0_bfresh": 350261607,
+ "seed0_cal": 260261107,
+ "t_mid_is_w4": true,
+ "tests": {
+  "alpha_soft": 0.05,
+  "alpha_star": 0.025,
+  "p_afresh": 0.9997620338858018,
+  "p_bfresh": 0.9733253563638103
+ },
+ "win_mult": 8.0
+}

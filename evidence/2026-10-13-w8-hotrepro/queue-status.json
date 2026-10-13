@@ -1,0 +1,82 @@
+{
+  "admitted": 1791904316.6093636,
+  "cleanup_pending": false,
+  "collection_errors": [],
+  "created": 1791904310.953797,
+  "dump_complete": true,
+  "execution_status": 0,
+  "finished": 1791904380.2193644,
+  "id": "2080e8b4f73ce4bf03e50074e9ebafdba8e7b6d8bee45881ef94f280b8aa7eb3",
+  "image_ids": [
+    "localhost:5000/paperclip@sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd"
+  ],
+  "image_verified": true,
+  "job": "hxq-2080e8b4f73ce4bf",
+  "job_status": {
+    "completionTime": "2026-10-13T15:12:58Z",
+    "conditions": [
+      {
+        "lastProbeTime": "2026-10-13T15:12:58Z",
+        "lastTransitionTime": "2026-10-13T15:12:58Z",
+        "message": "Reached expected number of succeeded pods",
+        "reason": "CompletionsReached",
+        "status": "True",
+        "type": "SuccessCriteriaMet"
+      },
+      {
+        "lastProbeTime": "2026-10-13T15:12:58Z",
+        "lastTransitionTime": "2026-10-13T15:12:58Z",
+        "message": "Reached expected number of succeeded pods",
+        "reason": "CompletionsReached",
+        "status": "True",
+        "type": "Complete"
+      }
+    ],
+    "ready": 0,
+    "startTime": "2026-10-13T15:11:56Z",
+    "succeeded": 1,
+    "terminating": 0,
+    "uncountedTerminatedPods": {}
+  },
+  "node": "spark-4a06",
+  "pod_statuses": [
+    {
+      "containers": [
+        {
+          "name": "attempt",
+          "terminated": {
+            "exitCode": 0,
+            "finishedAt": "2026-10-13T15:12:56Z",
+            "reason": "Completed",
+            "signal": null,
+            "startedAt": "2026-10-13T15:11:57Z"
+          }
+        }
+      ],
+      "message": null,
+      "name": "hxq-2080e8b4f73ce4bf-c5b2c",
+      "phase": "Succeeded",
+      "reason": null,
+      "uid": "cccdec9e-bb5d-4b65-b4de-f83d94c5d344"
+    }
+  ],
+  "protocol": 2,
+  "reason": "resource claim admitted",
+  "request": {
+    "archive_blob": "ad78b74e39222c22b97126c4f33fc24050c63b2535578dcd4e96aee31c436932",
+    "command": [
+      "python3",
+      "source/evidence/2026-10-13-w8-hotrepro/ktam_w8_hotrepro.py"
+    ],
+    "cpu": 1,
+    "files": {},
+    "image": "paperclip-test",
+    "issue": "9e9274f9-6542-4b4e-b99f-183490b5f35a",
+    "memory": 1073741824,
+    "nonce": "molasp-w8-hotrepro-son5140-a",
+    "owner": "529f369d-676b-46ff-a2f5-3af52e130bdf",
+    "wall": 2400
+  },
+  "result_blob": "110c3ebd0d2d3dd42fa99cf89422bdf806d36b4cc76a0adcb954e8c640e6e2f2",
+  "state": "complete"
+}
