@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""W8 arm-6 ladder growth (tick 111, SON-5138) — first stride of the
+"""W8 arm-6 ladder growth (SON-5138) — first stride of the
 RESUMED census ladder, executing the named next action of
 `research-log/2026-10-10-w8-pooling-premise-live-recheck.md`
 verbatim: grow toward the k_line_prac=1524 attribution target with
