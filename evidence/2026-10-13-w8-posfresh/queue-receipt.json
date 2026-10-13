@@ -1,0 +1,12 @@
+{
+  "request_id": "bda50c6bf65bb5433500dc7c855593c39727eb0376154b985c5efb386f9a1d66",
+  "job": "hxq-bda50c6bf65bb543",
+  "nonce": "molasp-w8-posfresh-t113",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "submitted_at": "2026-10-13T17:12:34Z",
+  "scaffold_note": "Scaffold written at tick 114 (SON-5144 run 91bbf790) while the request waits on the admission floor. Complete at collection: add admitted, finished, exit_status, run_out_sha256, verdicts_recorded_by_instrument and the branch reading per the frozen interpretation map in research-log/2026-10-13-w8-posfresh-prereg.md. House style keeps collected null (see 2026-10-13-w8-arm6).",
+  "collected": null
+}
