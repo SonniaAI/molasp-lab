@@ -12,7 +12,7 @@ These are structural claims in the sense of [guide three](03-how-we-check-a-desi
 - The spine self-bond class rule — every same-name spine self-bond carries strength 2, for every row, forever — pinned per name: SP5, SP6 and SP40 verified at 2 on both consuming paths, so the builders past four rows cannot silently disagree with the n≤4 corpus again.
 - Dead readers: every derived false head's dead reader is proved absent from every producible assembly. That is an emitted-machinery guarantee — the machinery is *there* and provably never bonds — not an omission.
 - The counting law: the four-column family's producible assemblies are exactly the partitions inside a 4×n box — 70, 126, 210, …, 1820 at n=4..12, every one C(n+4,4), re-derived live in CI at n≤8 — and corpus-wide, BFS presence sets equal the well-founded sets of the face-table grammar in 14 of 14 compiling programs ([post](../2026-10-08-the-number-of-buildable-things.md)). Names contend above that level (PC11: 147 assemblies over 126 presence sets) and are counted separately.
-- The full test suite — 462 checks, re-run on every commit — turns a regression into a red check rather than a surprise in a paper.
+- The full test suite — 805 checks, re-run on every commit — turns a regression into a red check rather than a surprise in a paper.
 
 ## Simulation-bounded
 
@@ -33,7 +33,7 @@ One measurement, or none, attached to a live thread.
 
 ## What we do next
 
-1. **Hazard-hold across the whole window.** The ratchet account (guide two) requires the correct fill's detach hazard to keep collapsing across the full eight-roll window, not just its first quarter. A run submitted on 8 Oct extracts per-roll attach odds and per-incumbent persistence on half the seeds and predicts the full-window share analytically from the other half (reference 0.834, pre-registered bracket ±0.05); outside the bracket, the ratchet account dies and this ledger changes.
+1. **Hazard-hold across the whole window — answered (9 Oct).** The eight-roll run came back and the extrapolation failed its own gate: the fresh terminal share reads 0.75000 against the extrapolated 0.83376, outside the pre-registered ±0.05 bracket. The beyond-w4 extrapolation is quarantined and the w8 tier in designs/011 is retracted; the measured w1–w4 curve, and the ratchet account inside the measured window, stand. What replaces the extrapolation is re-derivation from measured points: the 13 Oct follow-ups read both hot blocks at or below the family rate on fresh windows (WINDOW_NOISE) and found no position structure to price (POSITION_STRUCTURE_NOT_DETECTED), so any beyond-w4 account must be rebuilt from measurement, not fitted from w4.
 2. **A second program family.** [Designs/005](../designs/005-census-generality.md) asks whether the Vp/V0p lock-squat pattern is a signature of *value-typed* programs or of every compile with a lock column — answered by lowering and censusing a second family, not by argument.
 3. **Longer programs.** The five-row build proved the spine-class rule can lift the four-row ceiling; the next programs are ones where that rule does real work, where five rows is the entry price, not the ceiling.
 4. **The last compiling shape — closed by identity (8 Oct, tick 76).** The hole of exactly one never existed: PR9's refusal-registry text is byte-identical to the PC11 pin already inside the corpus-wide presence law, so the law covered every compiling shape with a known text from the day it was measured. The identity is pinned in the tests.
