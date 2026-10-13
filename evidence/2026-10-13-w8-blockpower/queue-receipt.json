@@ -1,0 +1,13 @@
+{
+  "request_id": "d3aa0acaa37ff4c93ecd79395ea352c9b9eb13794994db9d67feaa25b034dc83",
+  "job": "hxq-d3aa0acaa37ff4c9",
+  "nonce": "molasp-w8-blockpower-t120-a",
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "submitted_at": "2026-10-13T21:30:04Z",
+  "archive_blob": "a3bbced1606a08f2dcc86b4e0e875f58e0a8fc91fe16026533d44badf828c8c1",
+  "scaffold_note": "Scaffold written at tick 120 (SON-5152 run 6bd51714) while the request waits on the admission floor ('queued: resource/owner limit'). Job id taken from the queue's authoritative request record, never console echo (tick-119 lesson). Complete at collection: add admitted, finished, exit_status, node, run_out_sha256, run_out_bytes, verdicts_recorded_by_instrument and the branch reading per the frozen interpretation map in research-log/2026-10-13-w8-blockpower-prereg.md. House style keeps collected null (see 2026-10-13-w8-arm6).",
+  "collected": null
+}
