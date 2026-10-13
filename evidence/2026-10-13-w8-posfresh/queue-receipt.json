@@ -1,12 +1,28 @@
 {
   "request_id": "bda50c6bf65bb5433500dc7c855593c39727eb0376154b985c5efb386f9a1d66",
-  "job": "hxq-bda50c6bf65bb543",
+  "job": "hxq-bda50c6bf65",
   "nonce": "molasp-w8-posfresh-t113",
   "image": "paperclip-test",
+  "image_digest": "sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd",
   "cpu": 1,
   "memory": "1Gi",
   "wall_s": 2400,
   "submitted_at": "2026-10-13T17:12:34Z",
+  "admitted": "2026-10-13T20:13:09Z",
+  "finished": "2026-10-13T20:14:54Z",
+  "node": "spark-4a06",
+  "exit_status": 0,
+  "run_out_sha256": "76e3e066b086a32e1e3b151a64bf17db7ad1344f58077592f6c6f15446945a72",
+  "run_out_bytes": 2238,
+  "verdicts_recorded_by_instrument": {
+    "cal": "CAL_OK",
+    "cal_mid_w4": {"D2T": 367, "L2": 131, "other": 2},
+    "branch": "POSITION_DECLINE_NOT_DETECTED",
+    "p_fisher_one_sided": 0.4673236097126059,
+    "pooled_early": {"x": 1497, "pair_n": 2000, "share": 0.7485},
+    "pooled_late": {"x": 1493, "pair_n": 1999, "share": 0.7468734367183592},
+    "observed_delta": 0.0016265632816409026
+  },
   "scaffold_note": "Scaffold written at tick 114 (SON-5144 run 91bbf790) while the request waits on the admission floor. Complete at collection: add admitted, finished, exit_status, run_out_sha256, verdicts_recorded_by_instrument and the branch reading per the frozen interpretation map in research-log/2026-10-13-w8-posfresh-prereg.md. House style keeps collected null (see 2026-10-13-w8-arm6).",
   "collected": null
 }

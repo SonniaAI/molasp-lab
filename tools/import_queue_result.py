@@ -60,6 +60,20 @@ class ImportRefused(Exception):
     """Raised when the blob cannot be imported verbatim."""
 
 
+# The queue client's `result` command echoes one source-archive
+# verification line before the framed blob when the request carried a
+# source archive (observed live on request bda50c6b..., 2026-10-13).
+# Exactly this line, at position zero, at most once, is tolerated.
+CLIENT_PREAMBLE = "/queue-input/source.tgz: OK\n"
+
+
+def normalize_client_preamble(text):
+    """Return (text, stripped) with a known client preamble line removed."""
+    if text.startswith(CLIENT_PREAMBLE):
+        return text[len(CLIENT_PREAMBLE):], True
+    return text, False
+
+
 def parse_framed(text, request_id):
     """Return (exit_status, sections) from a framed result blob.
 
@@ -68,6 +82,7 @@ def parse_framed(text, request_id):
     mismatch against request_id.
     """
     begin = "HX-OUT-BEGIN:%s\n" % request_id
+    text, _ = normalize_client_preamble(text)
     if not text.startswith(begin):
         raise ImportRefused("blob does not start with HX-OUT-BEGIN for request %s" % request_id)
     body = text[len(begin):]
@@ -102,6 +117,7 @@ def import_blob(blob_text, request_id, evidence_root, force=False, blob_source=N
     """Import blob_text into evidence_root; returns the manifest dict."""
     if stream is None:
         stream = sys.stdout
+    blob_text, preamble_stripped = normalize_client_preamble(blob_text)
     exit_status, sections = parse_framed(blob_text, request_id)
     stdout_text = sections.get("stdout")
     if stdout_text is None:
@@ -133,6 +149,7 @@ def import_blob(blob_text, request_id, evidence_root, force=False, blob_source=N
         "run_out": {"sha256": _sha256(run_out_data), "bytes": len(run_out_data)},
         "stderr": stderr_entry,
         "blob_source": str(blob_source) if blob_source else None,
+        "client_preamble_stripped": preamble_stripped,
         "interpretation": "none — the verdict chain starts at tools/collect_w8.py",
     }
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")

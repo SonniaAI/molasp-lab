@@ -1,0 +1,141 @@
+{
+ "branch": "POSITION_DECLINE_NOT_DETECTED",
+ "cal": "CAL_OK",
+ "cal_mid_w4": {
+  "D2T": 367,
+  "L2": 131,
+  "other": 2,
+  "share": 0.7369477911646586
+ },
+ "descriptive": {
+  "fisher_block_u1_two_sided": 0.8369014824229006,
+  "fisher_block_u2_two_sided": 1.0000000000000484,
+  "fisher_early_vs_early_cross_block": 0.9179118885716877,
+  "fisher_late_vs_late_cross_block": 0.9181260419001351,
+  "u1e_subwindows": [
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 560261107,
+    "share": 0.752,
+    "x": 376
+   },
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 560261607,
+    "share": 0.748,
+    "x": 374
+   }
+  ],
+  "u1l_subwindows": [
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 560270107,
+    "share": 0.734,
+    "x": 367
+   },
+   {
+    "n": 500,
+    "pair_n": 499,
+    "seed0": 560270607,
+    "share": 0.7575150300601202,
+    "x": 378
+   }
+  ],
+  "u2e_subwindows": [
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 580261107,
+    "share": 0.724,
+    "x": 362
+   },
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 580261607,
+    "share": 0.77,
+    "x": 385
+   }
+  ],
+  "u2l_subwindows": [
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 580270107,
+    "share": 0.772,
+    "x": 386
+   },
+   {
+    "n": 500,
+    "pair_n": 500,
+    "seed0": 580270607,
+    "share": 0.724,
+    "x": 362
+   }
+  ]
+ },
+ "dg": 2.0,
+ "label": "W8_POSFRESH",
+ "late_offset": 9000,
+ "n_cal": 500,
+ "n_win": 1000,
+ "observed_delta": 0.0016265632816409026,
+ "pooled_early": {
+  "pair_n": 2000,
+  "x": 1497
+ },
+ "pooled_late": {
+  "pair_n": 1999,
+  "x": 1493
+ },
+ "seed0_cal": 260261107,
+ "seed0_u1": 560261107,
+ "seed0_u2": 580261107,
+ "t_mid_is_w4": true,
+ "tests": {
+  "alpha": 0.05,
+  "p_fisher_one_sided": 0.4673236097126059,
+  "share_early": 0.7485,
+  "share_late": 0.7468734367183592
+ },
+ "u1e": {
+  "pair_n": 1000,
+  "share": 0.75,
+  "wilson95": [
+   0.72224,
+   0.77585
+  ],
+  "x": 750
+ },
+ "u1l": {
+  "pair_n": 999,
+  "share": 0.7457457457457457,
+  "wilson95": [
+   0.71784,
+   0.77177
+  ],
+  "x": 745
+ },
+ "u2e": {
+  "pair_n": 1000,
+  "share": 0.747,
+  "wilson95": [
+   0.71914,
+   0.77296
+  ],
+  "x": 747
+ },
+ "u2l": {
+  "pair_n": 1000,
+  "share": 0.748,
+  "wilson95": [
+   0.72018,
+   0.77393
+  ],
+  "x": 748
+ },
+ "win_mult": 8.0
+}

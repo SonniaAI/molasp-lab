@@ -117,6 +117,32 @@ class PosfreshImportRehearsal(unittest.TestCase):
                 iqr.import_blob(blob, FOREIGN_RID, tmp)
             self.assertFalse((Path(tmp) / "run.out").exists())
 
+    def test_real_client_preamble_stripped(self):
+        """The live client prints one source-archive verification line
+        before the frame (observed on the real collection, request
+        bda50c6b..., 2026-10-13): exactly iqr.CLIENT_PREAMBLE at
+        position zero, at most once, is tolerated and recorded."""
+        blob = iqr.CLIENT_PREAMBLE + framed("0\n", SYNTHETIC_BODY)
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = iqr.import_blob(blob, REQUEST_ID, tmp)
+            run_out = (Path(tmp) / "run.out").read_bytes()
+            self.assertEqual(run_out, SYNTHETIC_BODY.encode("utf-8"))
+            self.assertTrue(manifest["client_preamble_stripped"])
+
+    def test_unknown_preamble_refused(self):
+        """Anything else before the frame still refuses before any write."""
+        blob = "unexpected noise\n" + framed("0\n", SYNTHETIC_BODY)
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(iqr.ImportRefused):
+                iqr.import_blob(blob, REQUEST_ID, tmp)
+            self.assertFalse((Path(tmp) / "run.out").exists())
+
+    def test_frame_without_preamble_records_not_stripped(self):
+        blob = framed("0\n", SYNTHETIC_BODY)
+        with tempfile.TemporaryDirectory() as tmp:
+            manifest = iqr.import_blob(blob, REQUEST_ID, tmp)
+            self.assertFalse(manifest["client_preamble_stripped"])
+
     def test_collected_json_reads_against_frozen_branch_map(self):
         payload = json.loads(SYNTHETIC_BODY)
         self.assertIn(payload["branch"], FROZEN_BRANCHES)
