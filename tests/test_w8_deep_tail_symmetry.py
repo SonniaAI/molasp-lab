@@ -1,4 +1,5 @@
-"""Tick 131 pins: SYMMETRIC deep-tail exactness for both binomial tail
+"""Tick 131 pins (switch-edge and transition pins updated tick 134):
+SYMMETRIC deep-tail exactness for both binomial tail
 helpers (tools/w8_exact_bands.py). Every number is byte-reproducible
 (no RNG; exact binomial sums; independent per-term-lgamma logsumep
 cross-checks — no shared code with the module under test).
@@ -24,10 +25,12 @@ Pinned here:
 - The mirror world p -> 1-p: window (945, 1539), exercising the
   sf_ge guard (mode 1233 < k < n/2), with the reflection identity
   sf_ge(1538, q) == cdf(3461, p) to ~2e-12 relative.
-- The switch edges: _deep_lower_direct fires through k=3594, off
-  from 3595; the 1 - x path's disclosed transition error just above
-  the flip (0.09% at k=3600, true 4.4e-8) shrinking to ~1.6e-9 by
-  k=3700 — nothing pinned lives there.
+- The switch edges (tick 134, geometric bound): _deep_lower_direct
+  fires through k=3633, off from 3634 (through tick 133 it fired
+  through 3594 / off 3595 under the count bound). The tick-131
+  transition disclosure (0.09% at k=3600, true 4.4e-8) is retired:
+  k=3600 now routes direct (4.4276521107896456e-08, rel 4.6e-11);
+  the complement persists at k=3700 (rel ~1.6e-9, mass ~1.7e-2).
 - The honest floor: below the subnormal seed (~e^-708.4 per term)
   the walk returns 0.0 (cdf(2500), true ~1e-324) — monotone-correct;
   the alpha_m=1e-300 window (2549, 4741) is exact at the floor's
@@ -87,12 +90,14 @@ def _sf_independent(k: int, n: int, p: float) -> float:
 class DeepTailSymmetryPins(unittest.TestCase):
 
     def test_switch_constant_and_edges(self):
-        """The switch and its flip point: fires through k=3594, off
-        from 3595 (bound crosses 1e-5); never above the mode."""
+        """The switch and its flip point: fires through k=3633, off
+        from 3634 (geometric bound crosses 1e-5; through tick 133
+        the count-bound edge was 3594/3595); never above the mode."""
         self.assertEqual(_DEEP_TAIL_DIRECT_SWITCH, 1e-5)
-        for k in (2601, 3000, 3461, 3563, 3564, 3580, 3594):
+        for k in (2601, 3000, 3461, 3563, 3564, 3580, 3594, 3595,
+                  3620, 3633):
             self.assertTrue(_deep_lower_direct(k, N, P), msg=f"k={k}")
-        for k in (3595, 3620, 3766, 4000):
+        for k in (3634, 3700, 3766, 4000):
             self.assertFalse(_deep_lower_direct(k, N, P), msg=f"k={k}")
         # mirror guard: fires at the deep upper tail with k < n/2 (p<1/2),
         # not below the mode
@@ -136,14 +141,17 @@ class DeepTailSymmetryPins(unittest.TestCase):
         self.assertLess(abs(sf - cdf) / cdf, 1e-9)
 
     def test_one_x_transition_disclosed(self):
-        """Just above the flip the 1 - x path keeps its known small
-        relative error (0.09% at k=3600, true 4.4e-8 — the ~4e-11
-        cancellation floor over the value), shrinking to ~1.6e-9 by
-        k=3700. Nothing pinned lives in the transition zone."""
+        """Tick 134 retired the old transition disclosure: k=3600
+        took the 1 - x path through tick 133 (0.09% rel error, pinned
+        4.423649579976541e-08); with the geometric tail-ratio bound
+        the guard fires there and the direct walk returns
+        4.4276521107896456e-08 (rel 4.6e-11). The complement survives
+        at k=3700 (bound ~1.9e-2, mass ~1.7e-2) with rel ~1.6e-9 —
+        residual mid-tail behaviour, now far from any deep mass."""
         c600 = binom_cdf(3600, N, P)
-        self.assertEqual(c600, 4.423649579976541e-08)
+        self.assertEqual(c600, 4.4276521107896456e-08)
         self.assertLess(abs(c600 - _cdf_independent(3600, N, P))
-                        / _cdf_independent(3600, N, P), 2e-3)
+                        / _cdf_independent(3600, N, P), 1e-9)
         c700 = binom_cdf(3700, N, P)
         self.assertLess(abs(c700 - _cdf_independent(3700, N, P))
                         / _cdf_independent(3700, N, P), 1e-8)

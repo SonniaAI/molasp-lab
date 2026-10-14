@@ -14,11 +14,15 @@ relative deviation recorded PER BRANCH CLASS:
 - deep_direct — tick 131's guard fires: tail mass provably below
                 _DEEP_TAIL_DIRECT_SWITCH = 1e-5, so the 1-x complement
                 is routed to the direct short-side walk;
-- complement  — the 1 - x branch (mid-tail; includes the disclosed
-                transition band just above the guard's flip, where the
-                monotone #terms*pmf(k) bound is loose and true mass is
-                small — the envelope MEASURES the worst case there,
-                bucketed by decade of true mass).
+- complement  — the 1 - x branch (mid-tail).  Since tick 134's
+                geometric tail-ratio bound on the deep-tail guard,
+                the guard fires within a few percent of the true
+                mass, so NO measured grid point with true mass
+                < 1e-5 takes this branch: the tick-132/133
+                transition band (worst 1.69e-4 at mass 1.03e-8,
+                cdf(2484, 2500, 0.999) — now deep_direct at 2.1e-13)
+                is eliminated; the class is bucketed by decade of
+                true mass and its deepest bucket is -5.
 
 Deterministic: no RNG, stdlib only.  Two grids:
   full  — n in {100, 500, 1000, 2500, 4999}, p in

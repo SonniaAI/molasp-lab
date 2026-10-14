@@ -187,6 +187,49 @@ def _pmf_terms(j_start: int, j_end: int, n: int, p: float) -> list[float]:
 # coverage pin lives far above the switch, unchanged byte-for-byte.
 _DEEP_TAIL_DIRECT_SWITCH = 1e-5
 
+# Tick 134: geometric tail-ratio bound. The count bound over-prices the
+# deep tail by up to ~3 decades (tick-132 envelope worst point: true
+# mass 1.03e-8 at cdf(2484, 2500, 0.999) computed to 1.69e-4 relative
+# because #terms*pmf(k) sat at ~2.2e-5, above the switch, so the guard
+# never fired). The pmf step ratios are STRICTLY monotone in j:
+# down-ratio r_j = pmf(j-1)/pmf(j) = j/(n-j+1) * q/p increases in j;
+# up-ratio s_j = pmf(j+1)/pmf(j) = (n-j)/(j+1) * p/q decreases in j.
+# Hence every term below k decays at least geometrically at rate r_k
+# (pmf(k-i) <= pmf(k) * r_k**i) and sum_{j<=k} pmf(j) <= pmf(k)/(1-r_k)
+# whenever r_k < 1 (k strictly below the ratio crossing ~ the mode);
+# mirror for the upper tail. O(1) arithmetic on top of the SAME three
+# lgamma calls, ~2100x tighter at the tick-132 worst point. The guards
+# take min(count, geometric): both are valid upper bounds, and the
+# count bound stays tighter for tiny #terms near the mode. This bound
+# only steers path choice — a marginal misfire sends a value down the
+# direct walk, which is relative-exact at any depth (tick 131) — so
+# float-level slack in r costs nothing.
+
+
+def _log_lower_tail_bound(k: int, n: int, p: float) -> float:
+    """log of a valid upper bound on cdf(k) (tick 134):
+    min of the count bound (k+1)*pmf(k) (pmf unimodal, k <= mode) and
+    the geometric bound pmf(k)/(1-r_k), r_k = k/(n-k+1) * q/p the
+    down-step ratio at k; the geometric term is used only when
+    r_k < 1, where the ratio monotonicity makes it a true bound."""
+    log_b = math.log(k + 1)
+    r = (k / (n - k + 1)) * ((1.0 - p) / p)
+    if r < 1.0:
+        log_b = min(log_b, -math.log1p(-r))
+    return log_b + _log_pmf_at(k, n, p)
+
+
+def _log_upper_tail_bound(k: int, n: int, p: float) -> float:
+    """log of a valid upper bound on sf_ge(k) (tick 134):
+    min of the count bound (n-k+1)*pmf(k) and the geometric bound
+    pmf(k)/(1-s_k), s_k = (n-k)/(k+1) * p/q the up-step ratio at k,
+    valid when s_k < 1 (k at/above the mode side of the crossing)."""
+    log_b = math.log(n - k + 1)
+    s = ((n - k) / (k + 1)) * (p / (1.0 - p))
+    if s < 1.0:
+        log_b = min(log_b, -math.log1p(-s))
+    return log_b + _log_pmf_at(k, n, p)
+
 
 def _log_pmf_at(j: int, n: int, p: float) -> float:
     """log pmf(j) via three direct lgamma calls (O(1)) — bound
@@ -199,23 +242,24 @@ def _log_pmf_at(j: int, n: int, p: float) -> float:
 def _deep_lower_direct(k: int, n: int, p: float) -> bool:
     """True when cdf(k) is provably below the 1 - x branch's resolution
     floor, so binom_cdf should take the direct down-walk (seed at k,
-    terms decay toward 0) instead — tick 131. Requires k <= mode, so
-    pmf(j) <= pmf(k) for all j <= k and (k+1)*pmf(k) bounds cdf(k)."""
+    terms decay toward 0) instead — tick 131. Requires k <= mode.
+    Tick 134: the mass test is _log_lower_tail_bound — min of the
+    tick-131 count bound and the geometric ratio bound."""
     mode = max(0, min(n, int((n + 1) * p)))
     if k > mode:
         return False  # k above the mode: cdf(k) >= ~0.5, never deep
-    return (math.log(k + 1) + _log_pmf_at(k, n, p)
+    return (_log_lower_tail_bound(k, n, p)
             < math.log(_DEEP_TAIL_DIRECT_SWITCH))
 
 
 def _deep_upper_direct(k: int, n: int, p: float) -> bool:
     """Mirror of _deep_lower_direct for binom_sf_ge(k): true when the
-    upper tail is provably below the 1 - x floor (k >= mode, pmf
-    monotone down above k, (n-k+1)*pmf(k) bounds sf_ge(k))."""
+    upper tail is provably below the 1 - x floor (k >= mode); bound
+    tightened to min(count, geometric) in tick 134."""
     mode = max(0, min(n, int((n + 1) * p)))
     if k < mode:
         return False  # k below the mode: sf_ge(k) >= ~0.5, never deep
-    return (math.log(n - k + 1) + _log_pmf_at(k, n, p)
+    return (_log_upper_tail_bound(k, n, p)
             < math.log(_DEEP_TAIL_DIRECT_SWITCH))
 
 
