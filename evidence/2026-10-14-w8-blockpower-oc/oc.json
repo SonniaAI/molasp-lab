@@ -1,0 +1,82 @@
+{
+  "alpha": 0.05,
+  "analysis": "blockpower-frozen-fisher-exact-one-sided-oc",
+  "anchor_note": "prereg power-section p_bar = 0.745; the SE formula is H0-variance and does not fix where delta sits \u2014 both baseline and midpoint anchorings measured",
+  "anchor_pbar": 0.745,
+  "instrument": "pooled Fisher exact one-sided, H1 share(GAP) > share(A6), alpha 0.05 (tick-120 prereg PRIMARY)",
+  "limits": [
+    "Monte Carlo over synthetic binomial counts; Wilson intervals quantify simulation error only",
+    "no kTAM trajectories; none of the probe's virgin seed windows consumed; no gate executed; ladder stays PAUSED",
+    "pre-datum: measured before request dd5a8300 is adjudicated; no branch of the frozen map is touched or re-derived",
+    "not a physical-replicate or exact-confidence claim"
+  ],
+  "n_per_group": 3560,
+  "normal_approx_power_prereg": {
+    "delta_0.0223": 0.696,
+    "delta_0.030": 0.896,
+    "delta_0.038": 0.979
+  },
+  "replicates": 4000,
+  "results": {
+    "D0223_BASELINE": {
+      "p_a6": 0.745,
+      "p_gap": 0.7673,
+      "reject_rate": 0.69425,
+      "reject_rate_wilson95": [
+        0.6797912597771242,
+        0.7083359828190864
+      ],
+      "rejections": 2777,
+      "replicates": 4000,
+      "seed": 20261019
+    },
+    "D030_BASELINE": {
+      "p_a6": 0.745,
+      "p_gap": 0.775,
+      "reject_rate": 0.89775,
+      "reject_rate_wilson95": [
+        0.8879757685297719,
+        0.9067609663100878
+      ],
+      "rejections": 3591,
+      "replicates": 4000,
+      "seed": 20261016
+    },
+    "D030_MIDPOINT": {
+      "p_a6": 0.73,
+      "p_gap": 0.76,
+      "reject_rate": 0.8915,
+      "reject_rate_wilson95": [
+        0.88148334241033,
+        0.90076538591099
+      ],
+      "rejections": 3566,
+      "replicates": 4000,
+      "seed": 20261017
+    },
+    "D038_BASELINE": {
+      "p_a6": 0.745,
+      "p_gap": 0.783,
+      "reject_rate": 0.979,
+      "reject_rate_wilson95": [
+        0.9740753071053599,
+        0.9830055124755145
+      ],
+      "rejections": 3916,
+      "replicates": 4000,
+      "seed": 20261018
+    },
+    "H0_SIZE": {
+      "p_a6": 0.745,
+      "p_gap": 0.745,
+      "reject_rate": 0.04825,
+      "reject_rate_wilson95": [
+        0.04203145324832355,
+        0.05533543559163455
+      ],
+      "rejections": 193,
+      "replicates": 4000,
+      "seed": 20261015
+    }
+  }
+}
