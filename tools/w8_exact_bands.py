@@ -57,6 +57,11 @@ from __future__ import annotations
 
 import math
 
+# log of the smallest NORMAL double: seeds below this are subnormal/0.0
+# and corrupt the O(1) recurrence (tick-129 anchored re-seed).
+_LOG_MIN_NORMAL = math.log(2.2250738585072014e-308)
+
+
 try:  # package import (tests) and script import both supported
     from .w8_census_sim import _log_factorials, _world_a_rates, _world_b_rates
     from .w8_simultaneous_band import FAMILY_LEVEL, bonferroni_z
@@ -105,15 +110,54 @@ def _pmf_terms(j_start: int, j_end: int, n: int, p: float) -> list[float]:
     walking toward j_end (down-walk uses pmf(j-1)/pmf(j) = j/(n-j+1) * q/p;
     up-walk uses pmf(j+1)/pmf(j) = (n-j)/(j+1) * p/q). Deterministic and
     ~10x faster than per-term exp(log(...)); relative error ~len*eps.
+
+    ANCHORED RE-SEED (tick 129 repair of the tick-128 fenced hazard): if
+    the direct seed would be subnormal (log-pmf below the min-normal
+    double), the O(1) recurrence is corrupt from the start -- a 0.0 seed
+    stays 0.0 forever (binom_sf_ge(2500, 4999, 0.7533) returned 0.0 where
+    the truth is 1 - ~4e-12). Deep-tail seeds that are merely far down
+    (still normal doubles, e.g. log-pmf -636.6 at j=2601) carry
+    lgamma-cancellation-scale (~1e-11) relative error that the whole
+    walk inherits; pre-repair that exposed impossible values
+    (cdf(2601) = -6.33e-11, sf_ge(2601) = 1.0000000000639078), now
+    clamped into [0, 1] by the callers. When the direct seed is not a
+    normal double, the walk instead seeds at the mode (or the interval
+    endpoint nearest the mode, when the interval does not contain it),
+    walking outward, so the recurrence only ever starts at a healthy
+    term and terms only ever decay toward the deep tail where they are
+    negligible relative to the accumulated mass. Healthy-seed calls take
+    the original path bit-for-bit (every pinned tick-127/128 number is
+    unchanged).
     """
     if j_start == j_end:
         return [binom_pmf(j_start, n, p)]
     lf = _log_factorials(n)
     j0 = j_start
-    seed = math.exp(lf[n] - lf[j0] - lf[n - j0]
-                     + j0 * math.log(p) + (n - j0) * math.log1p(-p))
+    log_seed = (lf[n] - lf[j0] - lf[n - j0]
+                + j0 * math.log(p) + (n - j0) * math.log1p(-p))
     ratio_pq = p / (1.0 - p)
     ratio_qp = (1.0 - p) / p
+    lo, hi = (j_end, j_start) if j_end < j_start else (j_start, j_end)
+    if log_seed < _LOG_MIN_NORMAL:  # anchored repair path (tick 129)
+        mode = int((n + 1) * p)  # floor((n+1)p), the max-pmf location
+        mode = max(0, min(n, mode))
+        anchor = mode if lo <= mode <= hi else (lo if mode < lo else hi)
+        seed = math.exp(lf[n] - lf[anchor] - lf[n - anchor]
+                        + anchor * math.log(p)
+                        + (n - anchor) * math.log1p(-p))
+        up = [seed]
+        cur = seed
+        for j in range(anchor, hi):
+            cur = cur * ((n - j) / (j + 1)) * ratio_pq
+            up.append(cur)
+        down = []
+        cur = seed
+        for j in range(anchor, lo, -1):
+            cur = cur * (j / (n - j + 1)) * ratio_qp
+            down.append(cur)
+        asc = down[::-1] + up  # terms lo..hi, ascending (down = lo..anchor-1, up = anchor..hi)
+        return asc if j_end >= j_start else asc[::-1]
+    seed = math.exp(log_seed)
     terms = [seed]
     cur = seed
     if j_end < j_start:  # walk down
@@ -128,25 +172,38 @@ def _pmf_terms(j_start: int, j_end: int, n: int, p: float) -> list[float]:
 
 
 def binom_cdf(k: int, n: int, p: float) -> float:
-    """P(X <= k), X ~ Bin(n, p): exact sum on the shorter side."""
+    """P(X <= k), X ~ Bin(n, p): exact sum on the shorter side.
+
+    Clamped to [0, 1]: walk rounding (~len*eps absolute at mass ~1) can
+    push the 1 - x branch a few 1e-13 outside the unit interval.
+    Known clamp (recorded tick 129): when the true value is below
+    ~1e-13, the shorter-side 1 - x branch cannot resolve it and returns
+    0.0; no caller compares at that scale (CP targets are alpha/2 ~
+    4e-3, coverage sums are O(1)).
+    """
     if k < 0:
         return 0.0
     if k >= n:
         return 1.0
     if k + 1 <= n - k:  # sum the lower tail directly
-        return math.fsum(_pmf_terms(k, 0, n, p))
-    return 1.0 - math.fsum(_pmf_terms(k + 1, n, n, p))
+        return min(1.0, max(0.0, math.fsum(_pmf_terms(k, 0, n, p))))
+    return min(1.0, max(0.0,
+                        1.0 - math.fsum(_pmf_terms(k + 1, n, n, p))))
 
 
 def binom_sf_ge(k: int, n: int, p: float) -> float:
-    """P(X >= k) = 1 - cdf(k-1), exact sum on the shorter side."""
+    """P(X >= k) = 1 - cdf(k-1), exact sum on the shorter side.
+
+    Clamped to [0, 1] with the same rationale as binom_cdf.
+    """
     if k <= 0:
         return 1.0
     if k > n:
         return 0.0
     if n - k + 1 <= k:  # sum the upper tail directly
-        return math.fsum(_pmf_terms(k, n, n, p))
-    return 1.0 - math.fsum(_pmf_terms(k - 1, 0, n, p))
+        return min(1.0, max(0.0, math.fsum(_pmf_terms(k, n, n, p))))
+    return min(1.0, max(0.0,
+                        1.0 - math.fsum(_pmf_terms(k - 1, 0, n, p))))
 
 
 # ---------------------------------------------------------------------------

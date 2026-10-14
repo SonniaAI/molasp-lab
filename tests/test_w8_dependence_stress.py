@@ -76,14 +76,18 @@ class DependenceStressPins(unittest.TestCase):
             self.assertGreaterEqual(fast, 1.0 - ALPHA_FAMILY / m - 1e-9)
 
     def test_seed_underflow_hazard_fenced(self):
-        """The shared helpers' deep-tail cliff, and this module's guard.
+        """The shared helpers' deep-tail cliff -- REPAIRED tick 129.
 
-        binom_sf_ge(2500, 4999, 0.753304) underflows (seed pmf ~e-805 ->
-        0.0, recurrence stays 0) where the true value is ~0.9958. The
-        assert-bracketed +-9*sigma window keeps every seed representable,
-        so the same quantity through cp_accept_window is exact.
+        Pre-repair, binom_sf_ge(2500, 4999, 0.753304) returned 0.0 (seed
+        pmf e^-745.25 -> 0.0, recurrence stays 0) where the truth is
+        1 - ~4e-12 (measured two ways: anchored re-seed inside
+        w8_exact_bands, and an independent per-term-lgamma logsumep --
+        the "true ~0.9958" in the original tick-128 note was itself
+        wrong). The anchored re-seed fixes the class; the assert-bracketed
+        +-9*sigma window stays as defense in depth, so the same quantity
+        through cp_accept_window remains exact either way.
         """
-        self.assertLess(binom_sf_ge(2500, 4999, 0.753304), 1e-300)
+        self.assertEqual(binom_sf_ge(2500, 4999, 0.753304), 1.0)
         kh, kl = cp_accept_window(4999, ALPHA_FAMILY / 6, 0.753304)
         self.assertLessEqual(kh, kl - 1)
         self.assertGreaterEqual(
