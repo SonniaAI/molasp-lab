@@ -1,0 +1,153 @@
+{
+  "analysis": "w8-blockpower-arbitration-dashboard",
+  "branch_map": "CAL_FAIL -> VOID;  min pair-n < 3400 -> NO_EVENTS;  p <= 0.05 -> BLOCK_MECHANISM_SUPPORTED;  p > 0.05 -> BLOCK_MECHANISM_NOT_DETECTED",
+  "branches": [
+    {
+      "branch": "CAL_FAIL",
+      "fires_when": "500-seed CAL replay pair census != D2T 367 : L2 131 exactly",
+      "oc": {
+        "cal_pass_at_floor_5pct_collapse_yield": 1.7964510637069825e-09,
+        "per_seed_corruption_50pct_mismatch": {
+          "dropout": 0.0013908936179543707,
+          "marginal_reshuffle": 0.004406444207983877
+        },
+        "per_seed_corruption_5pct_mismatch": {
+          "dropout": 0.00010299327893557904,
+          "marginal_reshuffle": 0.00026459219948163533
+        }
+      },
+      "order": 1,
+      "provenance": [
+        "cal_oc#kernels.dropout.eps_p05",
+        "cal_oc#kernels.dropout.eps_p50",
+        "cal_oc#kernels.reshuffle.eps_p05",
+        "cal_oc#kernels.reshuffle.eps_p50",
+        "cal_oc#verdict_safety.cal_pass_at_tick140_collapse"
+      ],
+      "read_before": "the floor and any p-value",
+      "role": "substrate-drift detector on fixed replayed seeds (determinism premise; not a sampling gate)",
+      "verdict": "VOID"
+    },
+    {
+      "branch": "min pair-n < 3400",
+      "fires_when": "pooled pair census below 3400 in either group",
+      "oc": {
+        "floor_edge_pair_n_3400_fisher_size": 0.04325,
+        "floor_edge_pair_n_3400_power_delta030": 0.89225,
+        "other_rate_5pct_fire_risk": 0.039635,
+        "q_yield_50pct_fire_risk": 0.9548731056040096,
+        "q_yield_5pct_fire_risk": 0.9603653544224855,
+        "two_group_fire_risk_at_hist_q995": 6.193569087951911e-95
+      },
+      "order": 2,
+      "provenance": [
+        "floor_oc#yield_curve[19].map_risk_two_groups",
+        "floor_oc#inversions.q_at_5pct_risk",
+        "floor_oc#inversions.q_at_50pct_risk",
+        "floor_oc#floor_edge_mc.FLOOR_EDGE_H0_SIZE.reject_rate",
+        "floor_oc#floor_edge_mc.FLOOR_EDGE_D030_POWER.reject_rate"
+      ],
+      "read_before": "any p-value",
+      "role": "catastrophic-collapse backstop (execution/substrate anomaly signal, not a sampling outcome)",
+      "verdict": "NO_EVENTS"
+    },
+    {
+      "branch": "p <= 0.05",
+      "fires_when": "exact one-sided Fisher rejects H0 at alpha 0.05",
+      "oc": {
+        "power_delta030": 0.89775,
+        "power_delta030_wilson95": [
+          0.8879757685297719,
+          0.9067609663100878
+        ],
+        "power_delta038": 0.979,
+        "prereg_normal_approx_power_lands_inside_mc_wilson": true,
+        "realized_size": 0.04825,
+        "realized_size_wilson95": [
+          0.04203145324832355,
+          0.05533543559163455
+        ]
+      },
+      "order": 3,
+      "provenance": [
+        "fisher_oc#results.H0_SIZE.reject_rate",
+        "fisher_oc#results.D030_BASELINE.reject_rate",
+        "fisher_oc#results.D038_BASELINE.reject_rate",
+        "fisher_oc#normal_approx_power_prereg"
+      ],
+      "read_before": "nothing (terminal)",
+      "role": "adjudicator (prereg PRIMARY instrument)",
+      "verdict": "BLOCK_MECHANISM_SUPPORTED"
+    },
+    {
+      "branch": "p > 0.05",
+      "fires_when": "exact one-sided Fisher fails to reject",
+      "oc": {
+        "not_detected_rate_if_true_delta0223": 0.30575,
+        "power_at_hotrepro_sized_delta0223": 0.69425,
+        "power_delta0223_wilson95": [
+          0.6797912597771242,
+          0.7083359828190864
+        ]
+      },
+      "order": 4,
+      "provenance": [
+        "fisher_oc#results.D0223_BASELINE.reject_rate",
+        "fisher_oc#results.D0223_BASELINE.reject_rate_wilson95"
+      ],
+      "read_before": "nothing (terminal)",
+      "role": "adjudicator complement (calibrated reading, not evidence of absence)",
+      "verdict": "BLOCK_MECHANISM_NOT_DETECTED"
+    }
+  ],
+  "cross_receipt": {
+    "cal_to_floor_ratio_meaning": "both 5%-firing points on the same per-seed scale: CAL at independent per-seed corruption eps (dropout kernel), floor at per-seed other-rate; the CAL detects corruption ~385x finer than the floor tolerates collapse",
+    "cal_to_floor_sensitivity_ratio_per_seed_scale": 384.8274954165258,
+    "clean_run_void_risk": {
+      "cal_under_determinism_premise": "0 by construction under the determinism premise on the committed substrate (9 consecutive committed identity runs; the CAL measures substrate drift on fixed replayed seeds, not sampling variation)",
+      "floor_at_hist_q995": 6.193569087951911e-95,
+      "reading": "a clean run cannot be VOIDed by statistical chance at historical yield"
+    },
+    "coverage_chain": "any per-seed corruption that escapes the CAL with >=95% probability displaces each group census by at most 1.19% of the smallest pre-registered effect (79.388 seeds at delta 0.0223), while corruption large enough to matter verdict-wise VOIDs at the CAL near-certainly",
+    "escape_displacement_fraction_of_smallest_effect": {
+      "dropout": 0.004618532687694127,
+      "reshuffle": 0.01186512105298813
+    },
+    "power_monotone_in_delta": {
+      "d0223": 0.69425,
+      "d030": 0.89775,
+      "d038": 0.979,
+      "strictly_increasing": true
+    },
+    "size_chain": {
+      "alpha": 0.05,
+      "floor_edge_pair_n_3400": 0.04325,
+      "nominal_pair_n_3560": 0.04825,
+      "ordering_holds": true
+    }
+  },
+  "framing": {
+    "aggregation_only": "pure function of the three committed receipts; every scalar traces to a recorded provenance path; the only new content is the cross_receipt block; byte-stable given identical inputs",
+    "ladder": "PAUSED",
+    "no_rng": "no RNG, no trajectories, no gate executed, no seed window consumed",
+    "pre_datum": "measured while request dd5a8300 (nonce molasp-w8-blockpower-t138-b) is still queued behind the board-operator maintenance lease; no datum exists; no branch of the frozen map is touched or re-derived"
+  },
+  "inputs": {
+    "cal_oc": {
+      "path": "evidence/2026-10-14-w8-blockpower-cal-oc/cal-oc.json",
+      "sha256": "d38f09307cc90730f9702bb3e82dc126bd8545d4d9f64eb3891901da87ad4970",
+      "source_tick": "tick141"
+    },
+    "fisher_oc": {
+      "path": "evidence/2026-10-14-w8-blockpower-oc/oc.json",
+      "sha256": "142ddfb924ada0a4d341f559c75bc492247989ddc639b245b451b7d9b13025a6",
+      "source_tick": "tick139"
+    },
+    "floor_oc": {
+      "path": "evidence/2026-10-14-w8-blockpower-floor-oc/floor-oc.json",
+      "sha256": "9c72da356e0573209e0b78aad0941fe0e070d05c16f62be018a9ebc8fa76303c",
+      "source_tick": "tick140"
+    }
+  },
+  "tick": "tick142"
+}
