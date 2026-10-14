@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="ui-monospace, Menlo, Consolas, monospace">
+<rect width="960" height="560" fill="#ffffff"/>
+<text x="96" y="24" font-size="14" font-weight="600" fill="#111">Domain-of-exactness envelope — w8 tail helpers (complement branches)</text>
+<text x="96" y="42" font-size="11" fill="#8a8a8a">max relative deviation vs decade of true tail mass · 537 compared · 37 below the 1e-290 oracle floor (counted, not compared)</text>
+<text x="96" y="56" font-size="11" fill="#8a8a8a">stratified grid n 100..4999, 7 rates · evidence 2026-10-14-w8-exactness-envelope</text>
+<rect x="364.62" y="76" width="345.38" height="410" fill="#fff6e5" stroke="none"/>
+<text x="710" y="92" font-size="11" fill="#8a8a8a" text-anchor="end">transition band: guard bound ≥ 1e-5, true mass below — disclosed, monotone price</text>
+<line x1="96" y1="486.00" x2="710" y2="486.00" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="451.83" x2="710" y2="451.83" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="455.83" font-size="11" text-anchor="end" fill="#111">1e-12</text>
+<line x1="96" y1="417.67" x2="710" y2="417.67" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="383.50" x2="710" y2="383.50" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="387.50" font-size="11" text-anchor="end" fill="#111">1e-10</text>
+<line x1="96" y1="349.33" x2="710" y2="349.33" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="315.17" x2="710" y2="315.17" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="319.17" font-size="11" text-anchor="end" fill="#111">1e-8</text>
+<line x1="96" y1="281.00" x2="710" y2="281.00" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="246.83" x2="710" y2="246.83" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="250.83" font-size="11" text-anchor="end" fill="#111">1e-6</text>
+<line x1="96" y1="212.67" x2="710" y2="212.67" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="178.50" x2="710" y2="178.50" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="182.50" font-size="11" text-anchor="end" fill="#111">1e-4</text>
+<line x1="96" y1="144.33" x2="710" y2="144.33" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96" y1="110.17" x2="710" y2="110.17" stroke="#e8e8e8" stroke-width="1"/>
+<text x="88" y="114.17" font-size="11" text-anchor="end" fill="#111">1e-2</text>
+<line x1="96" y1="76.00" x2="710" y2="76.00" stroke="#e8e8e8" stroke-width="1"/>
+<line x1="96.00" y1="486" x2="96.00" y2="491" stroke="#444"/>
+<text x="96.00" y="506" font-size="11" text-anchor="middle" fill="#111">-8</text>
+<line x1="172.75" y1="486" x2="172.75" y2="491" stroke="#444"/>
+<text x="172.75" y="506" font-size="11" text-anchor="middle" fill="#111">-7</text>
+<line x1="249.50" y1="486" x2="249.50" y2="491" stroke="#444"/>
+<text x="249.50" y="506" font-size="11" text-anchor="middle" fill="#111">-6</text>
+<line x1="326.25" y1="486" x2="326.25" y2="491" stroke="#444"/>
+<text x="326.25" y="506" font-size="11" text-anchor="middle" fill="#111">-5</text>
+<line x1="403.00" y1="486" x2="403.00" y2="491" stroke="#444"/>
+<text x="403.00" y="506" font-size="11" text-anchor="middle" fill="#111">-4</text>
+<line x1="479.75" y1="486" x2="479.75" y2="491" stroke="#444"/>
+<text x="479.75" y="506" font-size="11" text-anchor="middle" fill="#111">-3</text>
+<line x1="556.50" y1="486" x2="556.50" y2="491" stroke="#444"/>
+<text x="556.50" y="506" font-size="11" text-anchor="middle" fill="#111">-2</text>
+<line x1="633.25" y1="486" x2="633.25" y2="491" stroke="#444"/>
+<text x="633.25" y="506" font-size="11" text-anchor="middle" fill="#111">-1</text>
+<line x1="710.00" y1="486" x2="710.00" y2="491" stroke="#444"/>
+<text x="710.00" y="506" font-size="11" text-anchor="middle" fill="#111">0</text>
+<text x="403.0" y="528" font-size="11" text-anchor="middle" fill="#8a8a8a">decade of true tail mass (log10) — measured buckets only</text>
+<line x1="96" y1="112.93" x2="710" y2="112.93" stroke="#666" stroke-dasharray="2,4"/>
+<text x="716" y="112.93" font-size="11" fill="#666">shallowest frozen</text>
+<text x="716" y="126.93" font-size="11" fill="#666">consumer comparison 8.3e-3</text>
+<line x1="96" y1="383.50" x2="710" y2="383.50" stroke="#444" stroke-dasharray="6,4"/>
+<text x="104" y="399.50" font-size="11" fill="#111">two-method bar 1e-10 (direct paths ≤ 7.4e-11 domain-wide)</text>
+<path d="M710.00,466.05 L633.25,390.71 L556.50,348.80 L479.75,397.91 L403.00,328.46 L326.25,326.21 L249.50,192.83 L172.75,180.12 L96.00,170.73" fill="none" stroke="#1f5fa8" stroke-width="1.8"/>
+<circle cx="710.00" cy="466.05" r="3" fill="#1f5fa8"/>
+<circle cx="633.25" cy="390.71" r="3" fill="#1f5fa8"/>
+<circle cx="556.50" cy="348.80" r="3" fill="#1f5fa8"/>
+<circle cx="479.75" cy="397.91" r="3" fill="#1f5fa8"/>
+<circle cx="403.00" cy="328.46" r="3" fill="#1f5fa8"/>
+<circle cx="326.25" cy="326.21" r="3" fill="#1f5fa8"/>
+<circle cx="249.50" cy="192.83" r="3" fill="#1f5fa8"/>
+<circle cx="172.75" cy="180.12" r="3" fill="#1f5fa8"/>
+<circle cx="96.00" cy="170.73" r="3" fill="#1f5fa8"/>
+<text x="716" y="156.73" font-size="11" fill="#1f5fa8">binom_cdf complement</text>
+<path d="M710.00,466.05 L633.25,405.15 L556.50,345.85 L326.25,336.72 L249.50,223.69 L172.75,178.71" fill="none" stroke="#2c7a4b" stroke-width="1.8"/>
+<circle cx="710.00" cy="466.05" r="3" fill="#2c7a4b"/>
+<circle cx="633.25" cy="405.15" r="3" fill="#2c7a4b"/>
+<circle cx="556.50" cy="345.85" r="3" fill="#2c7a4b"/>
+<circle cx="326.25" cy="336.72" r="3" fill="#2c7a4b"/>
+<circle cx="249.50" cy="223.69" r="3" fill="#2c7a4b"/>
+<circle cx="172.75" cy="178.71" r="3" fill="#2c7a4b"/>
+<text x="716" y="182.71" font-size="11" fill="#2c7a4b">binom_sf_ge complement</text>
+<line x1="96.00" y1="162.73" x2="158.00" y2="136.73" stroke="#1f5fa8" stroke-width="1"/>
+<text x="162.00" y="136.73" font-size="11" fill="#1f5fa8">worst 1.69e-04 @ cdf(2484,2500,0.999), mass 1.03e-08</text>
+<text x="162.00" y="150.73" font-size="11" fill="#8a8a8a">≈5 decades below the shallowest consumer comparison</text>
+<rect x="96" y="76" width="614" height="410" fill="none" stroke="#444"/>
+<text x="20" y="281.0" font-size="11" fill="#8a8a8a" text-anchor="middle" transform="rotate(-90 20 281.0)">max relative deviation (log10)</text>
+</svg>

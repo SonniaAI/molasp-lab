@@ -107,3 +107,43 @@ Complement decade buckets (max rel dev by decade of true mass):
   in the card report); this tick's head to verify next tick.
 - Zero trajectories, no gate, no blog (instrument measurement, not a
   milestone), no wet-lab, no external contact, no paper/preprint.
+
+## Figure (tick 133 addendum, run dd78909b)
+
+`designs/assets/012-exactness-envelope.svg` — the envelope claim now has
+its figure. Deterministic, stdlib-only generator
+`tools/w8_envelope_figure.py` renders the figure as a PURE FUNCTION of the
+pinned receipt `envelope-full.json` (sha256 b8664201…725b): no RNG, no
+timestamps, byte-stable. Chart is log-log — X: decade of true tail mass
+(0…-8), Y: max relative deviation per decade bucket; curves are the two
+COMPLEMENT branches (`binom_cdf` in blue, `binom_sf_ge` in green, measured
+buckets only, lines joining measured decades); the direct paths appear as
+the annotated two-method bar (1e-10 dashed, direct-path domain max 7.4e-11
+in the same label); the consumer floor 8.3e-3 is the dotted line at top;
+the transition band (guard bound ≥1e-5, true mass below) is the shaded
+right region; worst point annotated from the receipt:
+1.69e-04 @ cdf(2484,2500,0.999), mass 1.03e-08, ≈5 decades below the
+shallowest consumer comparison.
+
+Pins: `tests/test_w8_envelope_figure.py` (4 tests) — asset sha256 pinned
+(`f37b264c…c6d19`), regeneration must be byte-identical, semantic anchors
+(worst point, counters, reference levels) must come from the receipt, and a
+geometry audit (15 bucket points in-frame, no non-finite coordinates).
+
+CATCH #10 (10th straight measure-then-pin tick): two first-draft defects
+caught before anything landed. (a) Label overflow — the first layout put
+~300–580px of reference-line text in a 204px gutter and a 219-char
+subtitle; caught by a programmatic geometry audit (text-width bound
+0.6·font-size per char, all `<text>`/`<circle>` bounds checked), fixed by
+two-line subtitle, in-plot bottom-left bar label, gutter consumer-floor
+label on two lines. (b) The first-draft test module used module-level
+`test_*` functions with NO `unittest.TestCase` — discovery collected 0
+tests, and the repo's own `test_collection_guard` flagged it as dead code
+in CI (`Ran 1004, FAILED failures=1`); rewritten as `EnvelopeFigurePins`.
+The guard did exactly its job; suite count becomes 1008 (skipped=1).
+
+Waiter unchanged at this tick: blockpower `d3aa0acaa37ff4c9…` still
+`queued` (board-operator maintenance lease); one frozen-rule probe, no
+resubmit, nonce `molasp-w8-blockpower-t120-a` idempotent, ladder PAUSED.
+Zero trajectories, no gate, no blog (figure for an existing claim, not a
+milestone), no wet-lab, no external contact, no paper/preprint.
