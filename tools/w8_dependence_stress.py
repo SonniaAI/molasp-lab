@@ -51,20 +51,28 @@ increasing in p, the defining equations give
 so both crossings are binary searches over exact CDF values — the
 interval's defining equations ARE the coverage statement.
 
-FENCED HAZARD (discovered this tick, measure-then-pin catch #5): the
-tick-127 helpers binom_cdf/binom_sf_ge inherit _pmf_terms' SEED
-UNDERFLOW — when the walk seed pmf(j_start) < ~1e-308 (more than
-~sqrt(2*708*n*p*q) from the mode), the seed rounds to 0.0 and the O(1)
-multiplicative recurrence stays 0 forever, so e.g. binom_sf_ge(2500,
-4999, 0.7533) returns 0.0 where the true value is 0.9958. Tick-127
-never evaluated that deep (all its seeds sit within a few sigma of the
-mode; its pinned numbers are unaffected), but a naive CDF-quantile
-search starting at k=n/2 walks straight into the cliff. Guard here:
-both searches run inside an assert-bracketed np +- 9*sigma window
-(seed log-pmf deficit <= ~40.5, never underflows; two-sided 9-sigma
-mass ~1e-15 makes every alpha_m/2 quantile used here interior), and
-the asserts FAIL LOUDLY if that ever stops holding. A proper
-anchored-walk fix inside w8_exact_bands is recorded as follow-up work.
+FENCE RETIRED (tick 130, the recorded tick-128 follow-up): the
+anchored re-seed repair in w8_exact_bands (tick 129, commit 1fe220b)
+landed, so every walk seed is healthy and the crossing searches no
+longer need the assert-bracketed np +- 9*sigma underflow window —
+both now binary-search the full [0, n] range. Boundary identities
+keep the predicates well-posed: cdf(n) = 1 >= half always, sf_ge(0) =
+1 >= half always, and sf_ge(n) >= half means the upper exit is
+impossible (k_low = n + 1, handled explicitly). Honest domain
+(measured this tick, pinned in test_w8_fence_retirement): a
+lower-tail crossing with k > n/2 resolves through the 1 - x branch,
+whose lgamma-cancellation noise floor is ~4e-11 at n ~ 5000 — below
+the floor the computed cdf returns 0.0 and the first decade above it
+is wrong by up to ~7x before converging (binom_cdf(3564, 4999,
+0.753304) = 5.97e-12 where the truth is 4.16e-11, first nonzero at
+exactly that k). Full-range search is therefore exact for alpha_m >=
+1e-8 (half >= 5e-9, >100x above the floor); the module's family
+levels (alpha_m >= 8.3e-3) sit eight orders above it. Upper-tail
+crossings have no such floor: sf_ge sums the short upper side
+directly and stays ~13-digit exact at any depth (verified against an
+independent per-term-lgamma logsumep at alpha_m = 2e-22, k_low =
+4055 at 9.5 sigma beyond np — the measurement the old fence would
+have rejected outright).
 
 Boundary-rate rules (exact, not artifacts): at p >= 1 only k = n
 occurs and CP hi(n) = 1 covers, while Wilson hi(k=n) < 1 strictly does
@@ -139,14 +147,6 @@ def _wilson_z(calib: str, m: int) -> float:
     raise ValueError(f"not a wilson calibration: {calib}")
 
 
-def _quantile_window(n: int, p: float) -> tuple[int, int]:
-    """Search window np +- 9*sigma clamped to [0, n] (underflow fence)."""
-    sigma = math.sqrt(n * p * (1.0 - p))
-    w = 9.0 * sigma + 10.0
-    return (max(0, int(math.floor(n * p - w))),
-            min(n, int(math.ceil(n * p + w))))
-
-
 def cp_accept_window(n: int, alpha_m: float, p: float) -> tuple[int, int]:
     """(k_high, k_low) acceptance window for CP at level 1-alpha_m.
 
@@ -156,16 +156,16 @@ def cp_accept_window(n: int, alpha_m: float, p: float) -> tuple[int, int]:
     Coverage = P(k_high <= X <= k_low - 1) > 1 - alpha_m at EVERY p
     (both tail exits are < alpha_m/2 by the minimizing property of the
     crossing search). Both predicates are monotone in k -> binary
-    search inside the assert-bracketed underflow-safe window.
+    search over the full [0, n] range (tick 130: the +-9*sigma
+    underflow fence is retired; every seed is healthy post-1fe220b,
+    and the boundary identities cdf(n) = 1 >= half / sf_ge(0) = 1 >=
+    half make both searches well-posed without a bracket).
     """
     if not 0.0 < p < 1.0:
         return 0, n + 1  # boundary rates: k=n (or k=0) surely; caller's
         # boundary rules decide coverage; window degenerates
     half = alpha_m / 2.0
-    wlo, whi = _quantile_window(n, p)
-    lo, hi = wlo, whi
-    assert lo == 0 or binom_cdf(lo - 1, n, p) < half, "cdf window miss"
-    assert binom_cdf(hi, n, p) >= half, "cdf window miss"
+    lo, hi = 0, n
     while lo < hi:
         mid = (lo + hi) // 2
         if binom_cdf(mid, n, p) >= half:
@@ -175,9 +175,7 @@ def cp_accept_window(n: int, alpha_m: float, p: float) -> tuple[int, int]:
     k_high = lo
     if binom_sf_ge(n, n, p) >= half:  # upper exit impossible: k_low = n+1
         return k_high, n + 1
-    lo, hi = wlo, whi
-    assert binom_sf_ge(lo, n, p) >= half, "sf window miss"
-    assert binom_sf_ge(hi, n, p) < half, "sf window miss"
+    lo, hi = 0, n
     while lo < hi:
         mid = (lo + hi) // 2
         if binom_sf_ge(mid, n, p) < half:

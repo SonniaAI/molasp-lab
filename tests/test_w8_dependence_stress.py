@@ -9,8 +9,10 @@ as permanent guards:
    w8_exact_bands helpers binom_cdf/binom_sf_ge return 0.0 for deep-tail
    seeds (pmf(j_start) underflows to 0.0 and the O(1) recurrence can
    never recover) — pinned below as the documented cliff, together with
-   the proof that this module's assert-bracketed +-9*sigma window makes
-   the SAME quantity exact.
+   the proof that the same quantity through cp_accept_window is exact
+   (pre-repair via the assert-bracketed +-9*sigma window; the window was
+   RETIRED in tick 130 once the anchored re-seed landed — the retirement
+   and its measured resolution floor are pinned in test_w8_fence_retirement.py).
 2. The exact families at zero drift reproduce tick 127 bit-for-bit
    (Bonferroni-Wilson) / to 1e-12 (CP via the independent fast path),
    and give the FIRST exact families for plain Wilson-95 and
@@ -84,8 +86,9 @@ class DependenceStressPins(unittest.TestCase):
         w8_exact_bands, and an independent per-term-lgamma logsumep --
         the "true ~0.9958" in the original tick-128 note was itself
         wrong). The anchored re-seed fixes the class; the assert-bracketed
-        +-9*sigma window stays as defense in depth, so the same quantity
-        through cp_accept_window remains exact either way.
+        +-9*sigma window was RETIRED in tick 130 (crossing searches now
+        run full-range over [0, n]), and the same quantity through
+        cp_accept_window remains exact either way.
         """
         self.assertEqual(binom_sf_ge(2500, 4999, 0.753304), 1.0)
         kh, kl = cp_accept_window(4999, ALPHA_FAMILY / 6, 0.753304)

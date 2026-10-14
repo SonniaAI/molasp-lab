@@ -176,10 +176,18 @@ def binom_cdf(k: int, n: int, p: float) -> float:
 
     Clamped to [0, 1]: walk rounding (~len*eps absolute at mass ~1) can
     push the 1 - x branch a few 1e-13 outside the unit interval.
-    Known clamp (recorded tick 129): when the true value is below
-    ~1e-13, the shorter-side 1 - x branch cannot resolve it and returns
-    0.0; no caller compares at that scale (CP targets are alpha/2 ~
-    4e-3, coverage sums are O(1)).
+    Known clamp (recorded tick 129, floor re-measured tick 130): a
+    lower-tail value with k > n/2 resolves through the 1 - x branch,
+    whose noise floor is set by lgamma cancellation in the seed
+    (~1e-11 RELATIVE to the O(1) complement mass, inherited by the
+    whole walk) — measured at n=4999, p=0.753304: every true cdf
+    below ~4e-11 returns 0.0, and the first decade above the floor is
+    wrong by up to ~7x (computed 5.97e-12 at k=3564 where the truth
+    is 4.16e-11) before converging. The tick-129 "~1e-13" scale was
+    the walk-rounding floor, not the cancellation floor. No caller
+    compares at that scale (CP targets are alpha/2 ~ 4e-3, coverage
+    sums are O(1)); the direct short-side sums stay ~13-digit exact
+    at any depth. Pinned in tests/test_w8_fence_retirement.py.
     """
     if k < 0:
         return 0.0
