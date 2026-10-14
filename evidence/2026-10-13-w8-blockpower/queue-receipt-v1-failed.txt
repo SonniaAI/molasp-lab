@@ -1,0 +1,21 @@
+/queue-input/source.tgz: OK
+HX-OUT-BEGIN:d3aa0acaa37ff4c93ecd79395ea352c9b9eb13794994db9d67feaa25b034dc83
+HX-FILE:status
+1
+
+HX-FILE:stderr
+Traceback (most recent call last):
+  File "/work/source/evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py", line 121, in <module>
+    from ktam_w8_blockprobe import (  # noqa: E402
+    ...<14 lines>...
+    )
+  File "/work/source/evidence/2026-10-09-w8-blockprobe/ktam_w8_blockprobe.py", line 127, in <module>
+    from molasp.offchannel import (canonical_assembly,    # noqa: E402
+                                   matched_strength)
+ModuleNotFoundError: No module named 'molasp'
+
+HX-FILE:stdout
+
+HX-QUEUE-EXIT:1
+HX-OUT-END:d3aa0acaa37ff4c93ecd79395ea352c9b9eb13794994db9d67feaa25b034dc83
+

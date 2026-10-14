@@ -1,0 +1,15 @@
+{
+  "request_id": "dd5a8300de1fc0ffbe3a7464a6a96e220294a46c22e1731cc91640eae607d6a5",
+  "job": "hxq-dd5a8300de1fc0ff",
+  "nonce": "molasp-w8-blockpower-t138-b",
+  "attempt": 3,
+  "image": "paperclip-test",
+  "cpu": 1,
+  "memory": "1Gi",
+  "wall_s": 2400,
+  "submitted_at": "2026-10-14T02:05:04Z",
+  "archive_blob": "e36fc0844a6076b9c11472980af9f4d119b0ab326ba553bffe336da5a978739e",
+  "command": ["python3", "source/evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py"],
+  "scaffold_note": "Attempt 3 (tick 138, SON-5152 run a26a6aad). Attempt 1 (queue-receipt.json) was VOID: archive lacked the molasp package -> ModuleNotFoundError before any trajectory. Attempt 2 (request c4f311546d220592ea754f98192e2319516b6c733f3655d92c48873d91323a09, nonce molasp-w8-blockpower-t138-a) was VOID: command ran 'python3 evidence/...' from cwd /work where the archive mounts as source/ -> exit 2 (viasite-v1 path lesson, kept verbatim as queue-receipt-v2-failed.txt). This attempt: complete molasp package in the archive (smoke-verified INSIDE the extracted archive tree, EXIT=0, full JSON+VERDICTS chain; smoke n=8 per window is never a verdict surface per prereg) and the attempt-1-proven command shape. Same frozen prereg research-log/2026-10-13-w8-blockpower-prereg.md, same seeds, same envelope. Fill at collection per the frozen map; collected stays null (house style).",
+  "collected": null
+}

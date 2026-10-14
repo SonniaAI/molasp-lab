@@ -1,0 +1,13 @@
+/queue-input/source.tgz: OK
+HX-OUT-BEGIN:c4f311546d220592ea754f98192e2319516b6c733f3655d92c48873d91323a09
+HX-FILE:status
+2
+
+HX-FILE:stderr
+python3: can't open file '/work/evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py': [Errno 2] No such file or directory
+
+HX-FILE:stdout
+
+HX-QUEUE-EXIT:2
+HX-OUT-END:c4f311546d220592ea754f98192e2319516b6c733f3655d92c48873d91323a09
+
