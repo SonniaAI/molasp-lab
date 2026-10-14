@@ -171,29 +171,81 @@ def _pmf_terms(j_start: int, j_end: int, n: int, p: float) -> list[float]:
     return terms
 
 
+# Tick 131: deep-tail direct switch. Measured floor of the 1 - x
+# branch (tick 130): lgamma-cancellation noise ~4e-11 ABSOLUTE at
+# n=4999, p=0.753304 — every true tail mass below it computes to 0.0,
+# the first decade above is wrong by up to ~7x. When the tail mass is
+# PROVABLY below this switch, the 1 - x branch cannot resolve it and
+# the direct short-side walk (relative error ~1e-11 at ANY depth: the
+# down/up-walk's error is relative to the tiny terms themselves) is the
+# only honest path. Valid bound: pmf is unimodal with mode
+# floor((n+1)p); on the mode's side of the pivot the pmf is monotone
+# away from it, so #terms * pmf(k) >= true tail mass. The switch never
+# fires for a resolvable value class (worst measured looseness ~900x:
+# bound 2.8e-8 at the true 4.2e-11, n=4999) and never near family
+# levels (bounds ~0.1-4). Bit-conservatism: every frozen-window and
+# coverage pin lives far above the switch, unchanged byte-for-byte.
+_DEEP_TAIL_DIRECT_SWITCH = 1e-5
+
+
+def _log_pmf_at(j: int, n: int, p: float) -> float:
+    """log pmf(j) via three direct lgamma calls (O(1)) — bound
+    arithmetic only; the walks keep seeding from the shared
+    _log_factorials table, so no pinned walk bit changes."""
+    return (math.lgamma(n + 1) - math.lgamma(j + 1) - math.lgamma(n - j + 1)
+            + j * math.log(p) + (n - j) * math.log1p(-p))
+
+
+def _deep_lower_direct(k: int, n: int, p: float) -> bool:
+    """True when cdf(k) is provably below the 1 - x branch's resolution
+    floor, so binom_cdf should take the direct down-walk (seed at k,
+    terms decay toward 0) instead — tick 131. Requires k <= mode, so
+    pmf(j) <= pmf(k) for all j <= k and (k+1)*pmf(k) bounds cdf(k)."""
+    mode = max(0, min(n, int((n + 1) * p)))
+    if k > mode:
+        return False  # k above the mode: cdf(k) >= ~0.5, never deep
+    return (math.log(k + 1) + _log_pmf_at(k, n, p)
+            < math.log(_DEEP_TAIL_DIRECT_SWITCH))
+
+
+def _deep_upper_direct(k: int, n: int, p: float) -> bool:
+    """Mirror of _deep_lower_direct for binom_sf_ge(k): true when the
+    upper tail is provably below the 1 - x floor (k >= mode, pmf
+    monotone down above k, (n-k+1)*pmf(k) bounds sf_ge(k))."""
+    mode = max(0, min(n, int((n + 1) * p)))
+    if k < mode:
+        return False  # k below the mode: sf_ge(k) >= ~0.5, never deep
+    return (math.log(n - k + 1) + _log_pmf_at(k, n, p)
+            < math.log(_DEEP_TAIL_DIRECT_SWITCH))
+
+
 def binom_cdf(k: int, n: int, p: float) -> float:
     """P(X <= k), X ~ Bin(n, p): exact sum on the shorter side.
 
     Clamped to [0, 1]: walk rounding (~len*eps absolute at mass ~1) can
     push the 1 - x branch a few 1e-13 outside the unit interval.
-    Known clamp (recorded tick 129, floor re-measured tick 130): a
-    lower-tail value with k > n/2 resolves through the 1 - x branch,
-    whose noise floor is set by lgamma cancellation in the seed
-    (~1e-11 RELATIVE to the O(1) complement mass, inherited by the
-    whole walk) — measured at n=4999, p=0.753304: every true cdf
-    below ~4e-11 returns 0.0, and the first decade above the floor is
-    wrong by up to ~7x (computed 5.97e-12 at k=3564 where the truth
-    is 4.16e-11) before converging. The tick-129 "~1e-13" scale was
-    the walk-rounding floor, not the cancellation floor. No caller
-    compares at that scale (CP targets are alpha/2 ~ 4e-3, coverage
-    sums are O(1)); the direct short-side sums stay ~13-digit exact
-    at any depth. Pinned in tests/test_w8_fence_retirement.py.
+    DEEP LOWER TAIL (tick 131): a lower-tail value with k > n/2 used to
+    resolve through the 1 - x branch, whose noise floor is lgamma
+    cancellation in the seed (~1e-11 RELATIVE to the O(1) complement
+    mass, inherited by the whole walk) — measured at n=4999,
+    p=0.753304 (tick 130): every true cdf below ~4e-11 returned 0.0
+    and the first decade above was wrong by up to ~7x (computed
+    5.97e-12 at k=3564 where the truth is 4.16e-11). When the tail
+    mass is provably below _DEEP_TAIL_DIRECT_SWITCH, the direct
+    down-walk now runs instead (seed at k, terms decay toward 0),
+    which is relative-exact (~1e-11) at ANY depth — the lower tail
+    becomes symmetric with the upper (sf_ge always summed its short
+    side directly). Honest floor: the walk seeds subnormal below
+    log-pmf ~ -708.4, so true masses < ~(n+1)e^-708 (~1e-304 at
+    n=4999) return 0.0 — monotone-correct for any comparison level
+    above ~1e-300. Pinned in tests/test_w8_deep_tail_symmetry.py and
+    tests/test_w8_fence_retirement.py.
     """
     if k < 0:
         return 0.0
     if k >= n:
         return 1.0
-    if k + 1 <= n - k:  # sum the lower tail directly
+    if k + 1 <= n - k or _deep_lower_direct(k, n, p):
         return min(1.0, max(0.0, math.fsum(_pmf_terms(k, 0, n, p))))
     return min(1.0, max(0.0,
                         1.0 - math.fsum(_pmf_terms(k + 1, n, n, p))))
@@ -202,13 +254,20 @@ def binom_cdf(k: int, n: int, p: float) -> float:
 def binom_sf_ge(k: int, n: int, p: float) -> float:
     """P(X >= k) = 1 - cdf(k-1), exact sum on the shorter side.
 
-    Clamped to [0, 1] with the same rationale as binom_cdf.
+    Clamped to [0, 1] with the same rationale as binom_cdf. DEEP
+    UPPER TAIL (tick 131): the mirror of binom_cdf's fix — when the
+    upper tail is provably below _DEEP_TAIL_DIRECT_SWITCH (k >= mode,
+    terms decay above k), the direct up-walk replaces the 1 - x
+    branch, removing the same ~4e-11 cancellation floor for deep
+    upper tails with k < n/2 (fires when the mode sits below the
+    pivot, i.e. p < 1/2). Same honest subnormal-seed floor as
+    binom_cdf. Pinned in tests/test_w8_deep_tail_symmetry.py.
     """
     if k <= 0:
         return 1.0
     if k > n:
         return 0.0
-    if n - k + 1 <= k:  # sum the upper tail directly
+    if n - k + 1 <= k or _deep_upper_direct(k, n, p):
         return min(1.0, max(0.0, math.fsum(_pmf_terms(k, n, n, p))))
     return min(1.0, max(0.0,
                         1.0 - math.fsum(_pmf_terms(k - 1, 0, n, p))))

@@ -29,6 +29,17 @@ levels (α_m ≥ 8.3e-3) sit eight orders above it. The first-draft
 "beyond-9σ unlock at α_m=2e-22" for the LOWER crossing was overreach
 and is withdrawn with numbers: k_high comes back 3564
 (resolution-limited), not the true 3461.
+
+TICK 131 SUPERSEDES THE FLOOR (deep-tail direct switch, symmetric
+tails): when the tail mass is provably below 1e-5 (the monotone
+#terms*pmf(k) bound on the mode's side of the pivot), binom_cdf /
+binom_sf_ge route to the direct short-side walk instead of the
+1 − x branch — relative-exact (~1e-11) at ANY depth, symmetric for
+both tails. The withdrawn crossing is repaired: α_m=2e-22 now gives
+(3461, 4055), BOTH ends outside the retired ±9σ window (3481, 4051),
+verified against the independent logsumep on both sides. The three
+floor pins below are corrected to the exact values (history kept in
+docstrings); full symmetry pins live in test_w8_deep_tail_symmetry.
 """
 
 import math
@@ -95,47 +106,66 @@ class FenceRetirementPins(unittest.TestCase):
                 self.assertEqual(
                     _coverage("bonferroni_cp", m, n, p), cov_ref)
 
-    def test_resolution_floor_zero_below(self):
-        """True cdf below ~4e-11 computes to 0.0 on the 1 − x branch."""
-        # k=3461: the TRUE crossing of 1e-22 (independent logsumep) — floored.
+    def test_resolution_floor_repaired_exact(self):
+        """Tick-131 correction: the floored deep lower tail is now exact.
+
+        Tick-130 history: k=3461 (the TRUE crossing of 1e-22) and k=3563
+        (true 3.37e-11) computed to 0.0 through the 1 - x branch. The
+        deep-tail direct switch (tail mass provably < 1e-5: bounds
+        9.3e-20 / 2.3e-8) routes both to the direct down-walk.
+        """
         self.assertGreaterEqual(_cdf_independent(3461, N, P), 1e-22)
         self.assertLess(_cdf_independent(3460, N, P), 1e-22)
-        self.assertEqual(binom_cdf(3461, N, P), 0.0)
-        # k=3563: true 3.367e-11, an order above 1e-22 — still floored.
-        self.assertEqual(binom_cdf(3563, N, P), 0.0)
+        computed = binom_cdf(3461, N, P)
+        self.assertEqual(computed, 1.0091961624198102e-22)
+        self.assertLess(abs(computed - _cdf_independent(3461, N, P))
+                        / _cdf_independent(3461, N, P), 1e-9)
+        computed63 = binom_cdf(3563, N, P)
+        self.assertEqual(computed63, 3.3674510443081154e-11)
+        self.assertLess(abs(computed63 - _cdf_independent(3563, N, P))
+                        / _cdf_independent(3563, N, P), 1e-9)
 
-    def test_first_nonzero_wrong_by_seven_x(self):
-        """First resolvable value is wrong by ~7x — pinned honestly."""
+    def test_first_decade_wrongness_repaired(self):
+        """Tick-131 correction: the 7x-wrong first-decade value is exact.
+
+        Tick-130 history: the 1 - x branch computed 5.965672400520816e-12
+        at k=3564 where the independent logsumep gives 4.15992404828027e-11
+        (~6.97x wrong), converging to ~3% by true ~1e-9 (k=3580 computed
+        1.0389942239896754e-09 vs 1.0742669044362198e-09). Both points
+        now take the direct down-walk (bounds 2.8e-8 / 6.8e-7 < 1e-5).
+        """
         computed = binom_cdf(3564, N, P)
-        truth = _cdf_independent(3564, N, P)
-        self.assertEqual(computed, 5.965672400520816e-12)
-        self.assertAlmostEqual(
-            truth / computed, 4.15992404828027e-11 / 5.965672400520816e-12,
-            delta=0.05)  # ~6.97x — the honest first-decade wrongness
-        # and it converges: by true ~1e-9 the relative error is ~3%.
-        self.assertAlmostEqual(
-            binom_cdf(3580, N, P) / _cdf_independent(3580, N, P),
-            1.0389942239896754e-09 / 1.0742669044362198e-09,
-            places=2)
+        self.assertEqual(computed, 4.159924048444505e-11)
+        self.assertLess(abs(computed - _cdf_independent(3564, N, P))
+                        / _cdf_independent(3564, N, P), 1e-9)
+        computed80 = binom_cdf(3580, N, P)
+        self.assertEqual(computed80, 1.0742669044780542e-09)
+        self.assertLess(abs(computed80 - _cdf_independent(3580, N, P))
+                        / _cdf_independent(3580, N, P), 1e-9)
 
-    def test_upper_crossing_exact_beyond_retired_fence(self):
-        """α_m=2e-22: k_low=4055 sits OUTSIDE the old ±9σ window and is
-        exact (short upper side summed directly); k_high is
-        resolution-limited at 3564, not the true 3461 — withdrawn."""
+    def test_both_crossings_exact_beyond_retired_fence(self):
+        """Tick-131: α_m=2e-22 gives (3461, 4055) — BOTH crossings now
+        exact and BOTH outside the retired ±9σ window (3481, 4051). The
+        tick-130 withdrawal of the lower crossing (k_high came back 3564,
+        resolution-limited) is repaired by the deep-tail direct switch."""
         kh, kl = cp_accept_window(N, 2e-22, P)
-        self.assertEqual(kh, 3564)  # floored (true crossing 3461)
+        self.assertEqual(kh, 3461)  # the true crossing (was 3564, floored)
         self.assertEqual(kl, 4055)
-        # the retired fence would have rejected this very call
+        # the retired fence would have rejected BOTH ends of this window
         sigma = math.sqrt(N * P * (1.0 - P))
+        wlo = max(0, int(N * P - 9.0 * sigma - 10.0))
         whi = min(N, int(math.ceil(N * P + 9.0 * sigma + 10.0)))
-        self.assertEqual(whi, 4051)
+        self.assertEqual((wlo, whi), (3481, 4051))
+        self.assertLess(kh, wlo)
         self.assertGreater(kl, whi)
         # defining equations, byte-level on the helper ...
         self.assertEqual(binom_sf_ge(4055, N, P), 8.911166361078581e-23)
         self.assertEqual(binom_sf_ge(4054, N, P), 1.256186946808807e-22)
-        # ... and inequality-level on the independent logsumep
+        # ... and inequality-level on the independent logsumep, both sides
         self.assertLess(_sf_independent(4055, N, P), 1e-22)
         self.assertGreaterEqual(_sf_independent(4054, N, P), 1e-22)
+        self.assertLess(_cdf_independent(3460, N, P), 1e-22)
+        self.assertGreaterEqual(_cdf_independent(3461, N, P), 1e-22)
 
     def test_family_alpha_eight_orders_above_floor(self):
         """Domain: α_m ≥ 8.3e-3 at family levels; floor ~4.2e-11."""

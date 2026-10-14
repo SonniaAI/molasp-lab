@@ -59,20 +59,26 @@ both now binary-search the full [0, n] range. Boundary identities
 keep the predicates well-posed: cdf(n) = 1 >= half always, sf_ge(0) =
 1 >= half always, and sf_ge(n) >= half means the upper exit is
 impossible (k_low = n + 1, handled explicitly). Honest domain
-(measured this tick, pinned in test_w8_fence_retirement): a
-lower-tail crossing with k > n/2 resolves through the 1 - x branch,
-whose lgamma-cancellation noise floor is ~4e-11 at n ~ 5000 — below
-the floor the computed cdf returns 0.0 and the first decade above it
-is wrong by up to ~7x before converging (binom_cdf(3564, 4999,
-0.753304) = 5.97e-12 where the truth is 4.16e-11, first nonzero at
-exactly that k). Full-range search is therefore exact for alpha_m >=
-1e-8 (half >= 5e-9, >100x above the floor); the module's family
-levels (alpha_m >= 8.3e-3) sit eight orders above it. Upper-tail
-crossings have no such floor: sf_ge sums the short upper side
-directly and stays ~13-digit exact at any depth (verified against an
-independent per-term-lgamma logsumep at alpha_m = 2e-22, k_low =
-4055 at 9.5 sigma beyond np — the measurement the old fence would
-have rejected outright).
+(SUPERSEDED tick 131, symmetric deep tails — the tick-130 floor
+statement is kept as history below): both crossing searches are now
+exact at ANY depth down to the subnormal-seed floor (~1e-304 true
+mass at n ~ 5000). Tick-130 history, repaired: a lower-tail crossing
+with k > n/2 used to resolve through the 1 - x branch, whose
+lgamma-cancellation noise floor was ~4e-11 at n ~ 5000 — below the
+floor the computed cdf returned 0.0 and the first decade above it
+was wrong by up to ~7x (binom_cdf(3564, 4999, 0.753304) computed
+5.97e-12 where the truth is 4.16e-11), making the search
+exact-only-for alpha_m >= 1e-8. Tick 131 routes a provably
+unresolvable 1 - x complement (tail mass < 1e-5 by the monotone
+#terms*pmf(k) bound) to the direct short-side walk — relative-exact
+(~1e-11) at any depth, symmetric for both tails — so the withdrawn
+alpha_m = 2e-22 LOWER crossing is now exact too (k_high = 3461 at
+n=4999, p=0.753304, verified against the independent
+per-term-lgamma logsumep), beside the upper (k_low = 4055 at 9.5
+sigma beyond np, tick 130 — the measurement the old fence would
+have rejected outright). Below the seed floor the computed tail is
+0.0, monotone-correct for any level above ~1e-300; the module's
+family levels (alpha_m >= 8.3e-3) remain far above all of this.
 
 Boundary-rate rules (exact, not artifacts): at p >= 1 only k = n
 occurs and CP hi(n) = 1 covers, while Wilson hi(k=n) < 1 strictly does
@@ -160,6 +166,20 @@ def cp_accept_window(n: int, alpha_m: float, p: float) -> tuple[int, int]:
     underflow fence is retired; every seed is healthy post-1fe220b,
     and the boundary identities cdf(n) = 1 >= half / sf_ge(0) = 1 >=
     half make both searches well-posed without a bracket).
+    Honest domain (tick 131, symmetric deep tails): both crossing
+    searches are exact at ANY depth down to the subnormal-seed floor
+    (~1e-304 true mass at n ~ 5000) — binom_cdf/binom_sf_ge route a
+    provably-unresolvable 1 - x complement to the direct short-side
+    walk (relative error ~1e-11 at any depth). This supersedes the
+    tick-130 floor statement (1 - x noise ~4e-11 absolute at
+    n=4999, first-decade ~7x wrongness, exact-only-for-alpha_m >=
+    1e-8): measured then, repaired now — the withdrawn alpha_m=2e-22
+    LOWER crossing is exact (k_high=3461 at n=4999, p=0.753304,
+    verified against the independent per-term-lgamma logsumep),
+    symmetric with the upper (k_low=4055, tick 130). Below the seed
+    floor the computed tail is 0.0 — monotone-correct for any
+    comparison level above ~1e-300. Pinned in
+    tests/test_w8_deep_tail_symmetry.py.
     """
     if not 0.0 < p < 1.0:
         return 0, n + 1  # boundary rates: k=n (or k=0) surely; caller's

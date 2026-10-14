@@ -181,10 +181,15 @@ class AnchoredRepairBattery(unittest.TestCase):
         self.assertEqual(binom_cdf(4999, 4999, 0.753304), 1.0)
 
     def test_clamped_short_side_documented(self):
-        # Known clamp (recorded, not a defect): the shorter-side 1 - x
-        # branch cannot resolve a true CDF of ~5e-277 and returns 0.0.
-        # No consumer compares at that scale (CP targets are alpha/2 ~4e-3).
-        self.assertEqual(binom_cdf(2601, 4999, 0.753304), 0.0)
+        # Tick-131 correction (deep-tail direct switch in w8_exact_bands):
+        # cdf(2601) is no longer clamped to 0.0 — the true ~5.08e-277 now
+        # resolves via the direct down-walk (seed log-pmf -636.6, healthy),
+        # matching the independent per-term-lgamma logsumep to ~7e-11
+        # relative (byte-pin below). The two honest limits stay: below the
+        # subnormal seed floor (cdf(2500), true ~1e-324) the walk returns
+        # 0.0, and the near-unit 1 - x side still clamps to 1.0.
+        self.assertEqual(binom_cdf(2601, 4999, 0.753304),
+                         5.082067281969146e-277)
         self.assertEqual(binom_cdf(2500, 4999, 0.753304), 0.0)
         self.assertEqual(binom_cdf(4500, 4999, 0.753304), 1.0)
 
