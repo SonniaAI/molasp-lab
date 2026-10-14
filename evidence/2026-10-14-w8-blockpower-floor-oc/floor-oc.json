@@ -1,0 +1,226 @@
+{
+ "agreement_bar": 1e-11,
+ "analysis": "blockpower-noevents-floor-oc",
+ "floor_edge_mc": {
+  "FLOOR_EDGE_D030_POWER": {
+   "p_a6": 0.745,
+   "p_gap": 0.775,
+   "reject_rate": 0.89225,
+   "reject_rate_wilson95": [
+    0.882261888829519,
+    0.9014854002740259
+   ],
+   "rejections": 3569,
+   "replicates": 4000,
+   "seed": 20261021
+  },
+  "FLOOR_EDGE_H0_SIZE": {
+   "p_a6": 0.745,
+   "p_gap": 0.745,
+   "reject_rate": 0.04325,
+   "reject_rate_wilson95": [
+    0.03737201372879841,
+    0.050004469896328
+   ],
+   "rejections": 173,
+   "replicates": 4000,
+   "seed": 20261020
+  }
+ },
+ "inversions": {
+  "other_rate_at_50pct": 0.04512689439599038,
+  "other_rate_at_5pct": 0.039634645577514505,
+  "other_rate_hist": 0.0050000000000000044,
+  "other_rate_multiple_at_5pct": 7.926929115502894,
+  "q_at_50pct_risk": 0.9548731056040096,
+  "q_at_5pct_risk": 0.9603653544224855
+ },
+ "limits": [
+  "defining-side sums only; float walk drops terms below 1e-25 of the accumulated total (cutoff index recorded per point)",
+  "Decimal ground truth at prec 80, exact-rational q, full defining-side sum, arithmetic error <= ~1e-76 relative",
+  "floor-edge MC over synthetic binomial counts at pair_n = 3400 exactly; Wilson intervals quantify simulation error only",
+  "no kTAM trajectories; none of the probe's virgin seed windows consumed; no gate executed; ladder stays PAUSED",
+  "pre-datum: measured while request dd5a8300 is still queued; no branch of the frozen map is touched or re-derived"
+ ],
+ "map_rule": "NO_EVENTS iff ng < 3400 OR na < 3400 (branch_map, evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py)",
+ "min_events": 3400,
+ "n_per_group": 3560,
+ "q_hist_floor": 0.995,
+ "q_hist_note": "prereg: terminal 'other' <= 0.5% in every committed w8 window -> q >= 0.995, expected pair-n >= ~3542",
+ "two_method_anchors": [
+  {
+   "decimal_risk_prec80": "3.0967845439872257671305872498383044826857839548318713628360805386731564009134311E-95",
+   "float_risk": 3.0967845439759556e-95,
+   "float_walk_k_stop": 3375,
+   "q_exact": "199/200",
+   "q_float": 0.995,
+   "rel_diff": 3.639351492309716e-12
+  },
+  {
+   "decimal_risk_prec80": "1.5567794416426079277035397486159930603675371056124519853858795184545187052458295E-20",
+   "float_risk": 1.5567794416366805e-20,
+   "float_walk_k_stop": 3343,
+   "q_exact": "49/50",
+   "q_float": 0.98,
+   "rel_diff": 3.807443862536746e-12
+  },
+  {
+   "decimal_risk_prec80": "0.062879558763315637043355217675348804019245940304868317146358618583141981970532836",
+   "float_risk": 0.06287955876307491,
+   "float_walk_k_stop": 3278,
+   "q_exact": "24/25",
+   "q_float": 0.96,
+   "rel_diff": 3.828336458601068e-12
+  },
+  {
+   "decimal_risk_prec80": "0.91241867030260838049289159103965032977205711315559356303521329652881216816271679",
+   "float_risk": 0.9124186702991498,
+   "float_walk_k_stop": 3232,
+   "q_exact": "19/20",
+   "q_float": 0.95,
+   "rel_diff": 3.790548000475742e-12
+  }
+ ],
+ "yield_curve": [
+  {
+   "float_walk_k_stop": 3006,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.1,
+   "per_group_risk": 0.9999999999961278,
+   "q_yield": 0.9
+  },
+  {
+   "float_walk_k_stop": 3028,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.095,
+   "per_group_risk": 0.9999999999961641,
+   "q_yield": 0.905
+  },
+  {
+   "float_walk_k_stop": 3050,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.09,
+   "per_group_risk": 0.9999999999961693,
+   "q_yield": 0.91
+  },
+  {
+   "float_walk_k_stop": 3072,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.085,
+   "per_group_risk": 0.9999999999961584,
+   "q_yield": 0.915
+  },
+  {
+   "float_walk_k_stop": 3094,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.08,
+   "per_group_risk": 0.9999999999961234,
+   "q_yield": 0.92
+  },
+  {
+   "float_walk_k_stop": 3116,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.075,
+   "per_group_risk": 0.9999999999960182,
+   "q_yield": 0.925
+  },
+  {
+   "float_walk_k_stop": 3139,
+   "map_risk_two_groups": 1.0,
+   "other_rate": 0.07,
+   "per_group_risk": 0.999999999708207,
+   "q_yield": 0.93
+  },
+  {
+   "float_walk_k_stop": 3162,
+   "map_risk_two_groups": 0.9999999999999624,
+   "other_rate": 0.065,
+   "per_group_risk": 0.9999998060241916,
+   "q_yield": 0.935
+  },
+  {
+   "float_walk_k_stop": 3185,
+   "map_risk_two_groups": 0.9999999976807791,
+   "other_rate": 0.06,
+   "per_group_risk": 0.9999518417098788,
+   "q_yield": 0.94
+  },
+  {
+   "float_walk_k_stop": 3209,
+   "map_risk_two_groups": 0.9999850449572283,
+   "other_rate": 0.055,
+   "per_group_risk": 0.9961328249623648,
+   "q_yield": 0.945
+  },
+  {
+   "float_walk_k_stop": 3232,
+   "map_risk_two_groups": 0.9923295106878309,
+   "other_rate": 0.05,
+   "per_group_risk": 0.9124186702991498,
+   "q_yield": 0.95
+  },
+  {
+   "float_walk_k_stop": 3256,
+   "map_risk_two_groups": 0.7352241039012146,
+   "other_rate": 0.045,
+   "per_group_risk": 0.48543620794037073,
+   "q_yield": 0.955
+  },
+  {
+   "float_walk_k_stop": 3278,
+   "map_risk_two_groups": 0.12180527861591083,
+   "other_rate": 0.04,
+   "per_group_risk": 0.06287955876307491,
+   "q_yield": 0.96
+  },
+  {
+   "float_walk_k_stop": 3297,
+   "map_risk_two_groups": 0.0016220236817778035,
+   "other_rate": 0.035,
+   "per_group_risk": 0.0008113409779801767,
+   "q_yield": 0.965
+  },
+  {
+   "float_walk_k_stop": 3315,
+   "map_risk_two_groups": 8.096238453308637e-07,
+   "other_rate": 0.03,
+   "per_group_risk": 4.048120046018114e-07,
+   "q_yield": 0.97
+  },
+  {
+   "float_walk_k_stop": 3330,
+   "map_risk_two_groups": 4.320528573409024e-12,
+   "other_rate": 0.025,
+   "per_group_risk": 2.1602642867068452e-12,
+   "q_yield": 0.975
+  },
+  {
+   "float_walk_k_stop": 3343,
+   "map_risk_two_groups": 3.113558883273361e-20,
+   "other_rate": 0.02,
+   "per_group_risk": 1.5567794416366805e-20,
+   "q_yield": 0.98
+  },
+  {
+   "float_walk_k_stop": 3355,
+   "map_risk_two_groups": 6.54312030794231e-33,
+   "other_rate": 0.015,
+   "per_group_risk": 3.271560153971155e-33,
+   "q_yield": 0.985
+  },
+  {
+   "float_walk_k_stop": 3365,
+   "map_risk_two_groups": 7.516803767695926e-54,
+   "other_rate": 0.01,
+   "per_group_risk": 3.758401883847963e-54,
+   "q_yield": 0.99
+  },
+  {
+   "float_walk_k_stop": 3375,
+   "map_risk_two_groups": 6.193569087951911e-95,
+   "other_rate": 0.005,
+   "per_group_risk": 3.0967845439759556e-95,
+   "q_yield": 0.995
+  }
+ ]
+}
