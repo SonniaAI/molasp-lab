@@ -1,0 +1,429 @@
+{
+  "alpha": 0.05,
+  "configs": [
+    {
+      "alpha": 0.05,
+      "label": "SIZE_500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.0975,
+        "rejections": 390,
+        "threshold": 0.0125,
+        "wilson95_high": 0.10708259614164213,
+        "wilson95_low": 0.08868975570656758
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.26475,
+        "rejections": 1059,
+        "threshold": 0.05,
+        "wilson95_high": 0.2786436904784261,
+        "wilson95_low": 0.25130772758937847
+      },
+      "n_per_arm": 500,
+      "pair_terminals": 2000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.0275,
+        "rejections": 110,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.03303906461846156,
+        "wilson95_low": 0.02286760929030635
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "SIZE_1000",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.097,
+        "rejections": 388,
+        "threshold": 0.0125,
+        "wilson95_high": 0.10656206298148325,
+        "wilson95_low": 0.08821124831001616
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.26725,
+        "rejections": 1069,
+        "threshold": 0.05,
+        "wilson95_high": 0.28118225598669877,
+        "wilson95_low": 0.25376436486465737
+      },
+      "n_per_arm": 1000,
+      "pair_terminals": 4000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.02875,
+        "rejections": 115,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.03439784580119478,
+        "wilson95_low": 0.024006429499348877
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "SIZE_1500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.0985,
+        "rejections": 394,
+        "threshold": 0.0125,
+        "wilson95_high": 0.10812344126240506,
+        "wilson95_low": 0.08964699169922524
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.2685,
+        "rejections": 1074,
+        "threshold": 0.05,
+        "wilson95_high": 0.2824513292760419,
+        "wilson95_low": 0.25499289296709005
+      },
+      "n_per_arm": 1500,
+      "pair_terminals": 6000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.0305,
+        "rejections": 122,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.036295868916349366,
+        "wilson95_low": 0.025605048332680336
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467,
+        0.7475786924939467
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "RESIDUAL_500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.56725,
+        "rejections": 2269,
+        "threshold": 0.0125,
+        "wilson95_high": 0.5825323286905195,
+        "wilson95_low": 0.5518386261870156
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.765,
+        "rejections": 3060,
+        "threshold": 0.05,
+        "wilson95_high": 0.7778815216479941,
+        "wilson95_low": 0.7516099734084641
+      },
+      "n_per_arm": 500,
+      "pair_terminals": 2000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.3665,
+        "rejections": 1466,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.38155382821335754,
+        "wilson95_low": 0.3517023431449929
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.744,
+        0.7315
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "RESIDUAL_1000",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.844,
+        "rejections": 3376,
+        "threshold": 0.0125,
+        "wilson95_high": 0.8549141977392868,
+        "wilson95_low": 0.8324257052773986
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.94225,
+        "rejections": 3769,
+        "threshold": 0.05,
+        "wilson95_high": 0.9490636478546839,
+        "wilson95_low": 0.9345877245555754
+      },
+      "n_per_arm": 1000,
+      "pair_terminals": 4000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.699,
+        "rejections": 2796,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.7130183059046269,
+        "wilson95_low": 0.6845998356660719
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.744,
+        0.7315
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "RESIDUAL_1500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.95325,
+        "rejections": 3813,
+        "threshold": 0.0125,
+        "wilson95_high": 0.9593684643371679,
+        "wilson95_low": 0.9462618003207178
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.98575,
+        "rejections": 3943,
+        "threshold": 0.05,
+        "wilson95_high": 0.9889845506617669,
+        "wilson95_low": 0.9815833501822882
+      },
+      "n_per_arm": 1500,
+      "pair_terminals": 6000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.88775,
+        "rejections": 3551,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.8971630086089217,
+        "wilson95_low": 0.877592943119915
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.744,
+        0.7315
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "ORIGINAL_500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.824,
+        "rejections": 3296,
+        "threshold": 0.0125,
+        "wilson95_high": 0.8354890953466211,
+        "wilson95_low": 0.8118891854016522
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.93175,
+        "rejections": 3727,
+        "threshold": 0.05,
+        "wilson95_high": 0.939157809464165,
+        "wilson95_low": 0.9235137112551777
+      },
+      "n_per_arm": 500,
+      "pair_terminals": 2000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.693,
+        "rejections": 2772,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.7071031726327702,
+        "wilson95_low": 0.678526482257405
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.778,
+        0.7315
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "ORIGINAL_1000",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.9835,
+        "rejections": 3934,
+        "threshold": 0.0125,
+        "wilson95_high": 0.9870091181735899,
+        "wilson95_low": 0.9790631001652689
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.99675,
+        "rejections": 3987,
+        "threshold": 0.05,
+        "wilson95_high": 0.9980996515730204,
+        "wilson95_low": 0.9944471415186612
+      },
+      "n_per_arm": 1000,
+      "pair_terminals": 4000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.9605,
+        "rejections": 3842,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.9661076595392831,
+        "wilson95_low": 0.9540086931909019
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.778,
+        0.7315
+      ]
+    },
+    {
+      "alpha": 0.05,
+      "label": "ORIGINAL_1500",
+      "loo_min_binom_bonferroni": {
+        "estimate": 0.999,
+        "rejections": 3996,
+        "threshold": 0.0125,
+        "wilson95_high": 0.9996110529626092,
+        "wilson95_low": 0.9974314226342689
+      },
+      "loo_min_binom_nominal": {
+        "estimate": 0.99925,
+        "rejections": 3997,
+        "threshold": 0.05,
+        "wilson95_high": 0.9997449002716282,
+        "wilson95_low": 0.997797095603605
+      },
+      "n_per_arm": 1500,
+      "pair_terminals": 6000,
+      "pairwise_min_fisher_bonferroni": {
+        "estimate": 0.9975,
+        "rejections": 3990,
+        "threshold": 0.008333333333333333,
+        "wilson95_high": 0.9986414570549819,
+        "wilson95_low": 0.9954038968717652
+      },
+      "replicates": 4000,
+      "seeds": [
+        20261021,
+        20261022,
+        20261023,
+        20261024,
+        20261025,
+        20261026,
+        20261027
+      ],
+      "shares": [
+        0.75,
+        0.6928,
+        0.778,
+        0.7315
+      ]
+    }
+  ],
+  "cross_check_vs_tick93_reference": {
+    "cases": 9,
+    "fisher_cases": 4,
+    "fisher_max_abs_diff": 1.0630385460785874e-14,
+    "max_abs_diff": 1.5316525825426197e-11
+  },
+  "generated_for": "SON-5152 tick 147 pre-datum OC measurement",
+  "instrument": "tick-93 dispersion receipt rule: min over 4 arms of the exact two-sided binomial p against the leave-one-out pool; reject iff min p <= 0.05 (no multiplicity correction)",
+  "n_values": [
+    500,
+    1000,
+    1500
+  ],
+  "pattern_original": [
+    0.75,
+    0.6928,
+    0.778,
+    0.7315
+  ],
+  "pattern_residual": [
+    0.75,
+    0.6928,
+    0.744,
+    0.7315
+  ],
+  "pooled_tick99_share": 0.7475786924939467,
+  "replicates": 4000,
+  "schema": "w9-homogeneity-oc-v1",
+  "seeds": [
+    20261021,
+    20261022,
+    20261023,
+    20261024,
+    20261025,
+    20261026,
+    20261027
+  ]
+}
