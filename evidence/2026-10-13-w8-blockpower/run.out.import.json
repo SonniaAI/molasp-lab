@@ -1,0 +1,15 @@
+{
+  "blob_source": "/tmp/w8-blockpower-result.blob",
+  "client_preamble_stripped": true,
+  "exit_status": 0,
+  "imported_at": "2026-10-21T00:53:12Z",
+  "interpretation": "none \u2014 the verdict chain starts at tools/collect_w8.py",
+  "request_id": "dd5a8300de1fc0ffbe3a7464a6a96e220294a46c22e1731cc91640eae607d6a5",
+  "run_out": {
+    "bytes": 3665,
+    "sha256": "e6335756523f51193bd097a04df3e37e91459364976d33196d08623f4b614d17"
+  },
+  "schema": 1,
+  "stderr": null,
+  "tool": "import_queue_result"
+}

@@ -9,7 +9,41 @@
   "wall_s": 2400,
   "submitted_at": "2026-10-14T02:05:04Z",
   "archive_blob": "e36fc0844a6076b9c11472980af9f4d119b0ab326ba553bffe336da5a978739e",
-  "command": ["python3", "source/evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py"],
+  "command": [
+    "python3",
+    "source/evidence/2026-10-13-w8-blockpower/ktam_w8_blockpower.py"
+  ],
   "scaffold_note": "Attempt 3 (tick 138, SON-5152 run a26a6aad). Attempt 1 (queue-receipt.json) was VOID: archive lacked the molasp package -> ModuleNotFoundError before any trajectory. Attempt 2 (request c4f311546d220592ea754f98192e2319516b6c733f3655d92c48873d91323a09, nonce molasp-w8-blockpower-t138-a) was VOID: command ran 'python3 evidence/...' from cwd /work where the archive mounts as source/ -> exit 2 (viasite-v1 path lesson, kept verbatim as queue-receipt-v2-failed.txt). This attempt: complete molasp package in the archive (smoke-verified INSIDE the extracted archive tree, EXIT=0, full JSON+VERDICTS chain; smoke n=8 per window is never a verdict surface per prereg) and the attempt-1-proven command shape. Same frozen prereg research-log/2026-10-13-w8-blockpower-prereg.md, same seeds, same envelope. Fill at collection per the frozen map; collected stays null (house style).",
-  "collected": null
+  "collected": null,
+  "image_digest": "sha256:323d04c246e73157ad6550a85723f25dcf37906f2769736ffd1656a3473c2fdd",
+  "admitted": "2026-10-14T06:08:09.844Z",
+  "finished": "2026-10-14T06:10:56.754Z",
+  "node": "spark-4a06",
+  "pod": "hxq-dd5a8300de1fc0ff-2mx8r",
+  "pod_uid": "e9177736-086f-4f84-b3a3-09c53e0f260c",
+  "exit_status": 0,
+  "result_blob_sha256": "6b3929011321422e8edb5356e1c6947d35e2059d940ab3dff1a3c7287f9e6c1e",
+  "run_out_sha256": "e6335756523f51193bd097a04df3e37e91459364976d33196d08623f4b614d17",
+  "run_out_bytes": 3665,
+  "verdicts_recorded_by_instrument": {
+    "cal": "CAL_OK",
+    "cal_mid_w4": {
+      "D2T": 367,
+      "L2": 131,
+      "other": 2
+    },
+    "branch": "BLOCK_MECHANISM_NOT_DETECTED",
+    "p_fisher_one_sided": 0.992456246077706,
+    "pooled_gap": {
+      "x": 2571,
+      "pair_n": 3559,
+      "share": 0.7223939308794606
+    },
+    "pooled_a6": {
+      "x": 2659,
+      "pair_n": 3557,
+      "share": 0.7475400618498735
+    },
+    "observed_delta": -0.02514613097041296
+  }
 }
