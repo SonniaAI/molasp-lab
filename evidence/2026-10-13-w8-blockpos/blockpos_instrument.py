@@ -26,6 +26,7 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fi
 LINE = "evidence/2026-10-09-w8-line/run.out"
 BLOCKPROBE = "evidence/2026-10-09-w8-blockprobe/run.out"
 HOTREPRO = "evidence/2026-10-13-w8-hotrepro/run.out"
+BLOCKPOWER = "evidence/2026-10-13-w8-blockpower/run.out"
 # This instrument's OWN receipt quotes every window seed base as
 # provenance metadata; the seed-scan guard must skip it or any
 # re-run after collection would refuse on its own output.
@@ -47,18 +48,22 @@ EXPECTED = [
 # mention it (sources plus whitelisted non-source mentions, with reasons).
 SEED_SCAN = {
     "340261107": {
-        "files": {LINE, "evidence/2026-10-13-w8-arm6/run.out", HOTREPRO},
+        "files": {LINE, "evidence/2026-10-13-w8-arm6/run.out", HOTREPRO, BLOCKPOWER},
         "non_source": {
             "evidence/2026-10-13-w8-arm6/run.out": "tick-110 stale-premise deterministic replay, superseded by correction b7623fd; never data",
             HOTREPRO: "burned_context metadata only",
+            BLOCKPOWER: "pre-registered blockpower arbitration datum (tick 143, sha e6335756): fresh-offset burn [2000,5560) past every prior burn of the block; no subwindow reuse",
         },
     },
     "340261607": {"files": {BLOCKPROBE}, "non_source": {}},
     "340262107": {"files": {HOTREPRO}, "non_source": {}},
     "340262607": {"files": {HOTREPRO}, "non_source": {}},
     "350261107": {
-        "files": {BLOCKPROBE, HOTREPRO},
-        "non_source": {HOTREPRO: "burned_context metadata only"},
+        "files": {BLOCKPROBE, HOTREPRO, BLOCKPOWER},
+        "non_source": {
+            HOTREPRO: "burned_context metadata only",
+            BLOCKPOWER: "pre-registered blockpower GAP arm (tick 143, sha e6335756): fresh-offset burn [1500,5060) past every prior burn of the block; no subwindow reuse",
+        },
     },
     "350261607": {"files": {HOTREPRO}, "non_source": {}},
     "350262107": {"files": {HOTREPRO}, "non_source": {}},

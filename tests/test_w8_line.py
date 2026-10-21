@@ -80,6 +80,13 @@ class TestReservedSeedsNeverRun(unittest.TestCase):
         #   (caught and repaired tick 112).
         # - 2026-10-13-w8-blockpos: window-provenance METADATA in a
         #   static-analysis receipt (tick 112) - no trajectories.
+        # - 2026-10-13-w8-blockpower: the pre-registered blockpower
+        #   arbitration datum (tick 143, run.out sha e6335756): a
+        #   legitimate fresh-offset burn of the arm-6 block
+        #   [2000,5560), past every prior burn of that block
+        #   ([0,2000) across line/arm6/arm6b/hotrepro-afresh); its
+        #   omission here broke hosted CI at 17f34bb (repaired
+        #   tick 144).
         # Any OTHER run.out containing either seed is a seed-reuse
         # bug - future arms must move to unburned blocks
         # (380261107, 400261107, ...).
@@ -88,6 +95,7 @@ class TestReservedSeedsNeverRun(unittest.TestCase):
             "2026-10-13-w8-arm6",
             "2026-10-13-w8-hotrepro",
             "2026-10-13-w8-blockpos",
+            "2026-10-13-w8-blockpower",
         )
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):

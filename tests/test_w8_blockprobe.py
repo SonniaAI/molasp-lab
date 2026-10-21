@@ -79,7 +79,13 @@ class TestFreshSeeds(unittest.TestCase):
         #   2be73bb (repaired tick 112).
         # - 2026-10-13-w8-blockpos: window-provenance METADATA in a
         #   static-analysis receipt (tick 112) - no trajectories.
-        legit = ("2026-10-09-w8-blockprobe", "2026-10-13-w8-hotrepro", "2026-10-13-w8-blockpos")
+        # - 2026-10-13-w8-blockpower: the pre-registered blockpower
+        #   GAP arm (tick 143, run.out sha e6335756): a legitimate
+        #   fresh-offset burn of the arm-8 block [1500,5060), past
+        #   every prior burn of that block ([0,1500) across
+        #   probe-arm8/hotrepro-bfresh); omission broke hosted CI at
+        #   17f34bb (repaired tick 144).
+        legit = ("2026-10-09-w8-blockprobe", "2026-10-13-w8-hotrepro", "2026-10-13-w8-blockpos", "2026-10-13-w8-blockpower")
         hits = []
         for p in sorted((REPO / "evidence").glob("*/run.out")):
             if any(d in str(p) for d in legit):

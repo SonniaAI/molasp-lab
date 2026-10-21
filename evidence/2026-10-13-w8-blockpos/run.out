@@ -112,11 +112,13 @@
           "expected": [
             "evidence/2026-10-09-w8-line/run.out",
             "evidence/2026-10-13-w8-arm6/run.out",
+            "evidence/2026-10-13-w8-blockpower/run.out",
             "evidence/2026-10-13-w8-hotrepro/run.out"
           ],
           "found": [
             "evidence/2026-10-09-w8-line/run.out",
             "evidence/2026-10-13-w8-arm6/run.out",
+            "evidence/2026-10-13-w8-blockpower/run.out",
             "evidence/2026-10-13-w8-hotrepro/run.out"
           ],
           "ok": true
@@ -151,10 +153,12 @@
         "350261107": {
           "expected": [
             "evidence/2026-10-09-w8-blockprobe/run.out",
+            "evidence/2026-10-13-w8-blockpower/run.out",
             "evidence/2026-10-13-w8-hotrepro/run.out"
           ],
           "found": [
             "evidence/2026-10-09-w8-blockprobe/run.out",
+            "evidence/2026-10-13-w8-blockpower/run.out",
             "evidence/2026-10-13-w8-hotrepro/run.out"
           ],
           "ok": true

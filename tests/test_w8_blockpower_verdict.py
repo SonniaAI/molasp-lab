@@ -37,7 +37,11 @@ class TestW8BlockpowerCollectedDatum(unittest.TestCase):
         self.assertEqual(hashlib.sha256(RUN_OUT.read_bytes()).hexdigest(), RUN_OUT_SHA)
         manifest = json.loads((EV / "run.out.import.json").read_text())
         self.assertEqual(manifest["request_id"], REQUEST_ID)
-        self.assertEqual(manifest["run_out_sha256"], RUN_OUT_SHA)
+        # import_queue_result schema 1 nests the digest under "run_out"
+        # (the flat "run_out_sha256" read in the first cut of this test
+        # was a test bug caught by hosted CI at 17f34bb, repaired tick 144).
+        self.assertEqual(manifest["run_out"]["sha256"], RUN_OUT_SHA)
+        self.assertEqual(manifest["run_out"]["bytes"], 3665)
 
     def test_cal_identity_tenth_consecutive_run(self):
         run, _ = _load()
