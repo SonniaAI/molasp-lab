@@ -4,11 +4,10 @@ Receipt cross-checks (the point of these pins): the six-window homogeneity
 numbers must reproduce the committed tick-103 receipt
 (evidence/2026-10-09-w8-window-heterogeneity/run.out:
 X2(5)=2.7713095514, p=0.7351922075242888, pooled 22111/29989,
-Wilson-95 [0.73229, 0.74225]) and the contested four-arm pool must
-reproduce the tick-118 quoted interval [0.72607, 0.76794] at 1235/1652.
-Everything here is descriptive/design math: no gate is executed, the
-ladder stays PAUSED, and the pooled contested line stays
-REPORTED-NOT-CLAIMABLE.
+Wilson-95 [0.73229, 0.74225]). The tick-99 four-arm pool remains a
+historical descriptive scalar only; after the tick-147 exit, the live
+report is per-arm with pointwise Wilson intervals and no pooled family
+claim. Everything here is descriptive/design math: no gate is executed.
 """
 
 from __future__ import annotations
@@ -16,7 +15,10 @@ from __future__ import annotations
 import os
 import sys
 import unittest
+import hashlib
+import json
 from fractions import Fraction
+from pathlib import Path
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
@@ -54,6 +56,30 @@ class TestFrozenDataIntegrity(unittest.TestCase):
             self.assertLessEqual(s.x, s.n)
             self.assertGreaterEqual(s.x, 0)
             self.assertTrue(s.source and s.provenance)
+
+    def test_contested_arm_sources_match_raw_receipts_and_seed_bases(self):
+        fields = {
+            "arm3": ("evidence/2026-10-08-w8-hazardhold/run.out", "fresh_terminal_w8", "seed0_fresh", "280261107"),
+            "arm4": ("evidence/2026-10-09-w8-growth/run.out", "growth_terminal_w8", "seed0_growth", "300261107"),
+            "arm6": ("evidence/2026-10-09-w8-line/run.out", "arm6_terminal_w8", "seed0_arm6", "340261107"),
+            "arm7": ("evidence/2026-10-09-w8-line/run.out", "arm7_terminal_w8", "seed0_arm7", "360261107"),
+        }
+        strata = {s.label: s for s in CONTESTED_FOUR_ARM_STRATA}
+        for label, (source, field, seed_field, seed_base) in fields.items():
+            with self.subTest(arm=label):
+                s = strata[label]
+                self.assertEqual(s.source, source)
+                self.assertEqual(s.provenance, seed_base)
+                receipt_path = Path(ROOT) / source
+                raw_bytes = receipt_path.read_bytes()
+                manifest = json.loads(Path(str(receipt_path) + ".import.json").read_text())
+                self.assertEqual(hashlib.sha256(raw_bytes).hexdigest(),
+                                 manifest["run_out"]["sha256"])
+                receipt = json.loads(raw_bytes.splitlines()[0])
+                self.assertEqual(str(receipt[seed_field]), seed_base)
+                counts = receipt[field]
+                self.assertEqual((counts["D2T"], counts["D2T"] + counts["L2"]),
+                                 (s.x, s.n))
 
     def test_cal_identity_chain_anchor(self):
         # mid-w4 pair census 367:131, other=2 -> pair_n=498
@@ -200,6 +226,28 @@ class TestSummarizeContract(unittest.TestCase):
         self.assertAlmostEqual(
             s["contested_four_arm_descriptive"]["share"],
             0.7475786924939467, places=12)
+
+    def test_armwise_summary_is_per_arm_and_pointwise_only(self):
+        result = summarize()["contested_four_arm_armwise_report_only"]
+        self.assertEqual(result["interval_scope"], "pointwise Wilson-95; not simultaneous")
+        self.assertEqual(result["claim_status"],
+                         "report-only per arm; no cross-arm pooled inference")
+        arms = result["arms"]
+        self.assertEqual(set(arms), {"arm3", "arm4", "arm6", "arm7"})
+        self.assertEqual((arms["arm3"]["x"], arms["arm3"]["n"]), (375, 500))
+        self.assertEqual((arms["arm4"]["x"], arms["arm4"]["n"]), (106, 153))
+        self.assertEqual((arms["arm6"]["x"], arms["arm6"]["n"]), (389, 500))
+        self.assertEqual((arms["arm7"]["x"], arms["arm7"]["n"]), (365, 499))
+        self.assertEqual(tuple(round(v, 5) for v in arms["arm3"]["wilson95"]),
+                         (0.71024, 0.78595))
+        self.assertEqual(tuple(round(v, 5) for v in arms["arm4"]["wilson95"]),
+                         (0.61573, 0.76044))
+        self.assertEqual(tuple(round(v, 5) for v in arms["arm6"]["wilson95"]),
+                         (0.73953, 0.81223))
+        self.assertEqual(tuple(round(v, 5) for v in arms["arm7"]["wilson95"]),
+                         (0.69092, 0.76847))
+        self.assertEqual(arms["arm3"]["source"],
+                         "evidence/2026-10-08-w8-hazardhold/run.out")
 
 
 if __name__ == "__main__":

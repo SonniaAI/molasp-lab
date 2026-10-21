@@ -16,9 +16,11 @@ serves BOTH frozen branches of the blockpower map:
   the new n.
 
 All frozen counts below are transcribed from committed receipts (paths in
-each stratum tuple). The four-arm dispersion gate instrument (tick 93/99)
-is untouched and remains the pooling authority; nothing here executes a
-gate, unfreezes the ladder, or claims a result.
+each stratum tuple). This is a historical planning artifact. Tick 147
+retired POOLING_CONTESTED by reassignment and unpaused the design ladder
+arm-wise. The four-arm values here are now report-only per arm; the
+historical pooled scalar remains descriptive and is not claimable. Nothing
+here executes a gate or claims a new result.
 
 z conventions (stated, not implied): Wilson uses z=1.96 matching the
 committed receipts; the design power math uses one-sided alpha=0.05
@@ -61,10 +63,10 @@ SIX_WINDOW_STRATA = (
 # Tick 99 line-census arms; the corrected four-arm pool of the tick-119
 # dispersion gate (POOLING_CONTESTED). Descriptive here only.
 CONTESTED_FOUR_ARM_STRATA = (
-    Stratum("arm3", 375, 500, "evidence/2026-10-13-w8-arm6/run.out (tick-99 census, corrected set)", "340261107", ("line",)),
-    Stratum("arm4", 106, 153, "evidence/2026-10-13-w8-arm6/run.out (tick-99 census, corrected set)", "340261107", ("line",)),
-    Stratum("arm6", 389, 500, "evidence/2026-10-13-w8-arm6/run.out", "340261107", ("line", "hot")),
-    Stratum("arm7", 365, 499, "evidence/2026-10-13-w8-arm6/run.out", "340261107", ("line",)),
+    Stratum("arm3", 375, 500, "evidence/2026-10-08-w8-hazardhold/run.out", "280261107", ("line",)),
+    Stratum("arm4", 106, 153, "evidence/2026-10-09-w8-growth/run.out", "300261107", ("line",)),
+    Stratum("arm6", 389, 500, "evidence/2026-10-09-w8-line/run.out", "340261107", ("line", "hot")),
+    Stratum("arm7", 365, 499, "evidence/2026-10-09-w8-line/run.out", "360261107", ("line",)),
 )
 
 # Calibration identity chain anchor (10 consecutive CAL_OK runs).
@@ -249,7 +251,23 @@ def summarize() -> dict:
         "contested_four_arm_descriptive": {
             "x": contested[0], "n": contested[1], "share": contested[2],
             "wilson95": contested[3],
+            "claim_status": "historical descriptive only; not claimable under tick-147 exit",
             "homogeneity_descriptive_only": homogeneity_x2(CONTESTED_FOUR_ARM_STRATA),
+        },
+        "contested_four_arm_armwise_report_only": {
+            "interval_scope": "pointwise Wilson-95; not simultaneous",
+            "claim_status": "report-only per arm; no cross-arm pooled inference",
+            "arms": {
+                s.label: {
+                    "x": s.x,
+                    "n": s.n,
+                    "share": s.x / s.n,
+                    "wilson95": wilson95(s.x, s.n),
+                    "source": s.source,
+                    "seed_base": s.provenance,
+                }
+                for s in CONTESTED_FOUR_ARM_STRATA
+            },
         },
         "cal": {"share": CAL_STRATUM.x / CAL_STRATUM.n,
                 "wilson95": wilson95(CAL_STRATUM.x, CAL_STRATUM.n)},
