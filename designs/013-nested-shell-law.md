@@ -115,3 +115,84 @@ edit remain behind the QA verdict gate (due 2026-10-22 17:00Z).
 unequal multiplicities at all three stages ([3,2,3]); or promote
 the per-body handshake to a proof sketch for general m (the law is
 now measured at depths 1-4).
+
+## 4a. Status — UPDATED tick 165: the table is COMPLETE and the
+last shape axis is closed
+
+Tick 165 pinned (law-only, before census) and then censused:
+the **depth-4 [2,2,2,2] full table** 1099/1511/2010/2606/3310/
+4134/5091 at n=6..12 — every scalar exact (heights 6/7/11/12 new);
+the **first ALL-stages-unequal point [3,2,3]**
+986/1348/1788/2316/2943/3681/4543 at n=6..12 — every scalar exact,
+fibers exactly the suffix products {1,3,6,18} at every height, the
+additive alternative separated by 420..1404; and the depth-4
+placement pair [3,2,2,2] n=6 -> 1323, [2,2,2,3] n=6 -> 1621 (the
+bottom-relay-3 point's fibers exactly {1,3,6,12,24}). Statics:
+the per-body handshake holds at FOUR stacked stages at every
+height 6..12. Receipt
+`evidence/2026-10-22-pc13-depth4-full-unequal/depth4_unequal.json`;
+pins `tests/test_pc13_depth4_full_unequal.py`.
+
+**Open next:** the proof-sketch gaps of section 5 below (tile
+inventory totality and choice-function independence at general m);
+ widen the multiplicity grid (k in {2..5}) at depth 3; or return to
+ the publication track once the QA verdict lands.
+
+## 5. The handshake-to-proof sketch (tick 165) — promoted from the
+open list
+
+**Claim (general m).** For an admitted relay chain of depth m with
+duplicate-unit bodies and per-body conduit glue, the reading count
+on an ideal I is
+
+    |readings(I)| = prod over heads i with corner (1, n-i) in I of k_i
+
+which sums over the nested shells to the suffix-product law of
+section 2. The sketch assembles three verified static lemmas:
+
+1. **Body identity** (verified element-wise at every height 6..12,
+   depths 1..4, k in {2,3}, tick 156 + 164 + 165 statics): each
+   body `unit{j}_{a}` mints a fresh glue g occurring EXACTLY twice
+   in the whole inventory — on its conduit E face and on its own
+   reader W face. This is the handshake that makes a reading a
+   function of the body chosen, not of the tile history below.
+2. **Value-typing north** (verified R1 every height): every relay
+   stage re-types its conduits' N faces to `{a}-t-done`, so the
+   growth above a relay row is bit-blind to which conduit was
+   taken; shape, not reading history, carries the ideal upward.
+3. **Coupling at the corner** (verified tick 156 at depth 1 and
+   re-verified by the X1 conduit-combination census at depths
+   2..4, every height): at a corner site pair the south-face
+   demand forces exactly one west match; the only west-matching
+   tile is the same body's reader (glue arithmetic at TAU=2 with
+growth order closing the east escape), so the reading at stage i
+   is a FUNCTION of the stage's local bit, with exactly k_i
+   choices.
+
+Corner site pairs of different stages are one row apart and share
+no face (non-adjacency is exactly why the second-consumer probe
+refuses), so the per-stage choice functions COMPOSE
+INDEPENDENTLY; the reading count is the product of the k_i over
+the stages whose corners I contains. An ideal in shell_d carries
+exactly heads d..m (h1 = n-d), which gives the suffix product.
+
+**Gaps to a full proof** (falsifiable, in order):
+
+- **(a) Tile-inventory totality at general m** — no gluing beyond
+  the handshake pairs can close a reading. Currently exhaustive
+  statics at m <= 3 and the full census cross-check at m <= 4;
+  a general-m gluing-graph argument is unwritten.
+- **(b) Choice-function independence** — the X1 census shows every
+  conduit combination realized on every full fiber at every
+  measured point; a direct construction (choose conduits stage by
+  stage, bottom-up) is the natural induction but is not yet
+  written down as a proof.
+- **(c) The non-adjacency arm** is immediate (corners are one row
+  apart by construction) but its converse role — that ANY consumer
+  off the adjacent-below row breaks lemma 1 — is verified only as
+  the guard refusal set, not as a geometric theorem.
+
+The sketch is falsifiable at every stage: any census that lands
+off the suffix-product law, or any full fiber missing a conduit
+combination, kills the corresponding lemma. That is exactly what
+ticks 163-165 tested at every reachable point; the law survived.

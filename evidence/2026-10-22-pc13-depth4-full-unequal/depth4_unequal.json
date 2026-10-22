@@ -1,0 +1,1332 @@
+{
+  "card": "SON-5152 tick 165",
+  "date": "2026-10-22",
+  "depth4_2222_full_table": {
+    "10": {
+      "additive_falsified": true,
+      "additive_total": 2009,
+      "assemblies": 3310,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 546,
+        "16": 66,
+        "2": 144,
+        "4": 135,
+        "8": 110
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 3310,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 3310,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 10,
+      "shell_sizes": {
+        "1": 546,
+        "16": 66,
+        "2": 144,
+        "4": 135,
+        "8": 110
+      },
+      "terminals": 16
+    },
+    "11": {
+      "additive_falsified": true,
+      "additive_total": 2583,
+      "assemblies": 4134,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 810,
+        "16": 78,
+        "2": 180,
+        "4": 165,
+        "8": 132
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 4134,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 4134,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. m. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 11,
+      "shell_sizes": {
+        "1": 810,
+        "16": 78,
+        "2": 180,
+        "4": 165,
+        "8": 132
+      },
+      "terminals": 16
+    },
+    "12": {
+      "additive_falsified": true,
+      "additive_total": 3268,
+      "assemblies": 5091,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 1155,
+        "16": 91,
+        "2": 220,
+        "4": 198,
+        "8": 156
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 5091,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 5091,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. m. b. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 12,
+      "shell_sizes": {
+        "1": 1155,
+        "16": 91,
+        "2": 220,
+        "4": 198,
+        "8": 156
+      },
+      "terminals": 16
+    },
+    "6": {
+      "additive_falsified": true,
+      "additive_total": 578,
+      "assemblies": 1099,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 55,
+        "16": 28,
+        "2": 40,
+        "4": 45,
+        "8": 42
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 1099,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1099,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p.  q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 6,
+      "shell_sizes": {
+        "1": 55,
+        "16": 28,
+        "2": 40,
+        "4": 45,
+        "8": 42
+      },
+      "terminals": 16
+    },
+    "7": {
+      "additive_falsified": true,
+      "additive_total": 828,
+      "assemblies": 1511,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 115,
+        "16": 36,
+        "2": 60,
+        "4": 63,
+        "8": 56
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 1511,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1511,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "program": "p. t. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 7,
+      "shell_sizes": {
+        "1": 115,
+        "16": 36,
+        "2": 60,
+        "4": 63,
+        "8": 56
+      },
+      "terminals": 16
+    },
+    "8": {
+      "additive_falsified": true,
+      "additive_total": 1143,
+      "assemblies": 2010,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 210,
+        "16": 45,
+        "2": 84,
+        "4": 84,
+        "8": 72
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 2010,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 2010,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 8,
+      "shell_sizes": {
+        "1": 210,
+        "16": 45,
+        "2": 84,
+        "4": 84,
+        "8": 72
+      },
+      "terminals": 16
+    },
+    "9": {
+      "additive_falsified": true,
+      "additive_total": 1533,
+      "assemblies": 2606,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 350,
+        "16": 55,
+        "2": 112,
+        "4": 108,
+        "8": 90
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 2606,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 2606,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 9,
+      "shell_sizes": {
+        "1": 350,
+        "16": 55,
+        "2": 112,
+        "4": 108,
+        "8": 90
+      },
+      "terminals": 16
+    }
+  },
+  "depth4_bottom3_2223": {
+    "6": {
+      "additive_falsified": true,
+      "additive_total": 733,
+      "assemblies": 1621,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 55,
+        "12": 42,
+        "24": 28,
+        "3": 40,
+        "6": 45
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        2,
+        2,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 1621,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1621,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p.  q2 :- p. u :- q2. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 6,
+      "shell_sizes": {
+        "1": 55,
+        "12": 42,
+        "24": 28,
+        "3": 40,
+        "6": 45
+      },
+      "terminals": 24
+    }
+  },
+  "depth4_terminal3_3222": {
+    "6": {
+      "additive_falsified": true,
+      "additive_total": 606,
+      "assemblies": 1323,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 55,
+        "2": 40,
+        "24": 28,
+        "4": 45,
+        "8": 42
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        2,
+        2
+      ],
+      "law_holds": true,
+      "law_total": 1323,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1323,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p.  q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 6,
+      "shell_sizes": {
+        "1": 55,
+        "2": 40,
+        "24": 28,
+        "4": 45,
+        "8": 42
+      },
+      "terminals": 24
+    }
+  },
+  "family": "PC13-D3/D4 (designs/013 section 1 fragment)",
+  "guard_probes": {
+    "and_body_at_relay": {
+      "compiled": false,
+      "program": "p. t. q2 :- p. u :- q2. u :- q2, p. r :- u. r :- u. w :- r. w :- r.",
+      "refusal": "UnsupportedGeometry: rule atom 'u' at non-terminal row 4 with 2 bodies: designs/012 admits only duplicate unit bodies on the adjacent-below derived row (the truth-OR relay shape); AND or non-adjacent bodies at an intermediate row are untested geometry"
+    },
+    "depth5_chain": {
+      "compiled": false,
+      "program": "p. t. q2 :- p. u :- q2. u :- q2. v :- u. v :- u. r :- v. r :- v. x :- r. x :- r. w :- x. w :- x.",
+      "refusal": "UnsupportedGeometry: rule atom 'x' at non-terminal row 7: relay chain depth 4 exceeds the admitted maximum 3 (designs/013 \u00a71)"
+    },
+    "mixed_bodies_at_relay": {
+      "compiled": false,
+      "program": "p. t. q2 :- p. u :- q2. u :- q2. u :- t. r :- u. r :- u. w :- r. w :- r.",
+      "refusal": "UnsupportedGeometry: rule atom 'u' at non-terminal row 4 with 3 bodies: designs/012 admits only duplicate unit bodies on the adjacent-below derived row (the truth-OR relay shape); AND or non-adjacent bodies at an intermediate row are untested geometry"
+    },
+    "second_terminal_consumer": {
+      "compiled": false,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r. v :- r. v :- r.",
+      "refusal": "UnsupportedGeometry: unit variant of 'v': chain literal 'r' at row 5 is non-adjacent (must sit directly below its reader); untested geometry"
+    },
+    "tick163_axis_head_chained_relay": {
+      "compiled": true,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. u :- r. u :- r. w :- u. w :- u.",
+      "tiles": 34
+    },
+    "tick163_axis_stacked_spine_relay": {
+      "compiled": true,
+      "program": "p. q. s. q2 :- p. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r.",
+      "tiles": 34
+    }
+  },
+  "kind": "pc13-depth4-full-and-unequal",
+  "pinned_before_census": "this file's module docstring (law-only derivation, tick 165)",
+  "static_323": {
+    "10": {
+      "all_stages_ok": true,
+      "rows": 10,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        }
+      }
+    },
+    "11": {
+      "all_stages_ok": true,
+      "rows": 11,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 11
+        }
+      }
+    },
+    "12": {
+      "all_stages_ok": true,
+      "rows": 12,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 11
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 12
+        }
+      }
+    },
+    "6": {
+      "all_stages_ok": true,
+      "rows": 6,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 5
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 4
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        }
+      }
+    },
+    "7": {
+      "all_stages_ok": true,
+      "rows": 7,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 5
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        }
+      }
+    },
+    "8": {
+      "all_stages_ok": true,
+      "rows": 8,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        }
+      }
+    },
+    "9": {
+      "all_stages_ok": true,
+      "rows": 9,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 3,
+          "k": 3,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done",
+            "unit3_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        }
+      }
+    }
+  },
+  "static_depth4": {
+    "10": {
+      "all_stages_ok": true,
+      "rows": 10,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        }
+      }
+    },
+    "11": {
+      "all_stages_ok": true,
+      "rows": 11,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 11
+        }
+      }
+    },
+    "12": {
+      "all_stages_ok": true,
+      "rows": 12,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 11
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 10
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 12
+        }
+      }
+    },
+    "6": {
+      "all_stages_ok": true,
+      "rows": 6,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 5
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 3
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 4
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        }
+      }
+    },
+    "7": {
+      "all_stages_ok": true,
+      "rows": 7,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 4
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 5
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        }
+      }
+    },
+    "8": {
+      "all_stages_ok": true,
+      "rows": 8,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 5
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        }
+      }
+    },
+    "9": {
+      "all_stages_ok": true,
+      "rows": 9,
+      "stages": {
+        "r": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "r-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 8
+        },
+        "u": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "u-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 6
+        },
+        "v": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "v-t-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 7
+        },
+        "w": {
+          "body_glues_each_exactly_twice": true,
+          "conduit_count_is_k": true,
+          "conduits": 2,
+          "k": 2,
+          "north_faces": [
+            "unit1_w-done",
+            "unit2_w-done"
+          ],
+          "north_faces_exactly_expected": true,
+          "row": 9
+        }
+      }
+    }
+  },
+  "summary": {
+    "additive_falsified_everywhere": true,
+    "conduit_combos_everywhere": true,
+    "depth4_full_table_all_pinned_scalars_land": true,
+    "depth4_new_heights_land": true,
+    "depth4_unequal_singles_land": true,
+    "expected_fiber_elementwise_everywhere": true,
+    "fence_unchanged": true,
+    "fibers_2223_exactly_suffix_products": true,
+    "fibers_323_exactly_suffix_products": true,
+    "law_holds_everywhere": true,
+    "nesting_elementwise_everywhere": true,
+    "presence_equals_ideals_everywhere": true,
+    "readings_restricted_everywhere": true,
+    "static_handshake_323_every_height": true,
+    "static_handshake_depth4_every_height": true,
+    "unequal_323_all_pinned_scalars_land": true
+  },
+  "unequal_all_stages_323": {
+    "10": {
+      "additive_falsified": true,
+      "additive_total": 1931,
+      "assemblies": 2943,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 690,
+        "18": 66,
+        "3": 135,
+        "6": 110
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 2943,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 2943,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. m. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 10,
+      "shell_sizes": {
+        "1": 690,
+        "18": 66,
+        "3": 135,
+        "6": 110
+      },
+      "terminals": 18
+    },
+    "11": {
+      "additive_falsified": true,
+      "additive_total": 2481,
+      "assemblies": 3681,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 990,
+        "18": 78,
+        "3": 165,
+        "6": 132
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 3681,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 3681,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. m. b. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 11,
+      "shell_sizes": {
+        "1": 990,
+        "18": 78,
+        "3": 165,
+        "6": 132
+      },
+      "terminals": 18
+    },
+    "12": {
+      "additive_falsified": true,
+      "additive_total": 3139,
+      "assemblies": 4543,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 1375,
+        "18": 91,
+        "3": 198,
+        "6": 156
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 4543,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 4543,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. m. b. a. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 12,
+      "shell_sizes": {
+        "1": 1375,
+        "18": 91,
+        "3": 198,
+        "6": 156
+      },
+      "terminals": 18
+    },
+    "6": {
+      "additive_falsified": true,
+      "additive_total": 566,
+      "assemblies": 986,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 95,
+        "18": 28,
+        "3": 45,
+        "6": 42
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 986,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 986,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p. t. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 6,
+      "shell_sizes": {
+        "1": 95,
+        "18": 28,
+        "3": 45,
+        "6": 42
+      },
+      "terminals": 18
+    },
+    "7": {
+      "additive_falsified": true,
+      "additive_total": 804,
+      "assemblies": 1348,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 175,
+        "18": 36,
+        "3": 63,
+        "6": 56
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 1348,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1348,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 7,
+      "shell_sizes": {
+        "1": 175,
+        "18": 36,
+        "3": 63,
+        "6": 56
+      },
+      "terminals": 18
+    },
+    "8": {
+      "additive_falsified": true,
+      "additive_total": 1104,
+      "assemblies": 1788,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 294,
+        "18": 45,
+        "3": 84,
+        "6": 72
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 1788,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 1788,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 8,
+      "shell_sizes": {
+        "1": 294,
+        "18": 45,
+        "3": 84,
+        "6": 72
+      },
+      "terminals": 18
+    },
+    "9": {
+      "additive_falsified": true,
+      "additive_total": 1476,
+      "assemblies": 2316,
+      "conduit_combos_realized": true,
+      "expected_fiber_elementwise": true,
+      "fiber_hist_is_shell_hist": true,
+      "fiber_histogram": {
+        "1": 462,
+        "18": 55,
+        "3": 108,
+        "6": 90
+      },
+      "fibers_all_legal": true,
+      "ks": [
+        3,
+        2,
+        3
+      ],
+      "law_holds": true,
+      "law_total": 2316,
+      "matches_pinned": true,
+      "nesting_elementwise": true,
+      "pinned": 2316,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "program": "p. t. y. z. k. q2 :- p. u :- q2. u :- q2. u :- q2. r :- u. r :- u. w :- r. w :- r. w :- r.",
+      "readings_differ_only_at_corner_pairs": true,
+      "rows": 9,
+      "shell_sizes": {
+        "1": 462,
+        "18": 55,
+        "3": 108,
+        "6": 90
+      },
+      "terminals": 18
+    }
+  }
+}
