@@ -1,0 +1,596 @@
+{
+  "derivations": {
+    "10": {
+      "ideal_count_closed": 1001,
+      "ideal_count_dp": 1001,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 176,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 55,
+        "full": 66,
+        "shoulder": 55
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 110,
+      "rows": 10
+    },
+    "11": {
+      "ideal_count_closed": 1365,
+      "ideal_count_dp": 1365,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 210,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 66,
+        "full": 78,
+        "shoulder": 66
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 132,
+      "rows": 11
+    },
+    "12": {
+      "ideal_count_closed": 1820,
+      "ideal_count_dp": 1820,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 247,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 78,
+        "full": 91,
+        "shoulder": 78
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 156,
+      "rows": 12
+    },
+    "5": {
+      "ideal_count_closed": 126,
+      "ideal_count_dp": 126,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 51,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 15,
+        "full": 21,
+        "shoulder": 15
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 30,
+      "rows": 5
+    },
+    "6": {
+      "ideal_count_closed": 210,
+      "ideal_count_dp": 210,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 70,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 21,
+        "full": 28,
+        "shoulder": 21
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 42,
+      "rows": 6
+    },
+    "7": {
+      "ideal_count_closed": 330,
+      "ideal_count_dp": 330,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 92,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 28,
+        "full": 36,
+        "shoulder": 28
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 56,
+      "rows": 7
+    },
+    "8": {
+      "ideal_count_closed": 495,
+      "ideal_count_dp": 495,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 117,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 36,
+        "full": 45,
+        "shoulder": 36
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 72,
+      "rows": 8
+    },
+    "9": {
+      "ideal_count_closed": 715,
+      "ideal_count_dp": 715,
+      "l0_box_law_dp_equals_closed": true,
+      "l0_pair_count_dp_equals_closed": true,
+      "l1_collapse_to_polynomial": true,
+      "l1_derived_c_r": 145,
+      "l1_enum_count_equals_derived": true,
+      "l1_strata": {
+        "even": 45,
+        "full": 55,
+        "shoulder": 45
+      },
+      "l1_strata_match_enumeration": true,
+      "l2_containment_cw_subset_cr": true,
+      "l2_overlap_equals_cw": true,
+      "l3_diff_is_two_strata": true,
+      "l3_diff_size": 90,
+      "rows": 9
+    }
+  },
+  "family": "staircase coefficient derivation for the PC11 relay families (T2U/M32/M23/M33, designs/012)",
+  "guard_probe": {
+    "second_terminal_or_consumer": {
+      "compiled": false,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r. v :- r. v :- r.",
+      "refusal": "UnsupportedGeometry: rule atom 'w' at non-terminal row 6: a second relayed OR head in one chain is unexamined (designs/012 \u00a71)"
+    },
+    "second_terminal_unit_consumer": {
+      "compiled": false,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r. v :- r.",
+      "refusal": "UnsupportedGeometry: rule atom 'w' at non-terminal row 6: a second relayed OR head in one chain is unexamined (designs/012 \u00a71)"
+    }
+  },
+  "ladder": {
+    "0": {
+      "10": {
+        "enumerated": 66,
+        "equal": true,
+        "predicted": 66
+      },
+      "11": {
+        "enumerated": 78,
+        "equal": true,
+        "predicted": 78
+      },
+      "12": {
+        "enumerated": 91,
+        "equal": true,
+        "predicted": 91
+      },
+      "5": {
+        "enumerated": 21,
+        "equal": true,
+        "predicted": 21
+      },
+      "6": {
+        "enumerated": 28,
+        "equal": true,
+        "predicted": 28
+      },
+      "7": {
+        "enumerated": 36,
+        "equal": true,
+        "predicted": 36
+      },
+      "8": {
+        "enumerated": 45,
+        "equal": true,
+        "predicted": 45
+      },
+      "9": {
+        "enumerated": 55,
+        "equal": true,
+        "predicted": 55
+      }
+    },
+    "1": {
+      "10": {
+        "enumerated": 176,
+        "equal": true,
+        "predicted": 176
+      },
+      "11": {
+        "enumerated": 210,
+        "equal": true,
+        "predicted": 210
+      },
+      "12": {
+        "enumerated": 247,
+        "equal": true,
+        "predicted": 247
+      },
+      "5": {
+        "enumerated": 51,
+        "equal": true,
+        "predicted": 51
+      },
+      "6": {
+        "enumerated": 70,
+        "equal": true,
+        "predicted": 70
+      },
+      "7": {
+        "enumerated": 92,
+        "equal": true,
+        "predicted": 92
+      },
+      "8": {
+        "enumerated": 117,
+        "equal": true,
+        "predicted": 117
+      },
+      "9": {
+        "enumerated": 145,
+        "equal": true,
+        "predicted": 145
+      }
+    },
+    "2": {
+      "10": {
+        "enumerated": 311,
+        "equal": true,
+        "predicted": 311
+      },
+      "11": {
+        "enumerated": 375,
+        "equal": true,
+        "predicted": 375
+      },
+      "12": {
+        "enumerated": 445,
+        "equal": true,
+        "predicted": 445
+      },
+      "5": {
+        "enumerated": 81,
+        "equal": true,
+        "predicted": 81
+      },
+      "6": {
+        "enumerated": 115,
+        "equal": true,
+        "predicted": 115
+      },
+      "7": {
+        "enumerated": 155,
+        "equal": true,
+        "predicted": 155
+      },
+      "8": {
+        "enumerated": 201,
+        "equal": true,
+        "predicted": 201
+      },
+      "9": {
+        "enumerated": 253,
+        "equal": true,
+        "predicted": 253
+      }
+    },
+    "3": {
+      "10": {
+        "enumerated": 455,
+        "equal": true,
+        "predicted": 455
+      },
+      "11": {
+        "enumerated": 555,
+        "equal": true,
+        "predicted": 555
+      },
+      "12": {
+        "enumerated": 665,
+        "equal": true,
+        "predicted": 665
+      },
+      "5": {
+        "enumerated": 105,
+        "equal": true,
+        "predicted": 105
+      },
+      "6": {
+        "enumerated": 155,
+        "equal": true,
+        "predicted": 155
+      },
+      "7": {
+        "enumerated": 215,
+        "equal": true,
+        "predicted": 215
+      },
+      "8": {
+        "enumerated": 285,
+        "equal": true,
+        "predicted": 285
+      },
+      "9": {
+        "enumerated": 365,
+        "equal": true,
+        "predicted": 365
+      }
+    }
+  },
+  "ladder_pins_beyond_census": {
+    "0": {
+      "10": 66,
+      "11": 78,
+      "12": 91,
+      "13": 105,
+      "14": 120,
+      "15": 136,
+      "16": 153,
+      "17": 171,
+      "18": 190,
+      "19": 210,
+      "20": 231,
+      "6": 28,
+      "7": 36,
+      "8": 45,
+      "9": 55
+    },
+    "1": {
+      "10": 176,
+      "11": 210,
+      "12": 247,
+      "13": 287,
+      "14": 330,
+      "15": 376,
+      "16": 425,
+      "17": 477,
+      "18": 532,
+      "19": 590,
+      "20": 651,
+      "6": 70,
+      "7": 92,
+      "8": 117,
+      "9": 145
+    },
+    "2": {
+      "10": 311,
+      "11": 375,
+      "12": 445,
+      "13": 521,
+      "14": 603,
+      "15": 691,
+      "16": 785,
+      "17": 885,
+      "18": 991,
+      "19": 1103,
+      "20": 1221,
+      "6": 115,
+      "7": 155,
+      "8": 201,
+      "9": 253
+    },
+    "3": {
+      "10": 455,
+      "11": 555,
+      "12": 665,
+      "13": 785,
+      "14": 915,
+      "15": 1055,
+      "16": 1205,
+      "17": 1365,
+      "18": 1535,
+      "19": 1715,
+      "20": 1905,
+      "6": 155,
+      "7": 215,
+      "8": 285,
+      "9": 365
+    }
+  },
+  "live_census": {
+    "M33": {
+      "6": {
+        "assemblies": 518,
+        "derived_law": 518,
+        "fiber_hist": {
+          "1": 140,
+          "3": 42,
+          "9": 28
+        },
+        "holds": true
+      },
+      "7": {
+        "assemblies": 730,
+        "derived_law": 730,
+        "fiber_hist": {
+          "1": 238,
+          "3": 56,
+          "9": 36
+        },
+        "holds": true
+      }
+    },
+    "T2U": {
+      "10": {
+        "assemblies": 1309,
+        "derived_law": 1309,
+        "fiber_hist": {
+          "1": 825,
+          "2": 110,
+          "4": 66
+        },
+        "holds": true
+      },
+      "11": {
+        "assemblies": 1731,
+        "derived_law": 1731,
+        "fiber_hist": {
+          "1": 1155,
+          "2": 132,
+          "4": 78
+        },
+        "holds": true
+      },
+      "12": {
+        "assemblies": 2249,
+        "derived_law": 2249,
+        "fiber_hist": {
+          "1": 1573,
+          "2": 156,
+          "4": 91
+        },
+        "holds": true
+      },
+      "6": {
+        "assemblies": 336,
+        "derived_law": 336,
+        "fiber_hist": {
+          "1": 140,
+          "2": 42,
+          "4": 28
+        },
+        "holds": true
+      },
+      "7": {
+        "assemblies": 494,
+        "derived_law": 494,
+        "fiber_hist": {
+          "1": 238,
+          "2": 56,
+          "4": 36
+        },
+        "holds": true
+      },
+      "8": {
+        "assemblies": 702,
+        "derived_law": 702,
+        "fiber_hist": {
+          "1": 378,
+          "2": 72,
+          "4": 45
+        },
+        "holds": true
+      },
+      "9": {
+        "assemblies": 970,
+        "derived_law": 970,
+        "fiber_hist": {
+          "1": 570,
+          "2": 90,
+          "4": 55
+        },
+        "holds": true
+      }
+    }
+  },
+  "result": "all three coefficient sets of the unified law are now DERIVED from the four-column staircase: |I| = C(n+4,4) (hockey-stick DP), |C_r| = C(n+2,2) + 2*C(n+1,2) = (n+1)(3n+2)/2 (three (h0,h1) strata of the relay corner (1,n-1)), |C_w| = C(n+2,2); C_w <= C_r element-wise because the corners share column 1 one row apart, which is WHY the overlap term collapses; the depth-m ladder |C^(m)| = sum (j+1)*C(n-j+2,2) predicts deeper-relay contention (m=2: 115/155/201/253/311/375/445 at n=6..12, m=3: 155/215/285/365/455/555/665) and is verified exact at every reachable (m, n); the derived-only law reproduces all 28/28 receipt scalars and the live T2U/M33 legs",
+  "rows_derived": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "square_from_receipts": {
+    "all_four_corners_hold_derived_only": true,
+    "corners": {
+      "2x2": {
+        "assemblies_by_height": {
+          "10": 1309,
+          "11": 1731,
+          "12": 2249,
+          "6": 336,
+          "7": 494,
+          "8": 702,
+          "9": 970
+        },
+        "derived_only_law_holds": true,
+        "k_r": 2,
+        "k_w": 2
+      },
+      "2x3": {
+        "assemblies_by_height": {
+          "10": 1441,
+          "11": 1887,
+          "12": 2431,
+          "6": 392,
+          "7": 566,
+          "8": 792,
+          "9": 1080
+        },
+        "derived_only_law_holds": true,
+        "k_r": 2,
+        "k_w": 3
+      },
+      "3x2": {
+        "assemblies_by_height": {
+          "10": 1551,
+          "11": 2019,
+          "12": 2587,
+          "6": 434,
+          "7": 622,
+          "8": 864,
+          "9": 1170
+        },
+        "derived_only_law_holds": true,
+        "k_r": 3,
+        "k_w": 2
+      },
+      "3x3": {
+        "assemblies_by_height": {
+          "10": 1749,
+          "11": 2253,
+          "12": 2860,
+          "6": 518,
+          "7": 730,
+          "8": 999,
+          "9": 1335
+        },
+        "derived_only_law_holds": true,
+        "k_r": 3,
+        "k_w": 3
+      }
+    },
+    "scalars_checked": 28
+  },
+  "summary": {
+    "l0_box_law_derived_all_heights": true,
+    "l1_cr_derived_collapses_all_heights": true,
+    "l2_containment_all_heights": true,
+    "l3_diff_two_strata_all_heights": true,
+    "l4_ladder_exact_all_depths": true,
+    "live_m33_matches_derived_law": true,
+    "live_t2u_matches_derived_law": true,
+    "s1_square_derived_only": true
+  }
+}
