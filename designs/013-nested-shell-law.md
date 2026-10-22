@@ -92,12 +92,26 @@ n = 6 vs 577 product — a single future census separates them by ≥ 154
 at every probed point. If the future family censuses anywhere else,
 this law is wrong and the receipts say so.
 
-## 4. Status
+## 4. Status — UPDATED tick 164: the fragment is real and §3 landed
 
-Docs + static analysis only, zero queue spend; the fragment of §1 is
-a sketch with no compiler work. Not a validated result until
-independently reviewed. The W8 post and status-guide edit remain
-behind the QA verdict gate (due 2026-10-22 17:00Z).
+At tick 163 this was docs + static analysis only, zero queue spend;
+the fragment of §1 was a sketch with no compiler work. **Tick 164
+implemented the carve-out** (`MAX_RELAY_STAGES = 3` in
+`molasp/compiler.py`, same per-body discipline, everything else
+still refused) and censused the family: [2,2,2] lands
+577/813/1110/1478/1928/2472/3123 at n=6..12 — every pinned scalar
+exact, fiber histograms exactly the suffix products, the additive
+falsifier separated at every height, and the depth-4 point
+[2,2,2,2] lands 2010/2606/3310 at n=8..10. Receipt
+`evidence/2026-10-22-pc13-depth3-first-census/depth3.json`; pins
+`tests/test_pc13_depth3_first_census.py`. The tick-163 fence probes
+now compile (they are the admitted fragment); the refusal boundary
+moved to genuine depth excess, AND/mixed bodies at relay rows, and
+non-adjacent consumers — all pinned verbatim. Not a validated
+result until independently reviewed. The W8 post and status-guide
+edit remain behind the QA verdict gate (due 2026-10-22 17:00Z).
 
-**Open next:** implement the §1 carve-out and census the first true
-depth-3 family against §3; or pin the ladder to n = 20 in a note.
+**Open next:** extend the depth-4 census to the full pinned table;
+unequal multiplicities at all three stages ([3,2,3]); or promote
+the per-body handshake to a proof sketch for general m (the law is
+now measured at depths 1-4).

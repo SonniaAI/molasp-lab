@@ -85,15 +85,21 @@ class LawTest(unittest.TestCase):
 
 
 class GuardTest(unittest.TestCase):
-    def test_both_depth3_axes_refused_verbatim(self):
+    """Tick-164 boundary: with the designs/013 §1 carve-out landed
+    (MAX_RELAY_STAGES = 3), BOTH tick-163 depth-3 probe axes now
+    COMPILE — they are exactly the admitted relay-chain fragment,
+    censused this tick by tools/pc13_depth3_first_census.py against
+    the §3 predictions.  The refusal boundary moved to genuine depth
+    excess (pinned in tests/test_pc13_depth3_first_census.py).  The
+    receipt below stays byte-stable as the tick-163 record of the
+    fence AS IT WAS."""
+
+    def test_both_depth3_axes_compile_now(self):
         probes = guard_probe()
         self.assertEqual(sorted(probes), sorted(DEPTH3_PROBES))
         for label, entry in probes.items():
-            self.assertFalse(entry["compiled"], label)
-            self.assertIn(
-                "second relayed OR head in one chain is unexamined",
-                entry["refusal"], label)
-            self.assertIn("designs/012", entry["refusal"], label)
+            self.assertTrue(entry["compiled"], label)
+            self.assertGreater(entry["tiles"], 0, label)
 
 
 class ReceiptTest(unittest.TestCase):

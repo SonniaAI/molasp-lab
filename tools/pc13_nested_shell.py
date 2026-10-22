@@ -214,6 +214,11 @@ def predictions():
 # Tick 162 fenced a SECOND TERMINAL consumer of the relayed head;
 # the two remaining depth-3 axes are probed fresh here.
 T2U_ANCHOR = "p. q. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r."
+# Post-tick-164 note: with the designs/013 §1 carve-out (relay
+# chains to depth 3) both probes below COMPILE now; guard_probe()
+# reports compiled=True.  The tick-163 receipt records the fence as
+# it was and stays byte-stable; the live refusal boundary lives in
+# tools/pc13_depth3_first_census.py.
 DEPTH3_PROBES = {
     "stacked_spine_relay": (
         "p. q. s. q2 :- p. "

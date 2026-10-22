@@ -157,8 +157,13 @@ class TestLiveCensusLegs(unittest.TestCase):
 
 
 class TestGuardProbe(unittest.TestCase):
-    """G1: a second consumer of the relayed head is refused by the
-    v0.2 geometry guard, pinned verbatim."""
+    """G1: a second consumer of the relayed head stays refused by
+    the v0.2 geometry guard, pinned verbatim.  Post-tick-164 note:
+    with the designs/013 §1 carve-out (relay chains up to depth 3)
+    the refusal now fires from the adjacency arm — the second
+    consumer reads the relayed head from a NON-adjacent row — which
+    is the genuine geometric reason; the blanket second-relay
+    sentence was the tick-163 fence."""
 
     def test_both_second_consumers_refuse(self):
         probe = guard_probe()
@@ -166,9 +171,9 @@ class TestGuardProbe(unittest.TestCase):
             self.assertFalse(probe[label]["compiled"], probe[label])
             self.assertEqual(
                 probe[label]["refusal"],
-                "UnsupportedGeometry: rule atom 'w' at non-terminal "
-                "row 6: a second relayed OR head in one chain is "
-                "unexamined (designs/012 \u00a71)",
+                "UnsupportedGeometry: unit variant of 'v': chain "
+                "literal 'r' at row 5 is non-adjacent (must sit "
+                "directly below its reader); untested geometry",
                 probe[label])
 
     def test_compile_raises_directly(self):

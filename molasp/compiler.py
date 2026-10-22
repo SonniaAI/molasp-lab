@@ -57,14 +57,27 @@ V column (the chain link), and the D column carries each row's
 value/variant done glue northward.  designs/012 extends this by one
 shape: a duplicate-unit OR-head at an intermediate row (the
 northward truth-OR relay — conduit N faces re-typed to the value
-glue, so growth above is bit-blind); AND bodies, AND consumers of a
-relayed head and relayed-head stacking stay refused.
+glue, so growth above is bit-blind).  designs/013 §1 admits a relay
+CHAIN on the same per-body discipline: up to MAX_RELAY_STAGES
+stacked relays, each stage's duplicate unit bodies reading the
+adjacent-below derived row (the previous stage's head, or the spine
+for the first relay); AND bodies, AND consumers of a relayed head
+and chains deeper than MAX_RELAY_STAGES stay refused.
 """
 from __future__ import annotations
 
 import re
 
 from . import offchannel
+
+# designs/013 §1: the maximum number of relayed OR stages in one
+# chain (terminal head + m relays).  Depth 1 is the designs/012
+# relay; depths 2-3 are the designs/013 carve-out, admitted with the
+# same per-body conduit-glue handshake (duplicate unit bodies on the
+# adjacent-below derived row, value-typed relay north faces).  Every
+# stage above the first reads the previous stage's head, so the
+# chain stays contiguous; deeper chains refuse loudly.
+MAX_RELAY_STAGES = 3
 
 FACE_DIR = {"N": (0, 1), "S": (0, -1), "E": (1, 0), "W": (-1, 0)}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
@@ -298,11 +311,12 @@ def compile_program(text: str, predicted=None, name=None):
                             "passthrough-re-type its value relay "
                             "(designs/009 §9.2 conflict); untested "
                             "(designs/012 §4)")
-                    if relayed_rows:
+                    if len(relayed_rows) >= MAX_RELAY_STAGES:
                         raise UnsupportedGeometry(
-                            f"rule atom {a!r} at non-terminal row {i}: a "
-                            "second relayed OR head in one chain is "
-                            "unexamined (designs/012 §1)")
+                            f"rule atom {a!r} at non-terminal row {i}: "
+                            f"relay chain depth {len(relayed_rows) + 1} "
+                            "exceeds the admitted maximum "
+                            f"{MAX_RELAY_STAGES} (designs/013 §1)")
                     relayed = True
                 if any(len(b) >= 2 for b in bodies):
                     raise UnsupportedGeometry(
