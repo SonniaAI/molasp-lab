@@ -1,0 +1,1124 @@
+{
+  "census_3U": {
+    "10": {
+      "assemblies": 1133,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 11,
+      "contended": 66,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 66,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 1133,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 935,
+        "3": 66
+      },
+      "never_power": true,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 10
+    },
+    "11": {
+      "assemblies": 1521,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 12,
+      "contended": 78,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 78,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 1521,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 1287,
+        "3": 78
+      },
+      "never_power": true,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 11
+    },
+    "12": {
+      "assemblies": 2002,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 13,
+      "contended": 91,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 91,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 2002,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 1729,
+        "3": 91
+      },
+      "never_power": true,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 12
+    },
+    "5": {
+      "assemblies": 168,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 6,
+      "contended": 21,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 21,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 168,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 105,
+        "3": 21
+      },
+      "never_power": true,
+      "presence": 126,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 5
+    },
+    "6": {
+      "assemblies": 266,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 7,
+      "contended": 28,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 28,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 266,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 182,
+        "3": 28
+      },
+      "never_power": true,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 6
+    },
+    "7": {
+      "assemblies": 402,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 8,
+      "contended": 36,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 36,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 402,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 294,
+        "3": 36
+      },
+      "never_power": true,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 7
+    },
+    "8": {
+      "assemblies": 585,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 9,
+      "contended": 45,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 45,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 585,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 450,
+        "3": 45
+      },
+      "never_power": true,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 8
+    },
+    "9": {
+      "assemblies": 825,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 10,
+      "contended": 55,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 55,
+      "family": "3U",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 3,
+      "law": 825,
+      "law_holds": true,
+      "max_fiber_both_site": 3,
+      "multiplicity_hist": {
+        "1": 660,
+        "3": 55
+      },
+      "never_power": true,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 9
+    }
+  },
+  "census_4": {
+    "10": {
+      "assemblies": 1199,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 11,
+      "contended": 66,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 66,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 1199,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 935,
+        "4": 66
+      },
+      "never_power": true,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 10
+    },
+    "11": {
+      "assemblies": 1599,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 12,
+      "contended": 78,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 78,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 1599,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 1287,
+        "4": 78
+      },
+      "never_power": true,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 11
+    },
+    "12": {
+      "assemblies": 2093,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 13,
+      "contended": 91,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 91,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 2093,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 1729,
+        "4": 91
+      },
+      "never_power": true,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 12
+    },
+    "5": {
+      "assemblies": 189,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 6,
+      "contended": 21,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 21,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 189,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 105,
+        "4": 21
+      },
+      "never_power": true,
+      "presence": 126,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 5
+    },
+    "6": {
+      "assemblies": 294,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 7,
+      "contended": 28,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 28,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 294,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 182,
+        "4": 28
+      },
+      "never_power": true,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 6
+    },
+    "7": {
+      "assemblies": 438,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 8,
+      "contended": 36,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 36,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 438,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 294,
+        "4": 36
+      },
+      "never_power": true,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 7
+    },
+    "8": {
+      "assemblies": 630,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 9,
+      "contended": 45,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 45,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 630,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 450,
+        "4": 45
+      },
+      "never_power": true,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 8
+    },
+    "9": {
+      "assemblies": 880,
+      "body_identity_pairing": true,
+      "both_site_corner_ideals": 10,
+      "contended": 55,
+      "contended_equals_corner_ideals": true,
+      "corner_law": 55,
+      "family": "4",
+      "fiber_exactly_k_on_corner_else_1": true,
+      "k": 4,
+      "law": 880,
+      "law_holds": true,
+      "max_fiber_both_site": 4,
+      "multiplicity_hist": {
+        "1": 660,
+        "4": 55
+      },
+      "never_power": true,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "readings_differ_only_at_site_pair": true,
+      "rows": 9
+    }
+  },
+  "duplicate_shape_agreement_top": {
+    "assemblies": true,
+    "law_holds": true,
+    "multiplicity_hist": true,
+    "presence": true,
+    "rows": 12
+  },
+  "family": "PC11-decorative, k-body or-head extension",
+  "fragment_boundary": "compiler v0.2 admits at most two DISTINCT terminal-or body shapes; the k > 2 families that compile are duplicate bodies (fresh conduit glue per body)",
+  "lemmas": {
+    "L_coupling_all_heights": true,
+    "L_east_all_heights": true,
+    "L_west_all_heights": true,
+    "beyond_prediction_k4_all_heights": true,
+    "duplicate_shape_independence_top": true,
+    "prediction_k3_all_heights": true
+  },
+  "result": "tick-156 prediction CONFIRMED: fiber == k exactly (3 never 8 at k = 3; 4 never 16 at k = 4); assemblies(n) = C(n+4,4) + (k-1)*C(n+2,2)",
+  "rows_measured": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "static_lemmas_k3": {
+    "10": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 10
+    },
+    "11": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 11
+    },
+    "12": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 12
+    },
+    "5": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 5
+    },
+    "6": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 6
+    },
+    "7": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 7
+    },
+    "8": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 8
+    },
+    "9": {
+      "L_coupling": {
+        "all_cross_pairs_fail_tau": true,
+        "growth_order_L_cannot_arrive_first": true,
+        "per_bit": {
+          "and1_r": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": [
+              "DAr"
+            ],
+            "cross_bond_sums": {
+              "1": 1,
+              "2": 1
+            },
+            "reader": [
+              "DBr"
+            ]
+          },
+          "unit1_r": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": [
+              "Cr"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "2": 1
+            },
+            "reader": [
+              "Ur"
+            ]
+          },
+          "unit2_r": {
+            "admissible_at_2n": [
+              "Ur2"
+            ],
+            "conduit": [
+              "Cr2"
+            ],
+            "cross_bond_sums": {
+              "0": 1,
+              "1": 1
+            },
+            "reader": [
+              "Ur2"
+            ]
+          }
+        },
+        "reader_function_of_bit": true,
+        "south_only_at_2n": []
+      },
+      "L_east": {
+        "each_exactly_twice": true,
+        "occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2,
+          "unit2_r": 2
+        },
+        "one_conduit_one_reader_each": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "Cr2",
+          "DAr"
+        ],
+        "exactly_the_k_conduits": true
+      },
+      "bodies": [
+        [
+          "q2",
+          "s"
+        ],
+        [
+          "q2"
+        ],
+        [
+          "q2"
+        ]
+      ],
+      "body_glues": {
+        "0": "and1_r",
+        "1": "unit1_r",
+        "2": "unit2_r"
+      },
+      "rows": 9
+    }
+  }
+}
