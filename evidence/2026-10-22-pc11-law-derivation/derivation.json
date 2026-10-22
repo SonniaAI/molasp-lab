@@ -1,0 +1,198 @@
+{
+ "bijection_stress": {
+  "box_law": 10626,
+  "corner_gap_bijection_exact": true,
+  "gap_bijection_exact": true,
+  "ideals": 10626,
+  "rows": 20
+ },
+ "census_partition": {
+  "10": {
+   "assemblies": 1067,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 66,
+   "multiplicity_1_sets": 935,
+   "multiplicity_2_sets": 66,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 1001,
+   "structure_ok": true,
+   "theorem_pred": 1067
+  },
+  "5": {
+   "assemblies": 147,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 21,
+   "multiplicity_1_sets": 105,
+   "multiplicity_2_sets": 21,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 126,
+   "structure_ok": true,
+   "theorem_pred": 147
+  },
+  "6": {
+   "assemblies": 238,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 28,
+   "multiplicity_1_sets": 182,
+   "multiplicity_2_sets": 28,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 210,
+   "structure_ok": true,
+   "theorem_pred": 238
+  },
+  "7": {
+   "assemblies": 366,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 36,
+   "multiplicity_1_sets": 294,
+   "multiplicity_2_sets": 36,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 330,
+   "structure_ok": true,
+   "theorem_pred": 366
+  },
+  "8": {
+   "assemblies": 540,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 45,
+   "multiplicity_1_sets": 450,
+   "multiplicity_2_sets": 45,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 495,
+   "structure_ok": true,
+   "theorem_pred": 540
+  },
+  "9": {
+   "assemblies": 770,
+   "assemblies_equals_presence_plus_contended": true,
+   "contended": 55,
+   "multiplicity_1_sets": 660,
+   "multiplicity_2_sets": 55,
+   "partition_closes_sets": true,
+   "partition_closes_weighted": true,
+   "presence": 715,
+   "structure_ok": true,
+   "theorem_pred": 770
+  }
+ },
+ "derivation": {
+  "10": {
+   "box_law": 1001,
+   "composition_count_3": 66,
+   "composition_count_5": 1001,
+   "corner_from_gaps": 66,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 66,
+   "corner_law": 66,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 1001,
+   "ideals_from_gaps": 1001,
+   "rows": 10
+  },
+  "5": {
+   "box_law": 126,
+   "composition_count_3": 21,
+   "composition_count_5": 126,
+   "corner_from_gaps": 21,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 21,
+   "corner_law": 21,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 126,
+   "ideals_from_gaps": 126,
+   "rows": 5
+  },
+  "6": {
+   "box_law": 210,
+   "composition_count_3": 28,
+   "composition_count_5": 210,
+   "corner_from_gaps": 28,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 28,
+   "corner_law": 28,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 210,
+   "ideals_from_gaps": 210,
+   "rows": 6
+  },
+  "7": {
+   "box_law": 330,
+   "composition_count_3": 36,
+   "composition_count_5": 330,
+   "corner_from_gaps": 36,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 36,
+   "corner_law": 36,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 330,
+   "ideals_from_gaps": 330,
+   "rows": 7
+  },
+  "8": {
+   "box_law": 495,
+   "composition_count_3": 45,
+   "composition_count_5": 495,
+   "corner_from_gaps": 45,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 45,
+   "corner_law": 45,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 495,
+   "ideals_from_gaps": 495,
+   "rows": 8
+  },
+  "9": {
+   "box_law": 715,
+   "composition_count_3": 55,
+   "composition_count_5": 715,
+   "corner_from_gaps": 55,
+   "corner_gap_bijection_exact": true,
+   "corner_ideals": 55,
+   "corner_law": 55,
+   "encoding_bijection_exact": true,
+   "gap_bijection_exact": true,
+   "ideals": 715,
+   "ideals_from_gaps": 715,
+   "rows": 9
+  }
+ },
+ "family": "PC11-decorative",
+ "lemmas": {
+  "L1": "ideals <-> weakly-decreasing heights <-> compositions of n into 5 parts -> C(n+4,4)",
+  "L2": "corner ideals (containing (1,n)) <-> compositions of n into 3 parts -> C(n+2,2)",
+  "L3": "multiplicity 1 on non-corner ideals, exactly 2 on corner ideals, readings differ only at (1,n)/(2,n) (machine-verified, live, every measured height)"
+ },
+ "new_height_this_tick": {
+  "predicted_first": {
+   "assemblies": 1443,
+   "contended": 78,
+   "presence": 1365
+  },
+  "rows": 11,
+  "seen": {
+   "assemblies": 1443,
+   "contended": 78,
+   "presence": 1365
+  },
+  "structure_ok": true
+ },
+ "rows_measured": [
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "theorem": "assemblies(n) = C(n+4,4) + C(n+2,2)"
+}
