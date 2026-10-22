@@ -1,0 +1,283 @@
+{
+ "family": "PC11-decorative",
+ "family_height_cap": {
+  "cap": 12,
+  "cap_exact": true,
+  "census_range": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "reason": "decorative alphabet (7 letters) over the 5-row anchor saturates: program_for(13) == program_for(12)",
+  "section_verified_all_censusable_heights": true
+ },
+ "heights": {
+  "10": {
+   "assemblies": 1067,
+   "assemblies_equals_law": true,
+   "contended": 66,
+   "coupled_both_site_sets": 11,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 10)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 10)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 1001,
+   "rows": 10,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 1067
+  },
+  "11": {
+   "assemblies": 1443,
+   "assemblies_equals_law": true,
+   "contended": 78,
+   "coupled_both_site_sets": 12,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 11)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 11)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 1365,
+   "rows": 11,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 1443
+  },
+  "5": {
+   "assemblies": 147,
+   "assemblies_equals_law": true,
+   "contended": 21,
+   "coupled_both_site_sets": 6,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 5)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 5)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 126,
+   "rows": 5,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 147
+  },
+  "6": {
+   "assemblies": 238,
+   "assemblies_equals_law": true,
+   "contended": 28,
+   "coupled_both_site_sets": 7,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 6)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 6)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 210,
+   "rows": 6,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 238
+  },
+  "7": {
+   "assemblies": 366,
+   "assemblies_equals_law": true,
+   "contended": 36,
+   "coupled_both_site_sets": 8,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 7)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 7)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 330,
+   "rows": 7,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 366
+  },
+  "8": {
+   "assemblies": 540,
+   "assemblies_equals_law": true,
+   "contended": 45,
+   "coupled_both_site_sets": 9,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 8)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 8)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 495,
+   "rows": 8,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 540
+  },
+  "9": {
+   "assemblies": 770,
+   "assemblies_equals_law": true,
+   "contended": 55,
+   "coupled_both_site_sets": 10,
+   "coupling_holds_no_fourfold": true,
+   "free_pairs_expected": true,
+   "free_sites": {
+    "(1, 9)": [
+     "Cr",
+     "DAr"
+    ],
+    "(2, 9)": [
+     "DBr",
+     "Ur"
+    ]
+   },
+   "free_sites_exactly_column_tops": true,
+   "max_fiber": 2,
+   "partition_closes_weighted": true,
+   "presence": 715,
+   "rows": 9,
+   "section_reproduces_fibers": true,
+   "section_two_bit_orbits_on_corner": true,
+   "section_unique_on_noncorner": true,
+   "terminals": 2,
+   "two_term_law": 770
+  }
+ },
+ "mechanism": "one shared or-support bit at the column-top pair",
+ "new_heights_this_tick": {
+  "predicted_first": {
+   "12": {
+    "assemblies": 1911,
+    "contended": 91,
+    "presence": 1820
+   }
+  },
+  "rows": [
+   12
+  ],
+  "seen": {
+   "12": {
+    "assemblies": 1911,
+    "contended": 91,
+    "coupling_holds_no_fourfold": true,
+    "free_sites_exactly_column_tops": true,
+    "presence": 1820,
+    "section_reproduces_fibers": true
+   }
+  }
+ },
+ "rows_measured": [
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11
+ ],
+ "rule_inventory": {
+  "head_multiplicities": {
+   "q2": 1,
+   "r": 2
+  },
+  "heads": {
+   "q2": [
+    [
+     "p"
+    ]
+   ],
+   "r": [
+    [
+     "q2"
+    ],
+    [
+     "q2",
+     "s"
+    ]
+   ]
+  },
+  "or_supported_heads": [
+   "r"
+  ],
+  "r_bodies": [
+   [
+    "q2"
+   ],
+   [
+    "q2",
+    "s"
+   ]
+  ]
+ }
+}
