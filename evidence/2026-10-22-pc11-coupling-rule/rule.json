@@ -1,0 +1,718 @@
+{
+  "census_cross_checks": {
+    "10": {
+      "assemblies": 1067,
+      "corner_ideals": 66,
+      "corner_ideals_with_both_sites": 11,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 1001,
+      "law_holds": true,
+      "law_k_form": 1067,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 10,
+      "section_prediction_agrees": true
+    },
+    "11": {
+      "assemblies": 1443,
+      "corner_ideals": 78,
+      "corner_ideals_with_both_sites": 12,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 1365,
+      "law_holds": true,
+      "law_k_form": 1443,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 11,
+      "section_prediction_agrees": true
+    },
+    "12": {
+      "assemblies": 1911,
+      "corner_ideals": 91,
+      "corner_ideals_with_both_sites": 13,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 1820,
+      "law_holds": true,
+      "law_k_form": 1911,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 12,
+      "section_prediction_agrees": true
+    },
+    "5": {
+      "assemblies": 147,
+      "corner_ideals": 21,
+      "corner_ideals_with_both_sites": 6,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 126,
+      "law_holds": true,
+      "law_k_form": 147,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 5,
+      "section_prediction_agrees": true
+    },
+    "6": {
+      "assemblies": 238,
+      "corner_ideals": 28,
+      "corner_ideals_with_both_sites": 7,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 210,
+      "law_holds": true,
+      "law_k_form": 238,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 6,
+      "section_prediction_agrees": true
+    },
+    "7": {
+      "assemblies": 366,
+      "corner_ideals": 36,
+      "corner_ideals_with_both_sites": 8,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 330,
+      "law_holds": true,
+      "law_k_form": 366,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 7,
+      "section_prediction_agrees": true
+    },
+    "8": {
+      "assemblies": 540,
+      "corner_ideals": 45,
+      "corner_ideals_with_both_sites": 9,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 495,
+      "law_holds": true,
+      "law_k_form": 540,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 8,
+      "section_prediction_agrees": true
+    },
+    "9": {
+      "assemblies": 770,
+      "corner_ideals": 55,
+      "corner_ideals_with_both_sites": 10,
+      "fiber_equals_k_never_4": true,
+      "ideals_count": 715,
+      "law_holds": true,
+      "law_k_form": 770,
+      "max_fiber_on_both_site_sets": 2,
+      "rows": 9,
+      "section_prediction_agrees": true
+    }
+  },
+  "corollary": "assemblies(n) = |ideals| + (k-1)*|corner ideals| with k = live body count of the or-head (k = 2 here); the (k-1) multiplier is derived",
+  "family": "PC11-decorative",
+  "heights": {
+    "10": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L10",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base10",
+        "S_col_east": "go10",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 10
+    },
+    "11": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L11",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base11",
+        "S_col_east": "go11",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 11
+    },
+    "12": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L12",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base12",
+        "S_col_east": "go12",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 12
+    },
+    "5": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L5",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base5",
+        "S_col_east": "go5",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 5
+    },
+    "6": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L6",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base6",
+        "S_col_east": "go6",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 6
+    },
+    "7": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L7",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base7",
+        "S_col_east": "go7",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 7
+    },
+    "8": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L8",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base8",
+        "S_col_east": "go8",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 8
+    },
+    "9": {
+      "L_coupling": {
+        "cross_pair_fails_tau": true,
+        "growth_order": {
+          "cannot_arrive_first": true,
+          "south_only_admissible": [],
+          "south_only_sum": 1,
+          "tile": "L9",
+          "with_west_sum": 2
+        },
+        "per_bit": {
+          "and": {
+            "admissible_at_2n": [
+              "DBr"
+            ],
+            "conduit": "DAr",
+            "cross_bond_sum": 1,
+            "glue": "and1_r",
+            "reader": "DBr"
+          },
+          "unit": {
+            "admissible_at_2n": [
+              "Ur"
+            ],
+            "conduit": "Cr",
+            "cross_bond_sum": 1,
+            "glue": "unit1_r",
+            "reader": "Ur"
+          }
+        },
+        "reader_is_function_of_bit": true,
+        "south_only_admissible_at_2n": [],
+        "south_only_is_empty": true
+      },
+      "L_east": {
+        "body_glue_occurrences": {
+          "and1_r": 2,
+          "unit1_r": 2
+        },
+        "each_glue_exactly_twice": true
+      },
+      "L_west": {
+        "admissible_at_1n": [
+          "Cr",
+          "DAr"
+        ],
+        "bond_sums": {
+          "Cr": 2,
+          "DAr": 2
+        },
+        "free_bit_exactly_two_conduits": true,
+        "south_is_value_typed_lo_read": true
+      },
+      "bodies": {
+        "and": {
+          "conduit": "DAr",
+          "glue": "and1_r",
+          "reader": "DBr"
+        },
+        "unit": {
+          "conduit": "Cr",
+          "glue": "unit1_r",
+          "reader": "Ur"
+        }
+      },
+      "context": {
+        "D_below_north": "s-t-done",
+        "L_below_north": "base9",
+        "S_col_east": "go9",
+        "V_below_north": "q2-t-done"
+      },
+      "reader_south_is_hi_chain_link": true,
+      "rows": 9
+    }
+  },
+  "lemmas": {
+    "L_coupling_all_heights": true,
+    "L_east_all_heights": true,
+    "L_west_all_heights": true,
+    "census_agrees_all_heights": true
+  },
+  "open_prediction": {
+    "claim": "a 3-body or-head censuses at fiber 3 on corner ideals, never 2^3",
+    "status": "derived-level prediction, not yet censused"
+  },
+  "result": "coupling rule derived from conduit geometry",
+  "rows_measured": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "rule": "the or-bit is carried east by exactly one named conduit glue per rule body; the (2,n) reader is a function of that glue, so k bodies give fiber k"
+}
