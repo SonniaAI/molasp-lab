@@ -1,0 +1,368 @@
+{
+  "censuses": {
+    "10": {
+      "additive_falsified": true,
+      "additive_law": 1243,
+      "assemblies": 1309,
+      "box_law": 1001,
+      "c_r": 176,
+      "c_r_formula": 176,
+      "c_w": 66,
+      "c_w_formula": 66,
+      "collapsed_falsified": true,
+      "collapsed_law": 1177,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 825,
+        "2": 110,
+        "4": 66
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 1309,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 10
+    },
+    "11": {
+      "additive_falsified": true,
+      "additive_law": 1653,
+      "assemblies": 1731,
+      "box_law": 1365,
+      "c_r": 210,
+      "c_r_formula": 210,
+      "c_w": 78,
+      "c_w_formula": 78,
+      "collapsed_falsified": true,
+      "collapsed_law": 1575,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 1155,
+        "2": 132,
+        "4": 78
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 1731,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. y. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 11
+    },
+    "12": {
+      "additive_falsified": true,
+      "additive_law": 2158,
+      "assemblies": 2249,
+      "box_law": 1820,
+      "c_r": 247,
+      "c_r_formula": 247,
+      "c_w": 91,
+      "c_w_formula": 91,
+      "collapsed_falsified": true,
+      "collapsed_law": 2067,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 1573,
+        "2": 156,
+        "4": 91
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 2249,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. y. z. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 12
+    },
+    "6": {
+      "additive_falsified": true,
+      "additive_law": 308,
+      "assemblies": 336,
+      "box_law": 210,
+      "c_r": 70,
+      "c_r_formula": 70,
+      "c_w": 28,
+      "c_w_formula": 28,
+      "collapsed_falsified": true,
+      "collapsed_law": 280,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 140,
+        "2": 42,
+        "4": 28
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 336,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 6
+    },
+    "7": {
+      "additive_falsified": true,
+      "additive_law": 458,
+      "assemblies": 494,
+      "box_law": 330,
+      "c_r": 92,
+      "c_r_formula": 92,
+      "c_w": 36,
+      "c_w_formula": 36,
+      "collapsed_falsified": true,
+      "collapsed_law": 422,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 238,
+        "2": 56,
+        "4": 36
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 494,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 7
+    },
+    "8": {
+      "additive_falsified": true,
+      "additive_law": 657,
+      "assemblies": 702,
+      "box_law": 495,
+      "c_r": 117,
+      "c_r_formula": 117,
+      "c_w": 45,
+      "c_w_formula": 45,
+      "collapsed_falsified": true,
+      "collapsed_law": 612,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 378,
+        "2": 72,
+        "4": 45
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 702,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 8
+    },
+    "9": {
+      "additive_falsified": true,
+      "additive_law": 915,
+      "assemblies": 970,
+      "box_law": 715,
+      "c_r": 145,
+      "c_r_formula": 145,
+      "c_w": 55,
+      "c_w_formula": 55,
+      "collapsed_falsified": true,
+      "collapsed_law": 860,
+      "elementwise_product_structure": true,
+      "fiber2_shapes_are_Cr_minus_Cw": true,
+      "fiber3_never": true,
+      "fiber4_shapes_are_Cw": true,
+      "fiber_hist": {
+        "1": 570,
+        "2": 90,
+        "4": 55
+      },
+      "multiplicative_holds": true,
+      "multiplicative_law": 970,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. s. q2 :- p. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 9
+    }
+  },
+  "design": "designs/012 northward truth-OR relay",
+  "family": "PC11-T2U two-or-pair (relayed intermediate duplicate-unit OR + terminal duplicate-unit OR)",
+  "relay_static": {
+    "10": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP10",
+        "base10",
+        "r-t-done"
+      ],
+      "rows": 10
+    },
+    "11": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP11",
+        "base11",
+        "r-t-done"
+      ],
+      "rows": 11
+    },
+    "12": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP12",
+        "base12",
+        "r-t-done"
+      ],
+      "rows": 12
+    },
+    "6": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP6",
+        "base6",
+        "r-t-done"
+      ],
+      "rows": 6
+    },
+    "7": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP7",
+        "base7",
+        "r-t-done"
+      ],
+      "rows": 7
+    },
+    "8": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP8",
+        "base8",
+        "r-t-done"
+      ],
+      "rows": 8
+    },
+    "9": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP9",
+        "base9",
+        "r-t-done"
+      ],
+      "rows": 9
+    }
+  },
+  "result": "fibers MULTIPLY: assemblies(n) = C(n+4,4) + (n+1)(3n+2)/2 + 2*C(n+2,2); fiber 4 on the both-corner ideals, fiber 2 on C_r\\C_w, fiber 3 nowhere; element-wise product structure on every 4-fiber",
+  "rows_measured": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "summary": {
+    "corner_formulas_all_heights": true,
+    "fiber_structure_all_heights": true,
+    "multiplicative_all_heights": true,
+    "presence_box_law_all_heights": true,
+    "relay_value_typed_all_heights": true
+  }
+}

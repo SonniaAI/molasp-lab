@@ -54,7 +54,11 @@ them.  Legal unit-chain links (designs/008 stage 1: at most one
 intermediate derived row, single unit body) are emitted: the
 intermediate reader relays its atom's truth-typed t-done glue up the
 V column (the chain link), and the D column carries each row's
-value/variant done glue northward.
+value/variant done glue northward.  designs/012 extends this by one
+shape: a duplicate-unit OR-head at an intermediate row (the
+northward truth-OR relay — conduit N faces re-typed to the value
+glue, so growth above is bit-blind); AND bodies, AND consumers of a
+relayed head and relayed-head stacking stay refused.
 """
 from __future__ import annotations
 
@@ -209,6 +213,7 @@ def compile_program(text: str, predicted=None, name=None):
     rows = row_order(facts, rules, order, predicted)
     n = len(rows)
     row_of_atom = {a: i for i, a in rows.items()}
+    relayed_rows = []                          # designs/012 truth-OR relays
 
     tiles, row_of = {}, {}
     a1 = rows[1]                               # row-1 atom (fact, true)
@@ -269,22 +274,43 @@ def compile_program(text: str, predicted=None, name=None):
         if a in predicted:
             bodies = rules.get(a, [])
             intermediate = bool(bodies) and i != n
+            relayed = False
             if intermediate:
                 if len(bodies) > 1:
-                    raise UnsupportedGeometry(
-                        f"rule atom {a!r} at non-terminal row {i} with "
-                        f"{len(bodies)} bodies: OR at an intermediate "
-                        "derived row needs a northward truth-OR relay "
-                        "(each variant conduit exposes its own glue); "
-                        "untested (designs/008 stage 1 admits single-"
-                        "body chains)")
+                    # designs/012 §1: a northward truth-OR relay admits
+                    # the duplicate-unit OR shape at an intermediate
+                    # row (every body a unit body on the adjacent-below
+                    # derived row); the conduit N faces re-type to the
+                    # value glue (§2).  Everything else stays refused.
+                    if any(len(b) != 1 or b[0] != below or b[0] not in rules
+                           for b in bodies):
+                        raise UnsupportedGeometry(
+                            f"rule atom {a!r} at non-terminal row {i} with "
+                            f"{len(bodies)} bodies: designs/012 admits "
+                            "only duplicate unit bodies on the adjacent-"
+                            "below derived row (the truth-OR relay "
+                            "shape); AND or non-adjacent bodies at an "
+                            "intermediate row are untested geometry")
+                    if i in passthrough_rows:
+                        raise UnsupportedGeometry(
+                            f"rule atom {a!r} at non-terminal row {i}: an "
+                            "AND consumer of a relayed OR head would "
+                            "passthrough-re-type its value relay "
+                            "(designs/009 §9.2 conflict); untested "
+                            "(designs/012 §4)")
+                    if relayed_rows:
+                        raise UnsupportedGeometry(
+                            f"rule atom {a!r} at non-terminal row {i}: a "
+                            "second relayed OR head in one chain is "
+                            "unexamined (designs/012 §1)")
+                    relayed = True
                 if any(len(b) >= 2 for b in bodies):
                     raise UnsupportedGeometry(
                         f"rule atom {a!r} at non-terminal row {i}: AND "
                         "at an intermediate derived row is untested "
                         "(designs/008 stage 1 admits unit-body chains "
                         "only)")
-                if intermediate_rows:
+                if intermediate_rows and not relayed:
                     raise UnsupportedGeometry(
                         f"chain depth > 2 at row {i}: a second "
                         "intermediate derived row is unexamined geometry "
@@ -408,8 +434,12 @@ def compile_program(text: str, predicted=None, name=None):
                                 "unwired in v0.2 stage 1")
                         cnames = (f"C{a}", f"U{a}") if unit_no == 1 else \
                                  (f"C{a}{unit_no}", f"U{a}{unit_no}")
-                        conduit_n = (below_d if i in passthrough_rows
-                                     else f"{vj}-done")
+                        if intermediate and len(bodies) > 1:
+                            conduit_n = f"{a}-t-done"   # designs/012 §2:
+                            # the truth-OR relay — value-typed north face
+                        else:
+                            conduit_n = (below_d if i in passthrough_rows
+                                         else f"{vj}-done")
                         emit(cnames[0],
                              {"W": f"go{i}", "S": below_d, "E": vj,
                               "N": conduit_n}, i)          # conduit
@@ -425,8 +455,12 @@ def compile_program(text: str, predicted=None, name=None):
             emit(f"L{i}", {"W": f"{a}-t", "S": f"base{i}", "N": lock_n}, i)
             if intermediate:
                 intermediate_rows.append(i)
-                d_north[i] = (below_d if i in passthrough_rows
-                              else f"unit1_{a}-done")
+                if len(bodies) > 1:
+                    d_north[i] = f"{a}-t-done"   # designs/012 §2 relay
+                    relayed_rows.append(i)
+                else:
+                    d_north[i] = (below_d if i in passthrough_rows
+                                  else f"unit1_{a}-done")
                 v_north[i] = f"{a}-t-done"
         else:                                   # predicted false
             emit(f"D{i}F{a}", {"W": f"go{i}", "S": below_d,
