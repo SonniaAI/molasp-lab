@@ -90,6 +90,17 @@ census range too, and it lands.
   censused an 11-row build — it reproduced the n=11 scalar exactly,
   which is what exposed it. The alphabet is now 7 letters
   (`tyzkmba`) and a statement-count pin guards the builder.
+- The first push's hosted CI caught what my local runs had masked:
+  I piped `unittest discover` through `tail`, so the recorded exit
+  code was `tail`'s, not the suite's — four tick-158..161 fence
+  pins (`test_second_relayed_head_refused` in the four corner
+  files) were failing unheard. Fixed by re-pinning those four as
+  what they truly are under the carve-out — depth-3 families that
+  compile and census EXACTLY on the law — which added two
+  never-pinned mixed points to the measurement set: [2,3,2] at
+  n=7 → 1069 and [2,3,3] at n=7 → 1516, both landing exactly.
+  Lesson recorded: never pipe a test run when the exit code is the
+  evidence.
 
 ## Status
 

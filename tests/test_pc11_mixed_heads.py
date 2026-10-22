@@ -20,7 +20,7 @@ if ROOT not in sys.path:
 
 from molasp.compiler import (CompileError, UnsupportedGeometry,
                              compile_program)
-from tools.pc11_contention_structure import all_ideals
+from tools.pc11_contention_structure import all_ideals, assembly_sets
 from tools.pc11_mixed_heads import (ANCHOR, ROWS, build_receipt, census,
                                     program_for, relay_static)
 
@@ -65,11 +65,17 @@ class TestMixedRelayFragment(unittest.TestCase):
                 "p. q. s. q2 :- p. r :- q2. r :- q2. r :- q2. "
                 "w :- r. w :- r, q2.", name="pin_and_cons_m32")
 
-    def test_second_relayed_head_refused(self):
-        with self.assertRaises(UnsupportedGeometry):
-            compile_program(
-                "p. q. s. q2 :- p. r :- q2. r :- q2. r :- q2. "
-                "w :- r. w :- r. z :- w. z :- w.", name="pin_stack_m32")
+    def test_stacked_relay_chain_compiles_and_censuses(self):
+        """Tick-164 boundary move (designs/013 §1): this stacked
+        chain is the admitted depth-3 fragment and censuses exactly
+        on the nested-shell law: [2,2,3] at n=7 -> 1132 (pinned in
+        designs/013 §3)."""
+        prog = ("p. q. s. q2 :- p. r :- q2. r :- q2. r :- q2. "
+                "w :- r. w :- r. z :- w. z :- w.")
+        build = compile_program(prog, name="pin_stack_m32")
+        self.assertGreater(len(build["tiles"]), 0)
+        assemblies, _ = assembly_sets(prog, "pin_stack_m32_census")
+        self.assertEqual(len(assemblies), 1132)
 
     def test_single_body_chain_depth_still_refused(self):
         with self.assertRaises(UnsupportedGeometry):
