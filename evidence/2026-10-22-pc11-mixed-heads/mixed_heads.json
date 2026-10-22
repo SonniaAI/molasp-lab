@@ -1,0 +1,564 @@
+{
+  "censuses": {
+    "10": {
+      "additive_falsified": true,
+      "additive_law": 1419,
+      "assemblies": 1551,
+      "box_law": 1001,
+      "c_r": 176,
+      "c_r_formula": 176,
+      "c_w": 66,
+      "c_w_formula": 66,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 825,
+        "3": 110,
+        "6": 66
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 1551,
+      "mixed_law_holds": true,
+      "presence": 1001,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 10,
+      "tied_falsified": true,
+      "tied_law": 1353
+    },
+    "11": {
+      "additive_falsified": true,
+      "additive_law": 1863,
+      "assemblies": 2019,
+      "box_law": 1365,
+      "c_r": 210,
+      "c_r_formula": 210,
+      "c_w": 78,
+      "c_w_formula": 78,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 1155,
+        "3": 132,
+        "6": 78
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 2019,
+      "mixed_law_holds": true,
+      "presence": 1365,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. y. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 11,
+      "tied_falsified": true,
+      "tied_law": 1785
+    },
+    "12": {
+      "additive_falsified": true,
+      "additive_law": 2405,
+      "assemblies": 2587,
+      "box_law": 1820,
+      "c_r": 247,
+      "c_r_formula": 247,
+      "c_w": 91,
+      "c_w_formula": 91,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 1573,
+        "3": 156,
+        "6": 91
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 2587,
+      "mixed_law_holds": true,
+      "presence": 1820,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. x. y. z. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 12,
+      "tied_falsified": true,
+      "tied_law": 2314
+    },
+    "6": {
+      "additive_falsified": true,
+      "additive_law": 378,
+      "assemblies": 434,
+      "box_law": 210,
+      "c_r": 70,
+      "c_r_formula": 70,
+      "c_w": 28,
+      "c_w_formula": 28,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 140,
+        "3": 42,
+        "6": 28
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 434,
+      "mixed_law_holds": true,
+      "presence": 210,
+      "presence_equals_ideals": true,
+      "program": "p. q. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 6,
+      "tied_falsified": true,
+      "tied_law": 350
+    },
+    "7": {
+      "additive_falsified": true,
+      "additive_law": 550,
+      "assemblies": 622,
+      "box_law": 330,
+      "c_r": 92,
+      "c_r_formula": 92,
+      "c_w": 36,
+      "c_w_formula": 36,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 238,
+        "3": 56,
+        "6": 36
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 622,
+      "mixed_law_holds": true,
+      "presence": 330,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 7,
+      "tied_falsified": true,
+      "tied_law": 514
+    },
+    "8": {
+      "additive_falsified": true,
+      "additive_law": 774,
+      "assemblies": 864,
+      "box_law": 495,
+      "c_r": 117,
+      "c_r_formula": 117,
+      "c_w": 45,
+      "c_w_formula": 45,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 378,
+        "3": 72,
+        "6": 45
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 864,
+      "mixed_law_holds": true,
+      "presence": 495,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 8,
+      "tied_falsified": true,
+      "tied_law": 729
+    },
+    "9": {
+      "additive_falsified": true,
+      "additive_law": 1060,
+      "assemblies": 1170,
+      "box_law": 715,
+      "c_r": 145,
+      "c_r_formula": 145,
+      "c_w": 55,
+      "c_w_formula": 55,
+      "conduit_choices_at_free_sites": {
+        "row_n": [
+          "Cw",
+          "Cw2"
+        ],
+        "row_n_minus_1": [
+          "Cr",
+          "Cr2",
+          "Cr3"
+        ]
+      },
+      "elementwise_product_structure": true,
+      "fiber2_never": true,
+      "fiber3_shapes_are_Cr_minus_Cw": true,
+      "fiber4_never": true,
+      "fiber6_shapes_are_Cw": true,
+      "fiber8_never": true,
+      "fiber_hist": {
+        "1": 570,
+        "3": 90,
+        "6": 55
+      },
+      "k_r": 3,
+      "k_w": 2,
+      "mixed_law": 1170,
+      "mixed_law_holds": true,
+      "presence": 715,
+      "presence_equals_ideals": true,
+      "program": "p. q. t. u. v. s. q2 :- p. r :- q2. r :- q2. r :- q2. w :- r. w :- r.",
+      "readings_differ_only_at_site_pairs": true,
+      "rows": 9,
+      "tied_falsified": true,
+      "tied_law": 1005
+    }
+  },
+  "design": "designs/012 northward truth-OR relay",
+  "family": "PC11-M32 mixed two-head (relayed k_r=3 duplicate-unit OR x terminal k_w=2 duplicate-unit OR)",
+  "relay_static": {
+    "10": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP10",
+        "base10",
+        "r-t-done"
+      ],
+      "rows": 10,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "11": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP11",
+        "base11",
+        "r-t-done"
+      ],
+      "rows": 11,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "12": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP12",
+        "base12",
+        "r-t-done"
+      ],
+      "rows": 12,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "6": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP6",
+        "base6",
+        "r-t-done"
+      ],
+      "rows": 6,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "7": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP7",
+        "base7",
+        "r-t-done"
+      ],
+      "rows": 7,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "8": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP8",
+        "base8",
+        "r-t-done"
+      ],
+      "rows": 8,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    },
+    "9": {
+      "above_reads_only_value": true,
+      "body_glue_occurrences": {
+        "unit1_r": 2,
+        "unit1_w": 2,
+        "unit2_r": 2,
+        "unit2_w": 2,
+        "unit3_r": 2
+      },
+      "body_glues_each_exactly_twice": true,
+      "r_conduit_count_is_k": true,
+      "r_conduits": [
+        "Cr",
+        "Cr2",
+        "Cr3"
+      ],
+      "relay_conduit_north_faces": {
+        "Cr": "r-t-done",
+        "Cr2": "r-t-done",
+        "Cr3": "r-t-done"
+      },
+      "relay_value_typed_north": true,
+      "row_n_south_reads": [
+        "SP9",
+        "base9",
+        "r-t-done"
+      ],
+      "rows": 9,
+      "w_conduit_count_is_k": true,
+      "w_conduits": [
+        "Cw",
+        "Cw2"
+      ]
+    }
+  },
+  "result": "mixed total law confirmed: assemblies(n) = |I| + sum_h (k_h-1)|C_h| + (k_r-1)(k_w-1)|C_r^C_w| = C(n+4,4) + (n+1)(3n+2) + 3*C(n+2,2); fibers {1: rest, 3: C_r\\C_w, 6: C_w}, fibers 2/4/8 never; element-wise 3x2 product structure on every 6-fiber",
+  "rows_measured": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "summary": {
+    "corner_formulas_all_heights": true,
+    "fiber_structure_all_heights": true,
+    "mixed_total_law_all_heights": true,
+    "presence_box_law_all_heights": true,
+    "relay_static_all_heights": true
+  }
+}
