@@ -1,0 +1,117 @@
+{
+ "anchor": "p. q. s. q2 :- p. r :- q2, s. r :- q2.",
+ "decorative_placement": "after_q (between q. and s.); D1 checks after_p",
+ "family": "PC11-decorative",
+ "fourth_difference_assemblies": [
+  1,
+  1
+ ],
+ "heights": {
+  "10": {
+   "assemblies": 1067,
+   "box_law": 1001,
+   "contended": 66,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 66,
+   "multiplicity_1_sets": 935,
+   "multiplicity_2_sets": 66,
+   "no_other_multiplicity": true,
+   "presence": 1001,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 1067
+  },
+  "5": {
+   "assemblies": 147,
+   "box_law": 126,
+   "contended": 21,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 21,
+   "multiplicity_1_sets": 105,
+   "multiplicity_2_sets": 21,
+   "no_other_multiplicity": true,
+   "presence": 126,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 147
+  },
+  "6": {
+   "assemblies": 238,
+   "box_law": 210,
+   "contended": 28,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 28,
+   "multiplicity_1_sets": 182,
+   "multiplicity_2_sets": 28,
+   "no_other_multiplicity": true,
+   "presence": 210,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 238
+  },
+  "7": {
+   "assemblies": 366,
+   "box_law": 330,
+   "contended": 36,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 36,
+   "multiplicity_1_sets": 294,
+   "multiplicity_2_sets": 36,
+   "no_other_multiplicity": true,
+   "presence": 330,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 366
+  },
+  "8": {
+   "assemblies": 540,
+   "box_law": 495,
+   "contended": 45,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 45,
+   "multiplicity_1_sets": 450,
+   "multiplicity_2_sets": 45,
+   "no_other_multiplicity": true,
+   "presence": 495,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 540
+  },
+  "9": {
+   "assemblies": 770,
+   "box_law": 715,
+   "contended": 55,
+   "contended_equals_corner_ideals": true,
+   "corner_law": 55,
+   "multiplicity_1_sets": 660,
+   "multiplicity_2_sets": 55,
+   "no_other_multiplicity": true,
+   "presence": 715,
+   "presence_equals_ideals": true,
+   "readings_differ_only_at_corner_pair": true,
+   "terminals": 2,
+   "two_term_law": 770
+  }
+ },
+ "new_heights_this_tick": [
+  9,
+  10
+ ],
+ "placement_agreement_top": {
+  "agree": true,
+  "rows": 10
+ },
+ "rows_measured": [
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ]
+}
