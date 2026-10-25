@@ -196,3 +196,44 @@ The sketch is falsifiable at every stage: any census that lands
 off the suffix-product law, or any full fiber missing a conduit
 combination, kills the corresponding lemma. That is exactly what
 ticks 163-165 tested at every reachable point; the law survived.
+
+## 6. The k-grid at depth 3 — UPDATED tick 166: five new full
+## tables, k reaches 5, and the orientation test passes
+
+Tick 166 censused five new depth-3 multiplicity tuples (terminal-
+first ks = [k_w, k_r, k_u]), every scalar pinned law-only in the
+tool docstring BEFORE census:
+
+| point     | n=6..12 table                                          | fibers (suffix products) |
+|-----------|--------------------------------------------------------|--------------------------|
+| [4,2,2]   | 801/1101/1470/1918/2456/3096/3851                      | {1,2,4,16}               |
+| [2,4,2]   | 969/1325/1758/2278/2896/3624/4475                      | {1,2,8,16}               |
+| [2,2,4]   | 1059/1451/1926/2494/3166/3954/4871                     | {1,4,8,16}               |
+| [5,2,2]   | 913/1245/1650/2138/2720/3408/4215                      | {1,2,4,20}               |
+| [4,3,2]   | 1109/1501/1974/2538/3204/3984/4891                     | {1,2,6,24}               |
+
+All 35 scalars exact; additive alternative separated at every
+height (margins 322→1066 and up, largest [4,3,2] 560→1859);
+element-wise structure (presence, nesting, expected fiber, conduit
+combos, reading restriction) holds at every height; R1/B1
+handshake statics green at n=6 and n=12 for every point; fence
+unchanged.
+
+The k=4 triple is ORIENTATION-DISCRIMINATING: the same multiset
+{4,2,2} at three different stages produces three pairwise
+DIFFERENT fiber sets, each exactly the suffix products for its
+placement — the stage that carries the 4 is identifiable from the
+census alone.  The first k=5 point ([5,2,2]) lands with fiber 20
+exactly where the law says (5·2·2, never 8 = 2^3 and never 9 =
+5+2+2); [4,3,2] is the first all-distinct non-palindromic tuple
+(fibers {1,2,6,24}, never {1,2,6,8} or {1,2,5,24}).
+
+Grid state after tick 166 (full tables n=6..12 unless noted):
+{2,3}×{2,3} square (ticks 158-161), [2,2,2]/[3,2,2]/[2,2,3]/
+[2,3,2]n7/[2,3,3]n7/[3,2,3] (ticks 163-165), the five points
+above (tick 166), depth-4 [2,2,2,2] plus [3,2,2,2]/[2,2,2,3] at
+n=6 (tick 165).  Still uncensused at depth 3: k=5 beyond the
+(5,2,2) axis and mixed (5,x,y)/(x,y,5) tuples; depth-4 unequal
+beyond n=6 singles.  Every measured point, without exception,
+lands exactly on the suffix-product law — 100+ pinned scalars by
+now.
