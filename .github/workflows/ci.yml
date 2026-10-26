@@ -4,7 +4,9 @@ on:
   pull_request:
 jobs:
   unittest:
-    runs-on: ubuntu-latest
+    # SON-6032: self-hosted spark ARC runner (scale set spark-molasp-lab,
+# ephemeral pods on spark-4a06, min 0)
+    runs-on: spark-molasp-lab
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
