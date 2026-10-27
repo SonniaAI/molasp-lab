@@ -21,7 +21,8 @@ concurrency:
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    # Same Linux build/deploy steps and permissions on the repo-scoped Spark runner.
+    runs-on: spark-molasp-lab
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
